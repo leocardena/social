@@ -10,6 +10,7 @@ local.properties
 .loadpath
 .recommenders
 src/main/resources/static/bower_components/**
+src/main/java/com/social/trakt/util/TraktAPIKey.java
 target/
 *.log*
 *.log.*
