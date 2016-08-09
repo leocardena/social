@@ -23,7 +23,7 @@ public class ErrorREST implements ErrorController {
 
 	@Override
 	public String getErrorPath() {
-		return null;
+		return "/error";
 	}
 
 }

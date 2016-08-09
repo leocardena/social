@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.RetrofitBuilder;
@@ -16,13 +18,9 @@ import retrofit2.Retrofit;
 
 @Service
 public class MovieAPIBusiness {
-
+	
+	@Autowired
 	private MovieAPIService movieAPIService;
-
-	public MovieAPIBusiness() {
-		Retrofit retrofit = RetrofitBuilder.getInstance();
-		this.movieAPIService = retrofit.create(MovieAPIService.class);
-	}
 
 	public Map<String, Object> getPopularMovies( String page, String limit, String extended ) {
 		Call<List<Movie>> call = movieAPIService.getPopularMovies( page, limit, extended );
