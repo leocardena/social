@@ -1,6 +1,8 @@
 package com.social.retrofit;
 
 import java.io.IOException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.util.TraktAPIKey;
 import com.social.trakt.util.TraktBaseUrl;
@@ -11,15 +13,15 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
+@Component
 public class RetrofitBuilder {
 	
-	@SuppressWarnings("unused")
-	private final static RetrofitBuilder INSTANCE = new RetrofitBuilder();
 	private final static Retrofit RETROFIT = RetrofitBuilder.getRetrofit();;
 	
 	private RetrofitBuilder() {
 	}
 	
+	@Bean
 	public static Retrofit getInstance() {
 		return RETROFIT;
 	} 
