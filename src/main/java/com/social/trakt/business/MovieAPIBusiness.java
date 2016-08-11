@@ -4,17 +4,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import com.social.retrofit.RetrofitBuilder;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Movie;
 import com.social.trakt.services.MovieAPIService;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 @Service
 public class MovieAPIBusiness {

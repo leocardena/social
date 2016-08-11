@@ -6,10 +6,10 @@
 		.module('social')
 		.config(config);
 	
-	config.$inject = ['$stateProvider', '$urlRouterProvider'];
+	config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 	
 	/*@ngInject**/
-	function config($stateProvider, $urlRouterProvider) {
+	function config($stateProvider, $urlRouterProvider, $locationProvider) {
 		
 		$stateProvider
 			
@@ -19,6 +19,8 @@
 			});
 		
 		$urlRouterProvider.otherwise('/');
+		
+		$locationProvider.html5Mode(true);
 		
 	}
 	
