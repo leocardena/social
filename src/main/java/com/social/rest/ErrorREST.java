@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.social.model.ErrorDetail;
 
 @RestController
-public class ErrorRest implements ErrorController {
+public class ErrorREST implements ErrorController {
 
 	@RequestMapping(value = "/error")
 	public ResponseEntity<?> error() {
