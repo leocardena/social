@@ -1,27 +1,27 @@
-(function () {
-	
+(function() {
+
 	'use strict';
-	
-	angular
-		.module('social')
-		.config(config);
-	
-	config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
-	
-	/*@ngInject**/
-	function config($stateProvider, $urlRouterProvider, $locationProvider) {
-		
+
+	angular.module('social').config(config);
+
+	config.$inject = [ '$stateProvider', '$locationProvider' ];
+
+	/* @ngInject* */
+	function config($stateProvider, $locationProvider) {
+
 		$stateProvider
-			
-			.state('welcome', {
-				url: '/',
-				template: '<div>Welcome</div>'
-			});
-		
-		$urlRouterProvider.otherwise('/');
-		
+
+		.state('social', {
+			abstract : true,
+			views : {
+				'navbar@' : {
+					templateUrl : 'app/layouts/navbar/navbar.html'
+				}
+			}
+		});
+
 		$locationProvider.html5Mode(true);
-		
+
 	}
-	
+
 })();

@@ -2,5 +2,5 @@
 	'use strict';
 	
 	angular
-			.module('social.login', []);
+			.module('social.account.login', []);
 })();

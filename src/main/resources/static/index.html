@@ -2,13 +2,20 @@
 <html ng-app="social">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 	<base href="/">
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<base href="/">
 </head>
 <body>
 
-	<main ui-view role="main"></main>
+	<nav ui-view="navbar" ng-cloak></nav>
+	
+	<div class="container">
+		<main ui-view="content" role="main"></main>
+	</div>
 	
 	<!-- Bower -->
 	<script src="bower_components/angular/angular.min.js"></script>
@@ -19,9 +26,17 @@
 	<script src="app/core/social.main.routes.js"></script>
 	<script src="app/core/social.core.module.js"></script>
 	
+	<!-- Account -->
+	<script src="app/account/account.module.js"></script>
+	<script src="app/account/account.routes.js"></script>
+	
 	<!-- Login -->
-	<script src="app/login/login.module.js"></script>
-	<script src="app/login/login.routes.js"></script>
+	<script src="app/account/login/login.module.js"></script>
+	<script src="app/account/login/login.routes.js"></script>
+	
+	<footer class="footer" ng-cloak>
+    	
+    </footer>
 	
 </body>
 </html>
