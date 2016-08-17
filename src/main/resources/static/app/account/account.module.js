@@ -2,5 +2,7 @@
 	'use strict';
 	
 	angular
-			.module('social.account', ['social.account.login']);
+			.module('social.account', 
+			['social.account.login',
+			 'social.account.register']);
 })();
