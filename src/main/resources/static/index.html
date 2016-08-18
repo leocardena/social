@@ -2,21 +2,50 @@
 <html ng-app="social">
 <head>
 	<meta charset="UTF-8">
-	<base href="/">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-wizard/dist/angular-wizard.min.css">
+	<link rel="stylesheet" type="text/css" href="content/css/social.css">
+	<base href="/">
 </head>
 <body>
 
-	<main ui-view role="main"></main>
+	<nav ui-view="navbar" ng-cloak></nav>
 	
+	<div class="container">
+		<main ui-view="content" role="main"></main>
+	</div>
+
 	<!-- Bower -->
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>
 	<script src="app/core/social.main.routes.js"></script>
 	<script src="app/core/social.core.module.js"></script>
+	
+	<!-- Account -->
+	<script src="app/account/account.module.js"></script>
+	<script src="app/account/account.routes.js"></script>
+	
+	<!-- Login -->
+	<script src="app/account/login/login.module.js"></script>
+	<script src="app/account/login/login.routes.js"></script>
+	
+	<!--Register -->
+	<script src="app/account/register/register.module.js"></script>
+	<script src="app/account/register/register.routes.js"></script>
+		<script src="app/account/register/register.controller.js"></script>
+	
+	<footer class="footer" ng-cloak>
+    	
+    </footer>
 	
 </body>
 </html>

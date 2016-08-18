@@ -3,6 +3,6 @@
 	'use strict';
 	
 	angular
-		.module('social.core', ['ui.router']);
+		.module('social.core', ['ui.router', 'mgo-angular-wizard', 'ui.bootstrap']);
 	
 })();
