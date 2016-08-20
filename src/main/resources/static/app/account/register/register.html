@@ -1,7 +1,8 @@
 <div>
 	<div class="row">
+	{{vm.registerAccount | json}}
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<h2>
 					<label class="control-label">Cadastro</label>
 				</h2>
@@ -11,8 +12,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-8 col-md-offset-1">
-				<wizard name="register" on-finish="finishedWizard()"> 
+			<wizard name="register" on-finish="finishedWizard()"> 
+					<div class="col-md-8 col-md-offset-1">
 						<wz-step wz-title="1">
 	   					 	<form name="vm.formRegister" class="form-horizontal" role="form" novalidate>
 	   					 		<div class="row">	
@@ -88,6 +89,8 @@
 						         </div>
 	   					 	</form>
 	   					 </wz-step>
+	   				</div>
+	   				<div class="col-md-8 col-md-offset-1">
 						<wz-step wz-title="2">
 							<form name="vm.formRegister" class="form-horizontal" role="form" novalidate>
 								<div class="row">	
@@ -147,8 +150,8 @@
 						         </div>
 						 	</form>
 	   					 </wz-step>
-				</wizard>
-			</div>
+	   				</div>
+			</wizard>
 		</div>
 	</div>
 </div>
