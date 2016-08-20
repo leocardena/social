@@ -3,6 +3,6 @@
 	'use strict';
 	
 	angular
-		.module('social', ['social.core', 'social.account']);
+		.module('social', ['social.core', 'social.account', 'social.services']);
 	
 })();

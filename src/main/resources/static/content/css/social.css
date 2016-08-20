@@ -2,3 +2,9 @@
 General CSS
 ========================================================================== */
 
+
+/* override the default loading bar CSS */
+
+#loading-bar .bar {
+  background: #2c3e50;
+}

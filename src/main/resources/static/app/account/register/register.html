@@ -14,6 +14,81 @@
 			<div class="col-md-8 col-md-offset-1">
 				<wizard name="register" on-finish="finishedWizard()"> 
 						<wz-step wz-title="1">
+	   					 	<form name="vm.formRegister" class="form-horizontal" role="form" novalidate>
+	   					 		<div class="row">	
+							        <div class="form-group"> 
+							          	 <label class="col-md-3 control-label" for="login">Nome:</label>
+							          	 <div class="col-md-8">
+	                    					<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome"
+	                          					 ng-model="vm.registerAccount.nome" ng-minlength=1 ng-maxlength=50  ng-required>
+	                          			 </div>
+	                          		</div>
+							     </div>
+							     <div class="row">	
+							        <div class="form-group"> 
+							          	 <label class="col-md-3 control-label" for="login">Sobrenome:</label>
+							          	 <div class="col-md-8">
+	                    					<input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome"
+	                          					 ng-model="vm.registerAccount.sobrenome" ng-minlength=1 ng-maxlength=50  ng-required>
+	                          			 </div>
+							        </div>
+							     </div>
+							     <div class="row">	
+							        <div class="form-group"> 
+							          	 <label class="col-md-3 control-label" for="pais">País:</label>
+							          	 <div class="col-md-8">
+	                    					<select class="form-control" name="country" id="country" ng-model="vm.registerAccount.country"
+	                    						 ng-options="country.name as country.nativeName for country in vm.countries track by country.callingCodes[0]">
+	                    						<option value="">Selecione...</option>
+	                    					</select>
+	                          			 </div>
+							        </div>
+							     </div>
+							     <div class="row">	
+							        <div class="form-group"> 
+							          	 <label class="col-md-3 control-label" for="celular">Celular:</label>
+							          	 <div class="col-md-8">
+	                    					<input type="text" class="form-control" id="phone" name="phone" placeholder="Celular"
+	                          					 ng-model="vm.registerAccount.phone" ng-minlength=1 ng-maxlength=50  ng-required>
+	                          			 </div>
+							        </div>
+							     </div>
+							     <div class="row">
+						         	<div class="form-group">
+						         		<label class="col-md-3 control-label" for="birthday">Aniversário:</label>
+	                    				<div class="col-md-5">
+		                    				<p class="input-group">
+											     <input type="text" class="form-control" name="birthday" id="birthday" uib-datepicker-popup="dd/MM/yyyy" 
+											     	show-button-bar="false" ng-model="vm.registerAccount.birthday" is-open="vm.popup.opened" 
+											     	datepicker-options="vm.dateOptions" ng-required="true" close-text="Fechar" 
+											     	alt-input-formats="vm.altInputFormats" />
+											     <span class="input-group-btn">
+											     	<button type="button" class="btn btn-default" ng-click="vm.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
+											     </span>
+											</p>
+	                           			</div>
+						         	</div>
+						         </div>
+						         <div class="row">
+						         	<div class="form-group">
+	                    				<div class="col-md-8 col-md-offset-3">
+		                    				<label class="radio-inline"><input type="radio" name="genre"
+		                    					ng-model="vm.registerAccount.genre" value="Feminino">Feminino</label>
+											<label class="radio-inline"><input type="radio" name="genre" 
+												ng-model="vm.registerAccount.genre" value="Masculino">Masculino</label>
+	                           			</div>
+						         	</div>
+						         </div>
+							     <div class="row">
+						         	<div class="form-group">
+							         	<div class="col-md-1 col-md-offset-10">
+							         		<input type="button" class="btn btn-default" wz-next value="Avançar" />
+							         	</div>
+							         </div>
+						         </div>
+	   					 	</form>
+	   					 </wz-step>
+						<wz-step wz-title="2">
 							<form name="vm.formRegister" class="form-horizontal" role="form" novalidate>
 								<div class="row">	
 							        <div class="form-group"> 
@@ -51,78 +126,7 @@
 	                           			</div>
 						         	</div>
 						         </div>
-						         <div class="row">
-						         	<div class="form-group">
-						         		<label class="col-md-3 control-label" for="birthday">Aniversário:</label>
-	                    				<div class="col-md-5">
-		                    				<p class="input-group">
-											     <input type="text" class="form-control" name="birthday" id="birthday" uib-datepicker-popup="dd/MM/yyyy" 
-											     	show-button-bar="false" ng-model="vm.registerAccount.birthday" is-open="vm.popup.opened" 
-											     	datepicker-options="vm.dateOptions" ng-required="true" close-text="Fechar" />
-											     <span class="input-group-btn">
-											     	<button type="button" class="btn btn-default" ng-click="vm.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
-											     </span>
-											</p>
-	                           			</div>
-						         	</div>
-						         </div>
-						         <div class="row">
-						         	<div class="form-group">
-	                    				<div class="col-md-8 col-md-offset-3">
-		                    				<label class="radio-inline"><input type="radio" name="genero">Feminino</label>
-											<label class="radio-inline"><input type="radio" name="genero">Masculino</label>
-	                           			</div>
-						         	</div>
-						         </div>
-						         <div class="row">
-						         	<div class="form-group">
-							         	<div class="col-md-1 col-md-offset-10">
-							         		<input type="submit" class="btn btn-default" wz-next value="Avançar" />
-							         	</div>
-							         </div>
-						         </div>
-						 	</form>
-	   					 </wz-step>
-	   					 <wz-step wz-title="2">
-	   					 	<form name="vm.formRegister" class="form-horizontal" role="form" novalidate>
-	   					 		<div class="row">	
-							        <div class="form-group"> 
-							          	 <label class="col-md-3 control-label" for="login">Nome:</label>
-							          	 <div class="col-md-8">
-	                    					<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome"
-	                          					 ng-model="vm.registerAccount.nome" ng-minlength=1 ng-maxlength=50  ng-required>
-	                          			 </div>
-	                          		</div>
-							     </div>
-							     <div class="row">	
-							        <div class="form-group"> 
-							          	 <label class="col-md-3 control-label" for="login">Sobrenome:</label>
-							          	 <div class="col-md-8">
-	                    					<input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Sobrenome"
-	                          					 ng-model="vm.registerAccount.sobrenome" ng-minlength=1 ng-maxlength=50  ng-required>
-	                          			 </div>
-							        </div>
-							     </div>
-							     <div class="row">	
-							        <div class="form-group"> 
-							          	 <label class="col-md-3 control-label" for="pais">País:</label>
-							          	 <div class="col-md-8">
-	                    					<select class="form-control">
-	                    						<option value="">Selecione...</option>
-	                    					</select>
-	                          			 </div>
-							        </div>
-							     </div>
-							     <div class="row">	
-							        <div class="form-group"> 
-							          	 <label class="col-md-3 control-label" for="celular">Celular:</label>
-							          	 <div class="col-md-8">
-	                    					<input type="text" class="form-control" id="phone" name="phone" placeholder="Celular"
-	                          					 ng-model="vm.registerAccount.phone" ng-minlength=1 ng-maxlength=50  ng-required>
-	                          			 </div>
-							        </div>
-							     </div>
-							     <div class="row">
+								 <div class="row">
 								 	<div class="checkbox col-md-offset-3">
 				    					<label>
 				      						<input type="checkbox" ng-model="vm.checkTerms">
@@ -134,14 +138,14 @@
 							     <div class="row">
 						         	<div class="form-group">
 						         		<div class="col-md-2 col-md-offset-3">
-							         		<input type="submit" class="btn btn-default" wz-previous value="Voltar" />
+							         		<input type="button" class="btn btn-default" wz-previous value="Voltar" />
 							         	</div>
 							         	<div class="col-md-2 col-md-offset-4">
-							         		<input type="submit" class="btn btn-default" value="Cadastrar" />
+							         		<input type="submit" class="btn btn-default" value="Cadastrar" ng-click="vm.register(vm.registerAccount)"/>
 							         	</div>
 							         </div>
 						         </div>
-	   					 	</form>
+						 	</form>
 	   					 </wz-step>
 				</wizard>
 			</div>
