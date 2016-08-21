@@ -17,7 +17,7 @@ public class AccountREST {
 	
 	@PostMapping
 	public ResponseEntity<?> post (@Valid @RequestBody UserDTO userDTO) {
-		//System.out.println(userDTO.toString());
+		System.out.println(userDTO.toString());
 		return ResponseEntity.ok().build();
 	} 
 

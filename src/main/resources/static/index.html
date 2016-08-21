@@ -27,6 +27,7 @@
 	<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 	<script src='bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+	<script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>
@@ -38,10 +39,14 @@
 	<script src="app/account/account.module.js"></script>
 	<script src="app/account/login/login.module.js"></script>
 	<script src="app/account/register/register.module.js"></script>
+	<script src="app/blocks/blocks.module.js"></script>
 	
 	<!-- Config -->
 	<script src="app/core/config/loading-bar.config.js"></script>
 	
+	<!-- Blocks -->
+	<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
+	<script src="app/blocks/config/http.config.js"></script>
 	
 	<!-- Base URL -->
 	<script src="app/services/auth/base/register-base-url.value.js"></script>

@@ -7,6 +7,7 @@
 		                        'mgo-angular-wizard', 
 		                        'ui.bootstrap', 
 		                        'ngResource', 
-		                        'angular-loading-bar']);
+		                        'angular-loading-bar',
+		                        'ngCacheBuster']);
 	
 })();
