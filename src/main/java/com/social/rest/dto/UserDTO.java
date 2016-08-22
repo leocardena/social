@@ -1,20 +1,18 @@
 package com.social.rest.dto;
 
-import javax.annotation.Generated;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("org.jsonschema2pojo")
-@JsonPropertyOrder({ "nome", "sobrenome", "country", "phone", "birthday", "genre", "login", "email", "password" })
+@JsonPropertyOrder({ "firstName", "lastName", "country", "phone", "birthday", "genre", "login", "email", "password" })
 public class UserDTO {
 
-	@JsonProperty("nome")
-	private String nome;
-	@JsonProperty("sobrenome")
-	private String sobrenome;
+	@JsonProperty("firstName")
+	private String firstName;
+	@JsonProperty("lastName")
+	private String lastName;
 	@JsonProperty("country")
 	private String country;
 	@JsonProperty("phone")
@@ -32,40 +30,40 @@ public class UserDTO {
 
 	/**
 	 * 
-	 * @return The nome
+	 * @return The firstName
 	 */
-	@JsonProperty("nome")
-	public String getNome() {
-		return nome;
+	@JsonProperty("firstName")
+	public String getFirstName() {
+		return firstName;
 	}
 
 	/**
 	 * 
-	 * @param nome
-	 *            The nome
+	 * @param firstName
+	 *            The firstName
 	 */
-	@JsonProperty("nome")
-	public void setNome(String nome) {
-		this.nome = nome;
+	@JsonProperty("firstName")
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	/**
 	 * 
-	 * @return The sobrenome
+	 * @return The lastName
 	 */
-	@JsonProperty("sobrenome")
-	public String getSobrenome() {
-		return sobrenome;
+	@JsonProperty("lastName")
+	public String getLastName() {
+		return lastName;
 	}
 
 	/**
 	 * 
-	 * @param sobrenome
-	 *            The sobrenome
+	 * @param lastName
+	 *            The lastName
 	 */
-	@JsonProperty("sobrenome")
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+	@JsonProperty("lastName")
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**

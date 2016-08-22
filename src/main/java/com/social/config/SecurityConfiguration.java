@@ -63,7 +63,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	            .antMatchers("/bower_components/**")
 	            .antMatchers("/i18n/**")
 	            .antMatchers("/content/**")
-	            .antMatchers("/test/**");
+	            .antMatchers("/test/**")
+	            .antMatchers("/h2-console/**");
 	    }
 
 	    @Override
@@ -100,7 +101,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	            .antMatchers(HttpMethod.POST, "/api/rest/account").permitAll()
 	            .antMatchers("/api/rest/**").authenticated()
 	            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN.toString())
-	            .antMatchers("/v2/api-docs/**").permitAll();
+	            .antMatchers("/v2/api-docs/**").permitAll()
+	            .antMatchers("/h2-console/**").permitAll();
 
 	    }
 

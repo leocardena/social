@@ -6,10 +6,10 @@
 			.module('social.account.register')
 			.controller('RegisterController', RegisterController);
 	
-    RegisterController.$inject = ['AuthService', 'countriesPrepareService'];
+    RegisterController.$inject = ['AuthService', 'countriesPrepareService', '$filter'];
 
 	/* @ngInject */
-	function RegisterController(AuthService, countriesPrepareService) {
+	function RegisterController(AuthService, countriesPrepareService, $filter) {
 		var vm = this;
 		vm.altInputFormats = ['d!/M!/yyyy'];
 		vm.countries = countriesPrepareService;
@@ -30,6 +30,7 @@
 			if (account.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
+            	account.birthday = $filter('date')(new Date(),'dd/MM/yyyy');
             	AuthService.createAccount(account).then(function () {
                     vm.success = 'OK';
                 }).catch(function (response) {

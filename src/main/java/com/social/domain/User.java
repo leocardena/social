@@ -55,7 +55,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Size(max = 50)
 	@Column(name = "last_name", length = 50)
 	private String lastName;
+	
+	@Size(max = 50)
+	@Column(name = "country", length = 50)
+	private String country;
 
+	@Size(max = 50)
+	@Column(name = "phone", length = 50)
+	private String phone;
+	
+	@Column(name = "birthday", length = 50)
+	private ZonedDateTime birthday;
+	
+	@Size(max = 50)
+	@Column(name = "genre", length = 50)
+	private String genre;
+	
 	@Email
 	@Size(max = 100)
 	@Column(length = 100, unique = true)
@@ -64,10 +79,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@NotNull
 	@Column(nullable = false)
 	private boolean activated = false;
-
-	@Size(min = 2, max = 5)
-	@Column(name = "lang_key", length = 5)
-	private String langKey;
 
 	@Size(max = 20)
 	@Column(name = "activation_key", length = 20)
@@ -173,14 +184,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.resetDate = resetDate;
 	}
 
-	public String getLangKey() {
-		return langKey;
-	}
-
-	public void setLangKey(String langKey) {
-		this.langKey = langKey;
-	}
-
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}
@@ -197,33 +200,38 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.persistentTokens = persistentTokens;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-
-		User user = (User) o;
-
-		if (!login.equals(user.login)) {
-			return false;
-		}
-
-		return true;
+	public String getCountry() {
+		return country;
 	}
 
-	@Override
-	public int hashCode() {
-		return login.hashCode();
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
-	@Override
-	public String toString() {
-		return "User{" + "login='" + login + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName
-				+ '\'' + ", email='" + email + '\'' + ", activated='" + activated + '\'' + ", langKey='" + langKey
-				+ '\'' + ", activationKey='" + activationKey + '\'' + "}";
+	public String getPhone() {
+		return phone;
 	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public ZonedDateTime getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(ZonedDateTime birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	
+	
+
 }
