@@ -49,7 +49,7 @@ public class AccountBusiness {
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
         newUser.setEmail(userDTO.getEmail());
-        //newUser.setBirthday(userDTO.getBirthday());
+        newUser.setBirthday(userDTO.getBirthday());
         newUser.setPhone(userDTO.getPhone());
         newUser.setCountry(userDTO.getCountry());
         newUser.setGenre(userDTO.getGenre());

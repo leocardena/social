@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
+import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.social.security.util.Constants;
 
@@ -64,8 +69,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "phone", length = 50)
 	private String phone;
 	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "birthday", length = 50)
-	private ZonedDateTime birthday;
+	private DateTime birthday;
 	
 	@Size(max = 50)
 	@Column(name = "genre", length = 50)
@@ -216,11 +222,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.phone = phone;
 	}
 
-	public ZonedDateTime getBirthday() {
+	public DateTime  getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(ZonedDateTime birthday) {
+	public void setBirthday(DateTime birthday) {
 		this.birthday = birthday;
 	}
 

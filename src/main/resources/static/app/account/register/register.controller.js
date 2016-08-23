@@ -30,7 +30,6 @@
 			if (account.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
-            	account.birthday = $filter('date')(new Date(),'dd/MM/yyyy');
             	AuthService.createAccount(account).then(function () {
                     vm.success = 'OK';
                 }).catch(function (response) {

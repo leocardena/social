@@ -1,9 +1,13 @@
 package com.social.rest.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.social.util.CustomDateTimeSerializer;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "firstName", "lastName", "country", "phone", "birthday", "genre", "login", "email", "password" })
@@ -11,20 +15,29 @@ public class UserDTO {
 
 	@JsonProperty("firstName")
 	private String firstName;
+	
 	@JsonProperty("lastName")
 	private String lastName;
+	
 	@JsonProperty("country")
 	private String country;
+	
 	@JsonProperty("phone")
 	private String phone;
+	
+	@JsonSerialize(using = CustomDateTimeSerializer.class)
 	@JsonProperty("birthday")
-	private String birthday;
+	private DateTime birthday;
+	
 	@JsonProperty("genre")
 	private String genre;
+	
 	@JsonProperty("login")
 	private String login;
+	
 	@JsonProperty("email")
 	private String email;
+	
 	@JsonProperty("password")
 	private String password;
 
@@ -109,7 +122,7 @@ public class UserDTO {
 	 * @return The birthday
 	 */
 	@JsonProperty("birthday")
-	public String getBirthday() {
+	public DateTime  getBirthday() {
 		return birthday;
 	}
 
@@ -119,7 +132,7 @@ public class UserDTO {
 	 *            The birthday
 	 */
 	@JsonProperty("birthday")
-	public void setBirthday(String birthday) {
+	public void setBirthday(DateTime birthday) {
 		this.birthday = birthday;
 	}
 

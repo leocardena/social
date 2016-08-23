@@ -11,9 +11,5 @@ General CSS
 /* override the default wizard CSS */
 
 .steps-indicator {
-    position: absolute;
-    top: 90px;
-    left: 545px;
-    width: 200px;
-    height: 50px;
+	  height: 80px;
 }
