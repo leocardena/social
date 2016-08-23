@@ -5,14 +5,14 @@ import org.springframework.http.HttpHeaders;
 public class ResponseAPI<T> {
 	
 	private HttpHeaders headers;
-	private T response;
+	private T body;
 	
 	public ResponseAPI() {}
 	
 	public ResponseAPI(HttpHeaders headers, T response) {
 		super();
 		this.headers = headers;
-		this.response = response;
+		this.body = response;
 	}
 	
 	public HttpHeaders getHeaders() {
@@ -23,12 +23,12 @@ public class ResponseAPI<T> {
 		this.headers = headers;
 	}
 	
-	public T getResponse() {
-		return response;
+	public T getBody() {
+		return body;
 	}
 	
-	public void setResponse(T response) {
-		this.response = response;
+	public void setBody(T response) {
+		this.body = response;
 	}
 
 }

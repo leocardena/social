@@ -25,7 +25,7 @@ public class MovieREST {
 			@RequestParam(value = "extended", required = false) String extended) {
 		
 		ResponseAPI<List<Movie>> response = service.getPopularMovies(page, limit, extended);
-		return ResponseEntity.ok().headers(response.getHeaders()).body(response.getResponse());
+		return ResponseEntity.ok().headers(response.getHeaders()).body(response.getBody());
 	}
 
 }

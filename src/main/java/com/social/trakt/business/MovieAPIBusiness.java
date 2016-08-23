@@ -32,7 +32,7 @@ public class MovieAPIBusiness {
 			HttpHeaders headers = PaginationUtil.getHeadersFromTraktResponse(resp.headers());
 			ResponseAPI<List<Movie>> responseAPI = new ResponseAPI<>();
 			responseAPI.setHeaders(headers);
-			responseAPI.setResponse(movies);
+			responseAPI.setBody(movies);
 			return responseAPI;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
