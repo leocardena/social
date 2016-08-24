@@ -28,6 +28,9 @@ public class AccountBusiness {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private MailBusiness mail;
+	
 	public User createNewUser(UserDTO userDTO) {
 		
 		Optional<User> user = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
@@ -58,6 +61,9 @@ public class AccountBusiness {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+        
+		mail.sendActivationEmail(newUser , "http://localhost:8080/cadastrar");
+        
         return newUser;
 		
 	}

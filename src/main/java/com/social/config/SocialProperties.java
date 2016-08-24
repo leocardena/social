@@ -7,10 +7,28 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SocialProperties {
 
 	private final Security security = new Security();
+    private final Mail mail = new Mail();
 
 	public Security getSecurity() {
 		return security;
 	}
+	
+    public Mail getMail() {
+        return mail;
+    }
+
+    public static class Mail {
+
+        private String from = "social.moviesandshows@gmail.com";
+
+        public String getFrom() {
+            return from;
+        }
+
+        public void setFrom(String from) {
+            this.from = from;
+        }
+    }
 
 	public static class Security {
 

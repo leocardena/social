@@ -17,7 +17,7 @@ import com.social.rest.util.APIEndpoint;
 public class AccountREST {
 
 	@Autowired
-	AccountBusiness accountBusiness;
+	private AccountBusiness accountBusiness;
 
 	@PostMapping
 	public ResponseEntity<?> post(@Valid @RequestBody UserDTO userDTO) {
