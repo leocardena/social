@@ -19,7 +19,7 @@ public class SocialProperties {
 
     public static class Mail {
 
-        private String from = "social.moviesandshows@gmail.com";
+        private String from = "support@social.com";
 
         public String getFrom() {
             return from;

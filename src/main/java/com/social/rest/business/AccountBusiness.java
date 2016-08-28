@@ -12,6 +12,7 @@ import com.social.repository.AuthorityRepository;
 import com.social.repository.UserRepository;
 import com.social.rest.dto.UserDTO;
 import com.social.rest.exception.EmailAlreadyInUseException;
+import com.social.rest.exception.KeyNotFoundException;
 import com.social.rest.exception.LoginAlreadyInUseException;
 import com.social.rest.util.RandomUtil;
 import com.social.security.util.AuthoritiesConstants;
@@ -29,7 +30,7 @@ public class AccountBusiness {
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private MailBusiness mail;
+	private MailBusiness mailBusiness;
 	
 	public User createNewUser(UserDTO userDTO) {
 		
@@ -61,12 +62,20 @@ public class AccountBusiness {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
-        
-		mail.sendActivationEmail(newUser , "http://localhost:8080/cadastrar");
-        
+		mailBusiness.sendActivationEmail(newUser , "http://localhost:8080/cadastrar");
         return newUser;
 		
 	}
 	
-
+    public User activateRegistration(String key) {
+        Optional<User> userOptional = userRepository.findOneByActivationKey(key);
+        if (!userOptional.isPresent())
+        	throw new KeyNotFoundException("A chave de ativação não é válida");
+        User user = userOptional.get();
+        user.setActivated(true);
+        user.setActivationKey(null);
+        userRepository.save(user);
+        return user;
+    }
+	
 }

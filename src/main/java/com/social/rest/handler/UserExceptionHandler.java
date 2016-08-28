@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.social.rest.dto.ErrorDetailDTO;
 import com.social.rest.exception.EmailAlreadyInUseException;
+import com.social.rest.exception.KeyNotFoundException;
 import com.social.rest.exception.LoginAlreadyInUseException;
 
 @ControllerAdvice
@@ -36,6 +37,19 @@ public class UserExceptionHandler {
 		error.setTimestamp(System.currentTimeMillis());
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+	
+	@ExceptionHandler(KeyNotFoundException.class)
+	public ResponseEntity<?> handleKeyNotFoundException(KeyNotFoundException exception,
+			HttpServletRequest request) {
+		ErrorDetailDTO error = new ErrorDetailDTO();
+
+		error.setStatus(404L);
+		error.setTitulo("Chave inválida");
+		error.setMensagem(exception.getMessage());
+		error.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
 
 }
