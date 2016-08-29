@@ -5,12 +5,12 @@
         .module('social.account.activate')
         .controller('ActivationController', ActivationController);
 
-    ActivationController.$inject = ['$stateParams', 'Auth'];
+    ActivationController.$inject = ['$stateParams', 'AuthService'];
 
-    function ActivationController ($stateParams, Auth) {
+    function ActivationController ($stateParams, AuthService) {
         var vm = this;
-
-        Auth.activateAccount({key: $stateParams.key}).then(function () {
+        console.log('key: ' + $stateParams.key);
+        AuthService.activateAccount({key: $stateParams.key}).then(function () {
             vm.error = null;
             vm.success = 'OK';
         }).catch(function () {

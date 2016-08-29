@@ -13,7 +13,7 @@
 		$stateProvider
 
 		.state('activate', {
-			url : '/activate?',
+			url : '/activate?key',
 			params: {
 	            key: null
 	        },

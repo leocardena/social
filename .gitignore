@@ -45,3 +45,4 @@ mvnw
 
 # Code Recommenders
 .recommenders/
+/.apt_generated/

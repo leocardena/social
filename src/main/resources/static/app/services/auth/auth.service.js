@@ -5,12 +5,13 @@
 			.module('social.services')
 			.factory('AuthService', AuthService);
 	
-	AuthService.$inject = ['RegisterService']
+	AuthService.$inject = ['RegisterService', 'ActivateService']
 	
-	function AuthService(RegisterService) {
+	function AuthService(RegisterService, ActivateService) {
         
 		var services = {
-				createAccount : _createAccount
+				createAccount : _createAccount,
+				activateAccount : _activateAccount
 		}
 		
 		return services;
@@ -24,6 +25,18 @@
                 },
                 function (err) {
                     //this.logout();
+                    return cb(err);
+                }.bind(this)).$promise;
+        }
+		
+        function _activateAccount (key, callback) {
+            var cb = callback || angular.noop;
+
+            return ActivateService.put(key,
+                function (response) {
+                    return cb(response);
+                },
+                function (err) {
                     return cb(err);
                 }.bind(this)).$promise;
         }
