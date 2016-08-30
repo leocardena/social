@@ -62,7 +62,7 @@ public class AccountBusiness {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
-		mailBusiness.sendActivationEmail(newUser , "http://localhost:8080/cadastrar");
+		mailBusiness.sendActivationEmail(newUser , "http://localhost:8080");
         return newUser;
 		
 	}

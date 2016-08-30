@@ -9,7 +9,7 @@
 
     function ActivationController ($stateParams, AuthService) {
         var vm = this;
-        console.log('key: ' + $stateParams.key);
+
         AuthService.activateAccount({key: $stateParams.key}).then(function () {
             vm.error = null;
             vm.success = 'OK';

@@ -8,8 +8,12 @@
     ActivateService.$inject = ['$resource', 'ActivateBase'];
 
     function ActivateService ($resource, ActivateBase) {
-        var service = $resource(ActivateBase.url, {}, {
-            'put': { method: 'PUT', params: {} }
+    	var service = $resource(ActivateBase.url, {}, {
+            'get': { method:
+            	'GET', 
+            	params: {},
+            	isArray: false
+            }
         });
 
         return service;

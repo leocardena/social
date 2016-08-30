@@ -32,7 +32,7 @@
         function _activateAccount (key, callback) {
             var cb = callback || angular.noop;
 
-            return ActivateService.put(key,
+            return ActivateService.get(key,
                 function (response) {
                     return cb(response);
                 },
