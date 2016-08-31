@@ -8,6 +8,7 @@
 		                        'ui.bootstrap', 
 		                        'ngResource', 
 		                        'angular-loading-bar',
-		                        'ngCacheBuster']);
+		                        'ngCacheBuster',
+		                        'ngStorage']);
 	
 })();

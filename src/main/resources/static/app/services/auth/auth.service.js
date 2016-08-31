@@ -5,16 +5,33 @@
 			.module('social.services')
 			.factory('AuthService', AuthService);
 	
-	AuthService.$inject = ['RegisterService', 'ActivateService']
+	AuthService.$inject = ['$q', 'RegisterService', 'ActivateService', 'AuthServerProvider', 'PrincipalService',
+	                       '$sessionStorage']
 	
-	function AuthService(RegisterService, ActivateService) {
+	function AuthService($q, RegisterService, ActivateService, AuthServerProvider, PrincipalService, $sessionStorage) {
         
 		var services = {
+				activateAccount : _activateAccount,
 				createAccount : _createAccount,
-				activateAccount : _activateAccount
+				getPreviousState : _getPreviousState,
+				login : _login,
+				logout: _logout,
+				resetPreviousState : _resetPreviousState
 		}
 		
 		return services;
+		
+        function _activateAccount (key, callback) {
+            var cb = callback || angular.noop;
+
+            return ActivateService.get(key,
+                function (response) {
+                    return cb(response);
+                },
+                function (err) {
+                    return cb(err);
+                }.bind(this)).$promise;
+        }
 		
 		function _createAccount (account, callback) {
             var cb = callback || angular.noop;
@@ -29,16 +46,40 @@
                 }.bind(this)).$promise;
         }
 		
-        function _activateAccount (key, callback) {
+		 function _getPreviousState() {
+	            var previousState = $sessionStorage.previousState;
+	            return previousState;
+	        }
+		
+        function _login (credentials, callback) {
             var cb = callback || angular.noop;
+            var deferred = $q.defer();
 
-            return ActivateService.get(key,
-                function (response) {
-                    return cb(response);
-                },
-                function (err) {
+            AuthServerProvider.login(credentials)
+                .then(loginThen)
+                .catch(function (err) {
+                    this.logout();
+                    deferred.reject(err);
                     return cb(err);
-                }.bind(this)).$promise;
+                }.bind(this));
+
+            function loginThen (data) {
+                PrincipalService.identity(true).then(function(account) {
+                    deferred.resolve(data);
+                });
+                return cb();
+            }
+
+            return deferred.promise;
+        }
+        
+        function _logout () {
+            AuthServerProvider.logout();
+            PrincipalService.authenticate(null);
+        }
+        
+        function _resetPreviousState() {
+            delete $sessionStorage.previousState;
         }
 
 	}

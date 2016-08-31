@@ -17,7 +17,9 @@
 			parent : 'account',
 			views : {
 				'content@' : {
-					templateUrl : 'app/account/login/login.html'
+					templateUrl : 'app/account/login/login.html',
+					controller: 'LoginController',
+					controllerAs: 'vm'
 				}
 			}
 		})

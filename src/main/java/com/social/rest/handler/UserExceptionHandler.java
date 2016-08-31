@@ -9,6 +9,7 @@ import com.social.rest.dto.ErrorDetailDTO;
 import com.social.rest.exception.EmailAlreadyInUseException;
 import com.social.rest.exception.KeyNotFoundException;
 import com.social.rest.exception.LoginAlreadyInUseException;
+import com.social.rest.exception.LoginNotFoundException;
 
 @ControllerAdvice
 public class UserExceptionHandler {
@@ -46,6 +47,19 @@ public class UserExceptionHandler {
 
 		error.setStatus(404L);
 		error.setTitulo("Chave inválida");
+		error.setMensagem(exception.getMessage());
+		error.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+	@ExceptionHandler(LoginNotFoundException.class)
+	public ResponseEntity<?> handleLoginNotFoundException(LoginNotFoundException exception,
+			HttpServletRequest request) {
+		ErrorDetailDTO error = new ErrorDetailDTO();
+
+		error.setStatus(404L);
+		error.setTitulo("Login Inválido");
 		error.setMensagem(exception.getMessage());
 		error.setTimestamp(System.currentTimeMillis());
 

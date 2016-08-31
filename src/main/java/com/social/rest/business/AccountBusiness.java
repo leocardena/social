@@ -14,8 +14,10 @@ import com.social.rest.dto.UserDTO;
 import com.social.rest.exception.EmailAlreadyInUseException;
 import com.social.rest.exception.KeyNotFoundException;
 import com.social.rest.exception.LoginAlreadyInUseException;
+import com.social.rest.exception.LoginNotFoundException;
 import com.social.rest.util.RandomUtil;
 import com.social.security.util.AuthoritiesConstants;
+import com.social.security.util.SecurityUtils;
 
 @Service
 public class AccountBusiness {
@@ -77,5 +79,15 @@ public class AccountBusiness {
         userRepository.save(user);
         return user;
     }
+
+	public UserDTO getUserWithAuthorities() {
+		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
+		Optional<User> userOptional = Optional.ofNullable(user);
+		if (!userOptional.isPresent())
+			throw new LoginNotFoundException("Login não encontrado");
+		// eagerly load the association
+        user.getAuthorities().size(); 
+        return new UserDTO(user);
+	}
 	
 }

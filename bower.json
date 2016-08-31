@@ -24,6 +24,7 @@
     "angular-i18n": "^1.5.8",
     "angular-resource": "^1.5.8",
     "angular-loading-bar": "^0.9.0",
-    "angular-cache-buster": "^0.4.3"
+    "angular-cache-buster": "^0.4.3",
+    "ngstorage": "^0.3.11"
   }
 }

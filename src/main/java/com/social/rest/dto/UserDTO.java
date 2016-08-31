@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.social.domain.User;
 import com.social.util.CustomDateTimeSerializer;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -15,31 +16,51 @@ public class UserDTO {
 
 	@JsonProperty("firstName")
 	private String firstName;
-	
+
 	@JsonProperty("lastName")
 	private String lastName;
-	
+
 	@JsonProperty("country")
 	private String country;
-	
+
 	@JsonProperty("phone")
 	private String phone;
-	
+
 	@JsonSerialize(using = CustomDateTimeSerializer.class)
 	@JsonProperty("birthday")
 	private DateTime birthday;
-	
+
 	@JsonProperty("genre")
 	private String genre;
-	
+
 	@JsonProperty("login")
 	private String login;
-	
+
 	@JsonProperty("email")
 	private String email;
-	
+
 	@JsonProperty("password")
 	private String password;
+	
+	public UserDTO() {};
+
+	public UserDTO(User user) {
+		this(user.getFirstName(), user.getLastName(), user.getCountry(), user.getPhone(), user.getBirthday(),
+				user.getGenre(), user.getLogin(), user.getEmail(), user.getPassword());
+	}
+
+	public UserDTO(String firstName, String lastName, String country, String phone, DateTime birthday, String genre,
+			String login, String email, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.country = country;
+		this.phone = phone;
+		this.birthday = birthday;
+		this.genre = genre;
+		this.login = login;
+		this.email = email;
+		this.password = password;
+	}
 
 	/**
 	 * 
@@ -122,7 +143,7 @@ public class UserDTO {
 	 * @return The birthday
 	 */
 	@JsonProperty("birthday")
-	public DateTime  getBirthday() {
+	public DateTime getBirthday() {
 		return birthday;
 	}
 
