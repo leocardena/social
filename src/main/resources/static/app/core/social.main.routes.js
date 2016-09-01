@@ -17,7 +17,14 @@
 				'navbar@' : {
 					templateUrl : 'app/layouts/navbar/navbar.html'
 				}
-			}
+			},
+            resolve: {
+                authorize: ['AuthService',
+                    function (AuthService) {
+                        return AuthService.authorize();
+                    }
+                ]
+            }
 		});
 
 		$locationProvider.html5Mode(true);

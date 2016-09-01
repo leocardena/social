@@ -18,6 +18,10 @@
 	            key: null
 	        },
 			parent : 'account',
+			data: {
+                authorities: [],
+                pageTitle: 'Ativação'
+            },
 			views : {
 				'content@' : {
 					templateUrl : 'app/account/activate/activate.html',

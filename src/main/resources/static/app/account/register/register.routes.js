@@ -15,6 +15,10 @@
 					  .state('register', {
 						  parent : 'account',
 						  url: '/cadastrar',
+						  data: {
+				                authorities: [],
+				                pageTitle: 'Cadastrar'
+				          },
 						  views: {
 							  'content@': {
 				                    templateUrl: 'app/account/register/register.html',

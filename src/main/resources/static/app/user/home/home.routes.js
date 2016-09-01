@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-			.module('social.account.login')
+			.module('social.user.home')
 			.config(config);
 
 	config.$inject = [ '$stateProvider' ];
@@ -12,17 +12,17 @@
 
 		$stateProvider
 
-		.state('login', {
-			url : '/login',
-			parent : 'account',
+		.state('home', {
+			url : '/home',
+			parent : 'user',
 			data: {
-                authorities: [],
-                pageTitle: 'Login'
+                authorities: ['ROLE_USER'],
+                pageTitle: 'Home'
             },
 			views : {
 				'content@' : {
-					templateUrl : 'app/account/login/login.html',
-					controller: 'LoginController',
+					templateUrl : 'app/user/home/home.html',
+					controller: 'HomeController',
 					controllerAs: 'vm'
 				}
 			}

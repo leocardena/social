@@ -43,6 +43,8 @@
                     $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
                     $state.go('home');
                 }
+                
+                $state.go('home');
 
                 $rootScope.$broadcast('authenticationSuccess');
 

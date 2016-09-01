@@ -10,12 +10,12 @@
     /*@ngInject*/
     function errorHandlerInterceptor ($q, $rootScope) {
         var service = {
-            responseError: responseError
+            responseError: _responseError
         };
 
         return service;
 
-        function responseError (response) {
+        function _responseError (response) {
             if (!(response.status === 401 && (response.data === '' || (response.data.path && response.data.path.indexOf('/api/rest/account') === 0 )))) {
                 $rootScope.$emit('socialApp.httpError', response);
             }

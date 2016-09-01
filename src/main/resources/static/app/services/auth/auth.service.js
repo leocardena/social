@@ -6,17 +6,20 @@
 			.factory('AuthService', AuthService);
 	
 	AuthService.$inject = ['$q', 'RegisterService', 'ActivateService', 'AuthServerProvider', 'PrincipalService',
-	                       '$sessionStorage']
+	                       '$sessionStorage', '$rootScope', '$state']
 	
-	function AuthService($q, RegisterService, ActivateService, AuthServerProvider, PrincipalService, $sessionStorage) {
+	function AuthService($q, RegisterService, ActivateService, AuthServerProvider, 
+			PrincipalService, $sessionStorage, $rootScope, $state) {
         
 		var services = {
 				activateAccount : _activateAccount,
+				authorize : _authorize,
 				createAccount : _createAccount,
 				getPreviousState : _getPreviousState,
 				login : _login,
 				logout: _logout,
-				resetPreviousState : _resetPreviousState
+				resetPreviousState : _resetPreviousState,
+				storePreviousState: _storePreviousState
 		}
 		
 		return services;
@@ -31,6 +34,45 @@
                 function (err) {
                     return cb(err);
                 }.bind(this)).$promise;
+        }
+        
+        function _authorize (force) {
+            var authReturn = PrincipalService.identity(force).then(authThen);
+
+            return authReturn;
+
+            function authThen () {
+                var isAuthenticated = PrincipalService.isAuthenticated();
+
+                // an authenticated user can't access to login and register pages
+                if (isAuthenticated && $rootScope.toState.parent === 'account' && ($rootScope.toState.name === 'login' || $rootScope.toState.name === 'register')) {
+                    $state.go('home');
+                }
+
+                // recover and clear previousState after external login redirect (e.g. oauth2)
+                if (isAuthenticated && !$rootScope.fromState.name && _getPreviousState()) {
+                    var previousState = _getPreviousState();
+                    resetPreviousState();
+                    $state.go(previousState.name, previousState.params);
+                }
+
+                if ($rootScope.toState.data.authorities && $rootScope.toState.data.authorities.length > 0 && !PrincipalService.hasAnyAuthority($rootScope.toState.data.authorities)) {
+                    if (isAuthenticated) {
+                        // user is signed in but not authorized for desired state
+                        $state.go('accessdenied');
+                    }
+                    else {
+                        // user is not authenticated. stow the state they wanted before you
+                        // send them to the login service, so you can return them when you're done
+                        storePreviousState($rootScope.toState.name, $rootScope.toStateParams);
+
+                        // now, send them to the signin state so they can log in
+                        $state.go('accessdenied').then(function() {
+                            LoginService.open();
+                        });
+                    }
+                }
+            }
         }
 		
 		function _createAccount (account, callback) {
@@ -80,6 +122,11 @@
         
         function _resetPreviousState() {
             delete $sessionStorage.previousState;
+        }
+        
+        function _storePreviousState(previousStateName, previousStateParams) {
+            var previousState = { "name": previousStateName, "params": previousStateParams };
+            $sessionStorage.previousState = previousState;
         }
 
 	}
