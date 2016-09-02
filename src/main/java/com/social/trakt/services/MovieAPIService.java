@@ -3,7 +3,6 @@ package com.social.trakt.services;
 import java.util.List;
 
 import com.social.trakt.model.Movie;
-import com.social.trakt.model.People;
 import com.social.trakt.model.Released;
 
 import retrofit2.Call;
@@ -19,15 +18,11 @@ public interface MovieAPIService {
 	
 	/*Returns a single movie's details.*/
 	@GET("/movies/{id}")
-	public Call<Movie> getSummaryMovies(@Query("id") String id, @Query("extended") String extended);
+	public Call<Movie> getSummaryMovie(@Query("id") String id, @Query("extended") String extended);
 
 	/*Returns all translations for a movie.*/
 	@GET("/movies/{id}/translations/{language}")
 	public Call<Movie> getTranslationMovie(@Query("id") String id, @Query("{language") String language);
-
-	/*Returns all cast and crew for a movie.*/
-	@GET("/movies/{id}/people")
-	public Call<List<People>> getPeopleMovie(@Query("id") String id, @Query("extended") String extended);
 
 	/*Returns related and similar movies.*/
 	@GET("/movies/{id}/related")

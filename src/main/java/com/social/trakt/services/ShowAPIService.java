@@ -3,7 +3,6 @@ package com.social.trakt.services;
 import java.util.List;
 
 import com.social.trakt.model.FirstAired;
-import com.social.trakt.model.People;
 import com.social.trakt.model.Show;
 
 import retrofit2.Call;
@@ -24,10 +23,6 @@ public interface ShowAPIService {
 	/* Returns all translations for a show. */
 	@GET("/shows/{id}/translations/{language}")
 	public Call<Show> getTranslationShow(@Query("id") String id, @Query("language") String language);
-
-	/* Returns all cast and crew for a show. */
-	@GET("/shows/{id}/people")
-	public Call<List<People>> getPeopleShow(@Query("id") String id, @Query("extended") String extended);
 
 	/* Returns related and similar shows. */
 	@GET("/shows/id/related")

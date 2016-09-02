@@ -2,7 +2,6 @@ package com.social.trakt.services;
 
 import java.util.List;
 
-import com.social.trakt.model.Episode;
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Season;
 
@@ -12,16 +11,12 @@ import retrofit2.http.Query;
 
 public interface SeasonAPIService {
 
-	/*Returns all seasons for a show including the number of episodes in each season.*/
+	/*
+	 * Returns all seasons for a show including the number of episodes in each season.*/
 	@GET("/shows/{id}/seasons")
 	public Call<List<Season>> getSummarySeason(@Query("id") String id, @Query("extended") String extended);
-
-	/*Returns all episodes for a specific season of a show.*/
-	@GET("/shows/{id}/seasons/{season}")
-	public Call<List<Episode>> getEpisodeForSeason(@Query("id") String id, @Query("season") int season,
-			@Query("extended") String extended);
-
-	/* Returns all show premieres airing during the time period specified.*/
+	
+	/* Returns all show premieres airing during the time period specified. */
 	@GET("/calendars/all/shows/premieres/{start_date}/{days}")
 	public Call<List<FirstAired>> getAllSeasonPremieres(@Query("start_date") String start_date, @Query("days") int days,
 			@Query("extended") String extended, @Query("query") String query, @Query("genres") String genres);
