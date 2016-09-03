@@ -59,6 +59,7 @@
 
                 if ($rootScope.toState.data.authorities && $rootScope.toState.data.authorities.length > 0 && !PrincipalService.hasAnyAuthority($rootScope.toState.data.authorities)) {
                     if (isAuthenticated) {
+                    	// user is signed in but not authorized for desired state
                         $state.go('accessdenied');
                     }
                     else {
@@ -67,7 +68,7 @@
                         _storePreviousState($rootScope.toState.name, $rootScope.toStateParams);
 
                         // now, send them to the signin state so they can log in
-                        $state.go('accessdenied');
+                        $state.go('login');
                     }
                 }
             }
