@@ -34,8 +34,7 @@ public class AccountREST {
 	
 	@GetMapping
 	public ResponseEntity<?> getAccount() {
-		accountBusiness.getUserWithAuthorities();
-		return null;
+		return ResponseEntity.status(HttpStatus.OK).body(accountBusiness.getUserWithAuthorities());
 	}
 
 }

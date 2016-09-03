@@ -38,38 +38,36 @@
         
         function _authorize (force) {
             var authReturn = PrincipalService.identity(force).then(authThen);
-
+            
             return authReturn;
 
             function authThen () {
                 var isAuthenticated = PrincipalService.isAuthenticated();
 
                 // an authenticated user can't access to login and register pages
-                if (isAuthenticated && $rootScope.toState.parent === 'account' && ($rootScope.toState.name === 'login' || $rootScope.toState.name === 'register')) {
+                if (isAuthenticated && $rootScope.toState.parent === 'account' && ($rootScope.toState.name === 'login'
+                		|| $rootScope.toState.name === 'register' || $rootScope.toState.name === 'activate')) {
                     $state.go('home');
                 }
 
                 // recover and clear previousState after external login redirect (e.g. oauth2)
                 if (isAuthenticated && !$rootScope.fromState.name && _getPreviousState()) {
                     var previousState = _getPreviousState();
-                    resetPreviousState();
+                    _resetPreviousState();
                     $state.go(previousState.name, previousState.params);
                 }
 
                 if ($rootScope.toState.data.authorities && $rootScope.toState.data.authorities.length > 0 && !PrincipalService.hasAnyAuthority($rootScope.toState.data.authorities)) {
                     if (isAuthenticated) {
-                        // user is signed in but not authorized for desired state
                         $state.go('accessdenied');
                     }
                     else {
                         // user is not authenticated. stow the state they wanted before you
                         // send them to the login service, so you can return them when you're done
-                        storePreviousState($rootScope.toState.name, $rootScope.toStateParams);
+                        _storePreviousState($rootScope.toState.name, $rootScope.toStateParams);
 
                         // now, send them to the signin state so they can log in
-                        $state.go('accessdenied').then(function() {
-                            LoginService.open();
-                        });
+                        $state.go('accessdenied');
                     }
                 }
             }
@@ -88,10 +86,10 @@
                 }.bind(this)).$promise;
         }
 		
-		 function _getPreviousState() {
+		function _getPreviousState() {
 	            var previousState = $sessionStorage.previousState;
 	            return previousState;
-	        }
+	    }
 		
         function _login (credentials, callback) {
             var cb = callback || angular.noop;

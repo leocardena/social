@@ -1,6 +1,6 @@
 (function () {
 	angular
-			.module('social.core')
+			.module('social.blocks')
 	  		.config(config);
 	
 	config.$inject = ['cfpLoadingBarProvider'];

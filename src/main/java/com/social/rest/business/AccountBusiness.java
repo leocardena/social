@@ -81,10 +81,10 @@ public class AccountBusiness {
     }
 
 	public UserDTO getUserWithAuthorities() {
-		User user = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get();
-		Optional<User> userOptional = Optional.ofNullable(user);
+		Optional<User> userOptional = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
 		if (!userOptional.isPresent())
 			throw new LoginNotFoundException("Login não encontrado");
+		User user = userOptional.get();
 		// eagerly load the association
         user.getAuthorities().size(); 
         return new UserDTO(user);

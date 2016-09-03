@@ -1,12 +1,14 @@
 package com.social.rest.dto;
 
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.social.domain.Authority;
 import com.social.domain.User;
 import com.social.util.CustomDateTimeSerializer;
 
@@ -41,16 +43,21 @@ public class UserDTO {
 
 	@JsonProperty("password")
 	private String password;
-	
-	public UserDTO() {};
+
+	@JsonProperty("authorities")
+	private Set<String> authorities;
+
+	public UserDTO() {
+	};
 
 	public UserDTO(User user) {
 		this(user.getFirstName(), user.getLastName(), user.getCountry(), user.getPhone(), user.getBirthday(),
-				user.getGenre(), user.getLogin(), user.getEmail(), user.getPassword());
+				user.getGenre(), user.getLogin(), user.getEmail(), user.getPassword(),
+				user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 	}
 
 	public UserDTO(String firstName, String lastName, String country, String phone, DateTime birthday, String genre,
-			String login, String email, String password) {
+			String login, String email, String password, Set<String> authorities) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.country = country;
@@ -60,6 +67,7 @@ public class UserDTO {
 		this.login = login;
 		this.email = email;
 		this.password = password;
+		this.authorities = authorities;
 	}
 
 	/**
@@ -231,6 +239,23 @@ public class UserDTO {
 	@JsonProperty("password")
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	/**
+	 * 
+	 * @return The authorities
+	 */
+	public Set<String> getAuthorities() {
+		return authorities;
+	}
+
+	/**
+	 * 
+	 * @param authorities
+	 *            The authorities
+	 */
+	public void setAuthorities(Set<String> authorities) {
+		this.authorities = authorities;
 	}
 
 	@Override

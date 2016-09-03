@@ -20,7 +20,7 @@
         $urlRouterProvider.otherwise('/');
 
         $httpProvider.interceptors.push('errorHandlerInterceptor');
-        // jhipster-needle-angularjs-add-interceptor JHipster will add new application http interceptor here
+        $httpProvider.interceptors.push('authExpiredInterceptor');
 
         $urlMatcherFactoryProvider.type('boolean', {
             name : 'boolean',
