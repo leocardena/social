@@ -20,8 +20,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 import org.joda.time.DateTime;
 
@@ -32,7 +30,7 @@ import com.social.security.util.Constants;
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "user")
 public class User extends AbstractAuditingEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -44,58 +42,45 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@NotNull
 	@Pattern(regexp = Constants.LOGIN_REGEX)
 	@Size(min = 1, max = 50)
-	@Column(length = 50, unique = true, nullable = false)
 	private String login;
 
 	@JsonIgnore
 	@NotNull
 	@Size(min = 60, max = 60)
-	@Column(name = "password_hash", length = 60)
 	private String password;
 
 	@Size(max = 50)
-	@Column(name = "first_name", length = 50)
 	private String firstName;
 
 	@Size(max = 50)
-	@Column(name = "last_name", length = 50)
 	private String lastName;
 	
 	@Size(max = 50)
-	@Column(name = "country", length = 50)
 	private String country;
 
 	@Size(max = 50)
-	@Column(name = "phone", length = 50)
 	private String phone;
 	
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	@Column(name = "birthday", length = 50)
+	//@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime birthday;
 	
 	@Size(max = 50)
-	@Column(name = "genre", length = 50)
 	private String genre;
 	
 	@Email
 	@Size(max = 100)
-	@Column(length = 100, unique = true)
 	private String email;
 
 	@NotNull
-	@Column(nullable = false)
 	private boolean activated = false;
 
 	@Size(max = 20)
-	@Column(name = "activation_key", length = 20)
 	@JsonIgnore
 	private String activationKey;
 
 	@Size(max = 20)
-	@Column(name = "reset_key", length = 20)
 	private String resetKey;
 
-	@Column(name = "reset_date", nullable = true)
 	private ZonedDateTime resetDate = null;
 
 	@JsonIgnore
