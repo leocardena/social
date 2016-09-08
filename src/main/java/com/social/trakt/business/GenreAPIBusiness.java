@@ -19,7 +19,7 @@ public class GenreAPIBusiness {
 	@Autowired
 	GenreAPIService genreAPIService;
 
-	public List<Genre> getListGenres (String type){
+	public List<Genre> getListGenres(String type) {
 		Call<List<Genre>> call = genreAPIService.getListGenres(type);
 		Call<List<Genre>> callClone = call.clone();
 		Response<List<Genre>> resp;
@@ -32,4 +32,5 @@ public class GenreAPIBusiness {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}
 	}
+
 }

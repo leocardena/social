@@ -48,4 +48,5 @@ public class SeasonAPIBusiness {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}
 	}
+
 }

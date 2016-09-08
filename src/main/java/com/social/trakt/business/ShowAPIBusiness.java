@@ -69,7 +69,6 @@ public class ShowAPIBusiness {
 		}
 	}
 
-
 	public List<Show> getRelatedShows(String id, String page, String limit, String extended) {
 		Call<List<Show>> call = showAPIService.getRelatedShows(id, page, limit, extended);
 		Call<List<Show>> callClone = call.clone();
@@ -111,4 +110,5 @@ public class ShowAPIBusiness {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}
 	}
+
 }
