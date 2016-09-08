@@ -3,8 +3,6 @@ package com.social.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,28 +10,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.social.util.FriendStatus;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 @Entity
-@Table(name = "Friend")
-public class Friend {
+@Table(name = "Rating")
+public class Rating {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idFriendShip")
+	@Column(name = "idRating")
 	private long id;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="idProfile")
+	@Column(name = "profile")
 	private Profile profile;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
-	private Profile friend;
+	@Column(name = "date")
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	private DateTime date;
 	
-	@Enumerated(EnumType.STRING)
-	private FriendStatus status;
+	@Column(name = "note")
+	private long note;
 
 	public long getId() {
 		return id;
@@ -51,20 +50,20 @@ public class Friend {
 		this.profile = profile;
 	}
 
-	public Profile getFriend() {
-		return friend;
+	public DateTime getDate() {
+		return date;
 	}
 
-	public void setFriend(Profile friend) {
-		this.friend = friend;
+	public void setDate(DateTime date) {
+		this.date = date;
 	}
 
-	public FriendStatus getStatus() {
-		return status;
+	public long getNote() {
+		return note;
 	}
 
-	public void setStatus(FriendStatus status) {
-		this.status = status;
+	public void setNote(long note) {
+		this.note = note;
 	}
 	
 }

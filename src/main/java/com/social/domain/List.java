@@ -1,0 +1,107 @@
+package com.social.domain;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import org.joda.time.DateTime;
+import com.social.util.Access;
+import com.social.util.ListType;
+
+@Entity
+@Table(name = "List")
+public class List {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idList")
+	private long id;
+	
+	@Column(name = "name")
+	private String name;
+
+	@JoinTable(name = "ListTitle", joinColumns = {
+			@JoinColumn(name = "idList", referencedColumnName = "idList") }, inverseJoinColumns = {
+					@JoinColumn(name = "idTitle", referencedColumnName = "idTitle") })
+	private Title title;
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idProfile")
+	private Profile profile;
+
+	@Column(name = "date")
+	private DateTime date;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "access")
+	private Access access;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type")
+	private ListType listType;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Title getTitle() {
+		return title;
+	}
+
+	public void setTitle(Title title) {
+		this.title = title;
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	public DateTime getDate() {
+		return date;
+	}
+
+	public void setDate(DateTime date) {
+		this.date = date;
+	}
+
+	public Access getAccess() {
+		return access;
+	}
+
+	public void setAccess(Access access) {
+		this.access = access;
+	}
+
+	public ListType getListType() {
+		return listType;
+	}
+
+	public void setListType(ListType listType) {
+		this.listType = listType;
+	}
+	
+}

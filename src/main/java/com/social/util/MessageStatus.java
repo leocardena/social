@@ -1,4 +1,4 @@
-package com.social.domain;
+package com.social.util;
 
 public enum MessageStatus {
 	

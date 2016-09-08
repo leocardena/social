@@ -1,26 +1,44 @@
 package com.social.domain;
 
 import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "Season")
 public class Season {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idSeason")
 	private long id;
 	
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "rating")
 	private long rating;
 	
+	@Column(name = "votes")
 	private long votes;
 	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSeason")
 	private List<Episode> epidodes;
 	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@Column(name = "aired")
 	private DateTime aired;
-
+	
 	public long getId() {
 		return id;
 	}
@@ -60,5 +78,13 @@ public class Season {
 	public void setAired(DateTime aired) {
 		this.aired = aired;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

@@ -1,18 +1,36 @@
 package com.social.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Profile")
-public class Profile {
+public class Profile extends People {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idProfile")
 	private long id;
 	
+	@Column(name = "genre")
 	private String genre;
 	
+	@Column(name = "avatar")
 	private String avatar;
 	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idCommentParent")
+	private CommentParent commentParent;
+	
+	@OneToOne
+	@JoinColumn(name = "idUser")
 	private User user;
 
 	public long getId() {
@@ -46,5 +64,13 @@ public class Profile {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
+	public CommentParent getCommentParent() {
+		return commentParent;
+	}
+
+	public void setCommentParent(CommentParent commentParent) {
+		this.commentParent = commentParent;
+	}
+
 }

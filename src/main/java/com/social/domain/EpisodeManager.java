@@ -1,6 +1,5 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,30 +9,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.social.util.FriendStatus;
+import com.social.util.EpisodeStatus;
 
 @Entity
-@Table(name = "Friend")
-public class Friend {
+@Table(name = "EpisodeManager")
+public class EpisodeManager {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idFriendShip")
+	@Column(name = "idEpisodeManager")
 	private long id;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idProfile")
 	private Profile profile;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
-	private Profile friend;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idEpisode")
+	private Episode episode;
 	
 	@Enumerated(EnumType.STRING)
-	private FriendStatus status;
+	@Column(name = "episodeStatus")
+	private EpisodeStatus epidoseStatus;
 
 	public long getId() {
 		return id;
@@ -51,20 +51,20 @@ public class Friend {
 		this.profile = profile;
 	}
 
-	public Profile getFriend() {
-		return friend;
+	public Episode getEpisode() {
+		return episode;
 	}
 
-	public void setFriend(Profile friend) {
-		this.friend = friend;
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
 	}
 
-	public FriendStatus getStatus() {
-		return status;
+	public EpisodeStatus getEpidoseStatus() {
+		return epidoseStatus;
 	}
 
-	public void setStatus(FriendStatus status) {
-		this.status = status;
+	public void setEpidoseStatus(EpisodeStatus epidoseStatus) {
+		this.epidoseStatus = epidoseStatus;
 	}
-	
+
 }

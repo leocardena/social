@@ -1,21 +1,40 @@
 package com.social.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "Episode")
 public class Episode {
-
+	
+	@Column(name = "name")
+	private String name;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idEpisode")
 	private long id;
 	
-	private long rating;
-	
+	@Column(name = "votes")
 	private long votes;
 	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@Column(name = "aired")
 	private DateTime aired;
+	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idRatingParent")
+	private RatingParent ratingParent;
 
 	public long getId() {
 		return id;
@@ -25,12 +44,12 @@ public class Episode {
 		this.id = id;
 	}
 
-	public long getRating() {
-		return rating;
+	public RatingParent getRatingParent() {
+		return ratingParent;
 	}
 
-	public void setRating(long rating) {
-		this.rating = rating;
+	public void setRatingParent(RatingParent ratingParent) {
+		this.ratingParent = ratingParent;
 	}
 
 	public long getVotes() {
@@ -47,6 +66,14 @@ public class Episode {
 
 	public void setAired(DateTime aired) {
 		this.aired = aired;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

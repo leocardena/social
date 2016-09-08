@@ -1,4 +1,4 @@
-package com.social.util;
+package com.social.rest.util;
 
 import org.springframework.http.HttpHeaders;
 import okhttp3.Headers;

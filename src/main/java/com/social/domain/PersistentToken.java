@@ -2,11 +2,14 @@ package com.social.domain;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import java.io.Serializable;
 
 /**
@@ -15,33 +18,33 @@ import java.io.Serializable;
  * @see com.social.security.CustomPersistentRememberMeServices
  */
 @Entity
-@Table(name = "jhi_persistent_token")
+@Table(name = "PersistentToken")
 public class PersistentToken implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d MMMM yyyy");
-
+    private static final DateTimeFormatter DATE_TIME_FORMATTER  = DateTimeFormat.forPattern("dd/MM/yyyy");
     private static final int MAX_USER_AGENT_LEN = 255;
 
     @Id
+    @Column(name = "series")
     private String series;
 
     @JsonIgnore
     @NotNull
-    @Column(name = "token_value", nullable = false)
+    @Column(name = "tokenValue", nullable = false)
     private String tokenValue;
 
     @JsonIgnore
-    @Column(name = "token_date")
-    private LocalDate tokenDate;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @Column(name = "tokenDate")
+    private DateTime tokenDate;
 
     //an IPV6 address max length is 39 characters
     @Size(min = 0, max = 39)
-    @Column(name = "ip_address", length = 39)
+    @Column(name = "ipAddress", length = 39)
     private String ipAddress;
 
-    @Column(name = "user_agent")
+    @Column(name = "userAgent")
     private String userAgent;
 
     @JsonIgnore
@@ -64,17 +67,17 @@ public class PersistentToken implements Serializable {
         this.tokenValue = tokenValue;
     }
 
-    public LocalDate getTokenDate() {
+    public DateTime getTokenDate() {
         return tokenDate;
     }
 
-    public void setTokenDate(LocalDate tokenDate) {
+    public void setTokenDate(DateTime tokenDate) {
         this.tokenDate = tokenDate;
     }
 
     @JsonGetter
     public String getFormattedTokenDate() {
-        return DATE_TIME_FORMATTER.format(this.tokenDate);
+        return this.tokenDate.toString(DATE_TIME_FORMATTER);
     }
 
     public String getIpAddress() {

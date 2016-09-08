@@ -1,36 +1,36 @@
 package com.social.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-@Entity
-@Table(name = "People")
-public class People {
+@MappedSuperclass
+public abstract class People {
 	
-	private long id;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@Column(name = "birthay")
+	private DateTime birthday;
 	
-	private DateTime birthay;
-	
+	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "country")
 	private String country;
+	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idRatingParent")
+	private RatingParent ratingParent;
 
-	public long getId() {
-		return id;
+	public DateTime getBirthday() {
+		return birthday;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public DateTime getBirthay() {
-		return birthay;
-	}
-
-	public void setBirthay(DateTime birthay) {
-		this.birthay = birthay;
+	public void setBirthday(DateTime birthday) {
+		this.birthday = birthday;
 	}
 
 	public String getName() {
@@ -49,4 +49,12 @@ public class People {
 		this.country = country;
 	}
 	
+	public RatingParent getRatingParent() {
+		return ratingParent;
+	}
+
+	public void setRatingParent(RatingParent ratingParent) {
+		this.ratingParent = ratingParent;
+	}
+
 }

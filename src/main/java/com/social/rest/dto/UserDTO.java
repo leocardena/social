@@ -4,12 +4,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.social.domain.Authority;
-import com.social.domain.User;
+import com.social.domain.Profile;
 import com.social.util.CustomDateTimeSerializer;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -40,7 +41,8 @@ public class UserDTO {
 
 	@JsonProperty("email")
 	private String email;
-
+	
+	@JsonIgnore
 	@JsonProperty("password")
 	private String password;
 
@@ -50,10 +52,10 @@ public class UserDTO {
 	public UserDTO() {
 	};
 
-	public UserDTO(User user) {
-		this(user.getFirstName(), user.getLastName(), user.getCountry(), user.getPhone(), user.getBirthday(),
-				user.getGenre(), user.getLogin(), user.getEmail(), user.getPassword(),
-				user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+	public UserDTO(Profile profile) {
+		this(profile.getName(), profile.getName(), profile.getCountry(), profile.getUser().getPhone(), profile.getBirthday(),
+				profile.getGenre(), profile.getUser().getUsername(), profile.getUser().getEmail(), profile.getUser().getPassword(),
+				profile.getUser().getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 	}
 
 	public UserDTO(String firstName, String lastName, String country, String phone, DateTime birthday, String genre,

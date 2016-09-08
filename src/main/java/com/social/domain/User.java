@@ -1,9 +1,7 @@
 package com.social.domain;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,77 +27,59 @@ import com.social.security.util.Constants;
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "User")
 public class User extends AbstractAuditingEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idUser")
 	private Long id;
 
 	@NotNull
 	@Pattern(regexp = Constants.LOGIN_REGEX)
 	@Size(min = 1, max = 50)
-	@Column(length = 50, unique = true, nullable = false)
-	private String login;
+	@Column(name = "username")
+	private String username;
 
 	@JsonIgnore
 	@NotNull
 	@Size(min = 60, max = 60)
-	@Column(name = "password_hash", length = 60)
+	@Column(name = "password")
 	private String password;
-
-	@Size(max = 50)
-	@Column(name = "first_name", length = 50)
-	private String firstName;
-
-	@Size(max = 50)
-	@Column(name = "last_name", length = 50)
-	private String lastName;
 	
 	@Size(max = 50)
-	@Column(name = "country", length = 50)
-	private String country;
-
-	@Size(max = 50)
-	@Column(name = "phone", length = 50)
+	@Column(name = "phone")
 	private String phone;
-	
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	@Column(name = "birthday", length = 50)
-	private DateTime birthday;
-	
-	@Size(max = 50)
-	@Column(name = "genre", length = 50)
-	private String genre;
 	
 	@Email
 	@Size(max = 100)
-	@Column(length = 100, unique = true)
+	@Column(length = 100)
 	private String email;
 
 	@NotNull
-	@Column(nullable = false)
+	@Column(name= "activated")
 	private boolean activated = false;
 
 	@Size(max = 20)
-	@Column(name = "activation_key", length = 20)
+	@Column(name = "activationKey")
 	@JsonIgnore
 	private String activationKey;
 
 	@Size(max = 20)
-	@Column(name = "reset_key", length = 20)
+	@Column(name = "resetKey")
 	private String resetKey;
-
-	@Column(name = "reset_date", nullable = true)
-	private ZonedDateTime resetDate = null;
+	
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+	@Column(name = "resetDate")
+	private DateTime resetDate = null;
 
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "jhi_user_authority", joinColumns = {
-			@JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "authority_name", referencedColumnName = "name") })
+	@JoinTable(name = "UserAuthority", joinColumns = {
+			@JoinColumn(name = "idUser", referencedColumnName = "idUser") }, inverseJoinColumns = {
+					@JoinColumn(name = "authorityName", referencedColumnName = "name") })
 	private Set<Authority> authorities = new HashSet<>();
 
 	@JsonIgnore
@@ -114,13 +94,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
 	// Lowercase the login before saving it in database
-	public void setLogin(String login) {
-		this.login = login.toLowerCase(Locale.ENGLISH);
+	public void setUsername(String username) {
+		this.username = username.toLowerCase();
 	}
 
 	public String getPassword() {
@@ -129,22 +109,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -179,11 +143,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.resetKey = resetKey;
 	}
 
-	public ZonedDateTime getResetDate() {
+	public DateTime getResetDate() {
 		return resetDate;
 	}
 
-	public void setResetDate(ZonedDateTime resetDate) {
+	public void setResetDate(DateTime resetDate) {
 		this.resetDate = resetDate;
 	}
 
@@ -203,14 +167,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 		this.persistentTokens = persistentTokens;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getPhone() {
 		return phone;
 	}
@@ -218,23 +174,5 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	public DateTime  getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(DateTime birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-	
-	
 
 }

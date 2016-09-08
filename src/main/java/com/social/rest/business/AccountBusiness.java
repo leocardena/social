@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.social.domain.Authority;
+import com.social.domain.Profile;
 import com.social.domain.User;
 import com.social.repository.AuthorityRepository;
 import com.social.repository.UserRepository;
@@ -50,20 +51,23 @@ public class AccountBusiness {
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER.toString());
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
-        newUser.setLogin(userDTO.getLogin());
+        newUser.setUsername(userDTO.getLogin());
         newUser.setPassword(encryptedPassword);
-        newUser.setFirstName(userDTO.getFirstName());
-        newUser.setLastName(userDTO.getLastName());
-        newUser.setEmail(userDTO.getEmail());
-        newUser.setBirthday(userDTO.getBirthday());
         newUser.setPhone(userDTO.getPhone());
-        newUser.setCountry(userDTO.getCountry());
-        newUser.setGenre(userDTO.getGenre());
+        newUser.setEmail(userDTO.getEmail());
         newUser.setActivated(false);
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
+        
+        Profile newProfile = new Profile();
+        newProfile.setName(userDTO.getFirstName() + " " + userDTO.getLastName());
+        newProfile.setBirthday(userDTO.getBirthday());
+        newProfile.setCountry(userDTO.getCountry());
+        newProfile.setGenre(userDTO.getGenre());
+        newProfile.setUser(newUser);
+        
+        //userRepository.save(newUser);
 		mailBusiness.sendActivationEmail(newUser , "http://localhost:8080");
         return newUser;
 		
@@ -87,7 +91,7 @@ public class AccountBusiness {
 		User user = userOptional.get();
 		// eagerly load the association
         user.getAuthorities().size(); 
-        return new UserDTO(user);
+        return new UserDTO();
 	}
 	
 }
