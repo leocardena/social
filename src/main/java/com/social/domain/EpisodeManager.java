@@ -15,24 +15,24 @@ import javax.persistence.Table;
 import com.social.util.EpisodeStatus;
 
 @Entity
-@Table(name = "EpisodeManager")
+@Table(name = "episodemanager")
 public class EpisodeManager {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idEpisodeManager")
+	@Column(name = "idepisodemanager")
 	private long id;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
+	@JoinColumn(name="idprofile")
 	private Profile profile;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idEpisode")
+	@JoinColumn(name="idepisode")
 	private Episode episode;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "episodeStatus")
+	@Column(name = "episodestatus")
 	private EpisodeStatus epidoseStatus;
 
 	public long getId() {

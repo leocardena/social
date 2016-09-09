@@ -1,10 +1,7 @@
 package com.social.domain;
 
 import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -21,9 +18,6 @@ public abstract class People {
 	@Column(name = "country")
 	private String country;
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idRatingParent")
-	private CommentParent commentParent;
 
 	public DateTime getBirthday() {
 		return birthday;
@@ -49,12 +43,4 @@ public abstract class People {
 		this.country = country;
 	}
 	
-	public CommentParent getRatingParent() {
-		return commentParent;
-	}
-
-	public void setCommentParent(CommentParent commentParent) {
-		this.commentParent = commentParent;
-	}
-
 }

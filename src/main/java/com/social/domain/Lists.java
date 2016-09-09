@@ -19,26 +19,26 @@ import com.social.util.Access;
 import com.social.util.ListType;
 
 @Entity
-@Table(name = "List")
+@Table(name = "list")
 public class Lists {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idList")
+	@Column(name = "idlist")
 	private long id;
 	
 	@Column(name = "name")
 	private String name;
 	
 	
-	@JoinTable(name = "ListTitle", joinColumns = {
-			@JoinColumn(name = "idList", referencedColumnName = "idList") }, inverseJoinColumns = {
-					@JoinColumn(name = "idTitle", referencedColumnName = "idTitle") })
+	@JoinTable(name = "listtitle", joinColumns = {
+			@JoinColumn(name = "idlist", referencedColumnName = "idlist") }, inverseJoinColumns = {
+					@JoinColumn(name = "idtitle", referencedColumnName = "idtitle") })
 	@ManyToMany
 	private List<Title> title;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idProfile")
+	@JoinColumn(name = "idprofile")
 	private Profile profile;
 
 	@Column(name = "date")

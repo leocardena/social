@@ -16,20 +16,20 @@ import javax.persistence.Table;
 import com.social.util.FriendStatus;
 
 @Entity
-@Table(name = "Friend")
+@Table(name = "friend")
 public class Friend {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idFriendShip")
+	@Column(name = "idfriendship")
 	private long id;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
-	@JoinColumn(name="idProfile", insertable=false, updatable=false)
+	@JoinColumn(name="idprofile", insertable=false, updatable=false)
 	private Profile profile;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
-	@JoinColumn(name="idProfile", insertable=false, updatable=false)
+	@JoinColumn(name="idprofile", insertable=false, updatable=false)
 	private Profile friend;
 	
 	@Enumerated(EnumType.STRING)

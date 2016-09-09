@@ -15,7 +15,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
-@Table(name = "Episode")
+@Table(name = "episode")
 public class Episode {
 	
 	@Column(name = "name")
@@ -23,7 +23,7 @@ public class Episode {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idEpisode")
+	@Column(name = "idepisode")
 	private long id;
 	
 	@Column(name = "votes")
@@ -34,7 +34,7 @@ public class Episode {
 	private DateTime aired;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idRatingParent")
+	@JoinColumn(name="idratingparent")
 	private RatingParent ratingParent;
 	
 	@ManyToOne

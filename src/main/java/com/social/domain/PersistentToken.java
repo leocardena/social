@@ -18,7 +18,7 @@ import java.io.Serializable;
  * @see com.social.security.CustomPersistentRememberMeServices
  */
 @Entity
-@Table(name = "PersistentToken")
+@Table(name = "persistenttoken")
 public class PersistentToken implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,20 +31,20 @@ public class PersistentToken implements Serializable {
 
     @JsonIgnore
     @NotNull
-    @Column(name = "tokenValue", nullable = false)
+    @Column(name = "tokenvalue", nullable = false)
     private String tokenValue;
 
     @JsonIgnore
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    @Column(name = "tokenDate")
+    @Column(name = "tokendate")
     private DateTime tokenDate;
 
     //an IPV6 address max length is 39 characters
     @Size(min = 0, max = 39)
-    @Column(name = "ipAddress", length = 39)
+    @Column(name = "ipaddress", length = 39)
     private String ipAddress;
 
-    @Column(name = "userAgent")
+    @Column(name = "useragent")
     private String userAgent;
 
     @JsonIgnore

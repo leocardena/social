@@ -17,20 +17,20 @@ import org.joda.time.DateTime;
 import com.social.util.MessageStatus;
 
 @Entity
-@Table(name = "Message")
+@Table(name = "message")
 public class Message {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idFriendShip")
+	@Column(name = "idfriendship")
 	private long id;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile", insertable=false, updatable=false)
+	@JoinColumn(name="idprofile", insertable=false, updatable=false)
 	private Profile sender;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile", insertable=false, updatable=false)
+	@JoinColumn(name="idprofile", insertable=false, updatable=false)
 	private Profile receiver;
 	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")

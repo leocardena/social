@@ -14,16 +14,16 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
-@Table(name = "Rating")
+@Table(name = "rating")
 public class Rating {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idRating")
+	@Column(name = "idrating")
 	private long id;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
+	@JoinColumn(name="idprofile")
 	private Profile profile;
 	
 	@Column(name = "date")

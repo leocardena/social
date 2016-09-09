@@ -10,17 +10,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Table(name = "CommentParent")
+@Table(name = "commentparent")
 @Entity
 public class CommentParent {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idCommentParent")
+	@Column(name = "idcommentparent")
 	private long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idComment")
+	@JoinColumn(name = "idcomment")
 	private Comment comment;
 
 	public long getId() {

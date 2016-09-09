@@ -11,16 +11,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RatingParent")
+@Table(name = "ratingparent")
 public class RatingParent {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idRatingParent")
+	@Column(name = "idratingparent")
 	private String id;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idRating")
+	@JoinColumn(name="idrating")
 	private Rating rating;
 
 	public String getId() {

@@ -27,7 +27,7 @@ import com.social.security.util.Constants;
  * A user.
  */
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User extends AbstractAuditingEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -11,12 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Profile")
+@Table(name = "profile")
 public class Profile extends People {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idProfile")
+	@Column(name = "idprofile")
 	private long id;
 	
 	@Column(name = "genre")
@@ -26,11 +26,11 @@ public class Profile extends People {
 	private String avatar;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idCommentParent")
+	@JoinColumn(name="idcommentparent")
 	private CommentParent commentParent;
 	
 	@OneToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "iduser")
 	private User user;
 
 	public long getId() {

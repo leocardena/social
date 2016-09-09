@@ -17,12 +17,12 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 @Entity
-@Table(name = "Season")
+@Table(name = "season")
 public class Season {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idSeason")
+	@Column(name = "idseason")
 	private long id;
 	
 	@Column(name = "name")
@@ -35,11 +35,11 @@ public class Season {
 	private long votes;
 	
 	@ManyToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="idtvshow")
 	private TvShow tvShow;
 	
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idSeason")
+	@JoinColumn(name = "idseason")
 	private List<Episode> epidodes;
 	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")

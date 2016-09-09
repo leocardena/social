@@ -11,12 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TvShow")
+@Table(name = "tvshow")
 public class TvShow extends Title {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idTvShow")
+	@Column(name = "idtvshow")
 	private long id;
 	
 	@OneToMany(targetEntity=Season.class, mappedBy="tvShow", fetch=FetchType.EAGER)

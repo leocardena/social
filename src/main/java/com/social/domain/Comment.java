@@ -11,13 +11,13 @@ import javax.persistence.Table;
 import org.joda.time.DateTime;
 import java.util.List;
 
-@Table(name = "Comment")
+@Table(name = "comment")
 @Entity
 public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idComment")
+	@Column(name = "idcomment")
 	private Long id;
 	
 	@Column(name = "text")

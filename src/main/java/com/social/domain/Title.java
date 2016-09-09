@@ -14,12 +14,12 @@ import javax.persistence.Table;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
-@Table(name = "Title")
+@Table(name = "title")
 public class Title {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idTitle")
+	@Column(name = "idtitle")
 	private long id;
 	
 	@Column(name = "imdb")
@@ -38,11 +38,11 @@ public class Title {
 	private long votes;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idRatingParent")
+	@JoinColumn(name="idratingparent")
 	private RatingParent ratingParent;
 	
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idCommentParent")
+	@JoinColumn(name="idcommentparent")
 	private CommentParent commentParent;
 
 	public long getId() {

@@ -13,7 +13,7 @@ public class Movie extends Title {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idMovie")
+	@Column(name = "idmovie")
 	private long id;
 	
 }
