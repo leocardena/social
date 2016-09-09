@@ -22,6 +22,13 @@ ALTER TABLE ListTitle ADD PRIMARY KEY (idList, idTitle);
 ALTER TABLE EpisodeManager ADD PRIMARY KEY (idEpisode, idProfile);
 ALTER TABLE Friend ADD PRIMARY KEY (idProfile, idFriend);
 ALTER TABLE Message ADD PRIMARY KEY (idMessage);
+
+
+
+ALTER TABLE `User`
+    CHANGE COLUMN `idUser` `idUser` INT NOT NULL AUTO_INCREMENT;
+
+
 -- -----------------------------------------------------
 -- FOREIGN KEY
 -- -----------------------------------------------------

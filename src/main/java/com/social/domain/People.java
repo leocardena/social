@@ -23,7 +23,7 @@ public abstract class People {
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idRatingParent")
-	private RatingParent ratingParent;
+	private CommentParent commentParent;
 
 	public DateTime getBirthday() {
 		return birthday;
@@ -49,12 +49,12 @@ public abstract class People {
 		this.country = country;
 	}
 	
-	public RatingParent getRatingParent() {
-		return ratingParent;
+	public CommentParent getRatingParent() {
+		return commentParent;
 	}
 
-	public void setRatingParent(RatingParent ratingParent) {
-		this.ratingParent = ratingParent;
+	public void setCommentParent(CommentParent commentParent) {
+		this.commentParent = commentParent;
 	}
 
 }

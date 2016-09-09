@@ -1,5 +1,6 @@
 package com.social.domain;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.joda.time.DateTime;
@@ -18,7 +20,7 @@ import com.social.util.ListType;
 
 @Entity
 @Table(name = "List")
-public class List {
+public class Lists {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,11 +29,13 @@ public class List {
 	
 	@Column(name = "name")
 	private String name;
-
+	
+	
 	@JoinTable(name = "ListTitle", joinColumns = {
 			@JoinColumn(name = "idList", referencedColumnName = "idList") }, inverseJoinColumns = {
 					@JoinColumn(name = "idTitle", referencedColumnName = "idTitle") })
-	private Title title;
+	@ManyToMany
+	private List<Title> title;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idProfile")
@@ -64,11 +68,11 @@ public class List {
 		this.name = name;
 	}
 
-	public Title getTitle() {
+	public List<Title> getTitle() {
 		return title;
 	}
 
-	public void setTitle(Title title) {
+	public void setTitle(List<Title> title) {
 		this.title = title;
 	}
 

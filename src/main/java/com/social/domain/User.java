@@ -34,11 +34,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idUser")
+	@Column(name = "iduser")
 	private Long id;
 
 	@NotNull
-	@Pattern(regexp = Constants.LOGIN_REGEX)
+	@Pattern(regexp = Constants.USERNAME_REGEX)
 	@Size(min = 1, max = 50)
 	@Column(name = "username")
 	private String username;
@@ -55,7 +55,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	
 	@Email
 	@Size(max = 100)
-	@Column(length = 100)
+	@Column(length = 100, name="email")
 	private String email;
 
 	@NotNull
@@ -63,23 +63,23 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	private boolean activated = false;
 
 	@Size(max = 20)
-	@Column(name = "activationKey")
+	@Column(name = "activationkey")
 	@JsonIgnore
 	private String activationKey;
 
 	@Size(max = 20)
-	@Column(name = "resetKey")
+	@Column(name = "resetkey")
 	private String resetKey;
 	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	@Column(name = "resetDate")
+	@Column(name = "resetdate")
 	private DateTime resetDate = null;
 
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "UserAuthority", joinColumns = {
-			@JoinColumn(name = "idUser", referencedColumnName = "idUser") }, inverseJoinColumns = {
-					@JoinColumn(name = "authorityName", referencedColumnName = "name") })
+	@JoinTable(name = "userauthority", joinColumns = {
+			@JoinColumn(name = "iduser", referencedColumnName = "iduser") }, inverseJoinColumns = {
+					@JoinColumn(name = "authorityname", referencedColumnName = "name") })
 	private Set<Authority> authorities = new HashSet<>();
 
 	@JsonIgnore

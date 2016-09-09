@@ -24,7 +24,6 @@ public class Rating {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="idProfile")
-	@Column(name = "profile")
 	private Profile profile;
 	
 	@Column(name = "date")

@@ -23,16 +23,16 @@ public abstract class AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @CreatedDate
-    @Column(name = "created_date", nullable = false)
     @JsonIgnore
+    @Column(name = "createddate", nullable = false)
     private DateTime createdDate = DateTime.now();
 
     @LastModifiedDate
-    @Column(name = "last_modified_date")
     @JsonIgnore
+    @Column(name = "lastmodifieddate")
     private DateTime lastModifiedDate = DateTime.now();
 
-
+  
     public DateTime getCreatedDate() {
         return createdDate;
     }
@@ -40,7 +40,7 @@ public abstract class AbstractAuditingEntity implements Serializable {
     public void setCreatedDate(DateTime createdDate) {
         this.createdDate = createdDate;
     }
-
+    
     public DateTime getLastModifiedDate() {
         return lastModifiedDate;
     }

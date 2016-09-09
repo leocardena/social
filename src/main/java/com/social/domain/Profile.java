@@ -30,7 +30,7 @@ public class Profile extends People {
 	private CommentParent commentParent;
 	
 	@OneToOne
-	@JoinColumn(name = "idUser")
+	@JoinColumn(name = "id")
 	private User user;
 
 	public long getId() {

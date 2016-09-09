@@ -10,6 +10,7 @@ import com.social.domain.Authority;
 import com.social.domain.Profile;
 import com.social.domain.User;
 import com.social.repository.AuthorityRepository;
+import com.social.repository.ProfileRepository;
 import com.social.repository.UserRepository;
 import com.social.rest.dto.UserDTO;
 import com.social.rest.exception.EmailAlreadyInUseException;
@@ -35,9 +36,11 @@ public class AccountBusiness {
 	@Autowired
 	private MailBusiness mailBusiness;
 	
+	@Autowired
+	private ProfileRepository profileRepository;
+	
 	public User createNewUser(UserDTO userDTO) {
-		
-		Optional<User> user = userRepository.findOneByLogin(userDTO.getLogin().toLowerCase());
+		Optional<User> user = userRepository.findOneByUsername(userDTO.getLogin().toLowerCase());
 		if (user.isPresent()) 
 				throw new LoginAlreadyInUseException("O login já está em uso.");
 		user = null;
@@ -67,7 +70,7 @@ public class AccountBusiness {
         newProfile.setGenre(userDTO.getGenre());
         newProfile.setUser(newUser);
         
-        //userRepository.save(newUser);
+        profileRepository.save(newProfile);
 		mailBusiness.sendActivationEmail(newUser , "http://localhost:8080");
         return newUser;
 		
@@ -85,13 +88,17 @@ public class AccountBusiness {
     }
 
 	public UserDTO getUserWithAuthorities() {
-		Optional<User> userOptional = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+		Optional<User> userOptional = userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin());
 		if (!userOptional.isPresent())
 			throw new LoginNotFoundException("Login não encontrado");
 		User user = userOptional.get();
+		user.getAuthorities().size(); 
 		// eagerly load the association
-        user.getAuthorities().size(); 
-        return new UserDTO();
+		Optional<Profile> profileOptional = profileRepository.findOneByUser(user.getId().toString());
+		if (!profileOptional.isPresent())
+			throw new LoginNotFoundException("Profile não encontrado");
+		Profile profile = profileOptional.get();
+        return new UserDTO(profile);
 	}
 	
 }

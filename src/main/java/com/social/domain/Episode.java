@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,6 +36,10 @@ public class Episode {
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idRatingParent")
 	private RatingParent ratingParent;
+	
+	@ManyToOne
+	@JoinColumn(name="id")
+	private Season season;
 
 	public long getId() {
 		return id;
@@ -74,6 +79,14 @@ public class Episode {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Season getSeason() {
+		return season;
+	}
+
+	public void setSeason(Season season) {
+		this.season = season;
 	}
 	
 }

@@ -26,15 +26,15 @@ public class Message {
 	private long id;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
+	@JoinColumn(name="idProfile", insertable=false, updatable=false)
 	private Profile sender;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
+	@JoinColumn(name="idProfile", insertable=false, updatable=false)
 	private Profile receiver;
 	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-	@Column(name = "idFriendShip")
+	@Column(name = "date")
 	private DateTime date;
 	
 	@Enumerated(EnumType.STRING)

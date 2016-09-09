@@ -24,12 +24,12 @@ public class Friend {
 	@Column(name = "idFriendShip")
 	private long id;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="idProfile", insertable=false, updatable=false)
 	private Profile profile;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idProfile")
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
+	@JoinColumn(name="idProfile", insertable=false, updatable=false)
 	private Profile friend;
 	
 	@Enumerated(EnumType.STRING)
