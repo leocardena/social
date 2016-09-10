@@ -9,6 +9,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Table(name = "title")
@@ -80,6 +82,11 @@ public class Title {
 
 	public void setVotes(long votes) {
 		this.votes = votes;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

@@ -13,10 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 import org.joda.time.DateTime;
@@ -48,18 +51,18 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Size(min = 60, max = 60)
 	@Column(name = "password")
 	private String password;
-	
+
 	@Size(max = 50)
 	@Column(name = "phone")
 	private String phone;
-	
+
 	@Email
 	@Size(max = 100)
-	@Column(length = 100, name="email")
+	@Column(length = 100, name = "email")
 	private String email;
 
 	@NotNull
-	@Column(name= "activated")
+	@Column(name = "activated")
 	private boolean activated = false;
 
 	@Size(max = 20)
@@ -70,10 +73,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Size(max = 20)
 	@Column(name = "resetkey")
 	private String resetKey;
-	
+
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "resetdate")
 	private DateTime resetDate = null;
+
+	@OneToOne(mappedBy = "user")
+	private Profile profile;
 
 	@JsonIgnore
 	@ManyToMany
@@ -173,6 +179,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

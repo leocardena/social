@@ -12,7 +12,7 @@ email VARCHAR(100) UNIQUE NOT NULL,
 username VARCHAR(50) UNIQUE NOT NULL,
 resetDate TIMESTAMP,
 resetKey VARCHAR(200),
-phone VARCHAR(11) UNIQUE NOT NULL,
+phone VARCHAR(11) NOT NULL,
 password VARCHAR (100) NOT NULL
 ) ENGINE=InnoDB;
 -- -----------------------------------------------------
@@ -71,12 +71,21 @@ birthay TIMESTAMP NOT NULL,
 country VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 -- -----------------------------------------------------
+-- Table SocialNetwork.Movie
+-- -----------------------------------------------------
+CREATE TABLE Movie(
+idMovie INT NOT NULL, 
+idTitle INT NOT NULL,
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL
+)ENGINE=InnoDB;
+-- -----------------------------------------------------
 -- Table SocialNetwork.Actor
 -- -----------------------------------------------------
 CREATE TABLE Actor(
 idActor INT UNIQUE NOT NULL,
-idCommentParent INT,
-idRatingParent INT,
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL,
 imdb INT UNIQUE NOT NULL,
 name VARCHAR (100) NOT NULL,
 birthay DATE NOT NULL,
@@ -87,36 +96,30 @@ country VARCHAR(100) NOT NULL
 -- -----------------------------------------------------
 CREATE TABLE Title(
 idTitle INT NOT NULL,
-idCommentParent INT,
 imdb  INT UNIQUE NOT NULL,
 name VARCHAR(100) UNIQUE NOT NULL,
 trailer VARCHAR(1000) NOT NULL,
 homePage VARCHAR(1000) NOT NULL,
 votes INT NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
--- -----------------------------------------------------
--- Table SocialNetwork.Movie
--- -----------------------------------------------------
-CREATE TABLE Movie(
-idMovie INT NOT NULL,
-idTitle INT NOT NULL,
-idRatingParent INT
-)ENGINE=InnoDB;
+
 -- -----------------------------------------------------
 -- Table SocialNetwork.TvShow
 -- -----------------------------------------------------
 CREATE TABLE TvShow( 
 idTvShow INT NOT NULL,
 idTitle INT NOT NULL,
-idRatingParent INT
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Season
 -- -----------------------------------------------------
 CREATE TABLE Season(
-idSeason INT UNIQUE NOT NULL,
+idSeason INT UNIQUE NOT NULL, 
 idTvShow INT NOT NULL,
-idRatingParent INT,
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL,
 name VARCHAR(100) NOT NULL,
 aired DATE NOT NULL,
 votes INT NOT NULL DEFAULT 0
@@ -125,9 +128,10 @@ votes INT NOT NULL DEFAULT 0
 -- Table SocialNetwork.Episode
 -- -----------------------------------------------------
 CREATE TABLE Episode(
-idEpisode INT UNIQUE NOT NULL,
+idEpisode INT UNIQUE NOT NULL, 
 idSeason INT NOT NULL,
-idRatingParent INT,
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL,
 name VARCHAR(100) NOT NULL,
 aired DATE NOT NULL,
 votes INT NOT NULL DEFAULT 0
@@ -136,7 +140,7 @@ votes INT NOT NULL DEFAULT 0
 -- Table SocialNetwork.Message
 -- -----------------------------------------------------
 CREATE TABLE Message(
-idMessage INT NOT NULL,
+idMessage INT NOT NULL, 
 idSender INT NOT NULL,
 idReceiver INT NOT NULL,
 date TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -147,7 +151,7 @@ status VARCHAR(7) NOT NULL DEFAULT 'UNREAD'
 -- Table SocialNetwork.Friend
 -- -----------------------------------------------------
 CREATE TABLE Friend(
-idFriendShip INT UNIQUE NOT NULL,
+idFriendShip INT UNIQUE NOT NULL, 
 idProfile INT  NOT NULL,
 idFriend INT NOT NULL,
 status VARCHAR(7) NOT NULL DEFAULT 'WAITING'
@@ -156,7 +160,7 @@ status VARCHAR(7) NOT NULL DEFAULT 'WAITING'
 -- Table SocialNetwork.EpisodeManager
 -- -----------------------------------------------------
 CREATE TABLE EpisodeManager(
-idEpisodeManager INT UNIQUE NOT NULL AUTO_INCREMENT,
+idEpisodeManager INT UNIQUE NOT NULL,  
 idEpisode INT NOT NULL,
 idProfile INT NOT NULL,
 episodeStatus VARCHAR(9) NOT NULL DEFAULT 'UNWHATCH'
@@ -165,7 +169,7 @@ episodeStatus VARCHAR(9) NOT NULL DEFAULT 'UNWHATCH'
 -- Table SocialNetwork.List
 -- -----------------------------------------------------
 CREATE TABLE List(
-idList INT UNIQUE NOT NULL AUTO_INCREMENT,
+idList INT NOT NULL, 
 idProfile INT NOT NULL,
 name VARCHAR(100) NOT NULL,
 date TIMESTAMP DEFAULT NOW() NOT NULL,
@@ -179,32 +183,42 @@ CREATE TABLE ListTitle(
 idList INT NOT NULL,
 idTitle INT NOT NULL
 )ENGINE=InnoDB;
+
+/* Comments */
 -- -----------------------------------------------------
 -- Table SocialNetwork.Comment
 -- -----------------------------------------------------
 CREATE TABLE Comment(
-idComment INT NOT NULL,
-idProfile INT NOT NULL,
+idComment INT NOT NULL, 
+idCommentParent INT NOT NULL,
 text TEXT NOT NULL,
 date TIMESTAMP DEFAULT NOW() NOT NULL,
 likes INT(10) DEFAULT 0 ,
 dislikes INT(10) DEFAULT 0,
 replies INT DEFAULT 0,
-reply INT
+parent INT
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.CommentParent
 -- -----------------------------------------------------
 CREATE TABLE CommentParent(
-idCommentParent INT NOT NULL,
-idComment INT NOT NULL
+idCommentParent INT NOT NULL 
 )ENGINE=InnoDB;
+-- -----------------------------------------------------
+-- Table SocialNetwork.ProfileComments
+-- -----------------------------------------------------
+CREATE TABLE ProfileComments(
+idComment INT NOT NULL,
+idProfile INT NOT NULL
+)ENGINE=InnoDB;
+
+/* Rating */
 -- -----------------------------------------------------
 -- Table SocialNetwork.Rating
 -- -----------------------------------------------------
 CREATE TABLE Rating(
 idRating INT NOT NULL,
-idProfile INT NOT NULL,
+idRatingParent INT NOT NULL,
 date TIMESTAMP NOT NULL DEFAULT NOW(),
 note FLOAT NOT NULL DEFAULT 0.0
 )ENGINE=InnoDB;
@@ -212,6 +226,12 @@ note FLOAT NOT NULL DEFAULT 0.0
 -- Table SocialNetwork.RatingParent
 -- -----------------------------------------------------
 CREATE TABLE RatingParent(
-idRatingParent INT NOT NULL,
-idRating INT NOT NULL
+idRatingParent INT NOT NULL 
+)ENGINE=InnoDB;
+-- -----------------------------------------------------
+-- Table SocialNetwork.ProfileRatings
+-- -----------------------------------------------------
+CREATE TABLE ProfileRatings(
+idRating INT NOT NULL,
+idProfile INT NOT NULL
 )ENGINE=InnoDB;

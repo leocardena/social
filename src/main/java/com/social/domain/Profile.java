@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "profile")
 public class Profile extends People {
@@ -29,19 +31,19 @@ public class Profile extends People {
 	@Column(name = "avatar")
 	private String avatar;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "iduser")
 	private User user;
 	
 	@ManyToMany
-	@JoinTable(name = "moviecomments", joinColumns = {
-			@JoinColumn(name = "idmovie", referencedColumnName = "idmovie") }, inverseJoinColumns = {
+	@JoinTable(name = "profilecomments", joinColumns = {
+			@JoinColumn(name = "idprofile", referencedColumnName = "idprofile") }, inverseJoinColumns = {
 					@JoinColumn(name = "idcomment", referencedColumnName = "idcomment") })
 	private List<Comment> comments = new ArrayList<>();
 	
 	@ManyToMany
-	@JoinTable(name = "movieratings", joinColumns = {
-			@JoinColumn(name = "idmovie", referencedColumnName = "idmovie") }, inverseJoinColumns = {
+	@JoinTable(name = "profileratings", joinColumns = {
+			@JoinColumn(name = "idprofile", referencedColumnName = "idprofile") }, inverseJoinColumns = {
 					@JoinColumn(name = "idrating", referencedColumnName = "idrating") })
 	private List<Rating> ratings = new ArrayList<>();
 	
@@ -103,6 +105,11 @@ public class Profile extends People {
 
 	public void setCommentParent(CommentParent commentParent) {
 		this.commentParent = commentParent;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

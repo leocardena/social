@@ -1,5 +1,6 @@
 package com.social.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.http.HttpHeaders;
 
 public class ResponseAPI<T> {
@@ -29,6 +30,11 @@ public class ResponseAPI<T> {
 	
 	public void setBody(T response) {
 		this.body = response;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

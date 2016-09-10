@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Table(name = "commentparent")
 @Entity
 public class CommentParent {
@@ -22,6 +24,11 @@ public class CommentParent {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

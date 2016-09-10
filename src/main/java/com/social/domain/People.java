@@ -2,6 +2,8 @@ package com.social.domain;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -40,6 +42,11 @@ public abstract class People {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 	
 }
