@@ -4,7 +4,7 @@ public enum TraktBaseUrl {
 
 	URL("https://api.trakt.tv");
 	
-	String valor;
+	private String valor;
 
 	TraktBaseUrl ( String valor ) {
 		this.valor = valor;

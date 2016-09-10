@@ -1,6 +1,6 @@
-package com.social.model;
+package com.social.rest.dto;
 
-public class ErrorDetail {
+public class ErrorDetailDTO {
 	
 	private String titulo;
 	private Long status;

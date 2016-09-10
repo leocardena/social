@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Social activation</title>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html"/>
+    </head>
+    <body>
+    	<p>Obrigado por se cadastrar!</p>
+        <p th:text="${user.username}"></p>
+        <p>
+            Sua conta foi criada na Rede Social, favor acessar o seguinte link para ativar sua conta:
+        </p>
+        <p>
+            <a th:href="@{|${baseUrl}/activate?key=${user.activationKey}|}">
+            	Link de Ativação
+            </a>
+        </p>
+    </body>
+</html>
