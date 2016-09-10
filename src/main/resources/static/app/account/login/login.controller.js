@@ -57,6 +57,9 @@
                 }
             }).catch(function () {
                 vm.authenticationError = true;
+                vm.username = null;
+                vm.password = null;
+                vm.formLogin.$setPristine();
             });
         }
 

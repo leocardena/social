@@ -20,7 +20,8 @@
 			parent : 'account',
 			data: {
                 authorities: [],
-                pageTitle: 'Ativação'
+                pageTitle: 'Ativação',
+                hideNavbar: false
             },
 			views : {
 				'content@' : {

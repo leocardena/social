@@ -17,7 +17,8 @@
 			parent : 'account',
 			data: {
                 authorities: [],
-                pageTitle: 'Login'
+                pageTitle: 'Login',
+                hideNavbar: true
             },
 			views : {
 				'content@' : {

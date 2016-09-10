@@ -17,7 +17,8 @@
 						  url: '/cadastrar',
 						  data: {
 				                authorities: [],
-				                pageTitle: 'Cadastrar'
+				                pageTitle: 'Cadastrar',
+				                hideNavbar: false
 				          },
 						  views: {
 							  'content@': {
