@@ -32,6 +32,9 @@ public class Rating {
 	
 	@Column(name = "note")
 	private long note;
+	
+	@OneToOne
+	private RatingParent idRatingParent;
 
 	public long getId() {
 		return id;
@@ -63,6 +66,14 @@ public class Rating {
 
 	public void setNote(long note) {
 		this.note = note;
+	}
+
+	public RatingParent getIdRatingParent() {
+		return idRatingParent;
+	}
+
+	public void setIdRatingParent(RatingParent idRatingParent) {
+		this.idRatingParent = idRatingParent;
 	}
 	
 }

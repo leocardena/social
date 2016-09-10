@@ -1,12 +1,17 @@
 package com.social.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,9 +27,25 @@ public class Actor extends People {
 	@Column(name = "imdb")
 	private String imdb;
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idratingparent")
+	@ManyToMany
+	@JoinTable(name = "actorcomments", joinColumns = {
+			@JoinColumn(name = "idactor", referencedColumnName = "idactor") }, inverseJoinColumns = {
+					@JoinColumn(name = "idcomment", referencedColumnName = "idcomment") })
+	private List<Comment> comments = new ArrayList<>();
+	
+	@ManyToMany
+	@JoinTable(name = "actorratings", joinColumns = {
+			@JoinColumn(name = "idactor", referencedColumnName = "idactor") }, inverseJoinColumns = {
+					@JoinColumn(name = "idrating", referencedColumnName = "idrating") })
+	private List<Rating> ratings = new ArrayList<>();
+	
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idratingparent")
+    private RatingParent ratingParent;
 	
 	public String getImdb() {
 		return imdb;
@@ -41,8 +62,24 @@ public class Actor extends People {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	public CommentParent getRatingParent() {
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
+	}
+
+	public CommentParent getCommentParent() {
 		return commentParent;
 	}
 
@@ -50,4 +87,12 @@ public class Actor extends People {
 		this.commentParent = commentParent;
 	}
 
+	public RatingParent getRatingParent() {
+		return ratingParent;
+	}
+
+	public void setRatingParent(RatingParent ratingParent) {
+		this.ratingParent = ratingParent;
+	}
+	
 }

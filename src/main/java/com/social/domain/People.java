@@ -17,7 +17,6 @@ public abstract class People {
 	
 	@Column(name = "country")
 	private String country;
-	
 
 	public DateTime getBirthday() {
 		return birthday;

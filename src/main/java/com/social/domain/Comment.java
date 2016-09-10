@@ -5,11 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.joda.time.DateTime;
-import java.util.List;
 
 @Table(name = "comment")
 @Entity
@@ -26,20 +24,20 @@ public class Comment {
 	@Column(name = "date")
 	private DateTime date;
 	
-	@OneToOne
-	private Profile profile;
-	
 	@Column(name = "likes")
 	private Long likes;
 	
 	@Column(name = "replies")
 	private Long replies;
 	
-	@OneToMany
-	private List<Comment> reply;
+	@OneToOne
+	private Comment parent;
 	
 	@Column(name = "dislike")
 	private Long dislike;
+	
+	@OneToOne
+	private CommentParent idCommentParent;
 
 	public Long getId() {
 		return id;
@@ -65,14 +63,6 @@ public class Comment {
 		this.date = date;
 	}
 
-	public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
-
 	public Long getLikes() {
 		return likes;
 	}
@@ -89,12 +79,20 @@ public class Comment {
 		this.replies = replies;
 	}
 
-	public List<Comment> getReply() {
-		return reply;
+	public Comment getParent() {
+		return parent;
 	}
 
-	public void setReply(List<Comment> reply) {
-		this.reply = reply;
+	public void setParent(Comment parent) {
+		this.parent = parent;
+	}
+
+	public CommentParent getIdCommentParent() {
+		return idCommentParent;
+	}
+
+	public void setIdCommentParent(CommentParent idCommentParent) {
+		this.idCommentParent = idCommentParent;
 	}
 
 	public Long getDislike() {
