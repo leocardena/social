@@ -6,17 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.social.model.ErrorDetail;
+import com.social.rest.dto.ErrorDetailDTO;
 import com.social.retrofit.exception.RetrofitException;
 
 @ControllerAdvice
 public class RetrofitExceptionHandler {
 
 	@ExceptionHandler(RetrofitException.class)
-	public ResponseEntity<ErrorDetail> handleRetrofitException(RetrofitException exception,
+	public ResponseEntity<ErrorDetailDTO> handleRetrofitException(RetrofitException exception,
 			HttpServletRequest request) {
 		
-		ErrorDetail error = new ErrorDetail();
+		ErrorDetailDTO error = new ErrorDetailDTO();
 		
 		error.setStatus(500L);
 		error.setTitulo("Erro na API Retrofit");

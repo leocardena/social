@@ -10,7 +10,8 @@ local.properties
 .loadpath
 .recommenders
 src/main/resources/static/bower_components/**
-src/main/java/com/social/trakt/util/TraktAPIKey.java
+src/main/java/com/social/trakt/util/TraktAPIKey
+src/main/java/com/social/config/MailConfiguration
 target/
 *.log*
 *.log.*
@@ -45,3 +46,4 @@ mvnw
 
 # Code Recommenders
 .recommenders/
+/.apt_generated/

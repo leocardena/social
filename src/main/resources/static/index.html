@@ -2,21 +2,100 @@
 <html ng-app="social">
 <head>
 	<meta charset="UTF-8">
-	<base href="/">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
+    <title>Social</title>
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-wizard/dist/angular-wizard.min.css">
+	<link rel='stylesheet' type='text/css' href="bower_components/angular-loading-bar/build/loading-bar.min.css" media='all' />
+	<link rel="stylesheet" type="text/css" href="content/css/social.css">
+	<base href="/">
 </head>
 <body>
 
-	<main ui-view role="main"></main>
+	<nav ui-view="navbar" ng-cloak></nav>
 	
+	<div class="container">
+		<main ui-view="content" role="main"></main>
+	</div>
+
 	<!-- Bower -->
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+	<script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>
 	<script src="app/core/social.main.routes.js"></script>
 	<script src="app/core/social.core.module.js"></script>
+	
+	<!-- Modules  -->
+	<script src="app/services/services.module.js"></script>
+	<script src="app/account/account.module.js"></script>
+	<script src="app/account/login/login.module.js"></script>
+	<script src="app/account/register/register.module.js"></script>
+	<script src="app/blocks/blocks.module.js"></script>
+	<script src="app/account/activate/activate.module.js"></script>
+	<script src="app/user/user.module.js"></script>
+	<script src="app/user/home/home.module.js"></script>
+	<script src="app/layouts/layouts.module.js"></script>
+	<script src="app/layouts/error/error.module.js"></script>
+
+	<!-- Blocks -->
+	<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
+	<script src="app/blocks/config/http.config.js"></script>
+	<script src="app/blocks/handlers/state.handler.js"></script>
+	<script src="app/blocks/config/loading-bar.config.js"></script>
+	<script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
+	
+	<!-- Layouts -->
+	<script src="app/layouts/error/error.state.js"></script>
+	
+	<!-- Base URL -->
+	<script src="app/services/auth/base/register-base-url.value.js"></script>
+	<script src="app/services/region/base/country-base-url.value.js"></script>
+	<script src="app/services/auth/base/activate-base-url.value.js"></script>
+	
+	<!-- Services -->
+	<script src="app/services/auth/register.service.js"></script>
+	<script src="app/services/auth/auth.service.js"></script>
+	<script src="app/services/auth/activate.service.js"></script>
+	<script src="app/services/region/country.service.js"></script>
+	<script src="app/services/region/region.service.js"></script>
+	<script src="app/services/auth/auth.session.service.js"></script>
+	<script src="app/services/auth/principal.service.js"></script>
+	<script src="app/services/auth/account.service.js"></script>
+	
+	<!-- Account -->
+	<script src="app/account/account.routes.js"></script>
+	
+	<!-- Login -->
+	<script src="app/account/login/login.routes.js"></script>
+	<script src="app/account/login/login.controller.js"></script>
+	
+	<!-- Register -->
+	<script src="app/account/register/register.routes.js"></script>
+	<script src="app/account/register/register.controller.js"></script>
+	
+	<!-- Activate -->
+	<script src="app/account/activate/activate.routes.js"></script>
+	<script src="app/account/activate/activate.controller.js"></script>
+	
+	<!-- User -->
+	<script src="app/user/user.routes.js"></script>
+	
+	<!-- Home -->
+	<script src="app/user/home/home.routes.js"></script>
+	<script src="app/user/home/home.controller.js"></script>
+	
+	<footer class="footer" ng-cloak></footer>
 	
 </body>
 </html>
