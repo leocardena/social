@@ -22,9 +22,12 @@ public class MovieREST {
 	@GetMapping(value = "/popular")
 	public ResponseEntity<?> getPopularMovies(@RequestParam(value = "page", required = false) String page,
 			@RequestParam(value = "limit", required = false) String limit,
-			@RequestParam(value = "extended", required = false) String extended) {
+			@RequestParam(value = "extended", required = false) String extended,
+			@RequestParam(value = "query", required = false) String query,
+			@RequestParam(value = "genres", required = false) String genres) 
+			{
 		
-		ResponseAPI<List<Movie>> response = service.getPopularMovies(page, limit, extended);
+		ResponseAPI<List<Movie>> response = service.getPopularMovies(page, limit, extended, query, genres);
 		return ResponseEntity.ok().headers(response.getHeaders()).body(response.getBody());
 	}
 
