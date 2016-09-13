@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.social.rest.business.AccountBusiness;
 import com.social.rest.dto.UserDTO;
 import com.social.rest.util.APIEndpoint;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(value = APIEndpoint.ACCOUNT)
@@ -25,16 +26,21 @@ public class AccountREST {
 	public ResponseEntity<?> post(@Valid @RequestBody UserDTO userDTO) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(accountBusiness.createNewUser(userDTO));
 	}
-	
+
 	@GetMapping(value = "/activate")
 	public ResponseEntity<?> activate(@RequestParam(value = "key") String key) {
 		accountBusiness.activateRegistration(key);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping
 	public ResponseEntity<?> getAccount() {
 		return ResponseEntity.status(HttpStatus.OK).body(accountBusiness.getUserWithAuthorities());
+	}
+
+	@GetMapping(value = "/authenticate")
+	public String isAuthenticated(HttpServletRequest request) {
+		return request.getRemoteUser();
 	}
 
 }

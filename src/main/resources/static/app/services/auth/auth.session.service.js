@@ -46,7 +46,7 @@
             $http.post('api/logout').success(function (response) {
                 delete $localStorage.authenticationToken;
                 // to get a new csrf token call the api
-                //$http.get('api/rest/account');
+                $http.get('api/rest/account');
                 return response;
             });
             

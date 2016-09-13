@@ -1,23 +1,32 @@
 <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
-            <form class="form" role="form" ng-submit="vm.login($event)" name="vm.formLogin">
+            <form novalidate class="form" role="form" ng-submit="vm.login($event)" name="vm.formLogin" >
             	<div class="row">
 					<a href=""><img src="" class="center-block logo" alt=""> </a>
         		</div>
         		<div class="row">
         			<h3 class="text-center subTitle">Entre, divirta-se!</h3>
         		</div>
-        		<div class="row text-center" ng-show="vm.authenticationError">
-        			<strong>Falha ao logar!</strong>
+        		<div class="text-center" ng-show="vm.authenticationError">
+        			<div class="alert alert-danger" close="">Usuário ou senha inválidos.</div>
         		</div>
                 <div class="form-group">
                     <label for="username" class="sr-only">Usuário</label>
-                    <input type="text" class="form-control" id="username" placeholder="Usuário" ng-model="vm.username">
+                    <input type="text" class="form-control" id="username" placeholder="Usuário" ng-model="vm.username" 
+                    	name="username" ng-required="true" ng-maxlength="30" popover-animation="true" 
+                    	uib-popover="Preencha o usuário corretamente."
+                    	popover-enable="vm.usernameError" popover-placement="left" 
+                    	popover-is-open="vm.usernameError && vm.formLogin.$submitted"
+                    	ng-focus="vm.dismissAlert()">
                 </div>
                 <div class="form-group">
                     <label for="password" class="sr-only">Senha</label>
                     <input type="password" class="form-control" id="password" placeholder="Senha"
-                           ng-model="vm.password">
+                    	ng-model="vm.password " ng-required="true" ng-maxlength="50" name="password"
+                    	popover-animation="true" uib-popover="Preencha a senha corretamente."
+                    	popover-enable="vm.passwordError" popover-placement="left" 
+                    	popover-is-open="vm.passwordError && vm.formLogin.$submitted"
+                    	ng-focus="vm.dismissAlert()">
                 </div>
                 <div class="checkbox">
                     <label for="rememberMe">

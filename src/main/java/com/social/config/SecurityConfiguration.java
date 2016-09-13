@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	    @Inject
 	    private UserDetailsService userDetailsService;
-
+	    
 	    @Bean
 	    public PasswordEncoder passwordEncoder() {
 	        return new BCryptPasswordEncoder();
@@ -68,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
-	        http
+			http
 	            .csrf()
 	        .and()
 	            .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
@@ -99,6 +99,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	            .authorizeRequests()
 	            .antMatchers(HttpMethod.POST, "/api/rest/account").permitAll()
 	            .antMatchers(HttpMethod.GET, "/api/rest/account/activate").permitAll()
+	            .antMatchers("/api/authenticate").permitAll()
 	            .antMatchers("/api/rest/**").authenticated()
 	            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN.toString())
 	            .antMatchers("/v2/api-docs/**").permitAll()

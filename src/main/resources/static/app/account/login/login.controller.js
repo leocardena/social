@@ -9,10 +9,10 @@
 
     function LoginController ($rootScope, $state, $timeout, AuthService) {
         var vm = this;
-
         vm.authenticationError = false;
         vm.cancel = cancel;
         vm.credentials = {};
+        vm.dismissAlert = _dismissAlert;
         vm.login = login;
         vm.password = null;
         vm.register = register;
@@ -30,22 +30,38 @@
             };
             vm.authenticationError = false;
         }
+        
+        function _dismissAlert() {
+        	vm.authenticationError = false;
+        }
 
         function login (event) {
             event.preventDefault();
+            
+            if (vm.formLogin.username.$invalid) {
+            	vm.usernameError = true;
+            	vm.authenticationError = false;
+            } else {
+            	vm.usernameError = false;
+            }
+            
+            if (vm.formLogin.password.$invalid && vm.formLogin.username.$valid) {
+            	vm.passwordError = true;
+            	vm.authenticationError = false;
+            } else {
+            	vm.passwordError = false;
+            }
+            
+            if (vm.formLogin.$invalid) return;
+            	
             AuthService.login({
                 username: vm.username,
                 password: vm.password,
                 rememberMe: vm.rememberMe
             }).then(function () {
                 vm.authenticationError = false;
-                if ($state.current.name === 'register' || $state.current.name === 'activate' ||
-                    $state.current.name === 'finishReset' || $state.current.name === 'requestReset') {
-                    $state.go('home');
-                }
+                vm.formError = false;
                 
-                $state.go('home');
-
                 $rootScope.$broadcast('authenticationSuccess');
 
                 // previousState was set in the authExpiredInterceptor before being redirected to login modal.
@@ -55,6 +71,7 @@
                     AuthService.resetPreviousState();
                     $state.go(previousState.name, previousState.params);
                 }
+                $state.go('home');
             }).catch(function () {
                 vm.authenticationError = true;
                 vm.username = null;
