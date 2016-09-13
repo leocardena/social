@@ -18,28 +18,7 @@ General CSS
 
 /* INICIO - corpo da aplicação */
 body {
-	background-image:
-		url(https://static.omelete.uol.com.br/media/extras/conteudos/Supernatural_DPgRbJI.jpg);
-	background-image: url(http://wallpapercave.com/wp/IQIAxJL.jpg);
-	background-image:
-		url(http://www.cfau-pd.net/images/friends-wallpaper/friends-wallpaper-5.jpg);
-	background-image:
-		url(https://wallpaperscraft.com/image/house_of_cards_frank_underwood_kevin_spacey_102090_1920x1080.jpg);
-	background-color: #000;
-	/*
-    bottom: 0;
-    color: black;
-    left: 0;
-    overflow: auto;
-    padding: 3em;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    background-size: cover;
-    */
-	background-repeat: no-repeat;
-	background-size: 100%;
+
 }
 
 .href {
@@ -118,6 +97,30 @@ img.logo {
 
 .subTitle {
 	margin-bottom: 3rem;
+}
+
+#loginBackground {
+		background-image:
+		url(https://static.omelete.uol.com.br/media/extras/conteudos/Supernatural_DPgRbJI.jpg);
+	background-image: url(http://wallpapercave.com/wp/IQIAxJL.jpg);
+	background-image:
+		url(http://www.cfau-pd.net/images/friends-wallpaper/friends-wallpaper-5.jpg);
+	background-image:
+		url(https://wallpaperscraft.com/image/house_of_cards_frank_underwood_kevin_spacey_102090_1920x1080.jpg);
+	background-color: #000;
+
+    bottom: 0;
+    color: black;
+    left: 0;
+    overflow: auto;
+    padding: 3em;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    background-size: cover;
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
 
 /* FINAL - corpo da aplicação */
