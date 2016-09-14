@@ -18,7 +18,8 @@
 			data: {
                 authorities: [],
                 pageTitle: 'Login',
-                hideNavbar: true
+                hideNavbar: true,
+                backgroundUrl: 'https://static.omelete.uol.com.br/media/extras/conteudos/Supernatural_DPgRbJI.jpg'
             },
 			views : {
 				'content@' : {

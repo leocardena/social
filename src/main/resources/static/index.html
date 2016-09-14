@@ -5,18 +5,18 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="">
-    <title>Social</title>
+    <title></title>
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-wizard/dist/angular-wizard.min.css">
 	<link rel='stylesheet' type='text/css' href="bower_components/angular-loading-bar/build/loading-bar.min.css" media='all' />
 	<link rel="stylesheet" type="text/css" href="content/css/social.css">
 	<base href="/">
 </head>
-<body>
-
+<body back-img="{{toState.data.backgroundUrl}}">
+	
 	<nav ui-view="navbar" ng-cloak></nav>
 	
-	<div class="container-fluid">
+	<div class="container">
 		<main ui-view="content" role="main"></main>
 	</div>
 
@@ -48,6 +48,7 @@
 	<script src="app/layouts/layouts.module.js"></script>
 	<script src="app/layouts/error/error.module.js"></script>
 	<script src="app/layouts/navbar/navbar.module.js"></script>
+	<script src="app/layouts/background/background.module.js"></script>
 
 	<!-- Blocks -->
 	<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
@@ -59,6 +60,7 @@
 	<!-- Layouts -->
 	<script src="app/layouts/error/error.state.js"></script>
 	<script src="app/layouts/navbar/navbar.controller.js"></script>
+	<script src="app/layouts/background/background.directive.js"></script>
 	
 	<!-- Base URL -->
 	<script src="app/services/auth/base/register-base-url.value.js"></script>
