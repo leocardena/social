@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 @Service
-public class MovieAPIBusiness {
+public class MovieTraktAPIBusiness {
 
 	@Autowired
 	private MovieAPIService movieAPIService;
