@@ -7,66 +7,85 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "trakt",
-    "slug",
-    "imdb",
-    "tmdb"
-})
+@JsonPropertyOrder({ "trakt", "slug", "tvdb", "imdb", "tmdb", "tvrage" })
 public class Ids {
 
-    @JsonProperty("trakt")
-    private Integer trakt;
-    @JsonProperty("slug")
-    private String slug;
-    @JsonProperty("imdb")
-    private String imdb;
-    @JsonProperty("tmdb")
-    private Integer tmdb;
+	@JsonProperty("trakt")
+	private Integer trakt;
+	@JsonProperty("slug")
+	private String slug;
+	@JsonProperty("tvdb")
+	private Integer tvdb;
+	@JsonProperty("imdb")
+	private String imdb;
+	@JsonProperty("tmdb")
+	private Integer tmdb;
+	@JsonProperty("tvrage")
+	private Integer tvrage;
 
-    @JsonProperty("trakt")
-    public Integer getTrakt() {
-        return trakt;
-    }
+	@JsonProperty("trakt")
+	public Integer getTrakt() {
+		return trakt;
+	}
 
-    @JsonProperty("trakt")
-    public void setTrakt(Integer trakt) {
-        this.trakt = trakt;
-    }
+	@JsonProperty("trakt")
+	public void setTrakt(Integer trakt) {
+		this.trakt = trakt;
+	}
 
-    @JsonProperty("slug")
-    public String getSlug() {
-        return slug;
-    }
+	@JsonProperty("slug")
+	public String getSlug() {
+		return slug;
+	}
 
-    @JsonProperty("slug")
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+	@JsonProperty("slug")
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
 
-    @JsonProperty("imdb")
-    public String getImdb() {
-        return imdb;
-    }
+	@JsonProperty("tvdb")
+	public Integer getTvdb() {
+		return tvdb;
+	}
 
-    @JsonProperty("imdb")
-    public void setImdb(String imdb) {
-        this.imdb = imdb;
-    }
+	@JsonProperty("tvdb")
+	public void setTvdb(Integer tvdb) {
+		this.tvdb = tvdb;
+	}
 
-    @JsonProperty("tmdb")
-    public Integer getTmdb() {
-        return tmdb;
-    }
+	@JsonProperty("imdb")
+	public String getImdb() {
+		return imdb;
+	}
 
-    @JsonProperty("tmdb")
-    public void setTmdb(Integer tmdb) {
-        this.tmdb = tmdb;
-    }
+	@JsonProperty("imdb")
+	public void setImdb(String imdb) {
+		this.imdb = imdb;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	@JsonProperty("tmdb")
+	public Integer getTmdb() {
+		return tmdb;
+	}
+
+	@JsonProperty("tmdb")
+	public void setTmdb(Integer tmdb) {
+		this.tmdb = tmdb;
+	}
+
+	@JsonProperty("tvrage")
+	public Integer getTvrage() {
+		return tvrage;
+	}
+
+	@JsonProperty("tvrage")
+	public void setTvrage(Integer tvrage) {
+		this.tvrage = tvrage;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
 }
