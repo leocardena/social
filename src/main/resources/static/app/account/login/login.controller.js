@@ -5,9 +5,9 @@
         .module('social.account.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'AuthService', 'TraktMovieService'];
+    LoginController.$inject = ['$rootScope', '$state', 'AuthService', 'TraktMovieService', 'backgroundPrepService'];
 
-    function LoginController ($rootScope, $state, $timeout, AuthService, TraktMovieService) {
+    function LoginController ($rootScope, $state, AuthService, TraktMovieService, backgroundPrepService) {
         var vm = this;
         vm.authenticationError = false;
         vm.cancel = cancel;
@@ -19,19 +19,7 @@
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
         vm.username = null;
-        
-        //activate();
-        
-        function activate(){
-        	TraktMovieService.getPopularMovies({
-        		limit : 1,
-        		extended : 'images',
-        		page: 1
-        	}, 
-        	function(result, headers) {
-        		console.log(result);
-        	});
-        }
+        $rootScope.background = backgroundPrepService[0].images.fanart.full;
         
         function cancel () {
             vm.credentials = {
