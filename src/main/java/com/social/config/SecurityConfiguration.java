@@ -99,6 +99,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	            .authorizeRequests()
 	            .antMatchers(HttpMethod.POST, "/api/rest/account").permitAll()
 	            .antMatchers(HttpMethod.GET, "/api/rest/account/activate").permitAll()
+	            .antMatchers(HttpMethod.GET, "/api/rest/trakt/movie/popular").permitAll()
 	            .antMatchers("/api/authenticate").permitAll()
 	            .antMatchers("/api/rest/**").authenticated()
 	            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN.toString())

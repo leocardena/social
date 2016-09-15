@@ -2,7 +2,7 @@
 	'use strict';
 	
 	angular
-			.module('social.services', []);
+			.module('social.services', ['social.services.trakt']);
 	
 })();
 
