@@ -5,9 +5,9 @@
         .module('social.account.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', 'AuthService', 'TraktMovieService', 'backgroundPrepService'];
+    LoginController.$inject = ['$rootScope', '$state', 'AuthService', 'backgroundPrepService'];
 
-    function LoginController ($rootScope, $state, AuthService, TraktMovieService, backgroundPrepService) {
+    function LoginController ($rootScope, $state, AuthService, backgroundPrepService) {
         var vm = this;
         vm.authenticationError = false;
         vm.cancel = cancel;

@@ -6,10 +6,10 @@
 			.module('social.account.register')
 			.controller('RegisterController', RegisterController);
 	
-    RegisterController.$inject = ['AuthService', 'countriesPrepareService', '$filter'];
+    RegisterController.$inject = ['AuthService', 'countriesPrepareService', 'backgroundPrepService', '$rootScope'];
 
 	/* @ngInject */
-	function RegisterController(AuthService, countriesPrepareService, $filter) {
+	function RegisterController(AuthService, countriesPrepareService, backgroundPrepService, $rootScope) {
 		var vm = this;
 		vm.altInputFormats = ['d!/M!/yyyy'];
 		vm.countries = countriesPrepareService;
@@ -21,6 +21,7 @@
 		vm.openCalendar = _openCalendar;
 		vm.popup = { opened : false };
 		vm.register = _register;
+		$rootScope.background = backgroundPrepService[0].images.fanart.full;
 
 		function _openCalendar () {
 		    vm.popup.opened = true;
