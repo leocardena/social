@@ -32,6 +32,10 @@ FINAL - override the default loading bar CSS
 	display: block;
 }
 
+.customBg {
+	background-color: black;
+}
+
 .emailField {
 	/*border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;*/
