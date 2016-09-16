@@ -12,11 +12,13 @@
 	<link rel="stylesheet" type="text/css" href="content/css/social.css">
 	<base href="/">
 </head>
-<body back-img="{{backgroundResolved.$current.locals.globals.backgroundPrepService[0].images.fanart.full}}" ng-class="toState.data.backgroundClass">
+<body back-img="{{toState.name === 'login' || toState.name === 'register' ? background
+	 : toState.data.backgroundUrl ? toState.data.backgroundUrl : null}}" 
+		ng-class="toState.data.backgroundClass">
 	<nav ui-view="navbar" ng-cloak></nav>
 	
 	<div class="container">
-		<main ui-view="content" role="main" ng-cloak></main>
+		<main ui-view="content" role="main"></main>
 	</div>
 
 	<!-- Bower -->
@@ -67,6 +69,7 @@
 	<script src="app/services/region/base/country-base-url.value.js"></script>
 	<script src="app/services/auth/base/activate-base-url.value.js"></script>
 	<script src="app/services/trakt/base/trakt.movie-base-url.value.js"></script>
+	<script src="app/services/trakt/base/trakt.show-base-url.value.js"></script>
 	
 	<!-- Services -->
 	<script src="app/services/auth/register.service.js"></script>
@@ -78,6 +81,7 @@
 	<script src="app/services/auth/principal.service.js"></script>
 	<script src="app/services/auth/account.service.js"></script>
 	<script src="app/services/trakt/trakt.movie.service.js"></script>
+	<script src="app/services/trakt/trakt.show.service.js"></script>
 	
 	<!-- Account -->
 	<script src="app/account/account.routes.js"></script>
