@@ -12,11 +12,13 @@
 	<link rel="stylesheet" type="text/css" href="content/css/social.css">
 	<base href="/">
 </head>
-<body back-img="{{backgroundResolved.$current.locals.globals.backgroundPrepService[0].images.fanart.full}}" ng-class="toState.data.backgroundClass">
+<body back-img="{{toState.name === 'login' || toState.name === 'register' ? background
+	 : toState.data.backgroundUrl ? toState.data.backgroundUrl : null}}" 
+		ng-class="toState.data.backgroundClass">
 	<nav ui-view="navbar" ng-cloak></nav>
 	
 	<div class="container">
-		<main ui-view="content" role="main" ng-cloak></main>
+		<main ui-view="content" role="main"></main>
 	</div>
 
 	<!-- Bower -->

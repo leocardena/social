@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ==========================================================================
 General CSS
 ========================================================================== */
@@ -174,3 +175,119 @@ a.hrefTermos:active {
 
 /*FINAL - Screen Register */
 /* FINAL - corpo da aplicação */
+=======
+/* ==========================================================================
+General CSS
+========================================================================== */
+
+/* ==========================================================================
+INICIO - override the default loading bar CSS
+========================================================================== */
+#loading-bar .bar {
+	background: #2c3e50;
+}
+
+/* ==========================================================================
+FINAL - override the default loading bar CSS
+========================================================================== */
+
+/* ==========================================================================
+ INICIO -  override the default wizard CSS 
+========================================================================== */
+.steps-indicator {
+	height: 80px;
+}
+
+/* ==========================================================================
+ FINAL -  override the default wizard CSS 
+========================================================================== */
+
+/* ==========================================================================
+ INICIO -  Corpo da Aplicação
+========================================================================== */
+.href {
+	text-align: center;
+	display: block;
+}
+
+.customBg {
+	background-color: black;
+}
+
+.emailField {
+	/*border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;*/
+	
+}
+
+.passwordField {
+	margin-top: 1rem;
+	/*border-top-left-radius: 0;
+	border-top-right-radius: 0;*/
+}
+
+.cadastre-seTopMargin {
+	margin-top: 2rem;
+}
+
+.form {
+	margin-top: 10rem;
+	background-color: rgba(0, 0, 0, 0.6);
+	padding: 3rem;
+	border-radius: 4rem;
+	color: #fff;
+	/*box-shadow: 30px 30px 50px -20px rgba(0,0,0,0.7);*/
+}
+
+.form-control {
+	padding: 2rem;
+}
+
+.btnLogin {
+	background-color: #c0392b;
+	border-color: #c0392b;
+}
+
+.btnLogin:hover {
+	background-color: #e74c3c;
+	border-color: #e74c3c;
+}
+
+.btnLogin, .btnLogin:active {
+	background-color: #c0392b;
+	border-color: #c0392b;
+}
+
+.hrefAlterar {
+	font-weight: bold;
+	color: #e74c3c;
+	margin-top: 0px;
+}
+
+a.hrefAlterar {
+	margin-top: 0rem;
+}
+
+a:hover {
+	color: #e74c3c;
+	text-decoration: none;
+}
+
+a:active {
+	text-decoration: none;
+	color: #fff;
+}
+
+img.logo {
+	width: 70px;
+	margin-bottom: 2rem;
+}
+
+.subTitle {
+	margin-bottom: 3rem;
+}
+
+/* ==========================================================================
+ FINAL -  Corpo da Aplicação
+========================================================================== */
+>>>>>>> origin/leonardo.cardena
