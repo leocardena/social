@@ -32,7 +32,7 @@ public class Profile extends People {
 	private String avatar;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "iduser")
+	@JoinColumn(name = "idUser")
 	private User user;
 	
 	@ManyToMany

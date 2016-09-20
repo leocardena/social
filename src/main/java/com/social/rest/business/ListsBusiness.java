@@ -1,13 +1,13 @@
 package com.social.rest.business;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysema.query.jpa.impl.JPAQuery;
+import com.social.domain.Profile;
 import com.social.domain.QLists;
 import com.social.domain.QProfile;
 import com.social.domain.QTitle;
@@ -24,18 +24,18 @@ public class ListsBusiness {
 	@Autowired
 	private ProfileRepository profileRepository;
 	
-	public List<User> getAllListProfile(){
-		List<User> list = new ArrayList<>();
-			
+	public Profile getAllListProfile(){
+
 		QUser qUser = QUser.user;
 		QProfile qProfile = QProfile.profile;
 		QLists qLists = QLists.lists;
 		QTitle qTitle = QTitle.title;
 		
-		if (list.isEmpty())
-			throw new NoListFound("Voçê não tem series adicionadas a lista.");
+		JPAQuery query = new JPAQuery(em).from(qProfile);
 		
-		return list;
+		System.out.println(">>>>>>>"+query.singleResult(qProfile));
+				
+		return query.singleResult(qProfile);
 		
 	}
 	
