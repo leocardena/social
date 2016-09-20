@@ -21,7 +21,11 @@
 		vm.openCalendar = _openCalendar;
 		vm.popup = { opened : false };
 		vm.register = _register;
-		$rootScope.background = backgroundPrepService[0].images.fanart.full;
+		if (backgroundPrepService instanceof Array) {
+			$rootScope.background = backgroundPrepService[0].images.fanart.full;
+		} else {
+			$rootScope.background = backgroundPrepService;
+		}
 
 		function _openCalendar () {
 		    vm.popup.opened = true;

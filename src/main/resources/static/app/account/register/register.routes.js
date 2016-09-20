@@ -48,30 +48,11 @@
             });
 		}
 		
-		backgroundPrepService.$inject = ['TraktMovieService', 'TraktShowService'];
+		backgroundPrepService.$inject = ['RandomTitleService'];
 
         /* @ngInject */
-        function backgroundPrepService (TraktMovieService, TraktShowService) {
-        	var randomService = Math.floor((Math.random() * 2) + 1);
-        	var randomPage = Math.floor((Math.random() * 5) + 1);
-        	switch (randomService) {
-        		case 1:
-        			return TraktMovieService.getPopularMovies({
-                		limit : 1,
-                		extended : 'images',
-                		page: randomPage
-                	}).$promise.then(function(data, headersFun){
-                		 return data;
-                	});
-        		case 2:
-        			return TraktShowService.getPopularShows({
-                		limit : 1,
-                		extended : 'images',
-                		page: randomPage
-                	}).$promise.then(function(data, headersFun){
-                		 return data;
-                	});
-        	}
+        function backgroundPrepService (RandomTitleService) {
+        	return RandomTitleService.getRandomTitle();
     	}
 		
 	}
