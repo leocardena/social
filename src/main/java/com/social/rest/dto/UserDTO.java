@@ -16,10 +16,12 @@ import com.social.util.CustomDateTimeSerializer;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "firstName", "lastName", "country", "phone", "birthday", "genre", "login", "email", "password" })
 public class UserDTO {
-
+	
+	@JsonIgnore
 	@JsonProperty("firstName")
 	private String firstName;
 
+	@JsonIgnore
 	@JsonProperty("lastName")
 	private String lastName;
 
@@ -45,6 +47,9 @@ public class UserDTO {
 	@JsonIgnore
 	@JsonProperty("password")
 	private String password;
+	
+	@JsonProperty("name")
+	private String name;
 
 	@JsonProperty("authorities")
 	private Set<String> authorities;
@@ -53,22 +58,20 @@ public class UserDTO {
 	};
 
 	public UserDTO(Profile profile) {
-		this(profile.getName(), profile.getName(), profile.getCountry(), profile.getUser().getPhone(), profile.getBirthday(),
-				profile.getGenre(), profile.getUser().getUsername(), profile.getUser().getEmail(), profile.getUser().getPassword(),
+		this(profile.getName(), profile.getCountry(), profile.getUser().getPhone(), profile.getBirthday(),
+				profile.getGenre(), profile.getUser().getUsername(), profile.getUser().getEmail(),
 				profile.getUser().getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 	}
 
-	public UserDTO(String firstName, String lastName, String country, String phone, DateTime birthday, String genre,
-			String login, String email, String password, Set<String> authorities) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public UserDTO(String name, String country, String phone, DateTime birthday, String genre,
+			String login, String email, Set<String> authorities) {
+		this.name = name;
 		this.country = country;
 		this.phone = phone;
 		this.birthday = birthday;
 		this.genre = genre;
 		this.login = login;
 		this.email = email;
-		this.password = password;
 		this.authorities = authorities;
 	}
 
@@ -228,6 +231,7 @@ public class UserDTO {
 	 * 
 	 * @return The password
 	 */
+	@JsonIgnore
 	@JsonProperty("password")
 	public String getPassword() {
 		return password;
@@ -238,11 +242,30 @@ public class UserDTO {
 	 * @param password
 	 *            The password
 	 */
+	@JsonIgnore
 	@JsonProperty("password")
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
+	
+	/**
+	 * 
+	 * @return The name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * 
+	 * @param password
+	 *            The name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	/**
 	 * 
 	 * @return The authorities
