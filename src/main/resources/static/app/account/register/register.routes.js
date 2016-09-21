@@ -18,7 +18,7 @@
 						  data: {
 				                authorities: [],
 				                pageTitle: 'Cadastrar',
-				                hideNavbar: true
+				                hideNavbar: false
 				          },
 						  views: {
 							  'content@': {
