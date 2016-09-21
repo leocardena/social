@@ -37,7 +37,7 @@ public class MovieTraktAPIBusiness {
 			responseAPI.setBody(movies);
 			return responseAPI;
 		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
+			 throw new RetrofitException("Erro ao executar request através da API");
 		}
 	}
 

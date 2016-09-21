@@ -1,10 +1,7 @@
-<div class="row">
-	<div class="container formCadastro">
+<div class="container formCadastro">
 
 		<div class="col-md-2 formCadastroTitle text-center">
-
 			<label class="control-label ">Cadastro</label>
-
 		</div>
 		<div class="col-md-8 formCadastroSubTitle">
 			<label class="control-label">Cadastre-se, seja você um
@@ -21,7 +18,7 @@
 				<div class="row">
 					<div class="form-group">
 						<label class="col-md-3 control-label labelColor" for="firstName">Nome:</label>
-						<div class="col-md-9">
+						<div class="col-md-6">
 							<input type="text" class="form-control" id="firstName"
 								name="firstName" placeholder="Nome"
 								ng-model="vm.registerAccount.firstName" ng-minlength=1
@@ -32,7 +29,7 @@
 				<div class="row">
 					<div class="form-group">
 						<label class="col-md-3 control-label labelColor" for="lastName">Sobrenome:</label>
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<input type="text" class="form-control" id="lastName"
 								name="lastName" placeholder="Sobrenome"
 								ng-model="vm.registerAccount.lastName" ng-minlength=1
@@ -43,7 +40,7 @@
 				<div class="row">
 					<div class="form-group">
 						<label class="col-md-3 control-label labelColor" for="country">País:</label>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<select class="form-control" name="country" id="country"
 								ng-model="vm.registerAccount.country"
 								ng-options="country.name as country.nativeName for country in vm.countries track by country.callingCodes[0]">
@@ -55,7 +52,7 @@
 				<div class="row">
 					<div class="form-group">
 						<label class="col-md-3 control-label labelColor" for="phone">Celular:</label>
-						<div class="col-md-6">
+						<div class="col-md-3">
 							<input type="text" class="form-control" id="phone" name="phone"
 								placeholder="Celular" ng-model="vm.registerAccount.phone"
 								ng-minlength=1 ng-maxlength=50 ng-required>
@@ -65,7 +62,7 @@
 				<div class="row">
 					<div class="form-group">
 						<label class="col-md-3 control-label labelColor" for="birthday">Aniversário:</label>
-						<div class="col-md-5">
+						<div class="col-md-3">
 							<p class="input-group">
 								<input type="text" class="form-control" name="birthday"
 									id="birthday" uib-datepicker-popup="dd/MM/yyyy"
@@ -85,7 +82,7 @@
 				</div>
 				<div class="row">
 					<div class="form-group">
-						<div class="col-md-12">
+						<div class="col-md-9">
 							<label class="radio-inline labelColor"><input
 								type="radio" name="genre" ng-model="vm.registerAccount.genre"
 								value="F">Feminino</label> <label
@@ -111,7 +108,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor" for="login">Usuário:</label>
-					<div class="col-md-9">
+					<div class="col-md-5">
 						<input type="text" class="form-control" id="login" name="login"
 							placeholder="Usuário" ng-model="vm.registerAccount.login"
 							ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/"
@@ -122,7 +119,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor" for="email">E-mail:</label>
-					<div class="col-md-9">
+					<div class="col-md-6">
 						<input type="email" class="form-control" id="email" name="email"
 							placeholder="E-mail" ng-model="vm.registerAccount.email"
 							ng-minlength=5 ng-maxlength=100 required>
@@ -132,7 +129,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor" for="password">Senha:</label>
-					<div class="col-md-9">
+					<div class="col-md-3">
 						<input type="password" class="form-control" id="password"
 							name="password" placeholder="Senha"
 							ng-model="vm.registerAccount.password" ng-minlength=4
@@ -144,7 +141,7 @@
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor"
 						for="confirmPassword">Confirmar senha:</label>
-					<div class="col-md-9">
+					<div class="col-md-3">
 						<input type="password" class="form-control" id="confirmPassword"
 							name="confirmPassword" placeholder="Confirme a senha"
 							ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50
@@ -153,26 +150,25 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="checkbox col-md-offset-3">
+				<div class="checkbox col-md-offset-0">
 					<label class="labelColor"> <input type="checkbox"
 						ng-model="vm.checkTerms"> Li e concordo com os <a
-						class="hrefTermos">termos de uso e política</a>
+						class="hrefTermos">termos de uso e políticas</a>
 					</label>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group">
-					<div class="col-md-2 col-md-offset-3">
-						<input type="button" class="btn-lg btn-primary btnRegister"
-							wz-previous value="Voltar" />
-					</div>
-					<div class="col-md-2 col-md-offset-4">
+					<div class="col-md-0 col-md-offset-0">
 						<input type="submit" class="btn-lg btn-primary btnRegister"
 							value="Cadastrar" ng-click="vm.register(vm.registerAccount)" />
+					</div>
+					<div class="form-group">
+					<div class="col-md-1 col-md-offset-10">
+						<input type="button" class="btn-lg btn-primary btnRegister"
+							wz-previous value="Voltar" />
 					</div>
 				</div>
 			</div>
 		</form>
 		</wz-step> </wizard>
 	</div>
-</div>
