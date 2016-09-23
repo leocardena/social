@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.csrf.CsrfFilter;
 import com.social.filter.CsrfCookieGeneratorFilter;
 import com.social.security.AjaxAuthenticationFailureHandler;
@@ -42,6 +43,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	    @Inject
 	    private UserDetailsService userDetailsService;
+	    
+	    @Inject
+	    private RememberMeServices rememberMeServices;
+	    
+	    @Inject
+	    private SocialProperties socialProperties;
 	    
 	    @Bean
 	    public PasswordEncoder passwordEncoder() {
@@ -76,7 +83,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	            .accessDeniedHandler(new CustomAccessDeniedHandler())
 	            .authenticationEntryPoint(authenticationEntryPoint)
 	        .and()
-	        	.rememberMe()
+		        .rememberMe()
+	            .rememberMeServices(rememberMeServices)
+	            .rememberMeParameter("remember-me")
+	            .key(socialProperties.getSecurity().getRememberMe().getKey())
 	        .and()
 	            .formLogin()
 	            .loginProcessingUrl("/api/authentication")

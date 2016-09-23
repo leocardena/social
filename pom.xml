@@ -132,7 +132,7 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<!-- Querydsl -->
 		<dependency>
 			<groupId>com.querydsl</groupId>
@@ -143,6 +143,12 @@
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
 			<version>4.1.0</version>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 
 	</dependencies>

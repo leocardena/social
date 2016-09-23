@@ -1,0 +1,42 @@
+# ===================================================================
+# SPRING properties
+# ===================================================================
+spring:
+      jpa:
+        database: MYSQL
+        show-sql: true
+        properties:
+          jadira.usertype.autoRegisterUserTypes: true
+          hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+
+      datasource:
+        url: jdbc:mysql://localhost/SocialNetwork?useSSL=false
+        username: root
+        password: root
+
+logging:
+        file: logs/spring-boot-logging.log
+        level:
+              guru.springframework.controllers: DEBUG
+              org:
+                  springframework.web: INFO
+                  hibernate: error
+                  hibernate.SQL: DEBUG
+                  hiberante.type.descriptor.sql.BasicBinder: TRACE
+                  
+# ===================================================================
+# Social specific properties
+# ===================================================================
+
+social:
+    security:
+        rememberMe:
+                  # security key (this key should be unique for your application, and kept secret)
+                  key: 
+    mail: 
+        from: social@localhost
+
+
+                  
+
+
