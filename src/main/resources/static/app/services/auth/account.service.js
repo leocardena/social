@@ -5,10 +5,10 @@
         .module('social.services')
         .factory('AccountService', AccountService);
 
-    AccountService.$inject = ['$resource'];
+    AccountService.$inject = ['$resource', 'AccountBase'];
 
-    function AccountService ($resource) {
-        var service = $resource('api/rest/account', {}, {
+    function AccountService ($resource, AccountBase) {
+        var service = $resource(AccountBase.url, {}, {
             'get': { method: 'GET', params: {}, isArray: false,
                 interceptor: {
                     response: function(response) {

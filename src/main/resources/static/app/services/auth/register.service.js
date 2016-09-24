@@ -5,11 +5,11 @@
 			.module('social.services')
 			.factory('RegisterService', RegisterService);
 	
-	RegisterService.$inject = ['RegisterBase', '$resource'];
+	RegisterService.$inject = ['AccountBase', '$resource'];
 	
 	/*@ngInject*/
-	function RegisterService(RegisterBase, $resource) {
-		return $resource( RegisterBase.url, {}, {} );
+	function RegisterService(AccountBase, $resource) {
+		return $resource( AccountBase.register, {}, {} );
 	}
 	
 })();

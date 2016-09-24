@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.social.rest.dto.ErrorDetailDTO;
 import com.social.retrofit.exception.RetrofitException;
+import com.social.web.rest.dto.ErrorDetailDTO;
 
 @ControllerAdvice
 public class RetrofitExceptionHandler {

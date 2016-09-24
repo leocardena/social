@@ -31,6 +31,7 @@
 	<script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
 	<script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
 	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>
@@ -58,6 +59,7 @@
 	<script src="app/blocks/handlers/state.handler.js"></script>
 	<script src="app/blocks/config/loading-bar.config.js"></script>
 	<script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
+	<script src="app/blocks/interceptor/auth.interceptor.js"></script>
 	
 	<!-- Layouts -->
 	<script src="app/layouts/error/error.state.js"></script>
@@ -65,11 +67,9 @@
 	<script src="app/layouts/background/background.directive.js"></script>
 	
 	<!-- Base URL -->
-	<script src="app/services/auth/base/register-base-url.value.js"></script>
 	<script src="app/services/region/base/country-base-url.value.js"></script>
-	<script src="app/services/auth/base/activate-base-url.value.js"></script>
-	<script src="app/services/trakt/base/trakt.movie-base-url.value.js"></script>
-	<script src="app/services/trakt/base/trakt.show-base-url.value.js"></script>
+	<script src="app/services/auth/base/account-base-url.value.js"></script>
+	<script src="app/services/trakt/base/trakt-base-url.value.js"></script>
 	
 	<!-- Services -->
 	<script src="app/services/auth/register.service.js"></script>
@@ -77,12 +77,16 @@
 	<script src="app/services/auth/activate.service.js"></script>
 	<script src="app/services/region/country.service.js"></script>
 	<script src="app/services/region/region.service.js"></script>
-	<script src="app/services/auth/auth.session.service.js"></script>
+	<script src="app/services/auth/auth.jwt.service.js"></script>
 	<script src="app/services/auth/principal.service.js"></script>
 	<script src="app/services/auth/account.service.js"></script>
 	<script src="app/services/trakt/trakt.movie.service.js"></script>
 	<script src="app/services/trakt/trakt.show.service.js"></script>
 	<script src="app/services/trakt/random-title.service.js"></script>
+	
+	<!-- Auth -->
+    <script src="app/services/auth/has-any-authority.directive.js"></script>
+	<script src="app/services/auth/has-authority.directive.js"></script>
 	
 	<!-- Account -->
 	<script src="app/account/account.routes.js"></script>

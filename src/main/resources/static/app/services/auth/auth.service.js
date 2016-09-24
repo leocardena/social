@@ -12,19 +12,20 @@
 			PrincipalService, $sessionStorage, $rootScope, $state) {
         
 		var services = {
-				activateAccount : _activateAccount,
-				authorize : _authorize,
-				createAccount : _createAccount,
-				getPreviousState : _getPreviousState,
-				login : _login,
-				logout: _logout,
-				resetPreviousState : _resetPreviousState,
-				storePreviousState: _storePreviousState
+				activateAccount : activateAccount,
+				authorize : authorize,
+				createAccount : createAccount,
+				loginWithToken: loginWithToken,
+				getPreviousState : getPreviousState,
+				login : login,
+				logout: logout,
+				resetPreviousState : resetPreviousState,
+				storePreviousState: storePreviousState
 		}
 		
 		return services;
 		
-        function _activateAccount (key, callback) {
+        function activateAccount (key, callback) {
             var cb = callback || angular.noop;
 
             return ActivateService.get(key,
@@ -36,45 +37,49 @@
                 }.bind(this)).$promise;
         }
         
-        function _authorize (force) {
+        function authorize (force) {
             var authReturn = PrincipalService.identity(force).then(authThen);
-            
+
             return authReturn;
 
             function authThen () {
                 var isAuthenticated = PrincipalService.isAuthenticated();
 
                 // an authenticated user can't access to login and register pages
-                if (isAuthenticated && $rootScope.toState.parent === 'account' && ($rootScope.toState.name === 'login'
-                		|| $rootScope.toState.name === 'register' || $rootScope.toState.name === 'activate')) {
+                if (isAuthenticated && $rootScope.toState.parent === 'account' && ($rootScope.toState.name === 'login' || $rootScope.toState.name === 'register' 
+                		|| $rootScope.toState.name === 'social-auth' || $rootScope.toState.name === 'activate' )) {
                     $state.go('home');
                 }
 
                 // recover and clear previousState after external login redirect (e.g. oauth2)
-                if (isAuthenticated && !$rootScope.fromState.name && _getPreviousState()) {
-                    var previousState = _getPreviousState();
-                    _resetPreviousState();
+                if (isAuthenticated && !$rootScope.fromState.name && getPreviousState()) {
+                    var previousState = getPreviousState();
+                    resetPreviousState();
                     $state.go(previousState.name, previousState.params);
                 }
 
-                if ($rootScope.toState.data.authorities && $rootScope.toState.data.authorities.length > 0 && !PrincipalService.hasAnyAuthority($rootScope.toState.data.authorities)) {
+                if ($rootScope.toState.data.authorities && $rootScope.toState.data.authorities.length > 0 && 
+                		!PrincipalService.hasAnyAuthority($rootScope.toState.data.authorities)) {
                     if (isAuthenticated) {
-                    	// user is signed in but not authorized for desired state
+                        // user is signed in but not authorized for desired state
                         $state.go('accessdenied');
                     }
                     else {
                         // user is not authenticated. stow the state they wanted before you
                         // send them to the login service, so you can return them when you're done
-                        _storePreviousState($rootScope.toState.name, $rootScope.toStateParams);
+                        storePreviousState($rootScope.toState.name, $rootScope.toStateParams);
 
-                        // now, send them to the signin state so they can log in
+                       // now, send them to the signin state so they can log in
+                       // $state.go('accessdenied').then(function() {
+                       //    LoginService.open();
+                       // });
                         $state.go('login');
                     }
                 }
             }
         }
 		
-		function _createAccount (account, callback) {
+		function createAccount (account, callback) {
             var cb = callback || angular.noop;
 
             return RegisterService.save(account,
@@ -82,17 +87,13 @@
                     return cb(account);
                 },
                 function (err) {
-                    //this.logout();
+                    this.logout();
                     return cb(err);
                 }.bind(this)).$promise;
         }
 		
-		function _getPreviousState() {
-	            var previousState = $sessionStorage.previousState;
-	            return previousState;
-	    }
 		
-        function _login (credentials, callback) {
+        function login (credentials, callback) {
             var cb = callback || angular.noop;
             var deferred = $q.defer();
 
@@ -114,16 +115,25 @@
             return deferred.promise;
         }
         
-        function _logout () {
+        function loginWithToken(jwt, rememberMe) {
+            return AuthServerProvider.loginWithToken(jwt, rememberMe);
+        }
+        
+        function logout () {
             AuthServerProvider.logout();
             PrincipalService.authenticate(null);
         }
         
-        function _resetPreviousState() {
+    	function getPreviousState() {
+            var previousState = $sessionStorage.previousState;
+            return previousState;
+    	}
+        
+        function resetPreviousState() {
             delete $sessionStorage.previousState;
         }
         
-        function _storePreviousState(previousStateName, previousStateParams) {
+        function storePreviousState(previousStateName, previousStateParams) {
             var previousState = { "name": previousStateName, "params": previousStateParams };
             $sessionStorage.previousState = previousState;
         }

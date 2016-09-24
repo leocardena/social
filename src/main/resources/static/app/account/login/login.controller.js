@@ -64,17 +64,10 @@
             }).then(function () {
                 vm.authenticationError = false;
                 vm.formError = false;
-                
+                        
                 $rootScope.$broadcast('authenticationSuccess');
-
-                // previousState was set in the authExpiredInterceptor before being redirected to login modal.
-                // since login is succesful, go to stored previousState and clear previousState
-                if (AuthService.getPreviousState()) {
-                    var previousState = AuthService.getPreviousState();
-                    AuthService.resetPreviousState();
-                    $state.go(previousState.name, previousState.params);
-                }
                 $state.go('home');
+                
             }).catch(function () {
                 vm.authenticationError = true;
                 vm.username = null;

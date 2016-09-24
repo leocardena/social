@@ -5,14 +5,14 @@
 			.module('social.services.trakt')
 			.factory('TraktMovieService', TraktMovieService);
 	
-	TraktMovieService.$inject = ['TraktMovieBase', '$resource'];
+	TraktMovieService.$inject = ['TraktBase', '$resource'];
 	
 	/*@ngInject*/
-	function TraktMovieService(TraktMovieBase, $resource) {
-		var service =  $resource( TraktMovieBase.url, {}, {
+	function TraktMovieService(TraktBase, $resource) {
+		var service =  $resource( TraktBase.movie, {}, {
 			'getPopularMovies' : {
 				method: 'GET',
-				url: TraktMovieBase.url + '/popular',
+				url: TraktBase.movie + '/popular',
 				params : {
 					limit : '@limit',
 					extended : '@extended',

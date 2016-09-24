@@ -9,6 +9,7 @@
 		                        'ngResource', 
 		                        'angular-loading-bar',
 		                        'ngCacheBuster',
+		                        'ngCookies',
 		                        'ngStorage']);
 	
 })();
