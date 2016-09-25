@@ -29,7 +29,7 @@ logging:
 
 social:
   security:
-    authentication:
+    authentication: 
       jwt:
         secret: 123123
         # Token is valid 24 hours

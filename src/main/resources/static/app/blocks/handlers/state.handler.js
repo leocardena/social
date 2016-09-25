@@ -20,7 +20,7 @@
                 $rootScope.toState = toState;
                 $rootScope.toStateParams = toStateParams;
                 $rootScope.fromState = fromState;
-
+               
                 // Redirect to a state with an external URL (http://stackoverflow.com/a/30221248/1098564)
                 if (toState.external) {
                     event.preventDefault();
@@ -30,7 +30,6 @@
                 if (PrincipalService.isIdentityResolved()) {
                 	AuthService.authorize();
                 }
-
                 
             });
 

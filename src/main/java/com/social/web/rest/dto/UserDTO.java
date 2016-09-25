@@ -38,8 +38,8 @@ public class UserDTO {
 	@JsonProperty("genre")
 	private String genre;
 
-	@JsonProperty("login")
-	private String login;
+	@JsonProperty("username")
+	private String username;
 
 	@JsonProperty("email")
 	private String email;
@@ -64,13 +64,13 @@ public class UserDTO {
 	}
 
 	public UserDTO(String name, String country, String phone, DateTime birthday, String genre,
-			String login, String email, Set<String> authorities) {
+			String username, String email, Set<String> authorities) {
 		this.name = name;
 		this.country = country;
 		this.phone = phone;
 		this.birthday = birthday;
 		this.genre = genre;
-		this.login = login;
+		this.username = username;
 		this.email = email;
 		this.authorities = authorities;
 	}
@@ -193,9 +193,9 @@ public class UserDTO {
 	 * 
 	 * @return The login
 	 */
-	@JsonProperty("login")
-	public String getLogin() {
-		return login;
+	@JsonProperty("username")
+	public String getUsername() {
+		return username;
 	}
 
 	/**
@@ -203,9 +203,9 @@ public class UserDTO {
 	 * @param login
 	 *            The login
 	 */
-	@JsonProperty("login")
-	public void setLogin(String login) {
-		this.login = login;
+	@JsonProperty("username")
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**

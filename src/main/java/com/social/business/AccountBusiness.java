@@ -45,7 +45,7 @@ public class AccountBusiness {
 	private ProfileRepository profileRepository;
 	
 	public User createNewUser(UserDTO userDTO) {
-		Optional<User> user = userRepository.findOneByUsername(userDTO.getLogin().toLowerCase());
+		Optional<User> user = userRepository.findOneByUsername(userDTO.getUsername().toLowerCase());
 		if (user.isPresent()) 
 				throw new LoginAlreadyInUseException("O login já está em uso.");
 		user = null;
@@ -59,7 +59,7 @@ public class AccountBusiness {
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER.toString());
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
-        newUser.setUsername(userDTO.getLogin());
+        newUser.setUsername(userDTO.getUsername());
         newUser.setPassword(encryptedPassword);
         newUser.setPhone(userDTO.getPhone());
         newUser.setEmail(userDTO.getEmail());
