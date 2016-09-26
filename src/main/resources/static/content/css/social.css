@@ -8,6 +8,18 @@ General CSS
 }
 
 /* FINAL - override the default loading bar CSS */
+@media ( max-width : 991px) {
+	.formCadastroSubTitle {
+		font-size: 17px;
+		text-align: center;
+	}
+	.navbar-brand {
+		position: absolute;
+		left: 50%;
+		margin-left: -50px !important; /* 50% of your logo width */
+		display: block;
+	}
+}
 
 /* INICIO -  override the default wizard CSS */
 .steps-indicator {
@@ -18,10 +30,34 @@ General CSS
 	list-style: none;
 }
 
+.steps-indicator li a {
+	color: #fff;
+	size-text: 10px;
+}
+
+.steps-indicator:before {
+  background-color: #fff;
+  content: '';
+  position: absolute;
+  height: 0px;
+}
+.steps-indicator li.current a:before {
+  background-color: #fff;
+ 
+ /* width: 100px;
+  height: 100px;*/
+}
+
+
 /* FINAL - override the default wizard CSS */
 
 /* INICIO - corpo da aplicação */
+html {
+	height: 100%;
+}
+
 body {
+	height: 100%;
 	background-color: #000;
 }
 
@@ -48,10 +84,10 @@ body {
 }
 
 .formLogin {
-	margin-top: 10rem;
-	background-color: rgba(0, 0, 0, 0.7);
+	margin-top: 25%; background-color : rgba( 0, 0, 0, 0.7);
 	padding: 3rem;
 	border-radius: 4rem;
+	background-color: rgba(0, 0, 0, 0.7);
 	/*box-shadow: 30px 30px 50px -20px rgba(0,0,0,0.7);*/
 }
 
@@ -128,18 +164,11 @@ img.logo {
 /* FINAL - Screen Login */
 
 /* INICIO - Screen Register */
-@media ( max-width : 991px) {
-	.formCadastroSubTitle {
-		font-size: 17px;
-		text-align: center;
-	}
-}
-
 .formCadastro {
 	background-color: rgba(0, 0, 0, 0.7);
 	padding: 1rem;
-	min-height: 100%;
-	height: auto;
+	height: 92.5vh;
+	min-height: 600px;
 }
 
 .formCadastroTitle {
@@ -202,12 +231,32 @@ a.hrefTermos:active {
 	color: #fff;
 }
 
+/*FINAL - Screen Register */
+
+/* INICIO - Navbar */
 .navbar {
-	margin: 0;
+	position: relative;
+	border: none;
 	background-color: #c0392b;
-	border: 0;
+	margin-bottom: 0;
+}
+
+.navbar-default {
 	color: #fff;
 }
 
-/*FINAL - Screen Register */
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #fff;
+}
+
+.navbarLogo {
+	max-width: 40px;
+	margin-top: -9px;
+}
+
+.navbar-brand {
+	margin-left: 3rem;
+}
+
+/*FINAL - Navbar */
 /* FINAL - corpo da aplicação */
