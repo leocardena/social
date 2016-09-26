@@ -203,10 +203,32 @@ a.hrefTermos:active {
 }
 
 .navbar {
-	margin: 0;
+	position: relative;
+	border: none;
 	background-color: #c0392b;
-	border: 0;
+}
+
+.navbar-default{
 	color: #fff;
+}
+
+.navbarLogin {
+	
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.navbarLogo {
+	max-width: 60px;
+	margin-top: -9px;
+}
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px !important;  /* 50% of your logo width */
+    display: block;
 }
 
 /*FINAL - Screen Register */
