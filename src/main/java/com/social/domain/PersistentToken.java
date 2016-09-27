@@ -50,6 +50,7 @@ public class PersistentToken implements Serializable {
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "iduser")
     private User user;
 
     public String getSeries() {

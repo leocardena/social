@@ -27,10 +27,10 @@ public class Title {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "trailler")
-	private String trailler;
+	@Column(name = "trailer")
+	private String trailer;
 	
-	@Column(name = "homePage")
+	@Column(name = "homepage")
 	private String homePage;
 	
 	@Column(name = "votes")
@@ -60,12 +60,12 @@ public class Title {
 		this.name = name;
 	}
 
-	public String getTrailler() {
-		return trailler;
+	public String getTrailer() {
+		return trailer;
 	}
 
-	public void setTrailler(String trailler) {
-		this.trailler = trailler;
+	public void setTrailer(String trailer) {
+		this.trailer = trailer;
 	}
 
 	public String getHomePage() {

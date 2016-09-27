@@ -7,14 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mysema.query.jpa.impl.JPAQuery;
-import com.social.domain.Profile;
+import com.social.domain.Lists;
 import com.social.domain.QLists;
-import com.social.domain.QProfile;
 import com.social.domain.QTitle;
-import com.social.domain.QUser;
-import com.social.domain.User;
+import com.social.domain.Title;
 import com.social.repository.ProfileRepository;
-import com.social.rest.exception.NoListFound;
+import com.social.repository.UserRepository;
 
 @Service
 public class ListsBusiness {
@@ -23,19 +21,20 @@ public class ListsBusiness {
 	private EntityManager em;
 	@Autowired
 	private ProfileRepository profileRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
-	public Profile getAllListProfile(){
+	public Lists getAllListProfile(){
 
-		QUser qUser = QUser.user;
-		QProfile qProfile = QProfile.profile;
 		QLists qLists = QLists.lists;
-		QTitle qTitle = QTitle.title;
+		JPAQuery query = new JPAQuery(em).from(qLists);
+		Lists t = query.singleResult(qLists);
 		
-		JPAQuery query = new JPAQuery(em).from(qProfile);
+		System.out.println(">>>>>>>"+t.getTitle().size());
+		System.out.println(">>>>>>>"+t.getTitle().get(0).getName());
+		System.out.println(">>>>>>>"+t.getTitle().get(1).getName());
 		
-		System.out.println(">>>>>>>"+query.singleResult(qProfile));
-				
-		return query.singleResult(qProfile);
+		return query.singleResult(qLists);
 		
 	}
 	
