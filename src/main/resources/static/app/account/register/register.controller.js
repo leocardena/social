@@ -20,8 +20,10 @@
 			minDate : new Date(1940, 1, 1),
 			startingDay : 1
 		};
+		vm.isOpen = false;
 		vm.next = _next;
 		vm.openCalendar = _openCalendar;
+		vm.openCalendar2 = _openCalendar2;
 		vm.popup = { opened : false };
 		vm.register = _register;
 		if (backgroundPrepService instanceof Array) {
@@ -43,6 +45,13 @@
 		function _openCalendar () {
 		    vm.popup.opened = true;
 		};
+		
+		function _openCalendar2 (e) {
+	        e.preventDefault();
+	        e.stopPropagation();
+
+	        vm.isOpen = true;
+	    };
 		
 		function _register(account) {
 			if (account.password !== vm.confirmPassword) {

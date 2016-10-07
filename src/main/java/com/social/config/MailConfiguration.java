@@ -16,7 +16,7 @@ public class MailConfiguration {
 		//Set gmail email id
 		javaMailSender.setUsername("social.moviesandshows@gmail.com");
 		//Set gmail email password
-		javaMailSender.setPassword("Social1q2w3eMoviesShows");
+		javaMailSender.setPassword("");
 		
 		Properties prop = javaMailSender.getJavaMailProperties();
 		prop.put("mail.transport.protocol", "smtp");
