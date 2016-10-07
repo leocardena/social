@@ -45,6 +45,7 @@ public class AccountBusiness {
 	private ProfileRepository profileRepository;
 	
 	public User createNewUser(UserDTO userDTO) {
+		System.out.println(userDTO.toString());
 		Optional<User> user = userRepository.findOneByUsername(userDTO.getUsername().toLowerCase());
 		if (user.isPresent()) 
 				throw new LoginAlreadyInUseException("O login já está em uso.");

@@ -13,7 +13,7 @@
 			wz-title="1">
 
 		<div>
-			<form name="vm.formRegister" class="form-horizontal text-center"
+			<form name="vm.formRegisterPersonal" class="form-horizontal text-center"
 				role="form" novalidate>
 				<div class="row">
 					<div class="form-group">
@@ -22,7 +22,9 @@
 							<input type="text" class="form-control" id="firstName"
 								name="firstName" placeholder="Nome"
 								ng-model="vm.registerAccount.firstName" ng-minlength=1
-								ng-maxlength=50 ng-required>
+								ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" required
+								uib-popover="I appeared on focus! Click away and I'll vanish..."  
+								popover-trigger="'focus'">
 						</div>
 					</div>
 				</div>
@@ -43,7 +45,8 @@
 						<div class="col-md-4">
 							<select class="form-control" name="country" id="country"
 								ng-model="vm.registerAccount.country"
-								ng-options="country.name as country.nativeName for country in vm.countries track by country.callingCodes[0]">
+								ng-options="country.name as country.nativeName for country 
+									in vm.countries" required>
 								<option value="">Selecione...</option>
 							</select>
 						</div>
@@ -55,7 +58,7 @@
 						<div class="col-md-3">
 							<input type="text" class="form-control" id="phone" name="phone"
 								placeholder="Celular" ng-model="vm.registerAccount.phone"
-								ng-minlength=1 ng-maxlength=50 ng-required>
+								ng-minlength=1 ng-maxlength=8>
 						</div>
 					</div>
 				</div>
@@ -87,15 +90,16 @@
 								type="radio" name="genre" ng-model="vm.registerAccount.genre"
 								value="F">Feminino</label> <label
 								class="radio-inline labelColor"><input type="radio"
-								name="genre" ng-model="vm.registerAccount.genre" value="M">Masculino</label>
+								name="genre" ng-model="vm.registerAccount.genre" value="M"
+								required>Masculino</label>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
 						<div class="col-md-1 col-md-offset-10">
-							<input type="button" class="btn-lg btn-primary btnRegister"
-								wz-next value="Avançar" />
+							<input type="submit" class="btn-lg btn-primary btnRegister"
+								value="Avançar" ng-click="vm.next()" />
 						</div>
 					</div>
 				</div>
@@ -103,14 +107,14 @@
 		</div>
 
 		</wz-step> <wz-step wz-title="2">
-		<form name="vm.formRegister" class="form-horizontal text-center"
+		<form name="vm.formRegisterUser" class="form-horizontal text-center"
 			role="form" novalidate>
 			<div class="row">
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor" for="login">Usuário:</label>
 					<div class="col-md-5">
-						<input type="text" class="form-control" id="login" name="login"
-							placeholder="Usuário" ng-model="vm.registerAccount.login"
+						<input type="text" class="form-control" id="username" name="username"
+							placeholder="Usuário" ng-model="vm.registerAccount.username"
 							ng-minlength=1 ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/"
 							ng-required>
 					</div>

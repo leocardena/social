@@ -6,10 +6,12 @@
 			.module('social.account.register')
 			.controller('RegisterController', RegisterController);
 	
-    RegisterController.$inject = ['AuthService', 'countriesPrepareService', 'backgroundPrepService', '$rootScope'];
+    RegisterController.$inject = ['AuthService', 'countriesPrepareService', 'backgroundPrepService', 
+                                  '$rootScope', 'WizardHandler'];
 
 	/* @ngInject */
-	function RegisterController(AuthService, countriesPrepareService, backgroundPrepService, $rootScope) {
+	function RegisterController(AuthService, countriesPrepareService, backgroundPrepService, 
+			$rootScope, WizardHandler) {
 		var vm = this;
 		vm.altInputFormats = ['d!/M!/yyyy'];
 		vm.countries = countriesPrepareService;
@@ -18,6 +20,7 @@
 			minDate : new Date(1940, 1, 1),
 			startingDay : 1
 		};
+		vm.next = _next;
 		vm.openCalendar = _openCalendar;
 		vm.popup = { opened : false };
 		vm.register = _register;
@@ -25,6 +28,16 @@
 			$rootScope.background = backgroundPrepService[0].images.fanart.full;
 		} else {
 			$rootScope.background = backgroundPrepService;
+		}
+		
+		function _next(){
+//			if (!vm.formRegister.$invalid) {
+//				vm.formInvalid = false;
+//				WizardHandler.wizard().next();
+//			} else {
+//				vm.formInvalid = true;
+//			}
+			WizardHandler.wizard('register').next();
 		}
 
 		function _openCalendar () {
