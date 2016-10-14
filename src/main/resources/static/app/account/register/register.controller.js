@@ -33,13 +33,12 @@
 		}
 		
 		function _next(){
-//			if (!vm.formRegister.$invalid) {
-//				vm.formInvalid = false;
-//				WizardHandler.wizard().next();
-//			} else {
-//				vm.formInvalid = true;
-//			}
-			WizardHandler.wizard('register').next();
+			if (!vm.formRegisterPersonal.$invalid) {
+				vm.formPersonalInvalid = false;
+				WizardHandler.wizard('register').next();
+			} else {
+				vm.formPersonalInvalid = true;
+			}
 		}
 
 		function _openCalendar () {

@@ -10,22 +10,24 @@
 
 		<wizard name="register" on-finish="finishedWizard()"
 			template="app/layouts/wizard/wizard.html"> <wz-step
-			wz-title="1">
+			wz-title="1" hide-indicators="true">
 
 		<div>
 			<form name="vm.formRegisterPersonal" class="form-horizontal text-center"
-				role="form" novalidate>
+				role="form" novalidate ng-submit="vm.next()" ng-class="{'submitted': submitted}"> 
 				<div class="row">
 					<div class="form-group">
 						<label class="col-md-3 control-label labelColor" for="firstName">Nome:</label>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="firstName"
 								name="firstName" placeholder="Nome"
-								ng-model="vm.registerAccount.firstName" ng-minlength=1
-								ng-maxlength=50 ng-pattern="/^[_'.@A-Za-z0-9-]*$/" 
-								uib-popover="Nome Inválido"
-								popover-placement="left"
-								popover-trigger="'focus'" required>
+								ng-model="vm.registerAccount.firstName" ng-minlength="1"
+								ng-maxlength="50" ng-pattern="/^[_'.@A-Za-z0-9-]*$/" 
+								uib-popover="{{vm.formRegisterPersonal.firstName.$error.required ? 
+								'Por favor, preencha o campo nome' : 'Campo nome inválido'}}" 
+								popover-placement="top" required
+								popover-enable="vm.formRegisterPersonal.firstName.$invalid && vm.formRegisterPersonal.$submitted"
+								popover-trigger="'mouseenter'">
 						</div>
 					</div>
 				</div>
@@ -35,9 +37,14 @@
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="lastName"
 								name="lastName" placeholder="Sobrenome"
-								ng-model="vm.registerAccount.lastName" ng-minlength=1
-								ng-maxlength=50 uib-popover="Sobrenome Inválido" popover-placement="left"
-								popover-trigger="'focus'" required>
+								ng-model="vm.registerAccount.lastName" ng-minlength="1"
+								ng-maxlength="50"
+								uib-popover="{{vm.formRegisterPersonal.lastName.$error.required ? 
+								'Por favor, preencha o campo sobrenome' : 'Campo sobrenome inválido'}}" 
+								popover-animation="true"
+								popover-placement="top" required
+								popover-enable="vm.formRegisterPersonal.lastName.$invalid && vm.formRegisterPersonal.$submitted"
+								popover-trigger="'mouseenter'">
 						</div>
 					</div>
 				</div>
@@ -48,9 +55,11 @@
 							<select class="form-control" name="country" id="country"
 								ng-model="vm.registerAccount.country"
 								ng-options="country.name as country.nativeName for country 
-									in vm.countries" uib-popover="Selecione um país"
-							    popover-placement="left"
-								popover-trigger="'focus'" required>
+									in vm.countries" 
+								uib-popover="Por favor, selecione um país" popover-animation="true"
+								popover-placement="top" required
+								popover-enable="vm.formRegisterPersonal.country.$invalid && vm.formRegisterPersonal.$submitted"
+								popover-trigger="'mouseenter'">
 								<option value="">Selecione...</option>
 							</select>
 						</div>
@@ -62,9 +71,11 @@
 						<div class="col-md-3">
 							<input type="text" class="form-control" id="phone" name="phone"
 								placeholder="Celular" ng-model="vm.registerAccount.phone"
-								ng-minlength=1 ng-maxlength=8 uib-popover="Celular inválido."
-							    popover-placement="left"
-								popover-trigger="'focus'">
+								ng-minlength=1 ng-maxlength=8 
+								uib-popover="Campo celular inválido" popover-animation="true"
+								popover-placement="top"
+								popover-enable="vm.formRegisterPersonal.phone.$invalid && vm.formRegisterPersonal.$submitted"
+								popover-trigger="'mouseenter'">
 						</div>
 					</div>
 				</div>
@@ -78,51 +89,45 @@
 									show-button-bar="false" ng-model="vm.registerAccount.birthday"
 									is-open="vm.popup.opened" datepicker-options="vm.dateOptions"
 									ng-required="true" close-text="Fechar"
-									alt-input-formats="vm.altInputFormats" /> <span
-									class="input-group-btn" uib-popover="Aniversário inválido"
-								    popover-placement="top-left"
-									popover-trigger="'focus'">
-									<button type="button" class="btn btn-default"
-										ng-click="vm.openCalendar()">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</button>
-								</span>
+									alt-input-formats="vm.altInputFormats" 
+									uib-popover="{{vm.formRegisterPersonal.birthday.$error.required ? 
+								    'Por favor, insira uma data de aniversário' : 'Campo aniversário inválido'}}" 
+									uib-popover="Aniversário inválido"
+								    popover-placement="top" 
+								    popover-enable="vm.formRegisterPersonal.birthday.$invalid && vm.formRegisterPersonal.$submitted"
+									popover-trigger="'mouseenter'" /> 
+									<span class="input-group-btn" >
+										<button type="button" class="btn btn-default"
+											ng-click="vm.openCalendar()" style="margin-left: 2px;">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
 							</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
-						<label class="col-md-3 control-label labelColor" for="birthday">Aniversário:</label>
-						<div class="col-md-3">
-							<p class="input-group">
-							    <input type="text" class="form-control" datetime-picker="dd MMM yyyy"
-							     ng-model="myDate" is-open="vm.isOpen"  />
-							    <span class="input-group-btn">
-							        <button type="button" class="btn btn-default" ng-click="vm.openCalendar2($event, prop)">
-							        <i class="fa fa-calendar"></i></button>
-							    </span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-group">
-						<div class="col-md-12">
-							<label class="radio-inline labelColor"><input
-								type="radio" name="genre" ng-model="vm.registerAccount.genre"
-								value="F">Feminino</label> <label
-								class="radio-inline labelColor"><input type="radio"
-								name="genre" ng-model="vm.registerAccount.genre" value="M"
-								required>Masculino</label>
+						<div class="col-md-4 col-md-offset-3"
+						uib-popover="Por favor, selecione um gênero" popover-placement="top" 
+						 popover-enable="vm.formRegisterPersonal.genre.$invalid && vm.formRegisterPersonal.$submitted"
+						 popover-trigger="'mouseenter'">
+							<label class="radio-inline labelColor" ng-style="{ 'border' : (vm.formRegisterPersonal.genre.$invalid && vm.formRegisterPersonal.$submitted) ? '1px solid red' : 'none' }"">
+								<input type="radio" name="genre" ng-model="vm.registerAccount.genre"
+								value="F" required>Feminino
+							</label> 
+							<label class="radio-inline labelColor" ng-style="{ 'border' : (vm.formRegisterPersonal.genre.$invalid && vm.formRegisterPersonal.$submitted) ? '1px solid red' : 'none' }">
+								<input type="radio" name="genre" ng-model="vm.registerAccount.genre" value="M"
+									required>Masculino
+							</label>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
 						<div class="col-md-1 col-md-offset-10">
-							<input type="submit" class="btn-lg btn-primary btnRegister"
-								value="Avançar" ng-click="vm.next()" />
+							<button type="submit" class="btn-lg btn-primary btnRegister"
+								value="Avançar" ng-click="submitted= true;">Avançar</button>
 						</div>
 					</div>
 				</div>

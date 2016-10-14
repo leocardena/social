@@ -28,7 +28,7 @@
                 	}).$promise.then(function(data, headersFun){
                 		 return data;
                 	}).catch(function () {
-                		return "http://www.planwallpaper.com/static/images/518164-backgrounds.jpg";
+                		return 'http://www.planwallpaper.com/static/images/518164-backgrounds.jpg';
                 	});
         		case 2:
         			return TraktShowService.getPopularShows({
@@ -38,7 +38,7 @@
                 	}).$promise.then(function(data, headersFun){
                 		 return data;
                 	}).catch(function () {
-                		return "http://www.planwallpaper.com/static/images/518164-backgrounds.jpg";
+                		return 'http://www.planwallpaper.com/static/images/518164-backgrounds.jpg';
                 	});
         	}
 		}

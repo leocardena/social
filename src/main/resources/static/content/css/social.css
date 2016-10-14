@@ -91,6 +91,10 @@ body {
 	/*box-shadow: 30px 30px 50px -20px rgba(0,0,0,0.7);*/
 }
 
+ .submitted .ng-invalid{
+        border: 1px solid red;
+}
+
 /*
 .form-control {
 	padding: 2rem;
