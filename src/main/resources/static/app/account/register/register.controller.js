@@ -56,18 +56,20 @@
 			if (account.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
-            	AuthService.createAccount(account).then(function () {
-                    vm.success = 'OK';
-                }).catch(function (response) {
-                    vm.success = null;
-                    if (response.status === 400 && response.data === 'login already in use') {
-                        vm.errorUserExists = 'ERROR';
-                    } else if (response.status === 400 && response.data === 'e-mail address already in use') {
-                        vm.errorEmailExists = 'ERROR';
-                    } else {
-                        vm.error = 'ERROR';
-                    }
-                });
+            	if (!vm.formRegisterUser.$invalid) {
+            		AuthService.createAccount(account).then(function () {
+                        vm.success = 'OK';
+                    }).catch(function (response) {
+                        vm.success = null;
+                        if (response.status === 400 && response.data === 'login already in use') {
+                            vm.errorUserExists = 'ERROR';
+                        } else if (response.status === 400 && response.data === 'e-mail address already in use') {
+                            vm.errorEmailExists = 'ERROR';
+                        } else {
+                            vm.error = 'ERROR';
+                        }
+                    });
+            	}
             }
 		}
 		
