@@ -4,13 +4,22 @@
 			<label class="control-label ">Cadastro</label>
 		</div>
 		<div class="col-md-8 formCadastroSubTitle">
-			<label class="control-label">Cadastre-se, seja você um
-				herói ou vilão</label>
+			<label class="control-label">
+				Cadastre-se, seja você um herói ou vilão
+			</label>
 		</div>
+		
+		<div class="col-md-8 col-md-offset-3" ng-show="vm.success">
+			<label class="control-label">
+				Cadastro realizado! Por favor, cheque seu email para confirmação.
+			</label>
+		</div>
+		
 
-		<wizard name="register" on-finish="finishedWizard()"
-			template="app/layouts/wizard/wizard.html"> <wz-step
-			wz-title="1" hide-indicators="true">
+		<wizard name="register" on-finish="finishedWizard()" template="app/layouts/wizard/wizard.html"
+		ng-hide="vm.success"> 
+			
+		<wz-step wz-title="1" hide-indicators="true">
 
 		<div>
 			<form name="vm.formRegisterPersonal" class="form-horizontal text-center"
@@ -59,7 +68,7 @@
 								uib-popover="Por favor, selecione um país" popover-animation="true"
 								popover-placement="top" 
 								popover-enable="vm.formRegisterPersonal.country.$invalid && vm.formRegisterPersonal.$submitted"
-								popover-trigger="'mouseenter'">
+								popover-trigger="'mouseenter'" required>
 								<option value="">Selecione...</option>
 							</select>
 						</div>
@@ -136,7 +145,22 @@
 			</form>
 		</div>
 
-		</wz-step> <wz-step wz-title="2">
+		</wz-step> 
+		<wz-step wz-title="2">
+		<div class="row">
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.errorUserExists">
+						O login já está em uso
+					</div>
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.errorEmailExists">
+						O email já está em uso
+					</div>
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.error">
+						Erro inesperado, tente novamente mais tarde
+					</div>
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.doNotMatch">
+						As senhas não coincidem
+					</div>
+		</div>
 		<form name="vm.formRegisterUser" class="form-horizontal text-center"
 			role="form" novalidate ng-submit="vm.register(vm.registerAccount)" ng-class="{'submitted': submitted}">
 			<div class="row">
@@ -156,7 +180,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor" for="email">E-mail:</label>
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<input type="email" class="form-control" id="email" name="email"
 							placeholder="E-mail" ng-model="vm.registerAccount.email"
 							ng-minlength=5 ng-maxlength=100 
@@ -170,7 +194,7 @@
 			<div class="row">
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor" for="password">Senha:</label>
-					<div class="col-md-3">
+					<div class="col-md-5">
 						<input type="password" class="form-control" id="password"
 							name="password" placeholder="Senha"
 							ng-model="vm.registerAccount.password" ng-minlength=4
@@ -186,7 +210,7 @@
 				<div class="form-group">
 					<label class="col-md-3 control-label labelColor"
 						for="confirmPassword">Confirmar senha:</label>
-					<div class="col-md-3">
+					<div class="col-md-5">
 						<input type="password" class="form-control" id="confirmPassword"
 							name="confirmPassword" placeholder="Confirme a senha"
 							ng-model="vm.confirmPassword" ng-minlength=4 ng-maxlength=50
@@ -222,5 +246,6 @@
 				</div>
 			</div>
 		</form>
-		</wz-step> </wizard>
+		</wz-step> 
+		</wizard>
 	</div>

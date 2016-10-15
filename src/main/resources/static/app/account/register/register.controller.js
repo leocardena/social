@@ -53,6 +53,10 @@
 	    };
 		
 		function _register(account) {
+			vm.errorUserExists = null;
+			vm.errorEmailExists = null;
+			vm.error = null;
+			vm.doNotMatch = null;
 			if (account.password !== vm.confirmPassword) {
                 vm.doNotMatch = 'ERROR';
             } else {
@@ -61,12 +65,15 @@
                         vm.success = 'OK';
                     }).catch(function (response) {
                         vm.success = null;
-                        if (response.status === 400 && response.data === 'login already in use') {
+                        if (response.status === 400 && response.data.titulo === 'Login em uso') {
+                        	console.log(response.data);
                             vm.errorUserExists = 'ERROR';
-                        } else if (response.status === 400 && response.data === 'e-mail address already in use') {
+                        } else if (response.status === 400 && response.data.titulo === 'Email em uso') {
                             vm.errorEmailExists = 'ERROR';
+                            console.log(response.data);
                         } else {
                             vm.error = 'ERROR';
+                            console.log(response.data);
                         }
                     });
             	}
