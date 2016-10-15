@@ -97,6 +97,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	            .disable()
 	        .and()
 	            .authorizeRequests()
+	            
+	            .antMatchers(HttpMethod.GET,"/get-lists").permitAll()
+	            
 	            .antMatchers(HttpMethod.POST, "/api/rest/account").permitAll()
 	            .antMatchers(HttpMethod.GET, "/api/rest/account/activate").permitAll()
 	            .antMatchers(HttpMethod.GET, "/api/rest/trakt/movie/popular").permitAll()
@@ -106,7 +109,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN.toString())
 	            .antMatchers("/v2/api-docs/**").permitAll()
 	            .antMatchers("/h2-console/**").permitAll();
-
+				
 	    }
 
 	    @Bean
