@@ -20,16 +20,20 @@
 			minDate : new Date(1940, 1, 1),
 			startingDay : 1
 		};
+		vm.dismissAlerts = _dismissAlerts;
 		vm.isOpen = false;
 		vm.next = _next;
 		vm.openCalendar = _openCalendar;
-		vm.openCalendar2 = _openCalendar2;
 		vm.popup = { opened : false };
 		vm.register = _register;
 		if (backgroundPrepService instanceof Array) {
 			$rootScope.background = backgroundPrepService[0].images.fanart.full;
 		} else {
 			$rootScope.background = backgroundPrepService;
+		}
+		
+		function _dismissAlerts() {
+			vm.alertEnable = false;
 		}
 		
 		function _next(){
@@ -45,25 +49,20 @@
 		    vm.popup.opened = true;
 		};
 		
-		function _openCalendar2 (e) {
-	        e.preventDefault();
-	        e.stopPropagation();
-
-	        vm.isOpen = true;
-	    };
-		
 		function _register(account) {
 			vm.errorUserExists = null;
 			vm.errorEmailExists = null;
 			vm.error = null;
 			vm.doNotMatch = null;
 			if (account.password !== vm.confirmPassword) {
+				vm.alertEnable = true;
                 vm.doNotMatch = 'ERROR';
             } else {
             	if (!vm.formRegisterUser.$invalid) {
             		AuthService.createAccount(account).then(function () {
                         vm.success = 'OK';
                     }).catch(function (response) {
+                    	vm.alertEnable = true;
                         vm.success = null;
                         if (response.status === 400 && response.data.titulo === 'Login em uso') {
                         	console.log(response.data);

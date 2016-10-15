@@ -84,7 +84,7 @@
 								uib-popover="Campo celular inválido" popover-animation="true"
 								popover-placement="top"
 								popover-enable="vm.formRegisterPersonal.phone.$invalid && vm.formRegisterPersonal.$submitted"
-								popover-trigger="'mouseenter'">
+								popover-trigger="'mouseenter'" ui-br-phone-number>
 						</div>
 					</div>
 				</div>
@@ -93,19 +93,17 @@
 						<label class="col-md-3 control-label labelColor" for="birthday">Aniversário:</label>
 						<div class="col-md-3">
 							<p class="input-group">
-								<input type="text" class="form-control" name="birthday"
+								<input ui-date-mask type="text" class="form-control" name="birthday"
 									id="birthday" uib-datepicker-popup="dd/MM/yyyy"
 									show-button-bar="false" ng-model="vm.registerAccount.birthday"
 									is-open="vm.popup.opened" datepicker-options="vm.dateOptions"
-									ng-required="true" close-text="Fechar"
-									alt-input-formats="vm.altInputFormats" 
+									close-text="Fechar" alt-input-formats="vm.altInputFormats" 
 									uib-popover="{{vm.formRegisterPersonal.birthday.$error.required ? 
 								    'Por favor, insira uma data de aniversário' : 'Campo aniversário inválido'}}" 
-									uib-popover="Aniversário inválido"
-								    popover-placement="top" 
+									uib-popover="Aniversário inválido" popover-placement="top" 
 								    popover-enable="vm.formRegisterPersonal.birthday.$invalid && vm.formRegisterPersonal.$submitted"
-									popover-trigger="'mouseenter'" /> 
-									<span class="input-group-btn" >
+									popover-trigger="'mouseenter'" required>  
+									<span class="input-group-btn">
 										<button type="button" class="btn btn-default"
 											ng-click="vm.openCalendar()" style="margin-left: 2px;">
 											<i class="glyphicon glyphicon-calendar"></i>
@@ -113,6 +111,7 @@
 									</span>
 							</p>
 						</div>
+						
 					</div>
 				</div>
 				<div class="row">
@@ -148,16 +147,16 @@
 		</wz-step> 
 		<wz-step wz-title="2">
 		<div class="row">
-					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.errorUserExists">
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.errorUserExists && vm.alertEnable">
 						O login já está em uso
 					</div>
-					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.errorEmailExists">
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.errorEmailExists && vm.alertEnable">
 						O email já está em uso
 					</div>
-					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.error">
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.error && vm.alertEnable">
 						Erro inesperado, tente novamente mais tarde
 					</div>
-					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.doNotMatch">
+					<div class="col-md-5 col-md-offset-3 alert alert-danger" ng-show="vm.doNotMatch && vm.alertEnable">
 						As senhas não coincidem
 					</div>
 		</div>
@@ -173,7 +172,7 @@
 							uib-popover="Por favor, digite um usuário" popover-animation="true"
 							popover-placement="top" popover-trigger="'mouseenter'"
 							popover-enable="vm.formRegisterUser.username.$invalid && vm.formRegisterUser.$submitted"
-							required>
+							required ng-focus="vm.dismissAlerts()">
 					</div>
 				</div>
 			</div>
@@ -187,7 +186,7 @@
 							uib-popover="Por favor, digite um email" popover-animation="true"
 							popover-placement="top" popover-trigger="'mouseenter'"
 							popover-enable="vm.formRegisterUser.email.$invalid && vm.formRegisterUser.$submitted"
-							required>
+							required ng-focus="vm.dismissAlerts()">
 					</div>
 				</div>
 			</div>
@@ -202,7 +201,7 @@
 							uib-popover="Por favor, digite uma senha" popover-animation="true"
 							popover-placement="top" popover-trigger="'mouseenter'"
 							popover-enable="vm.formRegisterUser.password.$invalid && vm.formRegisterUser.$submitted"
-							required>
+							required ng-focus="vm.dismissAlerts()">
 					</div>
 				</div>
 			</div>
@@ -217,7 +216,7 @@
 							uib-popover="Por favor, confirme a senha" popover-animation="true"
 							popover-placement="top" popover-trigger="'mouseenter'"
 							popover-enable="vm.formRegisterUser.confirmPassword.$invalid && vm.formRegisterUser.$submitted"
-							required>
+							required ng-focus="vm.dismissAlerts()">
 					</div>
 				</div>
 			</div>

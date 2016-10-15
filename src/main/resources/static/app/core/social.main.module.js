@@ -9,11 +9,11 @@
 		                   'social.blocks',
 		                   'social.user',
 		                   'social.layouts'])
-		                   .run(run);
+		                   .run(runStateHandler);
 
-		                   run.$inject = ['stateHandler'];
+		                   runStateHandler.$inject = ['stateHandler'];
 
-		                   function run(stateHandler) {
+		                   function runStateHandler(stateHandler) {
 		                       stateHandler.initialize();
 		                   }
 	

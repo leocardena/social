@@ -10,6 +10,7 @@
 		                        'angular-loading-bar',
 		                        'ngCacheBuster',
 		                        'ngCookies',
-		                        'ngStorage']);
+		                        'ngStorage',
+		                        'ui.utils.masks']);
 	
 })();

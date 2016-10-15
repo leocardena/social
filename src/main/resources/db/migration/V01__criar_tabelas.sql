@@ -12,7 +12,7 @@ email VARCHAR(100) UNIQUE NOT NULL,
 username VARCHAR(50) UNIQUE NOT NULL,
 resetDate TIMESTAMP,
 resetKey VARCHAR(200),
-phone VARCHAR(11) NOT NULL,
+phone VARCHAR(11),
 password VARCHAR (100) NOT NULL
 ) ENGINE=InnoDB;
 -- -----------------------------------------------------
