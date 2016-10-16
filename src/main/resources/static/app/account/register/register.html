@@ -80,7 +80,7 @@
 						<div class="col-md-3">
 							<input type="text" class="form-control" id="phone" name="phone"
 								placeholder="Celular" ng-model="vm.registerAccount.phone"
-								ng-minlength=1 ng-maxlength=8 
+								ng-minlength=14 ng-maxlength=15 
 								uib-popover="Campo celular inválido" popover-animation="true"
 								popover-placement="top"
 								popover-enable="vm.formRegisterPersonal.phone.$invalid && vm.formRegisterPersonal.$submitted"
@@ -93,8 +93,8 @@
 						<label class="col-md-3 control-label labelColor" for="birthday">Aniversário:</label>
 						<div class="col-md-3">
 							<p class="input-group">
-								<input ui-date-mask type="text" class="form-control" name="birthday"
-									id="birthday" uib-datepicker-popup="dd/MM/yyyy"
+								<input type="text" class="form-control" name="birthday"
+									id="birthday" uib-datepicker-popup="dd/MM/yyyy" ui-mask="99/99/9999" model-view-value="true" 
 									show-button-bar="false" ng-model="vm.registerAccount.birthday"
 									is-open="vm.popup.opened" datepicker-options="vm.dateOptions"
 									close-text="Fechar" alt-input-formats="vm.altInputFormats" 

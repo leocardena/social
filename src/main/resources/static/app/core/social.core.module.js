@@ -11,6 +11,7 @@
 		                        'ngCacheBuster',
 		                        'ngCookies',
 		                        'ngStorage',
+		                        'ui.mask',
 		                        'ui.utils.masks']);
 	
 })();
