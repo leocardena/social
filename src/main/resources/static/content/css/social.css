@@ -19,6 +19,10 @@ General CSS
 		margin-left: -50px !important; /* 50% of your logo width */
 		display: block;
 	}
+	.formLogin {
+		margin-top: 20%;
+		margin-bottom: 20%;
+	}
 }
 
 /* INICIO -  override the default wizard CSS */
@@ -36,18 +40,18 @@ General CSS
 }
 
 .steps-indicator:before {
-  background-color: #fff;
-  content: '';
-  position: absolute;
-  height: 0px;
-}
-.steps-indicator li.current a:before {
-  background-color: #fff;
- 
- /* width: 100px;
-  height: 100px;*/
+	background-color: #fff;
+	content: '';
+	position: absolute;
+	height: 0px;
 }
 
+.steps-indicator li.current a:before {
+	background-color: #fff;
+
+	/* width: 100px;
+  height: 100px;*/
+}
 
 /* FINAL - override the default wizard CSS */
 
@@ -67,12 +71,6 @@ body {
 	display: block;
 }
 
-.emailField {
-	/*border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;*/
-	
-}
-
 .passwordField {
 	margin-top: 1rem;
 	/*border-top-left-radius: 0;
@@ -84,15 +82,14 @@ body {
 }
 
 .formLogin {
-	margin-top: 25%; background-color : rgba( 0, 0, 0, 0.7);
+	margin-top: 20%;
+	margin-left: 5%;
+	margin-right: 5%;
+	background-color: rgba(0, 0, 0, 0.7);
 	padding: 3rem;
 	border-radius: 4rem;
 	background-color: rgba(0, 0, 0, 0.7);
 	/*box-shadow: 30px 30px 50px -20px rgba(0,0,0,0.7);*/
-}
-
- .submitted .ng-invalid{
-        border: 1px solid red;
 }
 
 /*
@@ -168,6 +165,11 @@ img.logo {
 /* FINAL - Screen Login */
 
 /* INICIO - Screen Register */
+
+.submitted .ng-invalid{
+        border: 1px solid red;
+}
+
 .formCadastro {
 	background-color: rgba(0, 0, 0, 0.7);
 	padding: 1rem;
@@ -237,6 +239,90 @@ a.hrefTermos:active {
 
 /*FINAL - Screen Register */
 
+/*INICIO - Screen HomePublic */
+.firstBackground {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 0;
+	height: 92.5vh;
+	background-image: url("/content/images/HomeImage.png");
+}
+
+.firstBackgroundText {
+	margin-top: 10%;
+}
+
+.firstBackground h1 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-size: 50px;
+	color: #fff;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-shadow: -2px 2px 1px #000;
+	letter-spacing: -1px;
+	border-radius: 1px;
+}
+
+.secondBackground {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 0;
+	height: 100vh;
+	background-image:
+		url("https://3.bp.blogspot.com/-OxsdruWJI3Y/VsBkXzSd65I/AAAAAAABoPI/G52d1LUYq28/s1600/papel-de-parede-deadpool-filme.jpg");
+}
+
+.secondBackgroundText {
+	margin-top: 10%;
+}
+
+.secondBackground h1 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-size: 30px;
+	color: #fff;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-shadow: -2px 2px 1px #000;
+	letter-spacing: -1px;
+	border-radius: 1px;
+	background-color: #c0392b;
+	margin-bottom: 8px;
+}
+
+
+
+.thirdBackgroundFirst {
+	background-color: #fff;
+	height: 50vh;
+	border-style: solid;
+}
+
+.thumbnailBody {
+	padding: 0;
+	margin-top: 0;
+}
+
+.thumbnailText {
+	color: #fff;
+}
+
+.thumbnail {
+	background-color: #000;
+	border: 0;
+	border-radius: 0;
+}
+
+.thumbnailBody:hover {
+	background-color: #c0392b;
+	border-radius: 5rem;
+}
+
+.btnLoginHome {
+	background-color: #e74c3c;
+	border-color: #e74c3c;
+}
+/*FINAL - Screen HomePublic */
+
 /* INICIO - Navbar */
 .navbar {
 	position: relative;
@@ -263,4 +349,5 @@ a.hrefTermos:active {
 }
 
 /*FINAL - Navbar */
+
 /* FINAL - corpo da aplicação */
