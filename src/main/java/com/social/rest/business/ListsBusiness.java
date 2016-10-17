@@ -7,15 +7,14 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mysema.query.SearchResults;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.social.domain.Lists;
+import com.social.domain.Profile;
 import com.social.domain.QLists;
+import com.social.domain.Title;
 import com.social.repository.ListsRepository;
 
 @Service
@@ -26,12 +25,12 @@ public class ListsBusiness {
 	@Autowired
 	private ListsRepository listsRepository;
 	
-	public List<Lists> getAllListByProfile(){
+	public List<Lists> getAllListByProfile(Profile profile){
 
 		JPAQuery query = new JPAQuery(em);
 		
 		SearchResults<Lists> searchList = query.from(QLists.lists)
-				.where(QLists.lists.id.eq((long) 2))
+				.where(QLists.lists.id.eq(profile.getId()))
 				.listResults(QLists.lists);
 		
 		List<Lists> lista = searchList.getResults();
@@ -43,7 +42,7 @@ public class ListsBusiness {
 		
 	}
 	
-	public Page<Lists> getAllList(Integer pageCurrent, Integer pageSize){
+	public Page<Lists> getAllLists(Integer pageCurrent, Integer pageSize){
 		
 		PageRequest pageRequest = new PageRequest(pageCurrent, pageSize);
 		Page<Lists> page = listsRepository.findAll(pageRequest);
@@ -60,8 +59,9 @@ public class ListsBusiness {
 		
 	}
 	
-	public void updateListsByProfile(){
-		//TODO
+	public void addTitleLists(){
+		//TODO	
+		//Descobrir como distinguir Filme de Série, olhar o diagrama e questionar
 	}
 	
 }

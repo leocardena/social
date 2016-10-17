@@ -18,7 +18,7 @@ public class ListREST {
 	@GetMapping(value="/get-lists/{pageSize}/{pageCurrent}")
 	public Page<Lists> getAllLists(@PathVariable("pageSize") Integer pageSize, 
 			@PathVariable("pageCurrent") Integer pageCurrent){
-		return listBusiness.getAllList(pageCurrent, pageSize);
+		return listBusiness.getAllLists(pageCurrent, pageSize);
 	}
 	
 }
