@@ -1,21 +1,19 @@
 package com.social.security;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import com.social.domain.User;
+import com.social.repository.UserRepository;
+import com.social.security.exception.UserNotActivatedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import com.social.domain.User;
-import com.social.repository.UserRepository;
-import com.social.security.exception.UserNotActivatedException;
+import javax.inject.Inject;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Authenticate a user from the database.
@@ -25,7 +23,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
 
-    @Autowired
+    @Inject
     private UserRepository userRepository;
 
     @Override
@@ -47,5 +45,4 @@ public class UserDetailsService implements org.springframework.security.core.use
         }).orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the " +
         "database"));
     }
-
 }

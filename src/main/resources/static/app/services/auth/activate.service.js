@@ -5,10 +5,10 @@
         .module('social.services')
         .factory('ActivateService', ActivateService);
 
-    ActivateService.$inject = ['$resource', 'ActivateBase'];
+    ActivateService.$inject = ['$resource', 'AccountBase'];
 
-    function ActivateService ($resource, ActivateBase) {
-    	var service = $resource(ActivateBase.url, {}, {
+    function ActivateService ($resource, AccountBase) {
+    	var service = $resource(AccountBase.activate, {}, {
             'get': { method:
             	'GET', 
             	params: {},

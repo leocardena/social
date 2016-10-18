@@ -8,29 +8,67 @@ General CSS
 }
 
 /* FINAL - override the default loading bar CSS */
+@media ( max-width : 991px) {
+	.formCadastroSubTitle {
+		font-size: 17px;
+		text-align: center;
+	}
+	.navbar-brand {
+		position: absolute;
+		left: 50%;
+		margin-left: -50px !important; /* 50% of your logo width */
+		display: block;
+	}
+	.formLogin {
+		margin-top: 20%;
+		margin-bottom: 20%;
+	}
+}
 
 /* INICIO -  override the default wizard CSS */
 .steps-indicator {
-	margin-bottom: 6rem;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	padding: 20px 0 0 0;
+	height: 70px;
+	list-style: none;
+}
+
+.steps-indicator li a {
+	color: #fff;
+	size-text: 10px;
+}
+
+.steps-indicator:before {
+	background-color: #fff;
+	content: '';
+	position: absolute;
+	height: 0px;
+}
+
+.steps-indicator li.current a:before {
+	background-color: #fff;
+
+	/* width: 100px;
+  height: 100px;*/
 }
 
 /* FINAL - override the default wizard CSS */
 
 /* INICIO - corpo da aplicação */
+html {
+	height: 100%;
+}
+
 body {
-	background-color: #2c3e50;
+	height: 100%;
+	background-color: #000;
 }
 
 /* INICIO - Screen Login */
 .href {
 	text-align: center;
 	display: block;
-}
-
-.emailField {
-	/*border-bottom-left-radius: 0;
-	border-bottom-right-radius: 0;*/
-	
 }
 
 .passwordField {
@@ -44,10 +82,13 @@ body {
 }
 
 .formLogin {
-	margin-top: 10rem;
+	margin-top: 20%;
+	margin-left: 5%;
+	margin-right: 5%;
 	background-color: rgba(0, 0, 0, 0.7);
 	padding: 3rem;
 	border-radius: 4rem;
+	background-color: rgba(0, 0, 0, 0.7);
 	/*box-shadow: 30px 30px 50px -20px rgba(0,0,0,0.7);*/
 }
 
@@ -66,7 +107,12 @@ body {
 	border-color: #e74c3c;
 }
 
-.btnLogin, .btnLogin:active {
+.btnLogin:active {
+	background-color: #c0392b;
+	border-color: #c0392b;
+}
+
+.btnLogin:focus {
 	background-color: #c0392b;
 	border-color: #c0392b;
 }
@@ -74,7 +120,7 @@ body {
 .hrefAlterar {
 	font-weight: bold;
 	color: #e74c3c;
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 a.hrefAlterar {
@@ -98,6 +144,8 @@ img.logo {
 .subTitle {
 	margin-bottom: 3rem;
 	color: #fff;
+	text-shadow: -2px 2px 1px #000;
+	letter-spacing: -1px;
 }
 
 .rememberMe {
@@ -107,21 +155,26 @@ img.logo {
 .pNotAccount {
 	color: #fff;
 }
+
+.alertLogin {
+	background-color: #c0392b;
+	color: #fff;
+	border-color: #c0392b;
+}
+
 /* FINAL - Screen Login */
 
 /* INICIO - Screen Register */
-@media ( max-width : 991px) {
-	.formCadastroSubTitle {
-		font-size: 17px;
-		text-align: center;
-	}
+
+.submitted .ng-invalid{
+        border: 1px solid red;
 }
 
 .formCadastro {
 	background-color: rgba(0, 0, 0, 0.7);
 	padding: 1rem;
-	border-radius: 1rem;
-	
+	height: 92.5vh;
+	min-height: 600px;
 }
 
 .formCadastroTitle {
@@ -129,7 +182,9 @@ img.logo {
 	background-color: #c0392b;
 	color: #fff;
 	font-size: 2em;
-	
+	text-shadow: -2px 2px 1px #000;
+	letter-spacing: -1px;
+	border-radius: 1px;
 }
 
 .formCadastroSubTitle {
@@ -138,6 +193,7 @@ img.logo {
 	margin-top: 2rem;
 	color: #e74c3c;
 	font-size: 2rem;
+	text-shadow: 0px 1px 0px #000;
 }
 
 .labelColor {
@@ -156,6 +212,16 @@ img.logo {
 	border-color: #e74c3c;
 }
 
+.btnRegister:active {
+	background-color: #c0392b;
+	border-color: #c0392b;
+}
+
+.btnRegister:focus {
+	background-color: #c0392b;
+	border-color: #c0392b;
+}
+
 .hrefTermos {
 	font-weight: bold;
 	color: #e74c3c;
@@ -171,6 +237,117 @@ a.hrefTermos:active {
 	color: #fff;
 }
 
-
 /*FINAL - Screen Register */
+
+/*INICIO - Screen HomePublic */
+.firstBackground {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 0;
+	height: 92.5vh;
+	background-image: url("/content/images/HomeImage.png");
+}
+
+.firstBackgroundText {
+	margin-top: 10%;
+}
+
+.firstBackground h1 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-size: 50px;
+	color: #fff;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-shadow: -2px 2px 1px #000;
+	letter-spacing: -1px;
+	border-radius: 1px;
+}
+
+.secondBackground {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 0;
+	height: 100vh;
+	background-image:
+		url("https://3.bp.blogspot.com/-OxsdruWJI3Y/VsBkXzSd65I/AAAAAAABoPI/G52d1LUYq28/s1600/papel-de-parede-deadpool-filme.jpg");
+}
+
+.secondBackgroundText {
+	margin-top: 10%;
+}
+
+.secondBackground h1 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-size: 30px;
+	color: #fff;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-shadow: -2px 2px 1px #000;
+	letter-spacing: -1px;
+	border-radius: 1px;
+	background-color: #c0392b;
+	margin-bottom: 8px;
+}
+
+
+
+.thirdBackgroundFirst {
+	background-color: #fff;
+	height: 50vh;
+	border-style: solid;
+}
+
+.thumbnailBody {
+	padding: 0;
+	margin-top: 0;
+}
+
+.thumbnailText {
+	color: #fff;
+}
+
+.thumbnail {
+	background-color: #000;
+	border: 0;
+	border-radius: 0;
+}
+
+.thumbnailBody:hover {
+	background-color: #c0392b;
+	border-radius: 5rem;
+}
+
+.btnLoginHome {
+	background-color: #e74c3c;
+	border-color: #e74c3c;
+}
+/*FINAL - Screen HomePublic */
+
+/* INICIO - Navbar */
+.navbar {
+	position: relative;
+	border: none;
+	background-color: #c0392b;
+	margin-bottom: 0;
+}
+
+.navbar-default {
+	color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #fff;
+}
+
+.navbarLogo {
+	max-width: 40px;
+	margin-top: -9px;
+}
+
+.navbar-brand {
+	margin-left: 3rem;
+}
+
+/*FINAL - Navbar */
+
 /* FINAL - corpo da aplicação */

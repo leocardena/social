@@ -1,10 +1,10 @@
 <div>
-	<div class="row col-md-offset-4">
-	    <ul class="steps-indicator steps-{{getEnabledSteps().length}} col-md-4 " ng-if="!hideIndicators">
-	      <li ng-class="{default: !step.completed && !step.selected, current: step.selected && !step.completed, done: step.completed && !step.selected, editing: step.selected && step.completed}" ng-repeat="step in getEnabledSteps()">
-	        <a ng-click="goTo(step)">{{step.title || step.wzTitle}}</a>
-	      </li>
-	    </ul>
+ <div class="row col-md-offset-2">
+     <ul class="steps-indicator steps-{{getEnabledSteps().length}} col-md-10" ng-if="!hideIndicators">
+       <li ng-class="{default: !step.completed && !step.selected, current: step.selected && !step.completed, done: step.completed && !step.selected, editing: step.selected && step.completed}" ng-repeat="step in getEnabledSteps()">
+         <a ng-click="goTo(step)">{{step.title || step.wzTitle}}</a>
+       </li>
+     </ul>
     </div>
-    <div class="row steps col-md-8 col-md-offset-1" ng-transclude></div>
+    <div class="container-fluid steps col-md-10 col-md-offset-1" ng-transclude></div>
 </div>

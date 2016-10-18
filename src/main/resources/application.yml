@@ -1,0 +1,43 @@
+# ===================================================================
+# SPRING properties
+# ===================================================================
+spring:
+  jpa:
+      database: MYSQL
+      show-sql: true
+      properties:
+        jadira.usertype.autoRegisterUserTypes: true
+        hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+
+  datasource:
+    url: jdbc:mysql://localhost/SocialNetwork?useSSL=false
+    username: root
+    password: root
+
+logging:
+  level:
+    org:
+      springframework.web: WARN
+      hibernate: ERROR
+      hibernate.SQL: DEBUG
+      hiberante.type.descriptor.sql.BasicBinder: TRACE
+      eu.kielczewski: DEBUG
+                  
+# ===================================================================
+# Social specific properties
+# ===================================================================
+
+social:
+  security:
+    authentication: 
+      jwt:
+        secret: 123123
+        # Token is valid 24 hours
+        tokenValidityInSeconds: 86400
+  mail: 
+    from: social@localhost
+
+
+                  
+
+

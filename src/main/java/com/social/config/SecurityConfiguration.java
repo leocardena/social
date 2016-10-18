@@ -10,17 +10,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
-import org.springframework.security.web.csrf.CsrfFilter;
-import com.social.filter.CsrfCookieGeneratorFilter;
-import com.social.security.AjaxAuthenticationFailureHandler;
-import com.social.security.AjaxAuthenticationSuccessHandler;
-import com.social.security.AjaxLogoutSuccessHandler;
 import com.social.security.Http401UnauthorizedEntryPoint;
-import com.social.security.handler.CustomAccessDeniedHandler;
+import com.social.security.jwt.JWTConfigurer;
+import com.social.security.jwt.TokenProvider;
 import com.social.security.util.AuthoritiesConstants;
 
 @Configuration
@@ -28,20 +25,15 @@ import com.social.security.util.AuthoritiesConstants;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	    @Inject
-	    private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
-
-	    @Inject
-	    private AjaxAuthenticationFailureHandler ajaxAuthenticationFailureHandler;
-
-	    @Inject
-	    private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
 
 	    @Inject
 	    private Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
 	    @Inject
 	    private UserDetailsService userDetailsService;
+	    
+	    @Inject
+	    private TokenProvider tokenProvider;
 	    
 	    @Bean
 	    public PasswordEncoder passwordEncoder() {
@@ -68,48 +60,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
-			http
-	            .csrf()
-	        .and()
-	            .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
-	            .exceptionHandling()
-	            .accessDeniedHandler(new CustomAccessDeniedHandler())
-	            .authenticationEntryPoint(authenticationEntryPoint)
-	        .and()
-	        	.rememberMe()
-	        .and()
-	            .formLogin()
-	            .loginProcessingUrl("/api/authentication")
-	            .successHandler(ajaxAuthenticationSuccessHandler)
-	            .failureHandler(ajaxAuthenticationFailureHandler)
-	            .usernameParameter("j_username")
-	            .passwordParameter("j_password")
-	            .permitAll()
-	        .and()
-	            .logout()
-	            .logoutUrl("/api/logout")
-	            .logoutSuccessHandler(ajaxLogoutSuccessHandler)
-	            .deleteCookies("JSESSIONID", "CSRF-TOKEN")
-	            .permitAll()
-	        .and()
-	            .headers()
-	            .frameOptions()
-	            .disable()
-	        .and()
-	            .authorizeRequests()
-	            
-	            .antMatchers(HttpMethod.GET,"/get-lists").permitAll()
-	            
-	            .antMatchers(HttpMethod.POST, "/api/rest/account").permitAll()
-	            .antMatchers(HttpMethod.GET, "/api/rest/account/activate").permitAll()
-	            .antMatchers(HttpMethod.GET, "/api/rest/trakt/movie/popular").permitAll()
-	            .antMatchers(HttpMethod.GET, "/api/rest/trakt/show/popular").permitAll()
-	            .antMatchers("/api/authenticate").permitAll()
-	            .antMatchers("/api/rest/**").authenticated()
-	            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN.toString())
-	            .antMatchers("/v2/api-docs/**").permitAll()
-	            .antMatchers("/h2-console/**").permitAll();
-				
+	    	
+	        http
+            .exceptionHandling()
+            .authenticationEntryPoint(authenticationEntryPoint)
+        .and()
+            .csrf()
+            .disable()
+            .headers()
+            .frameOptions()
+            .disable()
+        .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+            .authorizeRequests()
+            .antMatchers(HttpMethod.POST, "/api/rest/account/register").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/rest/account/activate").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/rest/trakt/movie/popular").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/rest/trakt/show/popular").permitAll()
+            .antMatchers("/api/authenticate").permitAll()
+            .antMatchers("/api/rest/account/reset_password/init").permitAll()
+            .antMatchers("/api/rest/account/reset_password/finish").permitAll()
+            .antMatchers("/api/rest/**").authenticated()
+            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN.toString())
+            .antMatchers("/v2/api-docs/**").permitAll()
+        .and()
+            .apply(securityConfigurerAdapter());
+
+	    }
+	    
+	    private JWTConfigurer securityConfigurerAdapter() {
+	        return new JWTConfigurer(tokenProvider);
 	    }
 
 	    @Bean

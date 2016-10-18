@@ -1,5 +1,5 @@
-<div class="row">
-	<div class="col-lg-4 col-lg-offset-4">
+
+	<div class="col-md-4 col-md-offset-4">
 		<form novalidate class="formLogin" role="form"
 			ng-submit="vm.login($event)" name="vm.formLogin">
 			<div class="row">
@@ -11,8 +11,9 @@
 				<h3 class="text-center subTitle">Entre, divirta-se!</h3>
 			</div>
 			<div class="text-center" ng-show="vm.authenticationError">
-				<div class="alert alert-danger" close="">Usuário ou senha
-					inválidos.</div>
+				<div class="alert alert-danger alertLogin">
+					Usu�rio ou senha inv�idos.
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="username" class="sr-only">Usuário</label> <input
@@ -41,7 +42,7 @@
 				</label>
 			</div>
 			<button type="submit"
-				class="btn btn-lg btn-primary btn-block btnLogin">Entrar</button>
+				class="btn btn-lg btn-danger btn-block btnLogin">Entrar</button>
 
 			<div class="cadastre-seTopMargin text-center">
 				<p class="pNotAccount">
@@ -55,4 +56,4 @@
 			</div>
 		</form>
 	</div>
-</div>
+
