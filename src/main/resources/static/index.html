@@ -10,7 +10,6 @@
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-wizard/dist/angular-wizard.min.css">
 	<link rel='stylesheet' type='text/css' href="bower_components/angular-loading-bar/build/loading-bar.min.css" media='all' />
 	<link rel="stylesheet" type="text/css" href="content/css/social.css">
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
 	<base href="/">
 </head>
 <body back-img="{{toState.name === 'login' || toState.name === 'register' ? background
@@ -18,9 +17,7 @@
 		ng-class="toState.data.backgroundClass">
 	<nav ui-view="navbar" ng-cloak></nav>
 	
-	
-		<main ui-view="content" role="main"></main>
-	
+	<main ui-view="content" role="main"></main>
 
 	<!-- Bower -->
 	<script src="bower_components/angular/angular.min.js"></script>
@@ -33,6 +30,8 @@
 	<script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
 	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+	<script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+	<script src="bower_components/angular-ui-mask/dist/mask.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>

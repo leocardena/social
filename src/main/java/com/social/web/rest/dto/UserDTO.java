@@ -16,7 +16,7 @@ import com.social.util.CustomDateTimeSerializer;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "firstName", "lastName", "country", "phone", "birthday", "genre", "login", "email", "password" })
 public class UserDTO {
-	
+
 	@JsonIgnore
 	@JsonProperty("firstName")
 	private String firstName;
@@ -43,11 +43,11 @@ public class UserDTO {
 
 	@JsonProperty("email")
 	private String email;
-	
+
 	@JsonIgnore
 	@JsonProperty("password")
 	private String password;
-	
+
 	@JsonProperty("name")
 	private String name;
 
@@ -63,8 +63,8 @@ public class UserDTO {
 				profile.getUser().getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 	}
 
-	public UserDTO(String name, String country, String phone, DateTime birthday, String genre,
-			String username, String email, Set<String> authorities) {
+	public UserDTO(String name, String country, String phone, DateTime birthday, String genre, String username,
+			String email, Set<String> authorities) {
 		this.name = name;
 		this.country = country;
 		this.phone = phone;
@@ -242,13 +242,11 @@ public class UserDTO {
 	 * @param password
 	 *            The password
 	 */
-	@JsonIgnore
 	@JsonProperty("password")
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @return The name
@@ -256,7 +254,7 @@ public class UserDTO {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * 
 	 * @param password

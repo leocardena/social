@@ -28,7 +28,7 @@
                 	}).$promise.then(function(data, headersFun){
                 		 return data;
                 	}).catch(function () {
-                		return "https://walter.trakt.us/images/movies/000/001/170/fanarts/original/c0ad7ea552.jpg";
+                		return 'https://walter.trakt.us/images/movies/000/001/170/fanarts/original/c0ad7ea552.jpg';
                 	});
         		case 2:
         			return TraktShowService.getPopularShows({
@@ -38,7 +38,7 @@
                 	}).$promise.then(function(data, headersFun){
                 		 return data;
                 	}).catch(function () {
-                		return "https://walter.trakt.us/images/movies/000/001/170/fanarts/original/c0ad7ea552.jpg";
+                		return 'https://walter.trakt.us/images/movies/000/001/170/fanarts/original/c0ad7ea552.jpg';
                 	});
         	}
 		}
