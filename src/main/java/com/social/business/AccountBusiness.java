@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import com.social.domain.Authority;
 import com.social.domain.CommentParent;
 import com.social.domain.Profile;
@@ -17,6 +18,7 @@ import com.social.repository.ProfileRepository;
 import com.social.repository.UserRepository;
 import com.social.security.util.AuthoritiesConstants;
 import com.social.security.util.SecurityUtils;
+import com.social.storage.AvatarStorage;
 import com.social.web.rest.dto.UserDTO;
 import com.social.web.rest.exception.EmailAlreadyInUseException;
 import com.social.web.rest.exception.KeyNotFoundException;
@@ -43,6 +45,9 @@ public class AccountBusiness {
 	
 	@Autowired
 	private ProfileRepository profileRepository;
+	
+	@Autowired
+	private AvatarStorage avatarStorage;
 	
 	public User createNewUser(UserDTO userDTO) {
 		System.out.println(userDTO.toString());
@@ -113,6 +118,17 @@ public class AccountBusiness {
 		Profile profile = profileOptional.get();
         log.debug("User with Authorities pesquisado, profile: {}", profile);
         return new UserDTO(profile);
+	}
+	
+	public String saveAvatar(Long code, MultipartFile avatar) {
+		
+		String avatarName = avatarStorage.saveAvatar(avatar);
+		Profile profile = profileRepository.findOne(code);
+		profile.setAvatar(avatarName);
+		profileRepository.save(profile);
+		
+		return avatarStorage.getUrl(avatarName);
+		
 	}
 	
 }
