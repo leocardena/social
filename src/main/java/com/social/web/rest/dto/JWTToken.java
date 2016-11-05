@@ -1,4 +1,4 @@
-package com.social.web.rest;
+package com.social.web.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

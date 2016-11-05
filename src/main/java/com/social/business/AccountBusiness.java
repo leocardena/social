@@ -77,7 +77,7 @@ public class AccountBusiness {
         CommentParent commentParent = new CommentParent();
         
         Profile newProfile = new Profile();
-        newProfile.setName(userDTO.getFirstName() + " " + userDTO.getLastName());
+        newProfile.setName(userDTO.getFirstName().trim() + " " + userDTO.getLastName().trim());
         newProfile.setBirthday(userDTO.getBirthday());
         newProfile.setCountry(userDTO.getCountry());
         newProfile.setGenre(userDTO.getGenre());

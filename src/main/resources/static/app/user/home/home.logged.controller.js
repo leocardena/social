@@ -5,11 +5,10 @@
         .module('social.user.home')
         .controller('HomeLoggedController', HomeLoggedController);
 
-    HomeLoggedController.$inject = ['PrincipalService', '$state', '$scope', 'AuthService'];
+    HomeLoggedController.$inject = ['PrincipalService', '$state', '$scope'];
 
-    function HomeLoggedController (PrincipalService, $state, $scope, AuthService) {
+    function HomeLoggedController (PrincipalService, $state, $scope) {
         var vm = this;
-        vm.logout = _logout;
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
@@ -23,10 +22,7 @@
             });
         }
         
-        function _logout() {
-            AuthService.logout();
-            $state.go('login');
-        }
+        
 
     }
     

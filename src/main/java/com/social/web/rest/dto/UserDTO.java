@@ -14,7 +14,9 @@ import com.social.domain.Profile;
 import com.social.util.CustomDateTimeSerializer;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "firstName", "lastName", "country", "phone", "birthday", "genre", "login", "email", "password" })
+@JsonPropertyOrder({ "firstName", "lastName", "country",
+	"phone", "birthday", "genre", "login", "email", "password",
+		"avatar" })
 public class UserDTO {
 
 	@JsonIgnore
@@ -51,20 +53,23 @@ public class UserDTO {
 	@JsonProperty("name")
 	private String name;
 
+	@JsonProperty("avatar")
+	private String avatar;
+
 	@JsonProperty("authorities")
 	private Set<String> authorities;
 
 	public UserDTO() {
-	};
+	}
 
 	public UserDTO(Profile profile) {
 		this(profile.getName(), profile.getCountry(), profile.getUser().getPhone(), profile.getBirthday(),
-				profile.getGenre(), profile.getUser().getUsername(), profile.getUser().getEmail(),
+				profile.getGenre(), profile.getUser().getUsername(), profile.getUser().getEmail(), profile.getAvatar(),
 				profile.getUser().getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
 	}
 
 	public UserDTO(String name, String country, String phone, DateTime birthday, String genre, String username,
-			String email, Set<String> authorities) {
+			String email, String avatar, Set<String> authorities) {
 		this.name = name;
 		this.country = country;
 		this.phone = phone;
@@ -72,6 +77,7 @@ public class UserDTO {
 		this.genre = genre;
 		this.username = username;
 		this.email = email;
+		this.avatar = avatar;
 		this.authorities = authorities;
 	}
 
@@ -279,6 +285,25 @@ public class UserDTO {
 	 */
 	public void setAuthorities(Set<String> authorities) {
 		this.authorities = authorities;
+	}
+
+	/**
+	 * 
+	 * @return The avatar
+	 */
+	@JsonProperty("avatar")
+	public String getAvatar() {
+		return avatar;
+	}
+
+	/**
+	 * 
+	 * @param avatar
+	 *            The avatar
+	 */
+	@JsonProperty("avatar")
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	@Override

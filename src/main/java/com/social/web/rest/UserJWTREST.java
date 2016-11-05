@@ -2,6 +2,7 @@ package com.social.web.rest;
 
 import com.social.security.jwt.JWTConfigurer;
 import com.social.security.jwt.TokenProvider;
+import com.social.web.rest.dto.JWTToken;
 import com.social.web.rest.util.APIEndpoint;
 import com.social.web.rest.vm.LoginVM;
 import java.util.Collections;
