@@ -17,7 +17,8 @@
             hasAuthority: hasAuthority,
             identity: identity,
             isAuthenticated: isAuthenticated,
-            isIdentityResolved: isIdentityResolved
+            isIdentityResolved: isIdentityResolved,
+            getUserInformation : getUserInformation
         };
 
         return service;
@@ -25,6 +26,10 @@
         function authenticate (identity) {
             _identity = identity;
             _authenticated = identity !== null;
+        }
+        
+        function getUserInformation () {
+        	return _identity;
         }
 
         function hasAnyAuthority (authorities) {

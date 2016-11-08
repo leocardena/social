@@ -64,8 +64,8 @@
             }).then(function () {
                 vm.authenticationError = false;
                 vm.formError = false;
-                        
-                $rootScope.$broadcast('authenticationSuccess');
+                
+                //$rootScope.$emit('authenticationSuccess');
                 $state.go('home');
                 
             }).catch(function () {

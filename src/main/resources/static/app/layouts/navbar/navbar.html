@@ -20,9 +20,10 @@
 				<li uib-dropdown class="dropdown" auto-close="outsideClick">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                         <span>
-                            <span class="glyphicon glyphicon-user"></span>
+                            <img ng-src="{{vm.getUserInfo().avatar ? vm.getUserInfo().avatar : 
+                            	'content/images/avatar/avatar-20x20.png'}}">
                             <span class="hidden-sm" ng-switch-when="true">
-                                Account
+                                {{vm.getUserInfo().name}}
                             </span>
                             <span class="hidden-sm" ng-switch-when="false">
                                 Login
