@@ -19,7 +19,7 @@ public class Title {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idtitle")
-	private long id;
+	private Long id;
 	
 	@Column(name = "imdb")
 	private String imdb;
@@ -36,11 +36,11 @@ public class Title {
 	@Column(name = "votes")
 	private long votes;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

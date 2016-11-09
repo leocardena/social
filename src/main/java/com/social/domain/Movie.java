@@ -19,7 +19,7 @@ public class Movie extends Title {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idmovie")
-	private long id;
+	private Long id;
 	
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idcommentparent")
@@ -29,11 +29,11 @@ public class Movie extends Title {
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

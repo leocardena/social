@@ -1,4 +1,4 @@
-package com.social.rest.business;
+package com.social.business;
 
 import java.util.List;
 
@@ -14,7 +14,6 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.social.domain.Lists;
 import com.social.domain.Profile;
 import com.social.domain.QLists;
-import com.social.domain.Title;
 import com.social.repository.ListsRepository;
 
 @Service
@@ -46,7 +45,7 @@ public class ListsBusiness {
 		
 		PageRequest pageRequest = new PageRequest(pageCurrent, pageSize);
 		Page<Lists> page = listsRepository.findAll(pageRequest);
-		
+
 		List<Lists> lista = page.getContent();
 		System.out.println(">>>>Total de paginas: "+page.getTotalPages());
 		lista.forEach(listas->{
@@ -61,7 +60,6 @@ public class ListsBusiness {
 	
 	public void addTitleLists(){
 		//TODO	
-		//Descobrir como distinguir Filme de Série, olhar o diagrama e questionar
 	}
 	
 }

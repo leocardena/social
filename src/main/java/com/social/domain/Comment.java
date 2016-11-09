@@ -40,8 +40,8 @@ public class Comment {
 	@Column(name = "dislikes")
 	private Long dislikes;
 	
-/*	@OneToOne
-	private CommentParent idCommentParent;*/
+	@OneToOne
+	private CommentParent idCommentParent;
 
 	public Long getId() {
 		return id;
@@ -91,13 +91,13 @@ public class Comment {
 		this.parent = parent;
 	}
 
-/*	public CommentParent getIdCommentParent() {
+	public CommentParent getIdCommentParent() {
 		return idCommentParent;
 	}
 
 	public void setIdCommentParent(CommentParent idCommentParent) {
 		this.idCommentParent = idCommentParent;
-	}*/
+	}
 
 	public Long getDislikes() {
 		return dislikes;

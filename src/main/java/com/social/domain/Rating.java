@@ -1,7 +1,9 @@
 package com.social.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,9 +24,9 @@ public class Rating {
 	@Column(name = "idrating")
 	private long id;
 	
-/*	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="idprofile")
-	private Profile profile;*/
+	private Profile profile;
 	
 	@Column(name = "date")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
@@ -45,14 +47,14 @@ public class Rating {
 		this.id = id;
 	}
 
-/*	public Profile getProfile() {
+	public Profile getProfile() {
 		return profile;
 	}
 
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
-*/
+
 	public DateTime getDate() {
 		return date;
 	}
