@@ -18,7 +18,7 @@
 			data: {
                 authorities: [],
                 pageTitle: 'Login',
-                hideNavbar: true
+                hideLoginDropdown: true
                 //backgroundUrl: 'https://walter.trakt.us/images/movies/000/000/120/fanarts/original/f7884a908e.jpg'
             },
 			views : {
@@ -27,6 +27,9 @@
 					controller: 'LoginController',
 					controllerAs: 'vm'
 				}
+			},
+			params: {
+				authenticationError: null
 			},
 			resolve : {
 				backgroundPrepService : backgroundPrepService

@@ -1,8 +1,8 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation" ng-hide="vm.state.$current.data.hideNavbar">
 	<div class="container">
 		
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
+			<button type="button" class="navbar-toggle"  ng-click="vm.toggleNavbar()">
 				<span class="sr-only">Toggle navigation</span> 
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -17,7 +17,8 @@
 			
 			<ul class="nav navbar-nav navbar-right navbarLogin">
 				
-				<li uib-dropdown class="dropdown" auto-close="outsideClick">
+				<li uib-dropdown class="dropdown" auto-close="outsideClick" is-open="vm.isOpen" 
+					ng-hide="vm.state.$current.data.hideLoginDropdown">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                         <span>
                             <span ng-switch-when="false" class="glyphicon glyphicon-user"></span>
@@ -32,7 +33,7 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu >
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                         <li ui-sref-active="active" ng-switch-when="true">
                             <!-- 
                             	<a ui-sref="settings" ng-click="vm.collapseNavbar()">
@@ -51,32 +52,57 @@
                                 <span>Logout</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <form novalidate role="form" ng-submit="vm.login($event)" name="vm.formLogin">
-								<div class="form-group">
-									<label for="username" class="sr-only">Usuário</label> 
-									<input type="text" class="form-control" id="username"
-										placeholder="Usuário" ng-model="vm.username" name="username"
-										ng-required="true" ng-maxlength="30">
-								</div>
-								<div class="form-group">
-									<label for="password" class="sr-only">Senha</label> <input
-										type="password" class="form-control" id="password"
-										placeholder="Senha" ng-model="vm.password " ng-required="true"
-										ng-maxlength="50" name="password">
-								</div>
-								<div class="checkbox">
-									<label for="rememberMe"> 
-										<input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked> 
-										<span>
-											Lembrar-me
-										</span>
-									</label>
-								</div>
-								<button type="submit" class="btn btn-sm btn-danger">
-									Entrar
-								</button>
-							</form>
+                        <li ui-sref-active="active" ng-switch-when="false" style="width: 300px;">
+                        	<div class="col-lg-12">
+                                
+                                <div class="text-center navbar-default-formLogin">
+                               		<h3><b>Log In</b></h3>
+                               	</div>
+	                            
+	                            <form novalidate role="form" ng-submit="vm.login($event)" name="vm.formLogin">
+									
+									<div class="form-group">
+										<label for="username" class="navbar-default-formLogin">Usuário</label> 
+										<input type="text" class="form-control" id="username"
+											placeholder="Usuário" ng-model="vm.username" name="username"
+											ng-required="true" ng-maxlength="30">
+									</div>
+									
+									<div class="form-group">
+										<label for="password" class="navbar-default-formLogin">Senha</label> 
+										<input type="password" class="form-control" id="password"
+											placeholder="Senha" ng-model="vm.password " ng-required="true"
+											ng-maxlength="50" name="password">
+									</div>
+									
+									 <div class="form-group">
+									 	<div class="row">
+									 		<div class="col-xs-7">
+	                                             <input type="checkbox" id="rememberMe" ng-model="vm.rememberMe" checked> 
+	                                             <label for="rememberMe" class="navbar-default-formLogin">Lembrar-me</label>
+	                                         </div>
+	                                         <div class="col-xs-5 pull-right">
+	                                            <button type="submit" class="form-control btn btn-danger">
+													Entrar
+												</button>
+	                                         </div>
+									 	</div>
+									 </div>
+									 
+									<div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="text-center">
+                                                    <a class="forgot-password">
+                                                    	Esqueceu a senha?
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									
+								</form>
+							</div>
                         </li>
                     </ul>
                 </li>

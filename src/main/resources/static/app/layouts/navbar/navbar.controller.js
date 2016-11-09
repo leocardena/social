@@ -7,22 +7,25 @@
 
     NavbarController.$inject = ['$state', 'PrincipalService', 'AuthService', '$localStorage', '$scope'];
 
-    function NavbarController ($state, PrincipalService, AuthService, $localStorage, $scope ) {
+    function NavbarController ($state, PrincipalService, AuthService, $localStorage, $scope) {
         var vm = this;
         vm.collapseNavbar = _collapseNavbar;
         vm.isAuthenticated = PrincipalService.isAuthenticated;
         vm.getUserInfo = _getUserInfo;
         vm.isNavbarCollapsed = true;
+        vm.isOpen = false;
+        vm.login = _login;
         vm.logout = _logout;
+        vm.rememberMe = true;
         vm.state = $state;
         vm.toggleNavbar = _toggleNavbar;
         
-        $scope.$on('authenticationSuccess', function() {
-    	    vm.account =  $localStorage.account;
-        });
-        
         function _collapseNavbar() {
-            vm.isNavbarCollapsed = true;
+            vm.isNavbarCollapsed = false;
+        }
+        
+        function _collapseDropDown() {
+        	 vm.isOpen = false;
         }
         
         function _getUserInfo() {
@@ -33,10 +36,42 @@
             vm.isNavbarCollapsed = !vm.isNavbarCollapsed;
         }
         
+        function _login (event) {
+            event.preventDefault();
+            
+            if (vm.formLogin.$invalid) {
+            	_toggleNavbar();
+            	_collapseDropDown();
+            	_resetForm();
+            	$state.go('login', {authenticationError: true});
+            } else {
+                AuthService.login({
+                    username: vm.username,
+                    password: vm.password,
+                    rememberMe: vm.rememberMe
+                }).then(function () {
+                	_collapseDropDown();
+                    $state.go('home');
+                }).catch(function () {
+                	_toggleNavbar();
+                	_collapseDropDown();
+                	_resetForm();
+                	$state.go('login', {authenticationError: true});
+                });
+            }
+            
+        }
+        
         function _logout() {
             AuthService.logout();
             delete vm.account;
             $state.go('login');
+        }
+        
+        function _resetForm() {
+        	vm.formLogin.$setPristine();
+        	 vm.username = null;
+        	 vm.password = null;
         }
 
     }

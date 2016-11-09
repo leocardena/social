@@ -5,11 +5,11 @@
         .module('social.account.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', 'AuthService', 'backgroundPrepService'];
+    LoginController.$inject = ['$rootScope', '$state', 'AuthService', 'backgroundPrepService', '$stateParams'];
 
-    function LoginController ($rootScope, $state, AuthService, backgroundPrepService) {
+    function LoginController ($rootScope, $state, AuthService, backgroundPrepService, $stateParams) {
         var vm = this;
-        vm.authenticationError = false;
+        vm.authenticationError = $stateParams.authenticationError;
         vm.cancel = cancel;
         vm.credentials = {};
         vm.dismissAlert = _dismissAlert;

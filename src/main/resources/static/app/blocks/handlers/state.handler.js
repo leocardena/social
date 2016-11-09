@@ -9,7 +9,7 @@
         'AuthService', 'PrincipalService'];
 
     function stateHandler($rootScope, $state, $sessionStorage,  $window,
-    		AuthService, PrincipalService, VERSION) {
+    		AuthService, PrincipalService) {
         return {
             initialize: _initialize
         };

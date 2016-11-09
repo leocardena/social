@@ -335,6 +335,10 @@ a.hrefTermos:active {
 	color: #fff;
 }
 
+.navbar-default-formLogin {
+	color: #000000;
+}
+
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: #fff;
 }
