@@ -1,10 +1,8 @@
 package com.social.trakt.services;
 
 import java.util.List;
-
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Season;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

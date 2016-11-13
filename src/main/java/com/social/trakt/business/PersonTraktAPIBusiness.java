@@ -8,23 +8,23 @@ import org.springframework.stereotype.Service;
 
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Movie;
-import com.social.trakt.model.People;
+import com.social.trakt.model.Person;
 import com.social.trakt.model.Show;
-import com.social.trakt.services.PeopleAPIService;
+import com.social.trakt.services.PersonAPIService;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
 @Service
-public class PeopleTraktAPIBusiness {
+public class PersonTraktAPIBusiness {
 
 	@Autowired
-	PeopleAPIService peopleAPIService;
+	PersonAPIService peopleAPIService;
 
-	public People getSummaryPeople(String id, String extended) {
-		Call<People> call = peopleAPIService.getSummaryPeople(id, extended);
-		Call<People> callClone = call.clone();
-		Response<People> resp;
+	public Person getSummaryPeople(String id, String extended) {
+		Call<Person> call = peopleAPIService.getSummaryPeople(id, extended);
+		Call<Person> callClone = call.clone();
+		Response<Person> resp;
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())
@@ -63,10 +63,10 @@ public class PeopleTraktAPIBusiness {
 		}
 	}
 
-	public List<People> getPeopleMovie(String id, String extended) {
-		Call<List<People>> call = peopleAPIService.getPeopleMovie(id, extended);
-		Call<List<People>> callClone = call.clone();
-		Response<List<People>> resp;
+	public List<Person> getPeopleMovie(String id, String extended) {
+		Call<List<Person>> call = peopleAPIService.getPeopleMovie(id, extended);
+		Call<List<Person>> callClone = call.clone();
+		Response<List<Person>> resp;
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())
@@ -77,10 +77,10 @@ public class PeopleTraktAPIBusiness {
 		}
 	}
 
-	public List<People> getPeopleShow(String id, String extended) {
-		Call<List<People>> call = peopleAPIService.getPeopleShow(id, extended);
-		Call<List<People>> callClone = call.clone();
-		Response<List<People>> resp;
+	public List<Person> getPeopleShow(String id, String extended) {
+		Call<List<Person>> call = peopleAPIService.getPeopleShow(id, extended);
+		Call<List<Person>> callClone = call.clone();
+		Response<List<Person>> resp;
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())

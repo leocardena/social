@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.social.trakt.services.EpisodeAPIService;
 import com.social.trakt.services.GenreAPIService;
 import com.social.trakt.services.MovieAPIService;
-import com.social.trakt.services.PeopleAPIService;
+import com.social.trakt.services.PersonAPIService;
 import com.social.trakt.services.SeasonAPIService;
 import com.social.trakt.services.ShowAPIService;
 
@@ -35,8 +35,8 @@ public class TraktServices {
 	}
 
 	@Bean
-	public PeopleAPIService getPeopleAPIService() {
-		return retrofit.create(PeopleAPIService.class);
+	public PersonAPIService getPeopleAPIService() {
+		return retrofit.create(PersonAPIService.class);
 	}
 
 	@Bean

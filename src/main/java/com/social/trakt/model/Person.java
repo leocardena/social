@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({ "name", "ids", "images", "biography", "birthday", "death", "birthplace", "homepage" })
 
-public class People {
+public class Person {
 
 	@JsonProperty("name")
 	private String name;

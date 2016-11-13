@@ -4,5 +4,6 @@ public interface APITraktEndpoint {
 	
 	public final String MOVIE = "/api/rest/trakt/movie";
 	public final String SHOW = "/api/rest/trakt/show";
+	public final String SEARCH = "/api/rest/trakt/search";
 
 }

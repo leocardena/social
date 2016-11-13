@@ -352,6 +352,10 @@ a.hrefTermos:active {
 	margin-left: 3rem;
 }
 
+.login-dropdown {
+	min-width: 300px;
+}
+
 /*FINAL - Navbar */
 
 /* FINAL - corpo da aplicação */
