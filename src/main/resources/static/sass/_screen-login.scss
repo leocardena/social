@@ -1,0 +1,84 @@
+@import "variables";
+
+.formLogin {
+	margin-top: 20%;
+	margin-left: 5%;
+	margin-right: 5%;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 3rem;
+	border-radius: 4rem;
+	background-color: rgba(0, 0, 0, 0.7);
+	img.logo {
+		width: 7rem;
+	}
+	.subTitle {
+		margin-bottom: 3rem;
+		color: $white;
+		text-shadow: -2px 2px 1px #000;
+		letter-spacing: -1px;
+	}
+	.btnLogin {
+	background-color: $red-primary;
+	border-color: $red-primary;
+	}
+	.btnLogin:hover {
+		background-color: $red-secondary;
+		border-color:$red-secondary;
+	}
+	.btnLogin:active {
+		background-color: $red-primary;
+		border-color: $red-primary;
+	}
+	.btnLogin:focus {
+		background-color: $red-primary;
+		border-color: $red-primary;
+	}
+	.hrefAlterar {
+		text-align: center;
+		display: block;
+		font-weight: bold;
+		color: $red-secondary;
+		margin-top: 0;
+	}
+	a.hrefAlterar {
+		margin-top: 0rem;
+	}
+
+	a.hrefAlterar:hover {
+		color: $red-secondary;
+		text-decoration: none;
+	}
+
+	a.hrefAlterar:active {
+		text-decoration: none;
+		color: $white;
+	}
+	.passwordField {
+	margin-top: 1rem;
+	}
+
+	.cadastre-seTopMargin {
+		margin-top: 2rem;
+	}
+
+	.rememberMe {
+		color: $white;
+	}
+
+	.pNotAccount {
+		color: $white;
+	}
+
+	.alertLogin {
+		background-color: $red-primary;
+		color: $white;
+		border-color: $red-primary;
+	}	
+}
+
+@media ( max-width : 991px) {
+	.formLogin {
+		margin-top: 20%;
+		margin-bottom: 20%;
+	}
+}
