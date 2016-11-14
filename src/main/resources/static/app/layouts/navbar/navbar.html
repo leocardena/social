@@ -17,9 +17,9 @@
 	        <form class="navbar-form" role="search" name="vm.formSearch">
 		        <div class="input-group">
 		            <input type="text" class="form-control" placeholder="Pesquise por filmes, séries, atores..." 
-		            	name="search.text">
+		            	name="vm.formSearch.text" ng-model="vm.search.text">
 		            <div class="input-group-btn">
-		                <button class="btn btn-default" type="submit" ng-click="vm.search(search.text)">
+		                <button class="btn btn-default" type="submit" ng-click="vm.search(vm.search.text, vm.search.type)">
 		                	<i class="glyphicon glyphicon-search"></i>
 		                </button>
 		            </div>

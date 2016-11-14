@@ -8,6 +8,7 @@ import com.social.trakt.services.EpisodeAPIService;
 import com.social.trakt.services.GenreAPIService;
 import com.social.trakt.services.MovieAPIService;
 import com.social.trakt.services.PersonAPIService;
+import com.social.trakt.services.SearchAPIService;
 import com.social.trakt.services.SeasonAPIService;
 import com.social.trakt.services.ShowAPIService;
 
@@ -48,4 +49,11 @@ public class TraktServices {
 	public ShowAPIService getShowAPIService() {
 		return retrofit.create(ShowAPIService.class);
 	}
+	
+	@Bean
+	public SearchAPIService getSearchAPIService() {
+		return retrofit.create(SearchAPIService.class);
+	}
+	
+	
 }

@@ -5,9 +5,11 @@
         .module('social.layouts.navbar')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'PrincipalService', 'AuthService', '$localStorage', '$scope'];
+    NavbarController.$inject = ['$state', 'PrincipalService', 'AuthService', 
+                                '$localStorage', '$scope', 'TraktSearchService'];
 
-    function NavbarController ($state, PrincipalService, AuthService, $localStorage, $scope) {
+    function NavbarController ($state, PrincipalService, AuthService, 
+    		$localStorage, $scope, TraktSearchService) {
         var vm = this;
         vm.collapseNavbar = _collapseNavbar;
         vm.isAuthenticated = PrincipalService.isAuthenticated;
@@ -18,6 +20,7 @@
         vm.logout = _logout;
         vm.rememberMe = true;
         vm.state = $state;
+        vm.search = _search;
         vm.toggleNavbar = _toggleNavbar;
         
         function _collapseNavbar() {
@@ -73,6 +76,15 @@
         	 vm.username = null;
         	 vm.password = null;
         }
+        
+        function _search(text, type) {
+        	return TraktSearchService.getSearch({
+	        		limit : 10,
+	        		query : text,
+	        		type : type,
+	        		fields : 'translations,title'
+	        	});
+	        }
 
     }
 })();

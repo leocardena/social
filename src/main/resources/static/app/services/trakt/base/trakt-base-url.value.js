@@ -7,7 +7,8 @@
 			.value('TraktBase', {
 				url : '/api/rest/trakt',
 				movie : '/api/rest/trakt/movie',
-				show : '/api/rest/trakt/show'
+				show : '/api/rest/trakt/show',
+				search : '/api/rest/trakt/search' 
 			});
 	
 })();

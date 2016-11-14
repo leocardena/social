@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Service;
 import com.social.domain.ResponseAPI;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Search;
@@ -12,13 +13,15 @@ import com.social.web.rest.util.PaginationUtil;
 import retrofit2.Call;
 import retrofit2.Response;
 
+@Service
 public class SearchTraktAPIBusiness {
 
 	@Autowired
 	private SearchAPIService searchAPIService;
 
-	public ResponseAPI<List<Search>> getSearch(String type, String page, String limit, String extended, String query) {
-		Call<List<Search>> call = searchAPIService.getSearch(type, page, limit, extended, query);
+	public ResponseAPI<List<Search>> getSearch(String type, String page, String limit, 
+			String extended, String query, String fields) {
+		Call<List<Search>> call = searchAPIService.getSearch(type, page, limit, extended, query, fields);
 		Call<List<Search>> callClone = call.clone();
 		Response<List<Search>> resp;
 		try {

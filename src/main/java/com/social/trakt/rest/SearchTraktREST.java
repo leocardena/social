@@ -1,7 +1,6 @@
 package com.social.trakt.rest;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +25,9 @@ public class SearchTraktREST {
 			@RequestParam(value = "query", required = true) String query,
 			@RequestParam(value = "page", required = false) String page,
 			@RequestParam(value = "limit", required = false) String limit,
-			@RequestParam(value = "extended", required = false) String extended) {
-		ResponseAPI<List<Search>> response = searchTraktAPIBusiness.getSearch(type, page, limit, extended, query);
+			@RequestParam(value = "extended", required = false) String extended,
+			@RequestParam(value = "fields", required = false) String fields) {
+		ResponseAPI<List<Search>> response = searchTraktAPIBusiness.getSearch(type, page, limit, extended, query, fields);
 		return ResponseEntity.ok().headers(response.getHeaders()).body(response.getBody());
 	}
 
