@@ -1,9 +1,9 @@
 package com.social.trakt;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
 import com.social.trakt.services.EpisodeAPIService;
 import com.social.trakt.services.GenreAPIService;
 import com.social.trakt.services.MovieAPIService;
@@ -11,13 +11,13 @@ import com.social.trakt.services.PersonAPIService;
 import com.social.trakt.services.SearchAPIService;
 import com.social.trakt.services.SeasonAPIService;
 import com.social.trakt.services.ShowAPIService;
-
 import retrofit2.Retrofit;
 
 @Component
 public class TraktServices {
 
 	@Autowired
+	@Qualifier("TraktTVBean")
 	private Retrofit retrofit;
 
 	@Bean

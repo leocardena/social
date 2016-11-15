@@ -14,14 +14,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Component
-public class RetrofitBuilder {
+public class RetrofitBuilderTraktTV {
 	
-	private final static Retrofit RETROFIT = RetrofitBuilder.getRetrofit();;
+	private final static Retrofit RETROFIT = RetrofitBuilderTraktTV.getRetrofit();;
 	
-	private RetrofitBuilder() {
+	private RetrofitBuilderTraktTV() {
 	}
 	
-	@Bean
+	@Bean(name = "TraktTVBean")
 	public static Retrofit getInstance() {
 		return RETROFIT;
 	} 
@@ -30,7 +30,7 @@ public class RetrofitBuilder {
 		return new Retrofit.Builder()
 				.baseUrl(TraktBaseUrl.URL.toString())
 				.addConverterFactory(JacksonConverterFactory.create())
-				.client(RetrofitBuilder.getClient()).build();
+				.client(RetrofitBuilderTraktTV.getClient()).build();
 	}
 	
 	private static OkHttpClient getClient() {
