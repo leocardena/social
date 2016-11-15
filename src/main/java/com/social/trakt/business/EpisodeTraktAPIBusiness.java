@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Episode;
-import com.social.trakt.services.EpisodeAPIService;
+import com.social.trakt.services.EpisodeTraktAPIService;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -17,7 +17,7 @@ import retrofit2.Response;
 public class EpisodeTraktAPIBusiness {
 
 	@Autowired
-	EpisodeAPIService episodeAPIService;
+	EpisodeTraktAPIService episodeAPIService;
 
 	public Episode getSummaryEpisode(String id, int season, int episode, String extended) {
 		Call<Episode> call = episodeAPIService.getSummaryEpisode(id, season, episode, extended);

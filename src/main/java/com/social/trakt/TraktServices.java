@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import com.social.trakt.services.EpisodeAPIService;
-import com.social.trakt.services.GenreAPIService;
-import com.social.trakt.services.MovieAPIService;
-import com.social.trakt.services.PersonAPIService;
-import com.social.trakt.services.SearchAPIService;
-import com.social.trakt.services.SeasonAPIService;
-import com.social.trakt.services.ShowAPIService;
+import com.social.trakt.services.EpisodeTraktAPIService;
+import com.social.trakt.services.GenreTraktAPIService;
+import com.social.trakt.services.MovieTraktAPIService;
+import com.social.trakt.services.PersonTraktAPIService;
+import com.social.trakt.services.SearchTraktAPIService;
+import com.social.trakt.services.SeasonTraktAPIService;
+import com.social.trakt.services.ShowTraktAPIService;
 import retrofit2.Retrofit;
 
 @Component
@@ -21,38 +21,38 @@ public class TraktServices {
 	private Retrofit retrofit;
 
 	@Bean
-	public EpisodeAPIService getEpisodeAPIService() {
-		return retrofit.create(EpisodeAPIService.class);
+	public EpisodeTraktAPIService getEpisodeAPIService() {
+		return retrofit.create(EpisodeTraktAPIService.class);
 	}
 
 	@Bean
-	public GenreAPIService getGenrePIService() {
-		return retrofit.create(GenreAPIService.class);
+	public GenreTraktAPIService getGenrePIService() {
+		return retrofit.create(GenreTraktAPIService.class);
 	}
 
 	@Bean
-	public MovieAPIService getMovieAPIService() {
-		return retrofit.create(MovieAPIService.class);
+	public MovieTraktAPIService getMovieAPIService() {
+		return retrofit.create(MovieTraktAPIService.class);
 	}
 
 	@Bean
-	public PersonAPIService getPeopleAPIService() {
-		return retrofit.create(PersonAPIService.class);
+	public PersonTraktAPIService getPeopleAPIService() {
+		return retrofit.create(PersonTraktAPIService.class);
 	}
 
 	@Bean
-	public SeasonAPIService getSeasonAPIService() {
-		return retrofit.create(SeasonAPIService.class);
+	public SeasonTraktAPIService getSeasonAPIService() {
+		return retrofit.create(SeasonTraktAPIService.class);
 	}
 
 	@Bean
-	public ShowAPIService getShowAPIService() {
-		return retrofit.create(ShowAPIService.class);
+	public ShowTraktAPIService getShowAPIService() {
+		return retrofit.create(ShowTraktAPIService.class);
 	}
 	
 	@Bean
-	public SearchAPIService getSearchAPIService() {
-		return retrofit.create(SearchAPIService.class);
+	public SearchTraktAPIService getSearchAPIService() {
+		return retrofit.create(SearchTraktAPIService.class);
 	}
 	
 	

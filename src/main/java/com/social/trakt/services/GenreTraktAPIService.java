@@ -8,7 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface GenreAPIService {
+public interface GenreTraktAPIService {
 
 	@GET("/genres/{type}")
 	public Call<List<Genre>> getListGenres(@Query("type") String type);

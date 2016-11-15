@@ -8,7 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface EpisodeAPIService {
+public interface EpisodeTraktAPIService {
 
 	/* Returns a single episode's details. */
 	@GET("/shows/{id}/seasons/{season}/episodes/{episode}")

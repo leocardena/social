@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Season;
-import com.social.trakt.services.SeasonAPIService;
+import com.social.trakt.services.SeasonTraktAPIService;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -18,7 +18,7 @@ import retrofit2.Response;
 public class SeasonTraktAPIBusiness {
 
 	@Autowired
-	SeasonAPIService seasonAPIService;
+	SeasonTraktAPIService seasonAPIService;
 
 	public List<Season> getSummarySeason(String id, String extended) {
 		Call<List<Season>> call = seasonAPIService.getSummarySeason(id, extended);

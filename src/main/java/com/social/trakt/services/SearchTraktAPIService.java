@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface SearchAPIService {
+public interface SearchTraktAPIService {
 
 	@GET("/search/{type}")
 	public Call<List<Search>> getSearch(@Path("type") String type, @Query("page") String page,

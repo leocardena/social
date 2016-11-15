@@ -7,7 +7,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface SeasonAPIService {
+public interface SeasonTraktAPIService {
 
 	/*
 	 * Returns all seasons for a show including the number of episodes in each season.*/

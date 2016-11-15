@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Genre;
-import com.social.trakt.services.GenreAPIService;
+import com.social.trakt.services.GenreTraktAPIService;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -17,7 +17,7 @@ import retrofit2.Response;
 public class GenreTraktAPIBusiness {
 
 	@Autowired
-	GenreAPIService genreAPIService;
+	GenreTraktAPIService genreAPIService;
 
 	public List<Genre> getListGenres(String type) {
 		Call<List<Genre>> call = genreAPIService.getListGenres(type);

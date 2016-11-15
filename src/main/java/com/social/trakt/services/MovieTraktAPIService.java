@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface MovieAPIService {
+public interface MovieTraktAPIService {
 
 	/*Returns the most popular movies*/
 	@GET("/movies/popular")

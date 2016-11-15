@@ -10,7 +10,7 @@ import com.social.domain.ResponseAPI;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Show;
-import com.social.trakt.services.ShowAPIService;
+import com.social.trakt.services.ShowTraktAPIService;
 import com.social.web.rest.util.PaginationUtil;
 
 import retrofit2.Call;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 public class ShowTraktAPIBusiness {
 
 	@Autowired
-	private ShowAPIService showAPIService;
+	private ShowTraktAPIService showAPIService;
 
 	public ResponseAPI<List<Show>> getPopularShows(String page, String limit, String extended, String query,
 			String genres) {

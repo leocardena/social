@@ -1,17 +1,17 @@
-package com.social.tmdb.business;
+package com.social.tmdb.util;
 
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.tmdb.model.TmdbConfiguration;
-import com.social.tmdb.services.TmdbConfigurationService;
+import com.social.tmdb.services.ConfigurationTmdbAPIService;
 import retrofit2.Call;
 import retrofit2.Response;
 
 public class ConfigurationTmdbAPI {
 	
 	@Autowired
-	private static TmdbConfigurationService tmdbConfigurationService;
+	private static ConfigurationTmdbAPIService tmdbConfigurationService;
 	
 	private final static TmdbConfiguration TMDB_CONFIGURATION  = ConfigurationTmdbAPI.getConfigurationTmdb();
 	

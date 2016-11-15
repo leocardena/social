@@ -10,7 +10,7 @@ import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Movie;
 import com.social.trakt.model.Person;
 import com.social.trakt.model.Show;
-import com.social.trakt.services.PersonAPIService;
+import com.social.trakt.services.PersonTraktAPIService;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -19,7 +19,7 @@ import retrofit2.Response;
 public class PersonTraktAPIBusiness {
 
 	@Autowired
-	PersonAPIService peopleAPIService;
+	PersonTraktAPIService peopleAPIService;
 
 	public Person getSummaryPeople(String id, String extended) {
 		Call<Person> call = peopleAPIService.getSummaryPeople(id, extended);

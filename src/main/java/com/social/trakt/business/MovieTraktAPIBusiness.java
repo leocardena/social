@@ -10,7 +10,7 @@ import com.social.domain.ResponseAPI;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Movie;
 import com.social.trakt.model.Released;
-import com.social.trakt.services.MovieAPIService;
+import com.social.trakt.services.MovieTraktAPIService;
 import com.social.web.rest.util.PaginationUtil;
 
 import retrofit2.Call;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 public class MovieTraktAPIBusiness {
 
 	@Autowired
-	private MovieAPIService movieAPIService;
+	private MovieTraktAPIService movieAPIService;
 
 	public ResponseAPI<List<Movie>> getPopularMovies(String page, String limit, String extended, String query,
 			String genres) {

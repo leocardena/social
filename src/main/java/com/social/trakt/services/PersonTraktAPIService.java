@@ -10,7 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface PersonAPIService {
+public interface PersonTraktAPIService {
 
 	/* Returns a single person's details. */
 	@GET("/people/{id}")
