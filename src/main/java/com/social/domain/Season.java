@@ -30,8 +30,8 @@ public class Season {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "rating")
-	private long rating;
+/*	@Column(name = "rating")
+	private long rating;*/
 	
 	@Column(name = "votes")
 	private long votes;

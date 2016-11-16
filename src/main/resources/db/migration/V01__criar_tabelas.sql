@@ -110,7 +110,7 @@ CREATE TABLE TvShow(
 idTvShow INT NOT NULL,
 idTitle INT NOT NULL,
 idCommentParent INT NOT NULL DEFAULT 0,
-idRatingParent INT NOT NULL DEFAULT 0
+idRatingParent INT NOT NULL  DEFAULT 0
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Season
@@ -118,8 +118,8 @@ idRatingParent INT NOT NULL DEFAULT 0
 CREATE TABLE Season(
 idSeason INT UNIQUE NOT NULL, 
 idTvShow INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL,
+idCommentParent INT NOT NULL DEFAULT 0,
+idRatingParent INT NOT NULL DEFAULT 0,
 name VARCHAR(100) NOT NULL,
 aired DATE NOT NULL,
 votes INT NOT NULL DEFAULT 0
@@ -130,8 +130,8 @@ votes INT NOT NULL DEFAULT 0
 CREATE TABLE Episode(
 idEpisode INT UNIQUE NOT NULL, 
 idSeason INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL,
+idCommentParent INT NOT NULL DEFAULT 0,
+idRatingParent INT NOT NULL DEFAULT 0,
 name VARCHAR(100) NOT NULL,
 aired DATE NOT NULL,
 votes INT NOT NULL DEFAULT 0
