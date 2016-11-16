@@ -64,13 +64,13 @@ public class Season {
 		this.id = id;
 	}
 
-	public long getRating() {
+/*	public long getRating() {
 		return rating;
 	}
 
 	public void setRating(long rating) {
 		this.rating = rating;
-	}
+	}*/
 
 	public long getVotes() {
 		return votes;
