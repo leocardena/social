@@ -39,16 +39,19 @@ public class TvShowBusiness {
 		
 		System.out.println("size encontrarAlgum() >>>> "+lista.size());
 		System.out.println("name encontrarAlgum() >>>> "+lista.get(0).getName());
-		System.out.println("size season  encontrarAlgum() >>>> "+lista.get(0).getSeason().size());
+		System.out.println("size season encontrarAlgum() >>>> "+lista.get(0).getSeason().size());
 		
 		/***********************************************************/
 		/*COM O @QUERY NÃO ESTA TRAZENDO NEM A RELAÇÃO COM A SEASON*/
 		/***********************************************************/
+		tvShow.setId((long)1);
 		JPAQuery query = new JPAQuery(em);
 		SearchResults<TvShow> searchResult = query.from(QTvShow.tvShow)
 				.where(QTvShow.tvShow.id.eq((long) 1))
 				.listResults(QTvShow.tvShow);
+		
 		List<TvShow> listaDinamica = searchResult.getResults();
+		
 		System.out.println("size JPAQuery >>>> "+listaDinamica.size());
 		System.out.println("name JPAQuery >>>> "+listaDinamica.get(0).getName());
 		System.out.println("size season JPAQuery >>>> "+listaDinamica.get(0).getSeason().size());

@@ -23,7 +23,7 @@ public class Profile extends People {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idprofile")
-	private long id;
+	private Long id;
 	
 	@Column(name = "genre")
 	private String genre;
@@ -51,11 +51,11 @@ public class Profile extends People {
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

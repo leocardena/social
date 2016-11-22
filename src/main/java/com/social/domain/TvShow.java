@@ -23,13 +23,12 @@ public class TvShow extends Title {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idtvshow")
 	private Long id;
-	
-	
+		
 	/*VERIFICAR O MAPPEDBY*/
-	
-	//mappedBy="tvShow",
-	//@OneToMany(targetEntity=Season.class, mappedBy="tvshow", fetch=FetchType.EAGER)
-	@OneToMany(targetEntity=Season.class, mappedBy="tvShow", fetch=FetchType.EAGER)
+//	mappedBy="tvShow",
+//	@OneToMany(targetEntity=Season.class, mappedBy="tvshow", fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name = "idtvshow")
 	private List<Season> season;
 	
     @OneToOne(cascade = CascadeType.ALL)

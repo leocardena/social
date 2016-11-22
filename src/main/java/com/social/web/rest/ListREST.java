@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.social.business.ListsBusiness;
 import com.social.business.TvShowBusiness;
 import com.social.domain.Lists;
+import com.social.domain.Profile;
 
 @RestController
 public class ListREST {
@@ -18,10 +19,12 @@ public class ListREST {
 	@Autowired
 	private TvShowBusiness tvShowBusiness;
 	
-	@GetMapping(value="/get-lists/{pageSize}/{pageCurrent}")
-	public Page<Lists> getAllLists(@PathVariable("pageSize") Integer pageSize, 
-			@PathVariable("pageCurrent") Integer pageCurrent){
-		return listBusiness.getAllLists(pageCurrent, pageSize);
+	@GetMapping(value="/get-lists")
+	public String getAllLists(){
+		Profile profile = new Profile();
+		profile.setId((long) 2);
+		listBusiness.getAllListByProfile(profile);
+		return "Pegou todas as listas";
 	}
 	
 	@GetMapping(value="/test-insert/tvshow")

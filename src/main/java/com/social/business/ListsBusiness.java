@@ -34,8 +34,11 @@ public class ListsBusiness {
 		
 		List<Lists> lista = searchList.getResults();
 
-		System.out.println(lista.get(0).getId());
-		System.out.println(lista.get(0).getName());
+		System.out.println("ID 		      >>> "+lista.get(0).getId());
+		System.out.println("Nome Lists    >>> "+lista.get(0).getName());
+		System.out.println("Nome Profile  >>> "+lista.get(0).getProfile().getName());
+		System.out.println("Nome 1ºTitulo >>> "+lista.get(0).getTitle().get(0).getName());
+		System.out.println("Nome 2ºTitulo >>> "+lista.get(0).getTitle().get(1).getName());
 		
 		return searchList.getResults();
 		
