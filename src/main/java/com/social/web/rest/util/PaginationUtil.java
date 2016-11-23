@@ -16,4 +16,14 @@ public class PaginationUtil {
 		return responseHeaders; 
 	}
 	
+	public static HttpHeaders getHeadersFromTMDBResponse(Integer page, Integer totalResults, Integer totalPages) {
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("X-Pagination-Item-Count", totalResults.toString());
+		responseHeaders.add("X-Pagination-Page", page.toString());
+		responseHeaders.add("X-Pagination-Page-Count", totalPages.toString());	
+		
+		return responseHeaders;
+	}
+	
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import com.social.tmdb.services.ConfigurationTmdbAPIService;
+import com.social.tmdb.services.MovieTmdbAPIService;
+
 import retrofit2.Retrofit;
 
 @Component
@@ -17,6 +19,11 @@ public class TmdbServices {
 	@Bean
 	public ConfigurationTmdbAPIService getTmdbConfigurationService() {
 		return retrofit.create(ConfigurationTmdbAPIService.class);
+	}
+	
+	@Bean
+	public MovieTmdbAPIService getMovieTmdbAPIService() {
+		return retrofit.create(MovieTmdbAPIService.class);
 	}
 
 }

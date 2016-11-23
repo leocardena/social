@@ -45,7 +45,7 @@ public class RetrofitBuilderTmdb {
 						.method(original.method(), original.body());
 
 				Request request = requestBuilder.url(url).build();
-
+				
 				try {
 					return chain.proceed(request);
 				} catch (IOException e) {
