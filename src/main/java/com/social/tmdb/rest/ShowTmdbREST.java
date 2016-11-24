@@ -6,23 +6,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.social.tmdb.business.MovieTmdbAPIBusiness;
-import com.social.tmdb.model.Movie;
+import com.social.tmdb.business.ShowTmdbAPIBusiness;
+import com.social.tmdb.model.Show;
 import com.social.tmdb.util.ApiTmdbEndpoint;
 
 @RestController
-@RequestMapping(value = ApiTmdbEndpoint.MOVIE)
-public class MovieTmdbREST {
+@RequestMapping(value = ApiTmdbEndpoint.SHOW)
+public class ShowTmdbREST {
 
 	@Autowired
-	private MovieTmdbAPIBusiness business;
+	private ShowTmdbAPIBusiness business;
 
 	@GetMapping(value = "/popular/random")
 	public ResponseEntity<?> getPopularMovies(@RequestParam(value = "page", required = false) String page,
 			@RequestParam(value = "language", required = false) String language,
 			@RequestParam(value = "size", required = true) String size) {
-		Movie movie = business.getPopularRandomMovie(size);
-		return ResponseEntity.ok().body(movie);
+		Show show = business.getPopularRandomShow(size);
+		return ResponseEntity.ok().body(show);
 	}
 
 }

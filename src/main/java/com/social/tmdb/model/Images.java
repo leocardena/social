@@ -1,7 +1,5 @@
-
 package com.social.tmdb.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -27,15 +25,15 @@ public class Images {
     @JsonProperty("secure_base_url")
     private String secureBaseUrl;
     @JsonProperty("backdrop_sizes")
-    private List<String> backdropSizes = new ArrayList<String>();
+    private List<String> backdropSizes;
     @JsonProperty("logo_sizes")
-    private List<String> logoSizes = new ArrayList<String>();
+    private List<String> logoSizes;
     @JsonProperty("poster_sizes")
-    private List<String> posterSizes = new ArrayList<String>();
+    private List<String> posterSizes;
     @JsonProperty("profile_sizes")
-    private List<String> profileSizes = new ArrayList<String>();
+    private List<String> profileSizes;
     @JsonProperty("still_sizes")
-    private List<String> stillSizes = new ArrayList<String>();
+    private List<String> stillSizes;
 
     /**
      * 

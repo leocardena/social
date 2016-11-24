@@ -19,11 +19,7 @@
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
         vm.username = null;
-		if (backgroundPrepService instanceof Array) {
-			$rootScope.background = backgroundPrepService[0].images.fanart.full;
-		} else {
-			$rootScope.background = backgroundPrepService;
-		}
+		$rootScope.background = backgroundPrepService.backdrop_path;
         
         function cancel () {
             vm.credentials = {

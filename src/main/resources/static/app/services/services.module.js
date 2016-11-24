@@ -2,7 +2,7 @@
 	'use strict';
 	
 	angular
-			.module('social.services', ['social.services.trakt']);
+			.module('social.services', ['social.services.trakt', 'social.services.tmdb']);
 	
 })();
 

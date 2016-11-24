@@ -1,6 +1,5 @@
 package com.social.tmdb.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,12 +9,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({ "page", "results", "total_results", "total_pages" })
-public class MovieResponse {
+public class MoviePagination {
 
 	@JsonProperty("page")
 	private Integer page;
 	@JsonProperty("results")
-	private List<Movie> results = new ArrayList<Movie>();
+	private List<Movie> results;
 	@JsonProperty("total_results")
 	private Integer totalResults;
 	@JsonProperty("total_pages")

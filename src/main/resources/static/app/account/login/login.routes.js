@@ -36,11 +36,11 @@
 			}
 		});
 		
-		backgroundPrepService.$inject = ['RandomTitleService'];
+		backgroundPrepService.$inject = ['TmdbRandomTitleService'];
 
         /* @ngInject */
-        function backgroundPrepService (RandomTitleService) {
-        	return RandomTitleService.getRandomTitle();
+        function backgroundPrepService (TmdbRandomTitleService) {
+        	return TmdbRandomTitleService.getRandomTitle();
     	}
    
 		

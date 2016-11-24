@@ -26,11 +26,7 @@
 		vm.openCalendar = _openCalendar;
 		vm.popup = { opened : false };
 		vm.register = _register;
-		if (backgroundPrepService instanceof Array) {
-			$rootScope.background = backgroundPrepService[0].images.fanart.full;
-		} else {
-			$rootScope.background = backgroundPrepService;
-		}
+		$rootScope.background = backgroundPrepService.backdrop_path;
 		
 		function _dismissAlerts() {
 			vm.alertEnable = false;

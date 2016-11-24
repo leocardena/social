@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.tmdb.exception.TMDBImageSizeNotContains;
+import com.social.tmdb.model.Images;
 import com.social.tmdb.model.TmdbConfiguration;
 import com.social.tmdb.services.ConfigurationTmdbAPIService;
 import com.social.util.ContainsEnum;
@@ -30,8 +31,14 @@ public class ConfigurationTmdbAPIConnection {
 		Response<TmdbConfiguration> resp;
 		try {
 			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
+			if (!resp.isSuccessful()) {
+				Images images = new Images();
+				images.setSecureBaseUrl("https://image.tmdb.org/t/p/");
+				TmdbConfiguration config = new TmdbConfiguration();
+				config.setImages(images);
+				return config;
+			}
+				
 			return resp.body();
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");

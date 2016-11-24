@@ -1,7 +1,6 @@
 
 package com.social.tmdb.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,7 +39,7 @@ public class Movie {
     @JsonProperty("release_date")
     private String releaseDate;
     @JsonProperty("genre_ids")
-    private List<Integer> genreIds = new ArrayList<Integer>();
+    private List<Integer> genreIds;
     @JsonProperty("id")
     private Integer id;
     @JsonProperty("original_title")
