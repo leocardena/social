@@ -36,8 +36,3 @@ social:
         tokenValidityInSeconds: 86400
   mail: 
     from: social@localhost
-
-
-                  
-
-

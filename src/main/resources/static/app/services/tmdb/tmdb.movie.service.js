@@ -12,13 +12,13 @@
 		var service =  $resource( TmdbBase.movie, {}, {
 			'getRandomPopularMovie' : {
 				method: 'GET',
+				cache : true,
 				url: TmdbBase.movie + '/popular/random',
 				params : {
 					size : '@size',
 					language : '@language',
 	        		page: '@page'
-				},
-				ignoreLoadingBar: true
+				}
 			}
 		} );
 		

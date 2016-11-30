@@ -162,6 +162,13 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>1.11.43</version>
 		</dependency>
+		
+		<!-- URL Rewrite -->
+		<dependency>
+			<groupId>org.tuckey</groupId>
+			<artifactId>urlrewritefilter</artifactId>
+			<version>4.0.4</version>
+		</dependency>
 
 	</dependencies>
 

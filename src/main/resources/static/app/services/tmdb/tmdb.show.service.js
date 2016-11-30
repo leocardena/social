@@ -13,12 +13,12 @@
 			'getRandomPopularShow' : {
 				method: 'GET',
 				url: TmdbBase.show + '/popular/random',
+				cache : true,
 				params : {
 					size : '@size',
 					language : '@language',
 	        		page: '@page'
-				},
-				ignoreLoadingBar: true
+				}
 			}
 		} );
 		

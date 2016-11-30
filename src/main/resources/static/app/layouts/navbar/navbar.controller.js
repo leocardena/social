@@ -6,10 +6,10 @@
         .controller('NavbarController', NavbarController);
 
     NavbarController.$inject = ['$state', 'PrincipalService', 'AuthService', 
-                                '$localStorage', '$scope', 'TraktSearchService'];
+                                '$localStorage', '$scope'];
 
     function NavbarController ($state, PrincipalService, AuthService, 
-    		$localStorage, $scope, TraktSearchService) {
+    		$localStorage, $scope) {
         var vm = this;
         vm.collapseNavbar = _collapseNavbar;
         vm.isAuthenticated = PrincipalService.isAuthenticated;
@@ -20,8 +20,14 @@
         vm.logout = _logout;
         vm.rememberMe = true;
         vm.state = $state;
-        vm.search = _search;
         vm.toggleNavbar = _toggleNavbar;
+        vm.searchTypes = [
+	        {path: 'movie', name: 'Filmes'},
+	        {path: 'show', name: 'Séries'},
+	        {path: 'person', name: 'Pessoas'}
+        ];
+        
+        vm.search = {type : vm.searchTypes[0].path};
         
         function _collapseNavbar() {
             vm.isNavbarCollapsed = false;
@@ -77,14 +83,5 @@
         	 vm.password = null;
         }
         
-        function _search(text, type) {
-        	return TraktSearchService.getSearch({
-	        		limit : 10,
-	        		query : text,
-	        		type : type,
-	        		fields : 'translations,title'
-	        	});
-	        }
-
     }
 })();

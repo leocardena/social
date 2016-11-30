@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+    <rule>
+        <condition type="request-uri" operator="notequal">^/trace$</condition>
+        <condition type="request-uri" operator="notequal">^/app/.*</condition>
+        <condition type="request-uri" operator="notequal">^/bower_components/.*</condition>
+        <condition type="request-uri" operator="notequal">^/content/.*</condition>
+        <condition type="request-uri" operator="notequal">^/api.*$</condition>
+        <condition type="request-uri" operator="notequal">^/index.html*$</condition>
+
+        <to>/index.html</to>
+    </rule>
+
+    <!-- Force HTTPS prod only -->
+    <!--
+    <rule match-type="regex">
+        <condition type="header" operator="notequal" name="X-Forwarded-Proto">^HTTPS$</condition>
+        <from>^.*$</from>
+        <to type="permanent-redirect" last="true">https://%{server-name}%{request-uri}</to>
+    </rule>
+    -->
+</urlrewrite>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="social">
 <head>
+	<base href="/">
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
@@ -10,7 +11,6 @@
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-wizard/dist/angular-wizard.min.css">
 	<link rel='stylesheet' type='text/css' href="bower_components/angular-loading-bar/build/loading-bar.min.css" media='all' />
 	<link rel="stylesheet" type="text/css" href="content/css/social.css">
-	<base href="/">
 </head>
 <body back-img="{{toState.name === 'login' || toState.name === 'register' ? background
 	 : toState.data.backgroundUrl ? toState.data.backgroundUrl : null}}" 
@@ -52,6 +52,7 @@
 	<script src="app/layouts/navbar/navbar.module.js"></script>
 	<script src="app/layouts/background/background.module.js"></script>
 	<script src="app/services/trakt/trakt.services.module.js"></script>
+	<script src="app/search/search.module.js"></script>
 
 	<!-- Blocks -->
 	<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
@@ -117,6 +118,10 @@
 	<script src="app/user/home/home.logged.controller.js"></script>
 	<script src="app/user/home/home.public.controller.js"></script>
 	<script src="app/user/home/home.principal.controller.js"></script>
+	
+	<!-- Search -->
+	<script src="app/search/search.state.js"></script>
+	<script src="app/search/search.controller.js"></script>
 	
 	<footer class="footer" ng-cloak></footer>
 	

@@ -8,7 +8,8 @@
 		                   'social.services',
 		                   'social.blocks',
 		                   'social.user',
-		                   'social.layouts'])
+		                   'social.layouts',
+		                   'social.search'])
 		                   .run(runStateHandler);
 
 		                   runStateHandler.$inject = ['stateHandler'];
