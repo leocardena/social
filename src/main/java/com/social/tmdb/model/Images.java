@@ -1,178 +1,87 @@
+
 package com.social.tmdb.model;
 
 import java.util.List;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "base_url",
-    "secure_base_url",
-    "backdrop_sizes",
-    "logo_sizes",
-    "poster_sizes",
-    "profile_sizes",
-    "still_sizes"
+    "id",
+    "backdrops",
+    "posters"
 })
 public class Images {
 
-    @JsonProperty("base_url")
-    private String baseUrl;
-    @JsonProperty("secure_base_url")
-    private String secureBaseUrl;
-    @JsonProperty("backdrop_sizes")
-    private List<String> backdropSizes;
-    @JsonProperty("logo_sizes")
-    private List<String> logoSizes;
-    @JsonProperty("poster_sizes")
-    private List<String> posterSizes;
-    @JsonProperty("profile_sizes")
-    private List<String> profileSizes;
-    @JsonProperty("still_sizes")
-    private List<String> stillSizes;
+    @JsonProperty("id")
+    private Integer id;
+    @JsonProperty("backdrops")
+    private List<Backdrop> backdrops;
+    @JsonProperty("posters")
+    private List<Poster> posters;
 
     /**
      * 
      * @return
-     *     The baseUrl
+     *     The id
      */
-    @JsonProperty("base_url")
-    public String getBaseUrl() {
-        return baseUrl;
+    @JsonProperty("id")
+    public Integer getId() {
+        return id;
     }
 
     /**
      * 
-     * @param baseUrl
-     *     The base_url
+     * @param id
+     *     The id
      */
-    @JsonProperty("base_url")
-    public void setBaseUrl(String baseUrl) {
-        this.baseUrl = baseUrl;
+    @JsonProperty("id")
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
      * 
      * @return
-     *     The secureBaseUrl
+     *     The backdrops
      */
-    @JsonProperty("secure_base_url")
-    public String getSecureBaseUrl() {
-        return secureBaseUrl;
+    @JsonProperty("backdrops")
+    public List<Backdrop> getBackdrops() {
+        return backdrops;
     }
 
     /**
      * 
-     * @param secureBaseUrl
-     *     The secure_base_url
+     * @param backdrops
+     *     The backdrops
      */
-    @JsonProperty("secure_base_url")
-    public void setSecureBaseUrl(String secureBaseUrl) {
-        this.secureBaseUrl = secureBaseUrl;
-    }
-
-    /**
-     * 
-     * @return
-     *     The backdropSizes
-     */
-    @JsonProperty("backdrop_sizes")
-    public List<String> getBackdropSizes() {
-        return backdropSizes;
-    }
-
-    /**
-     * 
-     * @param backdropSizes
-     *     The backdrop_sizes
-     */
-    @JsonProperty("backdrop_sizes")
-    public void setBackdropSizes(List<String> backdropSizes) {
-        this.backdropSizes = backdropSizes;
+    @JsonProperty("backdrops")
+    public void setBackdrops(List<Backdrop> backdrops) {
+        this.backdrops = backdrops;
     }
 
     /**
      * 
      * @return
-     *     The logoSizes
+     *     The posters
      */
-    @JsonProperty("logo_sizes")
-    public List<String> getLogoSizes() {
-        return logoSizes;
+    @JsonProperty("posters")
+    public List<Poster> getPosters() {
+        return posters;
     }
 
     /**
      * 
-     * @param logoSizes
-     *     The logo_sizes
+     * @param posters
+     *     The posters
      */
-    @JsonProperty("logo_sizes")
-    public void setLogoSizes(List<String> logoSizes) {
-        this.logoSizes = logoSizes;
-    }
-
-    /**
-     * 
-     * @return
-     *     The posterSizes
-     */
-    @JsonProperty("poster_sizes")
-    public List<String> getPosterSizes() {
-        return posterSizes;
-    }
-
-    /**
-     * 
-     * @param posterSizes
-     *     The poster_sizes
-     */
-    @JsonProperty("poster_sizes")
-    public void setPosterSizes(List<String> posterSizes) {
-        this.posterSizes = posterSizes;
-    }
-
-    /**
-     * 
-     * @return
-     *     The profileSizes
-     */
-    @JsonProperty("profile_sizes")
-    public List<String> getProfileSizes() {
-        return profileSizes;
-    }
-
-    /**
-     * 
-     * @param profileSizes
-     *     The profile_sizes
-     */
-    @JsonProperty("profile_sizes")
-    public void setProfileSizes(List<String> profileSizes) {
-        this.profileSizes = profileSizes;
-    }
-
-    /**
-     * 
-     * @return
-     *     The stillSizes
-     */
-    @JsonProperty("still_sizes")
-    public List<String> getStillSizes() {
-        return stillSizes;
-    }
-
-    /**
-     * 
-     * @param stillSizes
-     *     The still_sizes
-     */
-    @JsonProperty("still_sizes")
-    public void setStillSizes(List<String> stillSizes) {
-        this.stillSizes = stillSizes;
+    @JsonProperty("posters")
+    public void setPosters(List<Poster> posters) {
+        this.posters = posters;
     }
 
     @Override
@@ -182,7 +91,7 @@ public class Images {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(baseUrl).append(secureBaseUrl).append(backdropSizes).append(logoSizes).append(posterSizes).append(profileSizes).append(stillSizes).toHashCode();
+        return new HashCodeBuilder().append(id).append(backdrops).append(posters).toHashCode();
     }
 
     @Override
@@ -194,7 +103,7 @@ public class Images {
             return false;
         }
         Images rhs = ((Images) other);
-        return new EqualsBuilder().append(baseUrl, rhs.baseUrl).append(secureBaseUrl, rhs.secureBaseUrl).append(backdropSizes, rhs.backdropSizes).append(logoSizes, rhs.logoSizes).append(posterSizes, rhs.posterSizes).append(profileSizes, rhs.profileSizes).append(stillSizes, rhs.stillSizes).isEquals();
+        return new EqualsBuilder().append(id, rhs.id).append(backdrops, rhs.backdrops).append(posters, rhs.posters).isEquals();
     }
 
 }

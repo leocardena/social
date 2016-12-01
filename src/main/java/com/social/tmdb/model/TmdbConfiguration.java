@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class TmdbConfiguration {
 
     @JsonProperty("images")
-    private Images images;
+    private ImagesSize images;
     @JsonProperty("change_keys")
     private List<String> changeKeys;
 
@@ -27,7 +27,7 @@ public class TmdbConfiguration {
      *     The images
      */
     @JsonProperty("images")
-    public Images getImages() {
+    public ImagesSize getImages() {
         return images;
     }
 
@@ -37,7 +37,7 @@ public class TmdbConfiguration {
      *     The images
      */
     @JsonProperty("images")
-    public void setImages(Images images) {
+    public void setImages(ImagesSize images) {
         this.images = images;
     }
 

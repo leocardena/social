@@ -1,8 +1,11 @@
 package com.social.tmdb.rest;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +26,15 @@ public class ShowTmdbREST {
 			@RequestParam(value = "size", required = true) String size) {
 		Show show = business.getPopularRandomShow(size);
 		return ResponseEntity.ok().body(show);
+	}
+	
+	@GetMapping(value = "/{showId}/images")
+	public ResponseEntity<?> getPopularMovieImages(@RequestParam(value = "language", required = false) String language,
+			@RequestParam(value = "posterSize", required = true) String posterSize,
+			@RequestParam(value = "backdropSize", required = true) String backdropSize,
+			@PathVariable(value = "showId") String showId) {
+		Map<String, Object> map = business.getShowImages(showId, backdropSize, posterSize, language);
+		return ResponseEntity.ok().body(map);
 	}
 
 }

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.tmdb.exception.TMDBImageSizeNotContains;
-import com.social.tmdb.model.Images;
+import com.social.tmdb.model.ImagesSize;
 import com.social.tmdb.model.TmdbConfiguration;
 import com.social.tmdb.services.ConfigurationTmdbAPIService;
 import com.social.util.ContainsEnum;
@@ -32,7 +32,7 @@ public class ConfigurationTmdbAPIConnection {
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful()) {
-				Images images = new Images();
+				ImagesSize images = new ImagesSize();
 				images.setSecureBaseUrl("https://image.tmdb.org/t/p/");
 				TmdbConfiguration config = new TmdbConfiguration();
 				config.setImages(images);

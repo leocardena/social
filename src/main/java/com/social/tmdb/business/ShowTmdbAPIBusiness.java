@@ -1,15 +1,22 @@
 package com.social.tmdb.business;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
+import com.social.tmdb.model.Backdrop;
+import com.social.tmdb.model.Images;
+import com.social.tmdb.model.Poster;
 import com.social.tmdb.model.Show;
 import com.social.tmdb.model.ShowPagination;
 import com.social.tmdb.services.ShowTmdbAPIService;
 import com.social.tmdb.util.ConfigurationTmdbAPIConnection;
+import com.social.tmdb.util.TmdbImagesUtil;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -38,6 +45,28 @@ public class ShowTmdbAPIBusiness {
 			show = new Show();
 			show.setBackdropPath(backdropPath);
 			return show;
+		} catch (IOException e) {
+			throw new RetrofitException("Erro ao executar request através da API");
+		}
+	}
+	
+	public Map<String, Object> getShowImages(String showId, String backdropSize, String posterSize, String language) {
+		Call<Images> call = showTmdbAPIService.getShowImages(showId, language, "pt,en,null");
+		Call<Images> callClone = call.clone();
+		Response<Images> resp;
+		try {
+			resp = callClone.execute();
+			if (!resp.isSuccessful())
+				throw new RetrofitException("A resposta não foi bem sucedida");
+			Images images = resp.body();
+			Backdrop backdrop = TmdbImagesUtil.getFirstBackDropFromImages(images);
+			Poster poster = TmdbImagesUtil.getFirstPosterFromImages(images);
+			backdrop.setFilePath(config.getImageURL(backdropSize, backdrop.getFilePath()));
+			poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("backdrop", backdrop);
+			map.put("poster", poster);
+			return map;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}

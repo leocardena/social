@@ -80,6 +80,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.GET, "/api/rest/trakt/movie/popular").permitAll()
             .antMatchers(HttpMethod.GET, "/api/rest/trakt/show/popular").permitAll()
             .antMatchers(HttpMethod.GET, "/api/rest/trakt/search/{\\d+}").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/movie/{\\d+}/images").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/show/{\\d+}/images").permitAll()
             .antMatchers(HttpMethod.GET, "/api/rest/tmdb/movie/popular/random").permitAll()
             .antMatchers(HttpMethod.GET, "/api/rest/tmdb/show/popular/random").permitAll()
             .antMatchers("/api/authenticate").permitAll()
