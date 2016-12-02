@@ -13,7 +13,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonPropertyOrder({
     "id",
     "backdrops",
-    "posters"
+    "posters",
+    "profiles",
+    "stills"
 })
 public class Images {
 
@@ -23,6 +25,10 @@ public class Images {
     private List<Backdrop> backdrops;
     @JsonProperty("posters")
     private List<Poster> posters;
+    @JsonProperty("profiles")
+    private List<Profile> profiles;
+    @JsonProperty("stills")
+    private List<Still> stills;
 
     /**
      * 
@@ -34,7 +40,7 @@ public class Images {
         return id;
     }
 
-    /**
+	/**
      * 
      * @param id
      *     The id
@@ -83,6 +89,46 @@ public class Images {
     public void setPosters(List<Poster> posters) {
         this.posters = posters;
     }
+    
+    /**
+     * 
+     * @return
+     *     The profiles
+     */
+    @JsonProperty("profiles")
+    public List<Profile> getProfiles() {
+        return profiles;
+    }
+
+    /**
+     * 
+     * @param profiles
+     *     The profiles
+     */
+    @JsonProperty("profiles")
+    public void setProfiles(List<Profile> profiles) {
+        this.profiles = profiles;
+    }
+    
+    /**
+     * 
+     * @return
+     *     The stills
+     */
+    @JsonProperty("stills")
+    public List<Still> getStills() {
+		return stills;
+	}
+
+    /**
+     * 
+     * @param stills
+     *     The stills
+     */
+    @JsonProperty("stills")
+	public void setStills(List<Still> stills) {
+		this.stills = stills;
+	}
 
     @Override
     public String toString() {

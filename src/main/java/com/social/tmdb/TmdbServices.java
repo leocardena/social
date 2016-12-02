@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import com.social.tmdb.services.ConfigurationTmdbAPIService;
 import com.social.tmdb.services.MovieTmdbAPIService;
+import com.social.tmdb.services.PersonTmdbAPIService;
 import com.social.tmdb.services.ShowTmdbAPIService;
 import retrofit2.Retrofit;
 
@@ -29,6 +30,11 @@ public class TmdbServices {
 	@Bean
 	public ShowTmdbAPIService getShowTmdbAPIService() {
 		return retrofit.create(ShowTmdbAPIService.class);
+	}
+	
+	@Bean
+	public PersonTmdbAPIService getPersonTmdbAPIService() {
+		return retrofit.create(PersonTmdbAPIService.class);
 	}
 
 }

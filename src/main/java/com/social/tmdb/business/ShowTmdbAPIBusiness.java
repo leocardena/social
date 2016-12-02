@@ -13,10 +13,10 @@ import com.social.tmdb.model.Images;
 import com.social.tmdb.model.Poster;
 import com.social.tmdb.model.Show;
 import com.social.tmdb.model.ShowPagination;
+import com.social.tmdb.model.Still;
 import com.social.tmdb.services.ShowTmdbAPIService;
 import com.social.tmdb.util.ConfigurationTmdbAPIConnection;
 import com.social.tmdb.util.TmdbImagesUtil;
-
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -67,6 +67,40 @@ public class ShowTmdbAPIBusiness {
 			map.put("backdrop", backdrop);
 			map.put("poster", poster);
 			return map;
+		} catch (IOException e) {
+			throw new RetrofitException("Erro ao executar request através da API");
+		}
+	}
+	
+	public Poster getSeasonImages(String showId, String posterSize, String language, String seasonNumber) {
+		Call<Images> call = showTmdbAPIService.getSeasonImages(showId, seasonNumber, language, "pt,en,null");
+		Call<Images> callClone = call.clone();
+		Response<Images> resp;
+		try {
+			resp = callClone.execute();
+			if (!resp.isSuccessful())
+				throw new RetrofitException("A resposta não foi bem sucedida");
+			Images images = resp.body();
+			Poster poster = TmdbImagesUtil.getFirstPosterFromImages(images);
+			poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
+			return poster;
+		} catch (IOException e) {
+			throw new RetrofitException("Erro ao executar request através da API");
+		}
+	}
+	
+	public Still getEpisodeImages(String showId, String stillSize, String episodeNumber, String seasonNumber) {
+		Call<Images> call = showTmdbAPIService.getEpisodeImages(showId, episodeNumber, seasonNumber);
+		Call<Images> callClone = call.clone();
+		Response<Images> resp;
+		try {
+			resp = callClone.execute();
+			if (!resp.isSuccessful())
+				throw new RetrofitException("A resposta não foi bem sucedida");
+			Images images = resp.body();
+			Still still = TmdbImagesUtil.getFirstStillFromImages(images);
+			still.setFilePath(config.getImageURL(stillSize, still.getFilePath()));
+			return still;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}
