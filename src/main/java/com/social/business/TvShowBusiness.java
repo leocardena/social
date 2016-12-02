@@ -9,7 +9,17 @@ import org.springframework.stereotype.Service;
 
 import com.mysema.query.SearchResults;
 import com.mysema.query.jpa.impl.JPAQuery;
+import com.social.domain.Episode;
+import com.social.domain.Lists;
+import com.social.domain.Movie;
+import com.social.domain.Profile;
+import com.social.domain.QEpisode;
+import com.social.domain.QLists;
+import com.social.domain.QMovie;
+import com.social.domain.QProfile;
+import com.social.domain.QSeason;
 import com.social.domain.QTvShow;
+import com.social.domain.Season;
 import com.social.domain.TvShow;
 import com.social.repository.MovieRepository;
 import com.social.repository.TitleRepository;
@@ -29,33 +39,83 @@ public class TvShowBusiness {
 	
 	public SearchResults<TvShow> getAllTvShowById(String name){
 		List<TvShow> listaTvShow = tvShowRepository.findAll();
-		TvShow tvShow = tvShowRepository.findOneByName(name);
+		TvShow tvShowName = tvShowRepository.findOneByName(name);
+		TvShow tvShowId = tvShowRepository.findOne(Long.valueOf(1));
 		List<TvShow> lista = tvShowRepository.encontrarAlgum();
 		
-		System.out.println("size findAll() >>>> "+listaTvShow.size());
-		System.out.println("name findAll() >>>> "+listaTvShow.get(0).getName());
-		System.out.println("imdb findOneByName() >>>> "+tvShow.getImdb());
-		System.out.println("size season findOneByName() >>>> "+tvShow.getSeason().size());
-		
-		System.out.println("size encontrarAlgum() >>>> "+lista.size());
-		System.out.println("name encontrarAlgum() >>>> "+lista.get(0).getName());
-		System.out.println("size season encontrarAlgum() >>>> "+lista.get(0).getSeason().size());
+//		System.out.println("size findAll() >>>> "+listaTvShow.size());
+//		System.out.println("name findAll() >>>> "+listaTvShow.get(0).getName());
+//		System.out.println("imdb findOneByName() >>>> "+tvShowName.getImdb());
+//		System.out.println("size season findOneByName() >>>> "+tvShowName.getSeason().size());
+//		System.out.println("name findOne() >>>> "+tvShowId.getName());
+//		System.out.println("name findOne() >>>> "+tvShowId.getSeason().size());
+//		
+//		System.out.println("size INNER JOIN >>>> "+lista.size());
+//		System.out.println("name INNER JOIN >>>> "+lista.get(0).getName());
+//		System.out.println("name INNER JOIN >>>> "+lista.get(1).getName());
+//		System.out.println("size season INNER JOIN >>>> "+lista.get(0).getSeason().size());
 		
 		/***********************************************************/
 		/*COM O @QUERY NÃO ESTA TRAZENDO NEM A RELAÇÃO COM A SEASON*/
 		/***********************************************************/
-		tvShow.setId((long)1);
+		tvShowName.setId((long)1);
 		JPAQuery query = new JPAQuery(em);
-		SearchResults<TvShow> searchResult = query.from(QTvShow.tvShow)
-				.where(QTvShow.tvShow.id.eq((long) 1))
+		SearchResults<TvShow> searchResultTvShow = query.from(QTvShow.tvShow)
+				.where(QTvShow.tvShow.id.eq(tvShowName.getId()))
 				.listResults(QTvShow.tvShow);
 		
-		List<TvShow> listaDinamica = searchResult.getResults();
+//		SearchResults<Season> searchResultSeason = query.from(QSeason.season)
+//				.where(QSeason.season.tvShow.id.eq(tvShowName.getId()))
+//				.listResults(QSeason.season);
 		
-		System.out.println("size JPAQuery >>>> "+listaDinamica.size());
-		System.out.println("name JPAQuery >>>> "+listaDinamica.get(0).getName());
-		System.out.println("size season JPAQuery >>>> "+listaDinamica.get(0).getSeason().size());
+//		SearchResults<Episode> searchResultsEpisodes = query.from(QEpisode.episode)
+//				.where(QEpisode.episode.id.eq((long)1))
+//				.listResults(QEpisode.episode);
 		
+//		SearchResults<Profile> searchResultsProfile = query.from(QProfile.profile)
+//				.where(QProfile.profile.id.eq((long)1))
+//				.listResults(QProfile.profile);
+		
+//		SearchResults<Lists> searchResultsLists = query.from(QLists.lists)
+//				.where(QLists.lists.id.eq((long)1))
+//				.listResults(QLists.lists);
+		
+		SearchResults<Movie> searchResultsMovie = query.from(QMovie.movie)
+		.where(QMovie.movie.id.eq((long)1))
+		.listResults(QMovie.movie);
+		
+//		List<TvShow> listaDinamicaTvShow = searchResultTvShow.getResults();
+//		List<Season> listaDinamicaSeason = searchResultSeason.getResults();
+//		List<Episode> listaDinamicaEpisode = searchResultsEpisodes.getResults();
+//		List<Profile> listaDinamicaProfile = searchResultsProfile.getResults();
+//		List<Lists> listaDinamicaLists = searchResultsLists.getResults();
+		List<Movie> listaDinamicaMovie = searchResultsMovie.getResults();
+		
+//		System.out.println("TVSHOW size JPAQuery >>>> "+listaDinamicaTvShow.size());
+//		System.out.println("TVSHOW name JPAQuery >>>> "+listaDinamicaTvShow.get(0).getName());
+//		System.out.println("TVSHOW size season JPAQuery >>>> "+listaDinamicaTvShow.get(0).getSeason().size());
+		
+//		System.out.println("SEASON size JPAQuery >>>> "+listaDinamicaSeason.size());
+//		System.out.println("SEASON name JPAQuery >>>> "+listaDinamicaSeason.get(0).getName());
+//		System.out.println("SEASON size episode JPAQuery >>>> "+listaDinamicaSeason.get(0).getEpidodes().size());
+		
+//		System.out.println("EPISODE size JPAQuery >>>> "+listaDinamicaEpisode.size());
+//		System.out.println("EPISODE name JPAQuery >>>> "+listaDinamicaEpisode.get(0).getName());
+//		System.out.println("EPISODE size season JPAQuery >>>> "+listaDinamicaEpisode.get(0).getSeason());
+		
+//		System.out.println("PROFILE size JPAQuery >>>> "+listaDinamicaProfile.size());
+//		System.out.println("PROFILE name JPAQuery >>>> "+listaDinamicaProfile.get(0).getName());
+//		System.out.println("PROFILE email user JPAQuery >>>> "+listaDinamicaProfile.get(0).getUser().getEmail());
+		
+//		System.out.println("LISTS size JPAQuery >>>> "+listaDinamicaLists.size());
+//		System.out.println("LISTS name JPAQuery >>>> "+listaDinamicaLists.get(0).getName());
+//		System.out.println("LISTS size season JPAQuery >>>> "+listaDinamicaLists.get(0).getProfile().getName());
+		
+		System.out.println("MOVIE size JPAQuery >>>> "+listaDinamicaMovie.size());
+		System.out.println("MOVIE name JPAQuery >>>> "+listaDinamicaMovie.get(0).getName());
+		System.out.println("MOVIE id JPAQuery   >>>> "+listaDinamicaMovie.get(0).getId());
+
+	
 		return null;
 	}
 	

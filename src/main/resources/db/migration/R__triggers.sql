@@ -4,7 +4,7 @@ DROP TRIGGER IF EXISTS TGR_SEASON_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_EPISODE_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_MOVIE_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_ACTOR_ANTES_INSERT;
-
+DROP TRIGGER IF EXISTS TGR_PROFILE_ANTES_INSERT;
 
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para o cada Titulo quando este for colocado
@@ -174,4 +174,22 @@ CREATE trigger TGR_EPISODE_ANTES_INSERT BEFORE INSERT ON EPISODE
 						SET NEW.idCommentParent = @idCommentParent;			
 						SET NEW.idRatingParent = 1;
 				END IF;
+	END##
+	
+/*
+ 	Trigger para criar um idCommentParent para o cada Perfil quando este tiver alguém inserido (PROFILE) 
+ */ 
+DELIMITER ##
+CREATE trigger TGR_PROFILE_ANTES_INSERT BEFORE INSERT ON PROFILE
+	FOR EACH ROW
+	BEGIN
+        SET @idCommentParent = (SELECT idCommentParent FROM COMMENTPARENT ORDER BY idCommentParent DESC LIMIT 1) + 1;
+        
+        IF (@idCommentParent IS NULL) THEN
+			INSERT INTO COMMENTPARENT VALUES (1);
+            SET NEW.idCommentParent = 1;	
+		ELSE 
+			INSERT INTO COMMENTPARENT VALUES (@idCommentParent);
+			SET NEW.idCommentParent = @idCommentParent;
+		END IF;
 	END##

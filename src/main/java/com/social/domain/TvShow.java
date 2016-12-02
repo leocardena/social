@@ -26,9 +26,9 @@ public class TvShow extends Title {
 		
 	/*VERIFICAR O MAPPEDBY*/
 //	mappedBy="tvShow",
-//	@OneToMany(targetEntity=Season.class, mappedBy="tvshow", fetch=FetchType.EAGER)
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name = "idtvshow")
+//	@JoinColumn(name = "idtvshow")
+//	@OneToMany(targetEntity=Season.class, mappedBy="tvShow", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="tvShow")
 	private List<Season> season;
 	
     @OneToOne(cascade = CascadeType.ALL)

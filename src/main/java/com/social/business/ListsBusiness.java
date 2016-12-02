@@ -29,7 +29,7 @@ public class ListsBusiness {
 		JPAQuery query = new JPAQuery(em);
 		
 		SearchResults<Lists> searchList = query.from(QLists.lists)
-				.where(QLists.lists.id.eq(profile.getId()))
+				.where(QLists.lists.id.eq((long)2))
 				.listResults(QLists.lists);
 		
 		List<Lists> lista = searchList.getResults();
