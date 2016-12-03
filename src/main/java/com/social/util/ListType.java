@@ -1,5 +1,11 @@
 package com.social.util;
 
+/**
+ * Enum que representa os tipos lista
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum ListType {
 
 	WHATCHLIST("WhatchList"), 

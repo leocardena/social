@@ -1,5 +1,11 @@
 package com.social.tmdb.util;
 
+/**
+ * Enum que representa os tamanhos válidos para o tipo de imagem Logo
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum LogoSizes {
 	
 	W45("w45"),

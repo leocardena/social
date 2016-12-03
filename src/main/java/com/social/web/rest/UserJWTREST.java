@@ -18,31 +18,47 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+/**
+ * Camada REST responsável por expor os serviços do recurso User
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 @RestController
 @RequestMapping(value = APIEndpoint.BASE)
 public class UserJWTREST {
 
-    @Inject
-    private TokenProvider tokenProvider;
+	@Inject
+	private TokenProvider tokenProvider;
 
-    @Inject
-    private AuthenticationManager authenticationManager;
+	@Inject
+	private AuthenticationManager authenticationManager;
 
-    @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> authorize(@Valid @RequestBody LoginVM loginVM, HttpServletResponse response) {
+	/**
+	 * @param loginVM
+	 *            objeto com as credenciais do usuário que serão recebidas no
+	 *            body da request
+	 * @param response
+	 *            response que será enviada ao cliente
+	 * @return o token do usuário
+	 */
+	@PostMapping(value = "/authenticate")
+	public ResponseEntity<?> authorize(@Valid @RequestBody LoginVM loginVM, HttpServletResponse response) {
 
-        UsernamePasswordAuthenticationToken authenticationToken =
-            new UsernamePasswordAuthenticationToken(loginVM.getUsername(), loginVM.getPassword());
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+				loginVM.getUsername(), loginVM.getPassword());
 
-        try {
-            Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
-            String jwt = tokenProvider.createToken(authentication, rememberMe);
-            response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
-            return ResponseEntity.ok(new JWTToken(jwt));
-        } catch (AuthenticationException exception) {
-            return new ResponseEntity<>(Collections.singletonMap("AuthenticationException",exception.getLocalizedMessage()), HttpStatus.UNAUTHORIZED);
-        }
-    }
+		try {
+			Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+			boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
+			String jwt = tokenProvider.createToken(authentication, rememberMe);
+			response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
+			return ResponseEntity.ok(new JWTToken(jwt));
+		} catch (AuthenticationException exception) {
+			return new ResponseEntity<>(
+					Collections.singletonMap("AuthenticationException", exception.getLocalizedMessage()),
+					HttpStatus.UNAUTHORIZED);
+		}
+	}
 }

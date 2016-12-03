@@ -1,5 +1,11 @@
 package com.social.util;
 
+/**
+ * Enum que representa o estado de uma mensagem
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum MessageStatus {
 	
 	UNREAD("Unread"), 

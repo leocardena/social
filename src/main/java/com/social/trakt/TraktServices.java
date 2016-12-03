@@ -13,6 +13,14 @@ import com.social.trakt.services.SeasonTraktAPIService;
 import com.social.trakt.services.ShowTraktAPIService;
 import retrofit2.Retrofit;
 
+/**
+ * Classe com estereótipo componente que será injetada nas classes da camada
+ * business.
+ * Utilizada para disponilizar todos os serviços da API do Trakt.tv
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 @Component
 public class TraktServices {
 
@@ -49,11 +57,10 @@ public class TraktServices {
 	public ShowTraktAPIService getShowAPIService() {
 		return retrofit.create(ShowTraktAPIService.class);
 	}
-	
+
 	@Bean
 	public SearchTraktAPIService getSearchAPIService() {
 		return retrofit.create(SearchTraktAPIService.class);
 	}
-	
-	
+
 }

@@ -1,5 +1,11 @@
 package com.social.tmdb.util;
 
+/**
+ * Enum que representa os tamanhos válidos para o tipo de imagem Backdrop
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum BackdropSizes {
 
 	W300("w300"), 

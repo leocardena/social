@@ -9,6 +9,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
+/**
+ * Classe que configura globalmente a serialização de datas
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public class CustomDateTimeSerializer extends StdSerializer<DateTime> {
 
 	private static final long serialVersionUID = 3709989108010238748L;

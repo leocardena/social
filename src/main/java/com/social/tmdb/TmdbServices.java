@@ -10,6 +10,14 @@ import com.social.tmdb.services.PersonTmdbAPIService;
 import com.social.tmdb.services.ShowTmdbAPIService;
 import retrofit2.Retrofit;
 
+/**
+ * Classe com estereótipo componente que será injetada nas classes da camada
+ * business. 
+ * Utilizada para disponilizar todos os serviços da API do TMDB
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 @Component
 public class TmdbServices {
 

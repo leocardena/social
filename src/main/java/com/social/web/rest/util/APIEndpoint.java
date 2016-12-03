@@ -1,5 +1,11 @@
 package com.social.web.rest.util;
 
+/**
+ * Interface responsável por guardar as urls utilizadas nos serviços da aplicação
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public interface APIEndpoint {
 	
 	public final String BASE = "/api";

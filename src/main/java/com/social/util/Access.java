@@ -1,5 +1,11 @@
 package com.social.util;
 
+/**
+ * Enum que representa os tipos de acesso de uma lista
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum Access {
 
 	PRIVATE("Private"), PUBLIC("Public");

@@ -19,6 +19,16 @@
 					language : '@language',
 	        		page: '@page'
 				}
+			},
+			'getMovieImage' : {
+				method: 'GET',
+				url: TmdbBase.movie + '/:movieId/images',
+				params: {
+					language : '@language',
+					posterSize : '@posterSize',
+					backdropSize : '@backdropSize',
+					movieId: '@movieId'
+				}
 			}
 		} );
 		

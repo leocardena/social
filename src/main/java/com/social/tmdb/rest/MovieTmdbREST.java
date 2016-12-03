@@ -29,7 +29,7 @@ public class MovieTmdbREST {
 	}
 
 	@GetMapping(value = "/{movieId}/images")
-	public ResponseEntity<?> getPopularMovieImages(@RequestParam(value = "language", required = false) String language,
+	public ResponseEntity<?> getMovieImages(@RequestParam(value = "language", required = false) String language,
 			@RequestParam(value = "posterSize", required = true) String posterSize,
 			@RequestParam(value = "backdropSize", required = true) String backdropSize,
 			@PathVariable(value = "movieId") String movieId) {

@@ -13,7 +13,7 @@ import com.social.tmdb.util.ApiTmdbEndpoint;
 
 @RestController
 @RequestMapping(value = ApiTmdbEndpoint.PERSON)
-public class ProfileTmdbREST {
+public class PersonTmdbREST {
 
 	@Autowired
 	private PersonTmdbAPIBusiness business;

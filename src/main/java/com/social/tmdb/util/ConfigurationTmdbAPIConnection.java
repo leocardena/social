@@ -12,6 +12,11 @@ import com.social.util.ContainsEnum;
 import retrofit2.Call;
 import retrofit2.Response;
 
+/**
+ * Classe reponsável por obter a configuração das imagens e montar suas URLs 
+ * @author Cardena
+ *
+ */
 @Service
 public class ConfigurationTmdbAPIConnection {
 
@@ -24,7 +29,10 @@ public class ConfigurationTmdbAPIConnection {
 		this.tmdbConfigurationService = tmdbConfigurationService;
 		this.tmdbConfiguration = this.getConfigurationTmdb();
 	}
-
+	
+	/**
+	 * @return as informações de configuração para a requisição das imagens
+	 */
 	private TmdbConfiguration getConfigurationTmdb() {
 		Call<TmdbConfiguration> call = tmdbConfigurationService.getTmdbConfiguration();
 		Call<TmdbConfiguration> callClone = call.clone();
@@ -45,7 +53,12 @@ public class ConfigurationTmdbAPIConnection {
 		}
 
 	}
-
+	
+	/**
+	 * @param size tamanho da imagem a ser requisitada
+	 * @param path o path da imagem de será montada a URL
+	 * @return a URL da imagem montada
+	 */
 	public String getImageURL(String size, String path) {
 		size = size.toUpperCase();
 		if (ContainsEnum.contains(StillSizes.class, size) || ContainsEnum.contains(LogoSizes.class, size)

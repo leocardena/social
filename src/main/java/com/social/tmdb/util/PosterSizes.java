@@ -1,5 +1,11 @@
 package com.social.tmdb.util;
 
+/**
+ * Enum que representa os tamanhos válidos para o tipo de imagem Poster
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum PosterSizes {
 	
     W92("w92"),

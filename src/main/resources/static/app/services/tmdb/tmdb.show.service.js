@@ -17,9 +17,40 @@
 				params : {
 					size : '@size',
 					language : '@language',
-	        		page: '@page'
+	        		page : '@page'
+				}
+			},
+			'getShowImage' : {
+				method: 'GET',
+				url: TmdbBase.movie + '/:showId/images',
+				params: {
+					language : '@language',
+					posterSize : '@posterSize',
+					backdropSize : '@backdropSize',
+					showId : '@showId'
+				}
+			},
+			'getSeasonImage' : {
+				method: 'GET',
+				url: TmdbBase.movie + '/:showId/season/:seasonNumber/images',
+				params: {
+					language : '@language',
+					posterSize : '@posterSize',
+					showId : '@showId',
+					seasonNumber : '@seasonNumber'
+				}
+			},
+			'getEpisodeImage' : {
+				method: 'GET',
+				url: TmdbBase.movie + '/:showId/season/:seasonNumber/episode/:episodeNumber/images',
+				params: {
+					stillSize : '@stillSize',
+					showId : '@showId',
+					seasonNumber : '@seasonNumber',
+					episodeNumber : '@episodeNumber'
 				}
 			}
+			
 		} );
 		
 		return service;

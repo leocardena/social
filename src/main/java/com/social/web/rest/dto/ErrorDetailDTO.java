@@ -1,5 +1,11 @@
 package com.social.web.rest.dto;
 
+/**
+ * Objeto para retornar como body na response ao ser gerado um erro
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public class ErrorDetailDTO {
 	
 	private String titulo;

@@ -1,5 +1,11 @@
 package com.social.util;
 
+/**
+ * Enum que representa os estados de um episódio de uma série
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum EpisodeStatus {
 	
 	UNWATCHED("Unwatched"), 
