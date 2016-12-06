@@ -3,13 +3,19 @@
 	<div class="col-md-2">
 		<h2>Pesquisa</h2>
 		<div class="row">
-			<label></label>
+			<label>Página atual: {{vm.page}}</label>
 		</div>
-	
+		<div class="row">
+			<label> Total de Resultados: {{vm.totalResults}} </label>
+		</div>
+		<div class="row">
+			<label>Total de Páginas: {{vm.totalPages}}</label>
+		</div>
 	</div>
 	
 	<div class="col-md-offset-2" ng-repeat="result in vm.results">
 		<label style="color:white;">{{result.movie.title}}</label>
+		<img ng-src="{{result.movie.images.poster.file_path}}"/>
 	</div>
 
 </div>

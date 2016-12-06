@@ -13,6 +13,12 @@
 			'getSearch' : {
 				method: 'GET',
 				url: TraktBase.search + '/:type',
+				transformResponse: function(data, headers){
+		            var response = {}
+		            response.data = angular.fromJson(data);
+		            response.headers = headers();
+		            return response;
+		        },
 				params : {
 					limit : '@limit',
 					extended : '@extended',
@@ -21,8 +27,7 @@
 	        		languages : '@languages',
 	        		type : '@type',
 	        		fields : '@fields'
-				},
-				isArray : true
+				}
 			}
 		} );
 		

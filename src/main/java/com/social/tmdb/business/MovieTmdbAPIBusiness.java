@@ -60,8 +60,8 @@ public class MovieTmdbAPIBusiness {
 			Images images = resp.body();
 			Backdrop backdrop = TmdbImagesUtil.getFirstBackDropFromImages(images);
 			Poster poster = TmdbImagesUtil.getFirstPosterFromImages(images);
-			backdrop.setFilePath(config.getImageURL(backdropSize, backdrop.getFilePath()));
-			poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
+			if (backdrop.getFilePath() != null) backdrop.setFilePath(config.getImageURL(backdropSize, backdrop.getFilePath()));
+			if (poster.getFilePath() != null) poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("backdrop", backdrop);
 			map.put("poster", poster);

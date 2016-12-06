@@ -37,6 +37,10 @@
         		query : $stateParams.query,
         		type : $stateParams.type,
         		fields : 'translations,title'
+        	}).$promise.then(function(data){
+        		return data;
+        	}).catch(function () {
+        		return defaultBackground;
         	});
         }
     }
