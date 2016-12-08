@@ -1,0 +1,70 @@
+/*INICIO - Screen HomePublic */
+.firstBackground {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 0;
+	height: 92.5vh;
+	background-image: url("/content/images/HomeImage.png");
+	.firstBackgroundText {
+		margin-top: 10%;
+		.btnLoginHome {
+			background-color: $red-secondary;
+			border-color: $red-secondary;
+		}
+	}
+}
+
+.firstBackground h1 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-size: 50px;
+	color: $white;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-shadow: -2px 2px 1px $black;
+	letter-spacing: -1px;
+	border-radius: 1px;
+}
+
+.secondBackground {
+	width: 100%;
+	max-width: 100%;
+	margin-top: 0;
+	height: 100vh;
+	background-image:
+		url("https://3.bp.blogspot.com/-OxsdruWJI3Y/VsBkXzSd65I/AAAAAAABoPI/G52d1LUYq28/s1600/papel-de-parede-deadpool-filme.jpg");
+	.secondBackgroundText {
+		margin-top: 10%;
+	}
+}
+
+.secondBackground h1 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	font-size: 30px;
+	color: $white;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-shadow: -2px 2px 1px $black;
+	letter-spacing: -1px;
+	border-radius: 1px;
+	background-color: $red-primary;
+	margin-bottom: 8px;
+}
+
+.thumbnailBody {
+	padding: 0;
+	margin-top: 0;
+	.thumbnail {
+		background-color: $black;
+		border: 0;
+		border-radius: 0;
+		.thumbnailText {
+			color: $white;
+		}
+	}
+}
+
+.thumbnailBody:hover {
+	background-color: $red-primary;
+	border-radius: 5rem;
+}
+
