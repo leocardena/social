@@ -16,16 +16,17 @@
         vm.totalResults = searchPrepService.headers['x-pagination-item-count'];
         vm.totalPages = searchPrepService.headers['x-pagination-page-count'];
         vm.getImage = _getImage;
+        vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
         
         loadImages();
         
         function loadImages() {
         	for (var i = 0, len =  vm.results.length; i < len; i++) {
-        		  vm.results[i][vm.results[i].type].images = 
-        			  _getImage(vm.results[i].type,  vm.results[i][vm.results[i].type].ids.tmdb);
+        		var tmdbId = vm.results[i][vm.results[i].type].ids.tmdb;
+        		vm.results[i][vm.results[i].type].images = tmdbId ? 
+        			_getImage(vm.results[i].type,  tmdbId) : vm.imageNotAvailable;
         	}
         }
-        
         
         function _getImage(type, tmdb) {
         	switch (type) {
@@ -37,7 +38,6 @@
         				language: 'pt'
         				});
         		case 'show':
-        			console.log(type, tmdb);
         			return TmdbShowService.getShowImage({
         				showId: tmdb,
         				posterSize: 'w300',

@@ -25,6 +25,10 @@ General CSS
 	}
 }
 
+.panel {
+    border: 0;
+}
+
 /* INICIO -  override the default wizard CSS */
 .steps-indicator {
 	margin-top: 1rem;

@@ -61,8 +61,8 @@ public class ShowTmdbAPIBusiness {
 			Images images = resp.body();
 			Backdrop backdrop = TmdbImagesUtil.getFirstBackDropFromImages(images);
 			Poster poster = TmdbImagesUtil.getFirstPosterFromImages(images);
-			backdrop.setFilePath(config.getImageURL(backdropSize, backdrop.getFilePath()));
-			poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
+			if (backdrop.getFilePath() != null) backdrop.setFilePath(config.getImageURL(backdropSize, backdrop.getFilePath()));
+			if (poster.getHeight() != null) poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("backdrop", backdrop);
 			map.put("poster", poster);
@@ -82,7 +82,7 @@ public class ShowTmdbAPIBusiness {
 				throw new RetrofitException("A resposta não foi bem sucedida");
 			Images images = resp.body();
 			Poster poster = TmdbImagesUtil.getFirstPosterFromImages(images);
-			poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
+			if (poster.getFilePath() != null) poster.setFilePath(config.getImageURL(posterSize, poster.getFilePath()));
 			return poster;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
@@ -99,7 +99,7 @@ public class ShowTmdbAPIBusiness {
 				throw new RetrofitException("A resposta não foi bem sucedida");
 			Images images = resp.body();
 			Still still = TmdbImagesUtil.getFirstStillFromImages(images);
-			still.setFilePath(config.getImageURL(stillSize, still.getFilePath()));
+			if (still.getFilePath() != null) still.setFilePath(config.getImageURL(stillSize, still.getFilePath()));
 			return still;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");

@@ -14,8 +14,17 @@
 	</div>
 	
 	<div class="col-md-offset-2" ng-repeat="result in vm.results">
-		<label style="color:white;">{{result.movie.title}}</label>
-		<img ng-src="{{result.movie.images.poster.file_path}}"/>
+		
+		<div class="panel panel-default">
+			<div class="panel-body col-md-2">
+		     	<img ng-src="{{result[result.type].images.poster.file_path ? 
+		             result[result.type].images.poster.file_path : 
+		             result[result.type].images.file_path ?  
+		             result[result.type].images.file_path : vm.imageNotAvailable}}" alt="" 
+		             class="img-responsive center-block"/>
+		   	</div>
+		</div>
+		
 	</div>
 
 </div>

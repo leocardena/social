@@ -31,7 +31,7 @@ public class PersonTmdbAPIBusiness {
 				throw new RetrofitException("A resposta não foi bem sucedida");
 			Images images = resp.body();
 			Profile profile = TmdbImagesUtil.getFirstProfileFromImages(images);
-			profile.setFilePath(config.getImageURL(profileSize, profile.getFilePath()));
+			if (profile.getFilePath() != null ) profile.setFilePath(config.getImageURL(profileSize, profile.getFilePath()));
 			return profile;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
