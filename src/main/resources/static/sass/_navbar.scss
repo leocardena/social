@@ -11,12 +11,12 @@
 	.navbar-header{
 		.navbar-brand {
 			margin-left: 3rem;
-			.navbar-logo {
-				max-width: 40px;
-				margin-top: -9px;
-			}
 		}
 	}
+}
+
+.navbar-logo {
+	
 }
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: $white;
