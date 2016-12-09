@@ -11,7 +11,7 @@
         $stateProvider
             .state('search', {
                 parent: 'social',
-                url: '/search/{type}?query',
+                url: '/search/{type}?page?query',
                 data: {
                     authorities: [],
                     pageTitle: 'Resultados da Pesquisa'
@@ -33,14 +33,14 @@
         /*@ngInject*/
         function searchPrepService (TraktSearchService, $stateParams) {
         	return TraktSearchService.getSearch({
-        		limit : 10,
+        		limit : 5,
+        		page : $stateParams.page,
         		query : $stateParams.query,
         		type : $stateParams.type,
         		fields : 'translations,title'
         	}).$promise.then(function(data){
         		return data;
         	}).catch(function () {
-        		return defaultBackground;
         	});
         }
     }

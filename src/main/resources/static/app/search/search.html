@@ -18,13 +18,16 @@
 		<div class="panel panel-default">
 			<div class="panel-body col-md-2">
 		     	<img ng-src="{{result[result.type].images.poster.file_path ? 
-		             result[result.type].images.poster.file_path : 
-		             result[result.type].images.file_path ?  
-		             result[result.type].images.file_path : vm.imageNotAvailable}}" alt="" 
+		             result[result.type].images.poster.file_path : vm.imageNotAvailable}}" alt="" 
 		             class="img-responsive center-block"/>
 		   	</div>
 		</div>
 		
 	</div>
-
+	
+	<ul uib-pagination total-items="vm.totalResults" ng-model="vm.page" max-size="vm.maxSize"
+		 	class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"
+		 	first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"
+		 	ng-change="vm.paginationChange(vm.page)"></ul>
+		 	
 </div>
