@@ -6,19 +6,23 @@
         .controller('SearchController', SearchController);
 
     SearchController.$inject = ['TraktSearchService', 'searchPrepService', 'TmdbMovieService',
-                                'TmdbPersonService', 'TmdbShowService', '$stateParams'];
+                                'TmdbPersonService', 'TmdbShowService', '$stateParams', '$state',
+                                'SearchTextService'];
 
     function SearchController (TraktSearchService, searchPrepService, TmdbMovieService, 
-    		TmdbPersonService, TmdbShowService, $stateParams) {
+    		TmdbPersonService, TmdbShowService, $stateParams, $state, SearchTextService) {
         var vm = this;
         vm.itemsPerPage = 5;
         vm.results = searchPrepService.data;
         vm.maxSize = 5;
         vm.query = $stateParams.query;
+        vm.searchInput = { text : $stateParams.query };
         vm.type = $stateParams.type;
-        vm.paginationChange = _paginationChange;
         vm.getImage = _getImage;
         vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
+        vm.search = _search;
+        
+        SearchTextService.setText(vm.query);
         
         _loadHeaders(searchPrepService.headers);
         _loadImages();
@@ -62,18 +66,23 @@
         	}
         }
         
-        function _paginationChange (page) {
+        function _search (page, query, type) {
         	TraktSearchService.getSearch({
         		limit : 5,
-        		page : page,
-        		query : vm.query,
-        		type : vm.type,
+        		page :  page ,
+        		query : query,
+        		type : type,
         		fields : 'translations,title'
         	}).$promise.then(function(data){
         		vm.results = data.data;
         		_loadHeaders(data.headers);
         		_loadImages();
-        		return data;
+        		vm.page = page;
+        		vm.query = query;
+        		vm.type = type;
+        		SearchTextService.setText(vm.query);
+        		$state.go('search', {type : type, page : 
+        			page, query : query}, {notify : false}); 
         	});
         }
         

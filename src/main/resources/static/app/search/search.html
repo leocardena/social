@@ -1,33 +1,44 @@
-<div>
+<div class="container-fluid">
 
 	<div class="col-md-2">
-		<h2>Pesquisa</h2>
-		<div class="row">
-			<label>Página atual: {{vm.page}}</label>
-		</div>
-		<div class="row">
-			<label> Total de Resultados: {{vm.totalResults}} </label>
-		</div>
-		<div class="row">
-			<label>Total de Páginas: {{vm.totalPages}}</label>
-		</div>
-	</div>
 	
-	<div class="col-md-offset-2" ng-repeat="result in vm.results">
-		
-		<div class="panel panel-default">
-			<div class="panel-body col-md-2">
-		     	<img ng-src="{{result[result.type].images.poster.file_path ? 
-		             result[result.type].images.poster.file_path : vm.imageNotAvailable}}" alt="" 
-		             class="img-responsive center-block"/>
-		   	</div>
+		<div class="row">
+			<h2 class="control-label">Pesquisa</h2>
+		</div>
+		<div class="row">
+			<label class="control-label">Encontramos {{vm.totalResults}} resultados para "{{vm.query}}".</label>
+		</div>
+		<div class="row">
+			<label class="control-label">Você está visualizando a página {{vm.page}} de {{vm.totalPages}}.</label>
+		</div>
+		<div class="row">
+			<form class="form-horizontal" role="form" novalidate ng-submit="vm.search(1, vm.searchInput.text, vm.type)">
+				<div class="form-group">
+					<label class="control-label">Nova Pesquisa</label>
+					<input type="text" class="form-control" ng-model="vm.searchInput.text">
+				</div>
+			</form>
 		</div>
 		
 	</div>
 	
-	<ul uib-pagination total-items="vm.totalResults" ng-model="vm.page" max-size="vm.maxSize"
-		 	class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"
-		 	first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"
-		 	ng-change="vm.paginationChange(vm.page)"></ul>
+	<div>
+		
+		<div class="" ng-repeat="result in vm.results">
+			<div class="panel panel-default">
+				<div class="panel-body col-md-2">
+			     	<img ng-src="{{result[result.type].images.poster.file_path ? 
+			             result[result.type].images.poster.file_path : vm.imageNotAvailable}}" alt="" 
+			             class="img-responsive center-block"/>
+			   	</div>
+			</div>
+		</div>
+		
+		<ul uib-pagination total-items="vm.totalResults" ng-model="vm.page" max-size="vm.maxSize"
+			 	class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"
+			 	first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"
+			 	ng-change="vm.search(vm.page, vm.query, vm.type)"></ul>
+		
+	</div>
 		 	
 </div>

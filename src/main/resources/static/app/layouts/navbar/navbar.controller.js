@@ -6,10 +6,10 @@
         .controller('NavbarController', NavbarController);
 
     NavbarController.$inject = ['$state', 'PrincipalService', 'AuthService', 
-                                '$localStorage', '$scope'];
+                                '$localStorage', '$scope', 'SearchTextService'];
 
     function NavbarController ($state, PrincipalService, AuthService, 
-    		$localStorage, $scope) {
+    		$localStorage, $scope, SearchTextService) {
         var vm = this;
         vm.collapseNavbar = _collapseNavbar;
         vm.isAuthenticated = PrincipalService.isAuthenticated;
@@ -27,7 +27,9 @@
 	        {path: 'person', name: 'Pessoas'}
         ];
         
-        vm.search = {type : vm.searchTypes[0].path};
+        vm.search = {};
+        vm.search.type = vm.searchTypes[0].path;
+        vm.search.text = $state.current.name === 'search' && $state.params.query ? $state.params.query : null;
         
         function _collapseNavbar() {
             vm.isNavbarCollapsed = false;
@@ -82,6 +84,14 @@
         	 vm.username = null;
         	 vm.password = null;
         }
+        
+        $scope.$watch(function () { 
+        	return SearchTextService.getText(); 
+        	}, function (newValue, oldValue) {
+        		if (newValue !== oldValue) {
+        			vm.search.text = newValue;
+        		};
+        });
         
     }
 })();
