@@ -10,12 +10,15 @@
 	function SearchTextService() {
         
 		var data = {
-            text : ''
+            text : '',
+            type : ''
         }
 		
 		var services = {
 			getText : _getText,
-			setText : _setText
+			setText : _setText,
+			getType : _getType,
+			setType : _setType
 		}
 		
 		return services;
@@ -26,6 +29,14 @@
 		
         function _setText (text) {
             data.text = text;
+        }
+        
+		function _getType () {
+            return data.type;
+        }
+		
+        function _setType (type) {
+            data.type = type;
         }
 	}
 	

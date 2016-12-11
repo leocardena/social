@@ -18,6 +18,21 @@
 					<input type="text" class="form-control" ng-model="vm.searchInput.text">
 				</div>
 			</form>
+			<div class="row">
+				<label class="control-label" ng-style="{'color':(vm.type === 'movie' ? 'white' : 'none')}"
+					ng-click="vm.type != 'movie' ? vm.search(vm.page, vm.searchInput.text ? 
+					vm.searchInput.text : vm.query, 'movie') : null">Filmes</label>
+			</div>
+			<div class="row">
+				<label class="control-label" ng-style="{'color':(vm.type === 'show' ? 'white' :'none')}"
+					ng-click="vm.type != 'show' ? vm.search(vm.page, vm.searchInput.text ? 
+					vm.searchInput.text : vm.query, 'show') : null">Series</label>
+			</div>
+			<div class="row">
+				<label class="control-label" ng-style="{'color':(vm.type === 'person' ? 'white' : 'none')}"
+					ng-click="vm.type != 'person' ? vm.search(vm.page, vm.searchInput.text ? 
+					vm.searchInput.text : vm.query, 'person') : null">Pessoas</label>
+			</div>
 		</div>
 		
 	</div>
@@ -37,7 +52,7 @@
 		<ul uib-pagination total-items="vm.totalResults" ng-model="vm.page" max-size="vm.maxSize"
 			 	class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"
 			 	first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"
-			 	ng-change="vm.search(vm.page, vm.query, vm.type)"></ul>
+			 	ng-change="vm.changePage(vm.page, vm.query, vm.type, vm.searchInput.text)"></ul>
 		
 	</div>
 		 	

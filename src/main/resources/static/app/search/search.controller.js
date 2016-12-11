@@ -14,6 +14,7 @@
         var vm = this;
         vm.itemsPerPage = 5;
         vm.results = searchPrepService.data;
+        vm.changePage = _changePage;
         vm.maxSize = 5;
         vm.query = $stateParams.query;
         vm.searchInput = { text : $stateParams.query };
@@ -23,6 +24,7 @@
         vm.search = _search;
         
         SearchTextService.setText(vm.query);
+		SearchTextService.setType(vm.type);
         
         _loadHeaders(searchPrepService.headers);
         _loadImages();
@@ -81,9 +83,15 @@
         		vm.query = query;
         		vm.type = type;
         		SearchTextService.setText(vm.query);
+        		SearchTextService.setType(vm.type);
         		$state.go('search', {type : type, page : 
         			page, query : query}, {notify : false}); 
         	});
+        }
+        
+        function _changePage( page, query, type, inputText ) {
+        	if (query != inputText) vm.searchInput.text = query;
+        	_search(page, query, type);
         }
         
         function _loadHeaders (headers) {

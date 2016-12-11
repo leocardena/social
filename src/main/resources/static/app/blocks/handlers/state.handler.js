@@ -21,7 +21,10 @@
                 $rootScope.toStateParams = toStateParams;
                 $rootScope.fromState = fromState;
                 
-                if (fromState.name === 'search') SearchTextService.setText(null);
+                if (fromState.name === 'search') {
+                	SearchTextService.setText(null); 
+                	SearchTextService.setType(null);
+                }
                 
                 // Redirect to a state with an external URL (http://stackoverflow.com/a/30221248/1098564)
                 if (toState.external) {

@@ -28,8 +28,10 @@
         ];
         
         vm.search = {};
-        vm.search.type = vm.searchTypes[0].path;
-        vm.search.text = $state.current.name === 'search' && $state.params.query ? $state.params.query : null;
+        vm.search.type = $state.current.name === 'search' && $state.params.type ? 
+        		$state.params.type : vm.searchTypes[0].path;
+        vm.search.text = $state.current.name === 'search' && $state.params.query ? 
+        		$state.params.query : null;
         
         function _collapseNavbar() {
             vm.isNavbarCollapsed = false;
@@ -92,6 +94,15 @@
         			vm.search.text = newValue;
         		};
         });
+        
+        $scope.$watch(function () { 
+        	return SearchTextService.getType(); 
+        	}, function (newValue, oldValue) {
+        		if (newValue !== oldValue) {
+        			vm.search.type = newValue;
+        		};
+        });
+        
         
     }
 })();
