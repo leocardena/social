@@ -24,7 +24,8 @@
         vm.searchTypes = [
 	        {path: 'movie', name: 'Filmes'},
 	        {path: 'show', name: 'Séries'},
-	        {path: 'person', name: 'Pessoas'}
+	        {path: 'person', name: 'Pessoas'},
+	        {path: 'all', name: 'Todos'}
         ];
         
         vm.search = {};
@@ -98,7 +99,7 @@
         $scope.$watch(function () { 
         	return SearchTextService.getType(); 
         	}, function (newValue, oldValue) {
-        		if (newValue !== oldValue) {
+        		if (newValue !== oldValue && newValue != null) {
         			vm.search.type = newValue;
         		};
         });

@@ -73,7 +73,7 @@
         		limit : 5,
         		page :  page ,
         		query : query,
-        		type : type,
+        		type : type === 'all' ? 'movie,show,person' : type,
         		fields : 'translations,title'
         	}).$promise.then(function(data){
         		vm.results = data.data;

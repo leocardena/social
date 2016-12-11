@@ -56,10 +56,10 @@ public class ShowTraktAPIBusiness {
 		}
 	}
 
-	public Show getTranslationShow(String id, String language) {
-		Call<Show> call = showAPIService.getTranslationShow(id, language);
-		Call<Show> callClone = call.clone();
-		Response<Show> resp;
+	public List<Show> getShowTranslation(String id, String language, String extended) {
+		Call<List<Show>> call = showAPIService.getShowTranslation(id, language, extended);
+		Call<List<Show>> callClone = call.clone();
+		Response<List<Show>> resp;
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())

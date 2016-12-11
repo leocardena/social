@@ -33,6 +33,11 @@
 					ng-click="vm.type != 'person' ? vm.search(vm.page, vm.searchInput.text ? 
 					vm.searchInput.text : vm.query, 'person') : null">Pessoas</label>
 			</div>
+			<div class="row">
+				<label class="control-label" ng-style="{'color':(vm.type === 'all' ? 'white' : 'none')}"
+					ng-click="vm.type != 'all' ? vm.search(vm.page, vm.searchInput.text ? 
+					vm.searchInput.text : vm.query, 'all') : null">Todos</label>
+			</div>
 		</div>
 		
 	</div>

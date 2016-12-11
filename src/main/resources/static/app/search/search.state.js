@@ -36,7 +36,7 @@
         		limit : 5,
         		page : $stateParams.page,
         		query : $stateParams.query,
-        		type : $stateParams.type,
+        		type : $stateParams.type === 'all' ? 'movie,show,person' : $stateParams.type,
         		fields : 'translations,title'
         	}).$promise.then(function(data){
         		return data;

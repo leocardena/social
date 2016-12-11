@@ -8,6 +8,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
+import com.social.tmdb.exception.TMDBImageNotFound;
 import com.social.tmdb.model.Backdrop;
 import com.social.tmdb.model.Images;
 import com.social.tmdb.model.Poster;
@@ -56,6 +57,8 @@ public class ShowTmdbAPIBusiness {
 		Response<Images> resp;
 		try {
 			resp = callClone.execute();
+			if (resp.code() == 404)
+				throw new TMDBImageNotFound("A imagem não foi encontrada na API TMDB");
 			if (!resp.isSuccessful())
 				throw new RetrofitException("A resposta não foi bem sucedida");
 			Images images = resp.body();
@@ -78,6 +81,8 @@ public class ShowTmdbAPIBusiness {
 		Response<Images> resp;
 		try {
 			resp = callClone.execute();
+			if (resp.code() == 404)
+				throw new TMDBImageNotFound("A imagem não foi encontrada na API TMDB");
 			if (!resp.isSuccessful())
 				throw new RetrofitException("A resposta não foi bem sucedida");
 			Images images = resp.body();
@@ -95,6 +100,8 @@ public class ShowTmdbAPIBusiness {
 		Response<Images> resp;
 		try {
 			resp = callClone.execute();
+			if (resp.code() == 404)
+				throw new TMDBImageNotFound("A imagem não foi encontrada na API TMDB");
 			if (!resp.isSuccessful())
 				throw new RetrofitException("A resposta não foi bem sucedida");
 			Images images = resp.body();

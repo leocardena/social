@@ -44,9 +44,9 @@ public class RetrofitBuilderTraktTV {
 						.header("trakt-api-key", TraktAPIKey.KEY.toString())
 						.header("Content-Type", "application/json")
 						.method(original.method(), original.body());
-		
-				Request request = requestBuilder.build();
 				
+				Request request = requestBuilder.build();
+
 				try {
 					return chain.proceed(request);
 				} catch (IOException e) {

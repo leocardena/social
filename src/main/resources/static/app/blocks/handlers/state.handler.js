@@ -21,7 +21,7 @@
                 $rootScope.toStateParams = toStateParams;
                 $rootScope.fromState = fromState;
                 
-                if (fromState.name === 'search') {
+                if (fromState.name === 'search' && toState.name != 'search') {
                 	SearchTextService.setText(null); 
                 	SearchTextService.setType(null);
                 }
