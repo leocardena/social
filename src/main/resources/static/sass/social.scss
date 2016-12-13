@@ -1,50 +1,10 @@
-@import "variables";
-
-/* INICIO - override the default loading bar CSS */
-#loading-bar .bar {
-	background: $white;
-}
-/* FINAL - override the default loading bar CSS */
-
-/* INICIO -  override the default wizard CSS */
-.steps-indicator {
-	margin-top: 1rem;
-	margin-bottom: 2rem;
-	padding: 20px 0 0 0;
-	height: 70px;
-	list-style: none;
-}
-
-.steps-indicator li a {
-	color: $white;
-	size-text: 10px;
-}
-
-.steps-indicator:before {
-	background-color: $white;
-	content: '';
-	position: absolute;
-	height: 0px;
-}
-
-.steps-indicator li.current a:before {
-	background-color: $white;
-/* width: 100px;
-  height: 100px;*/
-}
-
-/* FINAL - override the default wizard CSS */
+@import "util/imports";
 
 html {
 	height: 100%;
 }
-
 body {
 	height: 100%;
 	background-color: $black;
 }
 
-@import "navbar";
-@import "screen-login";
-@import "screen-register";
-@import "screen-home-public";
