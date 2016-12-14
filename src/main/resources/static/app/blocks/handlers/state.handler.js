@@ -46,6 +46,7 @@
                 if (toState.data.pageTitle) {
                     titleKey = toState.data.pageTitle;
                 }
+                
                 $window.document.title = titleKey;
             });
 

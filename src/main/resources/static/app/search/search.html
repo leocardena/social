@@ -45,8 +45,8 @@
 	<div>
 		
 		<div class="" ng-repeat="result in vm.results">
-			<div class="panel panel-default">
-				<div class="panel-body col-md-2">
+			<div class="" ui-sref="title({type : result.type, traktSlug : result[result.type].ids.slug, title : result[result.type]})">
+				<div class="col-md-2">
 			     	<img ng-src="{{result[result.type].images.poster.file_path ? 
 			             result[result.type].images.poster.file_path : vm.imageNotAvailable}}" alt="" 
 			             class="img-responsive center-block"/>
