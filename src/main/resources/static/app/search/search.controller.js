@@ -69,6 +69,12 @@
         }
         
         function _search (page, query, type) {
+    		SearchTextService.setText(null);
+    		SearchTextService.setType(null);
+        	if (!query) {
+        		vm.searchInput.text = vm.query;
+        		query = vm.query;
+        	} 
         	TraktSearchService.getSearch({
         		limit : 5,
         		page :  page ,
@@ -79,13 +85,12 @@
         		vm.results = data.data;
         		_loadHeaders(data.headers);
         		_loadImages();
-        		vm.page = page;
         		vm.query = query;
         		vm.type = type;
         		SearchTextService.setText(vm.query);
         		SearchTextService.setType(vm.type);
-        		$state.go('search', {type : type, page : 
-        			page, query : query}, {notify : false}); 
+        		$state.go('search', {type : vm.type, page : 
+        			vm.page, query : vm.query}, {notify : false}); 
         	});
         }
         

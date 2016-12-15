@@ -27,6 +27,7 @@
 	        {path: 'person', name: 'Pessoas'},
 	        {path: 'all', name: 'Todos'}
         ];
+        vm.submitSearchForm = _submitSearchForm;
         
         vm.search = {};
         vm.search.type = $state.current.name === 'search' && $state.params.type ? 
@@ -86,6 +87,11 @@
         	vm.formLogin.$setPristine();
         	 vm.username = null;
         	 vm.password = null;
+        }
+        
+        function _submitSearchForm(type, query, page) {
+        	if (!query) return;
+        	$state.go('search', {type : type, page : page, query : query});
         }
         
         $scope.$watch(function () { 
