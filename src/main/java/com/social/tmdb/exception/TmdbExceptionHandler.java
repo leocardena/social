@@ -85,4 +85,19 @@ public class TmdbExceptionHandler {
 
 	}
 	
+	@ExceptionHandler(TMDBImageNotFound.class)
+	public ResponseEntity<ErrorDetailDTO> handleTMDBImageNotFound(TMDBImageNotFound exception,
+			HttpServletRequest request) {
+
+		ErrorDetailDTO error = new ErrorDetailDTO();
+
+		error.setStatus(404L);
+		error.setTitulo("Imagem do tipo poster não encontrada.");
+		error.setMensagem(exception.getMessage());
+		error.setTimestamp(System.currentTimeMillis());
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+
+	}
+	
 }

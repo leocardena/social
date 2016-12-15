@@ -12,6 +12,7 @@
 		                        'ngCookies',
 		                        'ngStorage',
 		                        'ui.mask',
-		                        'ui.utils.masks']);
+		                        'ui.utils.masks',
+		                        'pascalprecht.translate']);
 	
 })();

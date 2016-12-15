@@ -5,26 +5,41 @@
         .module('social.search')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['TraktSearchService', 'searchPrepService', 
-                                'TmdbMovieService', 'TmdbPersonService', 'TmdbShowService'];
+    SearchController.$inject = ['TraktSearchService', 'searchPrepService', 'TmdbMovieService',
+                                'TmdbPersonService', 'TmdbShowService', '$stateParams', '$state',
+                                'SearchTextService'];
 
     function SearchController (TraktSearchService, searchPrepService, TmdbMovieService, 
-    		TmdbPersonService, TmdbShowService) {
+    		TmdbPersonService, TmdbShowService, $stateParams, $state, SearchTextService) {
         var vm = this;
+        vm.itemsPerPage = 5;
         vm.results = searchPrepService.data;
-        vm.page = searchPrepService.headers['x-pagination-page'];
-        vm.totalResults = searchPrepService.headers['x-pagination-item-count'];
-        vm.totalPages = searchPrepService.headers['x-pagination-page-count'];
+        vm.changePage = _changePage;
+        vm.maxSize = 5;
+        vm.query = $stateParams.query;
+        vm.searchInput = { text : $stateParams.query };
+        vm.type = $stateParams.type;
         vm.getImage = _getImage;
         vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
+        vm.search = _search;
         
-        loadImages();
+        SearchTextService.setText(vm.query);
+		SearchTextService.setType(vm.type);
         
-        function loadImages() {
+        _loadHeaders(searchPrepService.headers);
+        _loadImages();
+        
+        function _loadImages() {
         	for (var i = 0, len =  vm.results.length; i < len; i++) {
         		var tmdbId = vm.results[i][vm.results[i].type].ids.tmdb;
-        		vm.results[i][vm.results[i].type].images = tmdbId ? 
-        			_getImage(vm.results[i].type,  tmdbId) : vm.imageNotAvailable;
+        		
+        		if (vm.results[i].type === 'person') {
+        			vm.results[i][vm.results[i].type].images = { poster : tmdbId ? 
+                			_getImage(vm.results[i].type,  tmdbId) : vm.imageNotAvailable };
+        		} else {
+            		vm.results[i][vm.results[i].type].images = tmdbId ? 
+                			_getImage(vm.results[i].type,  tmdbId) : vm.imageNotAvailable;
+        		}
         	}
         }
         
@@ -51,6 +66,43 @@
         				});
         			break;
         	}
+        }
+        
+        function _search (page, query, type) {
+    		SearchTextService.setText(null);
+    		SearchTextService.setType(null);
+        	if (!query) {
+        		vm.searchInput.text = vm.query;
+        		query = vm.query;
+        	} 
+        	TraktSearchService.getSearch({
+        		limit : 5,
+        		page :  page ,
+        		query : query,
+        		type : type === 'all' ? 'movie,show,person' : type,
+        		fields : 'translations,title'
+        	}).$promise.then(function(data){
+        		vm.results = data.data;
+        		_loadHeaders(data.headers);
+        		_loadImages();
+        		vm.query = query;
+        		vm.type = type;
+        		SearchTextService.setText(vm.query);
+        		SearchTextService.setType(vm.type);
+        		$state.go('search', {type : vm.type, page : 
+        			vm.page, query : vm.query}, {notify : false}); 
+        	});
+        }
+        
+        function _changePage( page, query, type, inputText ) {
+        	if (query != inputText) vm.searchInput.text = query;
+        	_search(page, query, type);
+        }
+        
+        function _loadHeaders (headers) {
+            vm.page = headers['x-pagination-page'];
+            vm.totalResults = headers['x-pagination-item-count'];
+            vm.totalPages = headers['x-pagination-page-count'];
         }
         
     }

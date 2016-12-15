@@ -32,6 +32,7 @@
 	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
 	<script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
 	<script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+	<script src="bower_components/angular-translate/angular-translate.min.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>
@@ -53,6 +54,7 @@
 	<script src="app/layouts/background/background.module.js"></script>
 	<script src="app/services/trakt/trakt.services.module.js"></script>
 	<script src="app/search/search.module.js"></script>
+	<script src="app/title/title.module.js"></script>
 
 	<!-- Blocks -->
 	<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
@@ -61,11 +63,13 @@
 	<script src="app/blocks/config/loading-bar.config.js"></script>
 	<script src="app/blocks/interceptor/auth-expired.interceptor.js"></script>
 	<script src="app/blocks/interceptor/auth.interceptor.js"></script>
+	<script src="app/blocks/config/translate.config.js"></script>
 	
 	<!-- Layouts -->
 	<script src="app/layouts/error/error.state.js"></script>
 	<script src="app/layouts/navbar/navbar.controller.js"></script>
 	<script src="app/layouts/background/background.directive.js"></script>
+	<script src="app/layouts/navbar/search-text.service.js"></script>
 	
 	<!-- Base URL -->
 	<script src="app/services/region/base/country-base-url.value.js"></script>
@@ -123,6 +127,10 @@
 	<!-- Search -->
 	<script src="app/search/search.state.js"></script>
 	<script src="app/search/search.controller.js"></script>
+	
+	<!-- Title -->
+	<script src="app/title/title.controller.js"></script>
+	<script src="app/title/title.state.js"></script>
 	
 	<footer class="footer" ng-cloak></footer>
 	

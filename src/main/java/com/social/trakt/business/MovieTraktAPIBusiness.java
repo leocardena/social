@@ -56,10 +56,10 @@ public class MovieTraktAPIBusiness {
 		}
 	}
 
-	public Movie getTranslationMovie(String id, String language) {
-		Call<Movie> call = movieAPIService.getTranslationMovie(id, language);
-		Call<Movie> callClone = call.clone();
-		Response<Movie> resp;
+	public List<Movie> getMovieTranslation(String id, String language, String extended) {
+		Call<List<Movie>> call = movieAPIService.getMovieTranslation(id, language, extended);
+		Call<List<Movie>> callClone = call.clone();
+		Response<List<Movie>> resp;
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())

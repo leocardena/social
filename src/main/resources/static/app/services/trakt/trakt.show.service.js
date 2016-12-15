@@ -20,6 +20,16 @@
 				},
 				isArray : true,
 				ignoreLoadingBar: true
+			},
+			'getTranslationShow' : {
+				method: 'GET',
+				url: TraktBase.show + '/:showId/translations/:language',
+				params : {
+					showId : '@showId',
+					language : '@language'
+				},
+				isArray : true,
+				ignoreLoadingBar: true
 			}
 		} );
 		

@@ -1,30 +1,97 @@
-<div>
+<div class="container-fluid">
 
-	<div class="col-md-2">
-		<h2>Pesquisa</h2>
+	<div class="row">
+
+	<div class="col-sm-3 col-md-2">
+	
 		<div class="row">
-			<label>Página atual: {{vm.page}}</label>
+			<h2 class="control-label">Pesquisa</h2>
 		</div>
+		
 		<div class="row">
-			<label> Total de Resultados: {{vm.totalResults}} </label>
+			<label class="control-label">Encontramos {{vm.totalResults}} resultados para "{{vm.query}}".</label>
 		</div>
+		
+		<div class="row" ng-hide="vm.results.length == 0">
+			<label class="control-label">Você está visualizando a página {{vm.page}} de {{vm.totalPages}}.</label>
+		</div>
+		
+		<div class="">
+			<form class="form-horizontal" role="form" novalidate ng-submit="vm.searchInput.text ? 
+				vm.search(1, vm.searchInput.text, vm.type) : null">
+				<div class="form-group">
+					<label class="control-label">Nova Pesquisa</label>
+					<input type="text" class="form-control" ng-model="vm.searchInput.text">
+				</div>
+			</form>
+		</div>
+			
 		<div class="row">
-			<label>Total de Páginas: {{vm.totalPages}}</label>
+			<label class="control-label" ng-style="{'color':(vm.type === 'movie' ? 'white' : 'none')}"
+				ng-click="vm.type != 'movie' ? vm.search(1, vm.searchInput.text, 'movie') : null">Filmes</label>
 		</div>
+			
+		<div class="row">
+			<label class="control-label" ng-style="{'color':(vm.type === 'show' ? 'white' :'none')}"
+				ng-click="vm.type != 'show' ? vm.search(1, vm.searchInput.text, 'show') : null">Series</label>
+		</div>
+			
+		<div class="row">
+			<label class="control-label" ng-style="{'color':(vm.type === 'person' ? 'white' : 'none')}"
+				ng-click="vm.type != 'person' ? vm.search(1, vm.searchInput.text, 'person') : null">Pessoas</label>
+		</div>
+			
+		<div class="row">
+			<label class="control-label" ng-style="{'color':(vm.type === 'all' ? 'white' : 'none')}"
+				ng-click="vm.type != 'all' ? vm.search(1, vm.searchInput.text, 'all') : null">Todos</label>
+		</div>
+			
 	</div>
 	
-	<div class="col-md-offset-2" ng-repeat="result in vm.results">
+	<div class="col-sm-9 col-md-10">
 		
-		<div class="panel panel-default">
-			<div class="panel-body col-md-2">
-		     	<img ng-src="{{result[result.type].images.poster.file_path ? 
-		             result[result.type].images.poster.file_path : 
-		             result[result.type].images.file_path ?  
-		             result[result.type].images.file_path : vm.imageNotAvailable}}" alt="" 
-		             class="img-responsive center-block"/>
-		   	</div>
-		</div>
+		<div id="hasSearchResults" ng-hide="vm.results.length == 0">
+			
+				<div class="row">
+					<div class="" ng-repeat="result in vm.results">
+						<div class="" ui-sref="title({type : result.type, traktSlug : 
+							result[result.type].ids.slug, title : result[result.type]})">
+							<div class="col-md-2">
+						     	<div class="row">
+						     		<img ng-src="{{result[result.type].images.poster.file_path ? 
+						             result[result.type].images.poster.file_path : vm.imageNotAvailable}}" alt="" 
+						             class="img-responsive center-block"/>
+						     	</div>
+						     	<div class="row">
+						     		  <p>{{result.type | translate}}</p>
+						     	</div>
+						   	</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="row">
+				
+					<div class="row col-md-offset-3">
+						<ul uib-pagination total-items="vm.totalResults" ng-model="vm.page" max-size="vm.maxSize"
+							class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"
+							first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"
+							ng-change="vm.changePage(vm.page, vm.query, vm.type, vm.searchInput.text)">
+						</ul>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="row" ng-show="vm.results.length == 0">
+				<h3 class="text-center control-label"> 
+					Não foram encontrados resultados para a sua pesquisa
+				</h3>
+			</div>
 		
 	</div>
-
+	
+	</div>
+		 	
 </div>

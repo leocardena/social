@@ -6,10 +6,10 @@
         .controller('NavbarController', NavbarController);
 
     NavbarController.$inject = ['$state', 'PrincipalService', 'AuthService', 
-                                '$localStorage', '$scope'];
+                                '$localStorage', '$scope', 'SearchTextService'];
 
     function NavbarController ($state, PrincipalService, AuthService, 
-    		$localStorage, $scope) {
+    		$localStorage, $scope, SearchTextService) {
         var vm = this;
         vm.collapseNavbar = _collapseNavbar;
         vm.isAuthenticated = PrincipalService.isAuthenticated;
@@ -24,10 +24,16 @@
         vm.searchTypes = [
 	        {path: 'movie', name: 'Filmes'},
 	        {path: 'show', name: 'Séries'},
-	        {path: 'person', name: 'Pessoas'}
+	        {path: 'person', name: 'Pessoas'},
+	        {path: 'all', name: 'Todos'}
         ];
+        vm.submitSearchForm = _submitSearchForm;
         
-        vm.search = {type : vm.searchTypes[0].path};
+        vm.search = {};
+        vm.search.type = $state.current.name === 'search' && $state.params.type ? 
+        		$state.params.type : vm.searchTypes[0].path;
+        vm.search.text = $state.current.name === 'search' && $state.params.query ? 
+        		$state.params.query : null;
         
         function _collapseNavbar() {
             vm.isNavbarCollapsed = false;
@@ -82,6 +88,28 @@
         	 vm.username = null;
         	 vm.password = null;
         }
+        
+        function _submitSearchForm(type, query, page) {
+        	if (!query) return;
+        	$state.go('search', {type : type, page : page, query : query});
+        }
+        
+        $scope.$watch(function () { 
+        	return SearchTextService.getText(); 
+        	}, function (newValue, oldValue) {
+        		if (newValue !== oldValue) {
+        			vm.search.text = newValue;
+        		};
+        });
+        
+        $scope.$watch(function () { 
+        	return SearchTextService.getType(); 
+        	}, function (newValue, oldValue) {
+        		if (newValue !== oldValue && newValue != null) {
+        			vm.search.type = newValue;
+        		};
+        });
+        
         
     }
 })();

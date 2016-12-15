@@ -20,6 +20,16 @@
 				},
 				isArray : true,
 				ignoreLoadingBar: true
+			},
+			'getTranslationMovie' : {
+				method: 'GET',
+				url: TraktBase.movie + '/:movieId/translations/:language',
+				params : {
+					movieId : '@movieId',
+					language : '@language'
+				},
+				isArray : true,
+				ignoreLoadingBar: true
 			}
 		} );
 		
