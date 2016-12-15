@@ -1,0 +1,15 @@
+.activeAccount{
+	margin-top: 15%;
+	padding: 3rem;
+	padding-bottom: 5rem;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 3rem;
+	.activeTitle{
+		color: $white;
+		text-shadow: -2px 2px 1px #000;
+		letter-spacing: -1px;
+	}
+	.activeMessage{
+		color: $white;
+	}
+}
