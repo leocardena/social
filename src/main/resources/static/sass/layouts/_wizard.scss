@@ -1,0 +1,25 @@
+.steps-indicator {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	padding: 20px 0 0 0;
+	height: 70px; 
+	list-style: none;
+}
+
+.steps-indicator li a {
+	color: $white;
+	size-text: 10px;
+}
+
+.steps-indicator:before {
+	background-color: $white;
+	content: '';
+	position: absolute;
+	height: 0px;
+}
+
+.steps-indicator li.current a:before {
+	background-color: $white;
+/* width: 100px;
+  height: 100px;*/
+}

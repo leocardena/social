@@ -1,5 +1,3 @@
-@import "variables";
-
 .formLogin {
 	margin-top: 20%;
 	margin-left: 5%;
@@ -18,8 +16,8 @@
 		letter-spacing: -1px;
 	}
 	.btnLogin {
-	background-color: $red-primary;
-	border-color: $red-primary;
+		background-color: $red-primary;
+		border-color: $red-primary;
 	}
 	.btnLogin:hover {
 		background-color: $red-secondary;
@@ -31,7 +29,7 @@
 	}
 	.btnLogin:focus {
 		background-color: $red-primary;
-		border-color: $red-primary;
+		border-color: $red-primary; 
 	}
 	.hrefAlterar {
 		text-align: center;
