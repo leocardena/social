@@ -41,7 +41,7 @@ public class AccountBusinessImpl implements AccountBusiness {
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private MailBusinessImpl mailBusiness;
+	private MailBusiness mailBusiness;
 	
 	@Autowired
 	private ProfileRepository profileRepository;
