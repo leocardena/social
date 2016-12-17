@@ -29,8 +29,18 @@
 					controller: 'ActivationController',
 					controllerAs: 'vm'
 				}
+			},
+			resolve : {
+				backgroundPrepService : backgroundPrepService
 			}
-		})
+		});
+		
+		backgroundPrepService.$inject = ['TmdbRandomTitleService'];
+
+        /* @ngInject */
+        function backgroundPrepService (TmdbRandomTitleService) {
+        	return TmdbRandomTitleService.getRandomTitle();
+    	}
 	}
 
 })();
