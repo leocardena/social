@@ -12,7 +12,7 @@
     function SearchController (TraktSearchService, searchPrepService, TmdbMovieService, 
     		TmdbPersonService, TmdbShowService, $stateParams, $state, SearchTextService) {
         var vm = this;
-        vm.itemsPerPage = 5;
+        vm.itemsPerPage = 15;
         vm.results = searchPrepService.data;
         vm.changePage = _changePage;
         vm.maxSize = 5;
@@ -76,7 +76,7 @@
         		query = vm.query;
         	} 
         	TraktSearchService.getSearch({
-        		limit : 15,
+        		limit : vm.itemsPerPage,
         		page :  page ,
         		query : query,
         		type : type === 'all' ? 'movie,show,person' : type,
