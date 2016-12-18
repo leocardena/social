@@ -33,5 +33,8 @@ public interface MovieTraktAPIService {
 	@GET("/calendars/all/movies/{start_date}/{days}")
 	public Call<List<Released>> getAllMovies(@Path("start_date") String start_date, @Path("days") int days,
 			@Query("extended") String extended, @Query("query") String query, @Query("genres") String genres);
+	
+	@GET("/movies/{movieId}/people")
+	public Call<Movie> getAllPeopleForAMovie(@Path("movieId") String movieId, @Query("extended") String extended);
 
 }

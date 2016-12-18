@@ -19,16 +19,21 @@ public class MovieTraktREST {
 
 	@Autowired
 	private MovieTraktAPIBusiness business;
-	
+
 	/**
-	 * Returna os shows populares do trakttv baseados 
-	 * na quantidade de rating e suas notas mais altas
+	 * Returna os shows populares do trakttv baseados na quantidade de rating e
+	 * suas notas mais altas
 	 * 
-	 * @param page a pagina atual
-	 * @param limit a quantidade de resultados por pagina
-	 * @param extended o detalhamento das informacoes
-	 * @param query texto de pesquisa para filtrar os resultados
-	 * @param genres filtra movies populares por genero
+	 * @param page
+	 *            a pagina atual
+	 * @param limit
+	 *            a quantidade de resultados por pagina
+	 * @param extended
+	 *            o detalhamento das informacoes
+	 * @param query
+	 *            texto de pesquisa para filtrar os resultados
+	 * @param genres
+	 *            filtra movies populares por genero
 	 * @return os movies populares
 	 */
 	@GetMapping(value = "/popular")
@@ -41,13 +46,16 @@ public class MovieTraktREST {
 		ResponseAPI<List<Movie>> response = business.getPopularMovies(page, limit, extended, query, genres);
 		return ResponseEntity.ok().headers(response.getHeaders()).body(response.getBody());
 	}
-	
+
 	/**
 	 * Retorna a traducao de um movie
 	 * 
-	 * @param id o id do movie
-	 * @param language a lingua na qual o movie sera traduzido
-	 * @param extended detalhamento das informacoes retornadas
+	 * @param id
+	 *            o id do movie
+	 * @param language
+	 *            a lingua na qual o movie sera traduzido
+	 * @param extended
+	 *            detalhamento das informacoes retornadas
 	 * @return o movie traduzido
 	 */
 	@GetMapping(value = "/{movieId}/translations/{language}")
@@ -55,6 +63,19 @@ public class MovieTraktREST {
 			@PathVariable("language") String language,
 			@RequestParam(value = "extended", required = false) String extended) {
 		return ResponseEntity.ok(business.getMovieTranslation(movieId, language, extended));
+	}
+	
+	/**
+	 * Retorna as pessoas envolvidas em um filme
+	 * 
+	 * @param movieId o id do filme
+	 * @param extented detalhamento das informacoes retornadas
+	 * @return as pessoas envolvidas no filme
+	 */
+	@GetMapping(value = "/{movieId}/people")
+	public ResponseEntity<?> getAllPeopleForAMovie(@PathVariable("movieId") String movieId,
+			@RequestParam(value = "extended", required = false) String extented) {
+		return ResponseEntity.ok(business.getAllPeopleForAMovie(movieId, extented));
 	}
 
 }
