@@ -54,8 +54,8 @@
 			
 				<div class="row">
 					<div class="" ng-repeat="result in vm.results">
-						<div class="" ui-sref="title({type : result.type, traktSlug : 
-							result[result.type].ids.slug, title : result[result.type]})">
+						<div class="" ng-click="vm.exibirTitulo(result.type, result[result.type].ids.slug, 
+							result[result.type])">
 							<div class="col-md-2">
 						     	<div class="row">
 						     		<img ng-src="{{result[result.type].images.poster.file_path ? 

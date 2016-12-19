@@ -22,7 +22,8 @@
         vm.getImage = _getImage;
         vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
         vm.search = _search;
-        
+        vm.exibirTitulo = _exibirTitulo;
+
         SearchTextService.setText(vm.query);
 		SearchTextService.setType(vm.type);
         
@@ -103,6 +104,25 @@
             vm.page = headers['x-pagination-page'];
             vm.totalResults = headers['x-pagination-item-count'];
             vm.totalPages = headers['x-pagination-page-count'];
+        }
+        
+        function _exibirTitulo(type, traktSlug, title) {
+        	switch (type) {
+				case 'movie':
+					$state.go('movie', {
+						'title' : title, 
+						'traktSlug' : traktSlug,
+						'type' : type
+					});
+				case 'show':
+					break;
+				case 'season':
+					break;
+				case 'episode':
+					break;
+				case 'people':
+					break;
+        	}
         }
         
     }
