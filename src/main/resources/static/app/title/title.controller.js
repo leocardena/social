@@ -32,9 +32,6 @@
 			}
 		}
 		
-//		/*provisorio*/
-//		$window.document.title = $stateParams.traktSlug;
-		
 	}
 	
 })();

@@ -57,8 +57,8 @@ public class MovieTraktAPIBusinessImpl implements MovieTraktAPIBusiness {
 	}
 	
 	@Override
-	public List<Movie> getMovieTranslation(String id, String language, String extended) {
-		Call<List<Movie>> call = movieAPIService.getMovieTranslation(id, language, extended);
+	public List<Movie> getMovieTranslation(String id, String language) {
+		Call<List<Movie>> call = movieAPIService.getMovieTranslation(id, language);
 		Call<List<Movie>> callClone = call.clone();
 		Response<List<Movie>> resp;
 		try {
@@ -72,7 +72,7 @@ public class MovieTraktAPIBusinessImpl implements MovieTraktAPIBusiness {
 	}
 	
 	@Override
-	public List<Movie> getRelatedMovies(String id, String page, String limit, String extended) {
+	public ResponseAPI<List<Movie>> getRelatedMovies(String id, String page, String limit, String extended) {
 		Call<List<Movie>> call = movieAPIService.getRelatedMovies(id, page, limit, extended);
 		Call<List<Movie>> callClone = call.clone();
 		Response<List<Movie>> resp;
@@ -80,7 +80,12 @@ public class MovieTraktAPIBusinessImpl implements MovieTraktAPIBusiness {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())
 				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
+			List<Movie> movies = resp.body();
+			HttpHeaders headers = PaginationUtil.getHeadersFromTraktResponse(resp.headers());
+			ResponseAPI<List<Movie>> responseAPI = new ResponseAPI<>();
+			responseAPI.setHeaders(headers);
+			responseAPI.setBody(movies);
+			return responseAPI;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}

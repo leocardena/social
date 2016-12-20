@@ -5,9 +5,9 @@
         .module('social.account.login')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', 'AuthService', 'backgroundPrepService', '$stateParams'];
+    LoginController.$inject = ['$state', 'AuthService', 'backgroundPrepService', '$stateParams'];
 
-    function LoginController ($rootScope, $state, AuthService, backgroundPrepService, $stateParams) {
+    function LoginController ($state, AuthService, backgroundPrepService, $stateParams) {
         var vm = this;
         vm.authenticationError = $stateParams.authenticationError;
         vm.cancel = cancel;
@@ -19,8 +19,8 @@
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
         vm.username = null;
-		$rootScope.background = backgroundPrepService.backdrop_path;
-        
+		$state.current.data.background = backgroundPrepService.backdrop_path;
+		
         function cancel () {
             vm.credentials = {
                 username: null,
@@ -61,7 +61,6 @@
                 vm.authenticationError = false;
                 vm.formError = false;
                 
-                //$rootScope.$emit('authenticationSuccess');
                 $state.go('home');
                 
             }).catch(function () {
