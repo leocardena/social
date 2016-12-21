@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import com.social.domain.Lists;
 import com.social.domain.Profile;
 import com.social.repository.ListsRepository;
@@ -25,7 +24,6 @@ public class ListsBusiness {
 	public List<Lists> getAllListByProfile(Profile profile){
 
 		
-		JPAQuery query = new JPAQuery(em);
 				
 //		
 //		SearchResults<Lists> searchList = query.from(QLists.lists)
