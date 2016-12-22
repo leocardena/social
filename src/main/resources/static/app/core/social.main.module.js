@@ -10,7 +10,8 @@
 		                   'social.user',
 		                   'social.layouts',
 		                   'social.search',
-		                   'social.title'])
+		                   'social.title',
+		                   'social.components'])
 		                   .run(runStateHandler);
 
 		                   runStateHandler.$inject = ['stateHandler'];

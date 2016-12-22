@@ -7,18 +7,25 @@
 			.controller('TitleMovieController', TitleMovieController);
 	
 	TitleMovieController.$inject = ['$stateParams', 'TmdbMovieService', 'movieSummaryPrepService', 'moviePeoplePrepService',
-	                                'movieTranslationsPrepService', 'relatedMoviesPrepService', '$window', '$state'];
+	                                'movieTranslationsPrepService', 'relatedMoviesPrepService', '$window', '$state',
+	                                'TrailerModalService'];
 	
 	/*@ngInject*/
 	function TitleMovieController($stateParams, TmdbMovieService, movieSummaryPrepService, moviePeoplePrepService, 
-			movieTranslationsPrepService, relatedMoviesPrepService, $window, $state) {
+			movieTranslationsPrepService, relatedMoviesPrepService, $window, $state, TrailerModalService) {
 		var vm = this;
 		vm.movie = movieSummaryPrepService;
 		vm.movie.cast = moviePeoplePrepService.cast;
 		vm.movie.crew = moviePeoplePrepService.crew;
 		vm.movie.relatedMovies = relatedMoviesPrepService;
+		vm.movie.rating = 3;
+		vm.openTrailer = _openTrailer;
 		
 		_init();
+		
+		function _openTrailer() {
+			TrailerModalService.open(vm.movie.trailer);
+		}
 		
     	function _loadImages(tmdb) {
         	TmdbMovieService.getMovieImage({

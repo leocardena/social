@@ -13,6 +13,7 @@
 		                        'ngStorage',
 		                        'ui.mask',
 		                        'ui.utils.masks',
-		                        'pascalprecht.translate']);
+		                        'pascalprecht.translate',
+		                        'ngYoutubeEmbed']);
 	
 })();
