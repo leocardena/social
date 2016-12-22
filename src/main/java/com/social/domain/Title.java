@@ -13,14 +13,14 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Inheritance(strategy = InheritanceType.JOINED)
+@Entity
 @Table(name = "title")
-@MappedSuperclass
 public abstract class Title {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idtitle")
-	private Long id;
+	private long id;
 	
 	@Column(name = "imdb")
 	private String imdb;
@@ -37,11 +37,11 @@ public abstract class Title {
 	@Column(name = "votes")
 	private long votes;
 	
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

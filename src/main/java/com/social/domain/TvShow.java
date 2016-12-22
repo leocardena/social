@@ -22,7 +22,7 @@ public class TvShow extends Title {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idtvshow")
-	private Long id;
+	private long id;
 		
 	/*VERIFICAR O MAPPEDBY*/
 //	mappedBy="tvShow",
@@ -39,11 +39,11 @@ public class TvShow extends Title {
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
