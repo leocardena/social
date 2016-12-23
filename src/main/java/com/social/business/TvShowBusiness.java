@@ -7,10 +7,13 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysema.query.SearchResults;
+import com.mysema.query.jpa.impl.JPAQuery;
 import com.social.domain.Episode;
 import com.social.domain.Lists;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
+import com.social.domain.QMovie;
 import com.social.domain.Season;
 import com.social.domain.TvShow;
 import com.social.repository.MovieRepository;
@@ -51,7 +54,7 @@ public class TvShowBusiness {
 		/*COM O @QUERY NÃO ESTA TRAZENDO NEM A RELAÇÃO COM A SEASON*/
 		/***********************************************************/
 //		tvShowName.setId((long)1);
-//		JPAQuery query = new JPAQuery(em);
+		JPAQuery query = new JPAQuery(em);
 //		SearchResults<TvShow> searchResultTvShow = query.from(QTvShow.tvShow)
 //				.where(QTvShow.tvShow.id.eq(tvShowName.getId()))
 //				.listResults(QTvShow.tvShow);
@@ -72,16 +75,16 @@ public class TvShowBusiness {
 //				.where(QLists.lists.id.eq((long)1))
 //				.listResults(QLists.lists);
 		
-//		SearchResults<Movie> searchResultsMovie = query.from(QMovie.movie)
-//		.where(QMovie.movie.id.eq((long)1))
-//		.listResults(QMovie.movie);
+		SearchResults<Movie> searchResultsMovie = query.from(QMovie.movie)
+				.where(QMovie.movie.name.contains("rs"))
+				.listResults(QMovie.movie);
 		
 //		List<TvShow> listaDinamicaTvShow = searchResultTvShow.getResults();
 //		List<Season> listaDinamicaSeason = searchResultSeason.getResults();
 //		List<Episode> listaDinamicaEpisode = searchResultsEpisodes.getResults();
 //		List<Profile> listaDinamicaProfile = searchResultsProfile.getResults();
 //		List<Lists> listaDinamicaLists = searchResultsLists.getResults();
-//		List<Movie> listaDinamicaMovie = searchResultsMovie.getResults();
+		List<Movie> listaDinamicaMovie = searchResultsMovie.getResults();
 		
 //		System.out.println("TVSHOW size JPAQuery >>>> "+listaDinamicaTvShow.size());
 //		System.out.println("TVSHOW name JPAQuery >>>> "+listaDinamicaTvShow.get(0).getName());
@@ -103,11 +106,12 @@ public class TvShowBusiness {
 //		System.out.println("LISTS name JPAQuery >>>> "+listaDinamicaLists.get(0).getName());
 //		System.out.println("LISTS size season JPAQuery >>>> "+listaDinamicaLists.get(0).getProfile().getName());
 		
-//		System.out.println("MOVIE size JPAQuery >>>> "+listaDinamicaMovie.size());
-//		System.out.println("MOVIE name JPAQuery >>>> "+listaDinamicaMovie.get(0).getName());
-//		System.out.println("MOVIE id JPAQuery   >>>> "+listaDinamicaMovie.get(0).getId());
-
-	
+		System.out.println("MOVIE size JPAQuery >>>> "+listaDinamicaMovie.size());
+		System.out.println("MOVIE name JPAQuery >>>> "+listaDinamicaMovie.get(0).getName());
+		System.out.println("MOVIE id JPAQuery   >>>> "+listaDinamicaMovie.get(0).getId());
+		System.out.println("MOVIE id Comment Parent JPAQuery >>>> "+listaDinamicaMovie.get(0).getCommentParent().getId());
+		System.out.println("MOVIE id Rating Parent JPAQuery >>>> "+listaDinamicaMovie.get(0).getRatingParent().getId());
+		
 //		return null;
 	}
 	
