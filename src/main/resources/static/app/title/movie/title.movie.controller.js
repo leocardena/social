@@ -27,6 +27,17 @@
 		vm.castArray = vm.movie.cast.slice(startCast, endCast);
 		vm.loadMore = _loadMore;
 		vm.exibirTitulo = _exibirTitulo;
+		vm.evaluate = _evaluate;
+		vm.comments = [{
+			user : 'Gustavo',
+			comment : 'Filme muito bom'
+		}, {
+			user : 'Leonardo',
+			comment : 'Ótima produção!'
+		}, {
+			user: 'Pedro',
+			comment : 'Merece óscar!!'
+		}];
 		
 		_init();
 		
@@ -40,6 +51,11 @@
 				'traktSlug' : traktSlug,
 				'type' : 'movie'
 			});
+        }
+        
+        function _evaluate() {
+        	//request to backend
+        	//console.log(vm.movie.userRating);
         }
 		
 		function _loadMore(action) {

@@ -25,10 +25,25 @@
                     	</div>
                     	
                     	<div class="row">
-                    		  <span uib-rating ng-model="vm.movie.rating" max="5" read-only="true" 
-                    		  	aria-labelledby="default-rating" titles="['Um','Dois','Tr�s', 'Quatro', 'Cinco']">
-                    		  </span>  
-                    		  <p>{{vm.movie.rating}}</p>
+                    		<div class="col-md-2">
+                    			<h4 class="text-center">Avaliação Geral</h4>
+                    		</div>
+                    		<div class="col-md-2">
+                    			<h4>{{vm.movie.rating}}</h4>
+                    		</div>
+                    		<div class="col-md-2">
+                    			<h4>Total de avaliações: 500</h4>
+                    		</div>
+                    		<div>
+                    			<p>Dê sua avaliação:</p>
+                    			<ng-rate-it 
+                    				ng-model="vm.movie.userRating" 
+									resetable="false"
+									step="1"
+									rated="vm.evaluate">
+								</ng-rate-it>
+                    		  	</span>  
+                    		</div>
                     	</div>
                     	
                        	<div class="row">
@@ -48,7 +63,8 @@
                        	
                        	<div class="row">
                        		<p class="col-md-3">Diretor {{vm.movie.crew.directing[0].person.name}}</p>
-                       		<a class="col-md-3" ng-href="{{vm.movie.homepage}}" target="_blank">
+                       		<a ng-show="vm.movie.homepage" class="col-md-3" ng-href="{{vm.movie.homepage}}" 
+                       			target="_blank">
                        			Página Oficial
                        		</a>
                        	</div>
@@ -105,6 +121,34 @@
                        			</div>
                        		</div>
                        		
+                       	</div>
+                       	
+                       	<div class="row">
+                       		<div class="row">
+                       			<h3>Comentários</h3>
+                       		</div>
+                       		<div class="row col-md-8">
+		                    	<textarea
+								  ng-model="vm.comment"
+								  name="comment"
+								  ng-minlength="2"
+								  ng-maxlength="200"
+								  class="form-control"
+								  rows="3">
+								</textarea>
+                       		</div>
+                       		<div class="row">
+                       			<div ng-repeat="userComment in vm.comments">
+                       				<div style="border-style: solid;" class="col-md-8">
+	                       				<span class="row">
+	                       					<label class="control-label">Usuário: {{userComment.user}} </label>
+	                       				</span>
+										<span class="row">
+											<label class="control-label">Comentário: {{userComment.comment}}</label>
+										</span>
+                       				</div>
+                       			</div>
+                       		</div>
                        	</div>
                        	
                 </div>
