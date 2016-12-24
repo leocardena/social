@@ -76,7 +76,7 @@
         		query = vm.query;
         	} 
         	TraktSearchService.getSearch({
-        		limit : 5,
+        		limit : 18,
         		page :  page ,
         		query : query,
         		type : type === 'all' ? 'movie,show,person' : type,

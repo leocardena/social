@@ -5,10 +5,12 @@
         .module('social.account.activate')
         .controller('ActivationController', ActivationController);
 
-    ActivationController.$inject = ['$stateParams', 'AuthService'];
+    ActivationController.$inject = ['$stateParams', 'AuthService', '$rootScope', 'backgroundPrepService'];
 
-    function ActivationController ($stateParams, AuthService) {
+    function ActivationController ($stateParams, AuthService, $rootScope, backgroundPrepService) {
         var vm = this;
+        
+        $rootScope.background = backgroundPrepService.backdrop_path;
 
         AuthService.activateAccount({key: $stateParams.key}).then(function () {
             vm.error = null;

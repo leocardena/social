@@ -12,7 +12,7 @@
 	<link rel='stylesheet' type='text/css' href="bower_components/angular-loading-bar/build/loading-bar.min.css" media='all' />
 	<link rel="stylesheet" type="text/css" href="content/css/social.css">
 </head>
-<body back-img="{{toState.name === 'login' || toState.name === 'register' ? background
+<body back-img="{{toState.name === 'login' || toState.name === 'register' || toState.name === 'activate' ? background
 	 : toState.data.backgroundUrl ? toState.data.backgroundUrl : null}}" 
 		ng-class="toState.data.backgroundClass">
 	<nav ui-view="navbar" ng-cloak></nav>
