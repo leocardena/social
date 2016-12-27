@@ -30,6 +30,35 @@
 				},
 				isArray : true,
 				ignoreLoadingBar: true
+			},
+			'getRelatedMovies' : {
+				method: 'GET',
+				url: TraktBase.movie + '/:movieId/related',
+				params : {
+					movieId : '@movieId',
+					page : '@page',
+					limit : '@limit',
+					extended : '@extended'
+				},
+				isArray : true,
+				ignoreLoadingBar: true
+			},
+			'getSummaryMovie' : {
+				method: 'GET',
+				url: TraktBase.movie + '/:movieId',
+				params : {
+					movieId : '@movieId',
+					extended : '@extended'
+				}
+			}, 
+			'getAllPeopleForAMovie' : {
+				method: 'GET',
+				url: TraktBase.movie + '/:movieId/people',
+				params : {
+					movieId : '@movieId',
+					extended : '@extended'
+				},
+				ignoreLoadingBar: true
 			}
 		} );
 		

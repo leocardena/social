@@ -6,15 +6,31 @@
 			.module('social.title')
 			.controller('TitleController', TitleController);
 	
-	TitleController.$inject = ['titlePrepService', '$stateParams', '$state', '$window'];
+	TitleController.$inject = ['$stateParams', '$state'];
 	
 	/*@ngInject*/
-	function TitleController (titlePrepService, $stateParams, $state, $window) {
-		var vm = this;
-		vm.type = {type : $stateParams.type};
+	function TitleController ($stateParams, $state) {
+		_init();
 		
-		/*provisorio*/
-		$window.document.title = $stateParams.traktSlug;
+		function _init() {
+			switch ($stateParams.type.toLowerCase()) {
+				case 'movie':
+					$state.go('movie', {
+						'title' : $stateParams.title, 
+						'traktSlug' : $stateParams.traktSlug,
+						'type' : $stateParams.type
+					});
+					break;
+				case 'show':
+					break;
+				case 'season':
+					break;
+				case 'episode':
+					break;
+				case 'people':
+					break;
+			}
+		}
 		
 	}
 	

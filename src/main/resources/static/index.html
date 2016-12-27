@@ -9,12 +9,12 @@
     <title></title>
 	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="bower_components/angular-wizard/dist/angular-wizard.min.css">
-	<link rel='stylesheet' type='text/css' href="bower_components/angular-loading-bar/build/loading-bar.min.css" media='all' />
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-loading-bar/build/loading-bar.min.css" media='all' />
+	<link rel="stylesheet" type="text/css" href="bower_components/angular-rateit/dist/ng-rateit.css" />
 	<link rel="stylesheet" type="text/css" href="content/css/social.css">
 </head>
-<body back-img="{{toState.name === 'login' || toState.name === 'register' || toState.name === 'activate' ? background
-	 : toState.data.backgroundUrl ? toState.data.backgroundUrl : null}}" 
-		ng-class="toState.data.backgroundClass">
+<body back-img="{{toState.data.background}}" ng-class="toState.data.backgroundClass">
+	
 	<nav ui-view="navbar" ng-cloak></nav>
 	
 	<main ui-view="content" role="main"></main>
@@ -33,6 +33,8 @@
 	<script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
 	<script src="bower_components/angular-ui-mask/dist/mask.js"></script>
 	<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+	<script src="bower_components/ng-youtube-embed/build/ng-youtube-embed.min.js"></script>
+	<script src="bower_components/angular-rateit/dist/ng-rateit.min.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>
@@ -55,6 +57,7 @@
 	<script src="app/services/trakt/trakt.services.module.js"></script>
 	<script src="app/search/search.module.js"></script>
 	<script src="app/title/title.module.js"></script>
+	<script src="/app/components/components.module.js"></script>
 
 	<!-- Blocks -->
 	<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
@@ -130,7 +133,15 @@
 	
 	<!-- Title -->
 	<script src="app/title/title.controller.js"></script>
-	<script src="app/title/title.state.js"></script>
+	<script src="app/title/title.routes.js"></script>
+	
+	<!-- Title - Movie -->
+	<script src="app/title/movie/title.movie.routes.js"></script>
+	<script src="app/title/movie/title.movie.controller.js"></script>
+	
+	<!-- Components -->
+	<script src="app/components/trailer/trailer-modal.service.js"></script>
+	<script src="app/components/trailer/trailler-modal.controller.js"></script>
 	
 	<footer class="footer" ng-cloak></footer>
 	

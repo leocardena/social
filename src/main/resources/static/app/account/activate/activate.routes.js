@@ -30,10 +30,17 @@
 					controllerAs: 'vm'
 				}
 			},
-			resolve: {
-				backgroundPrepService: backgroundPrepService
+			resolve : {
+				backgroundPrepService : backgroundPrepService
 			}
-		})
+		});
+		
+		backgroundPrepService.$inject = ['TmdbRandomTitleService'];
+
+        /* @ngInject */
+        function backgroundPrepService (TmdbRandomTitleService) {
+        	return TmdbRandomTitleService.getRandomTitle();
+    	}
 	}
 	
 	backgroundPrepService.$inject = ['TmdbRandomTitleService'];

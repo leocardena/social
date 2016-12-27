@@ -18,7 +18,6 @@ import org.springframework.security.data.repository.query.SecurityEvaluationCont
 import com.social.security.Http401UnauthorizedEntryPoint;
 import com.social.security.jwt.JWTConfigurer;
 import com.social.security.jwt.TokenProvider;
-import com.social.security.util.AuthoritiesConstants;
 
 @Configuration
 @EnableWebSecurity
@@ -75,26 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/api/rest/account/register").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/account/activate").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/trakt/movie/popular").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/trakt/show/popular").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/trakt/search/{\\d+}").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/movie/{\\d+}/images").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/show/{\\d+}/images").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/show/{\\d+}/season/{\\d+}/images").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/show/{\\d+}/season/{\\d+}/episode/{\\d+}/images").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/trakt/movie/{\\d+}/translations/{\\d+}").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/trakt/show/{\\d+}/translations/{\\d+}").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/person/{\\d+}/images").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/movie/popular/random").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/rest/tmdb/show/popular/random").permitAll()
             .antMatchers("/api/authenticate").permitAll()
-            .antMatchers("/api/rest/account/reset_password/init").permitAll()
-            .antMatchers("/api/rest/account/reset_password/finish").permitAll()
-            .antMatchers("/api/rest/**").authenticated()
-            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN.toString())
-            .antMatchers("/v2/api-docs/**").permitAll()
         .and()
             .apply(securityConfigurerAdapter());
 

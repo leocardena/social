@@ -5,16 +5,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.social.business.AccountBusiness;
+import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.dto.UserDTO;
 import com.social.web.rest.util.APIEndpoint;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -29,16 +29,17 @@ public class AccountREST {
 
 	@Autowired
 	private AccountBusiness accountBusiness;
-	
+
 	/**
-	 * @param userDTO objeto recebido através do body da request contendo informações do usuário a ser cadastrado
+	 * @param userDTO objeto recebido através do body da request contendo 
+	 * informações do usuário a ser cadastrado
 	 * @return O usuário que foi criado
 	 */
 	@PostMapping(value = "/register")
 	public ResponseEntity<?> post(@Valid @RequestBody UserDTO userDTO) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(accountBusiness.createNewUser(userDTO));
 	}
-	
+
 	/**
 	 * @param key a key para ativação do cadastro
 	 * @return status 200 confirmando o sucesso da operação
@@ -48,7 +49,7 @@ public class AccountREST {
 		accountBusiness.activateRegistration(key);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	/**
 	 * @return a conta do usuário junto a suas roles
 	 */
@@ -56,7 +57,7 @@ public class AccountREST {
 	public ResponseEntity<?> getAccount() {
 		return ResponseEntity.status(HttpStatus.OK).body(accountBusiness.getUserWithAuthorities());
 	}
-	
+
 	/**
 	 * @param request a request a ser enviada como resposta
 	 * @return o usuário logado no momento

@@ -17,7 +17,8 @@
 					profileSize : '@profileSize',
 					personId: '@personId'
 				}
-			}
+			},
+			ignoreLoadingBar: true
 		} );
 		
 		return service;

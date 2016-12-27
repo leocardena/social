@@ -13,7 +13,7 @@ src/main/resources/static/bower_components/**
 node_modules/**
 src/main/java/com/social/trakt/util/TraktAPIKey
 src/main/java/com/social/config/MailConfiguration
-target/
+target/**
 *.log*
 *.log.*
 logs/*
@@ -22,7 +22,7 @@ logs/*
 mvnw.cmd
 mvnw
 .classpath
-
+.factorypath
 
 # Eclipse Core
 .project

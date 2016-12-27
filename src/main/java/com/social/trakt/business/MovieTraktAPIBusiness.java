@@ -1,100 +1,78 @@
 package com.social.trakt.business;
 
-import java.io.IOException;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Service;
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.social.domain.ResponseAPI;
-import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Movie;
 import com.social.trakt.model.Released;
-import com.social.trakt.services.MovieTraktAPIService;
-import com.social.web.rest.util.PaginationUtil;
 
-import retrofit2.Call;
-import retrofit2.Response;
-
-@Service
-public class MovieTraktAPIBusiness {
-
-	@Autowired
-	private MovieTraktAPIService movieAPIService;
-
+public interface MovieTraktAPIBusiness {
+	
+	/**
+	 * Retorna os filmes populares no trakt.tv
+	 * 
+	 * @param page a pagina requisitada
+	 * @param limit o limite de informacoes por pagina
+	 * @param extended o detalhamento de informacoes
+	 * @param query o texto de pesquisa
+	 * @param genres os generos
+	 * @return os filmes populares do trakt.tv
+	 */
+	@PreAuthorize("permitAll")
 	public ResponseAPI<List<Movie>> getPopularMovies(String page, String limit, String extended, String query,
-			String genres) {
-		Call<List<Movie>> call = movieAPIService.getPopularMovies(page, limit, extended, query, genres);
-		Call<List<Movie>> callClone = call.clone();
-		Response<List<Movie>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			List<Movie> movies = resp.body();
-			HttpHeaders headers = PaginationUtil.getHeadersFromTraktResponse(resp.headers());
-			ResponseAPI<List<Movie>> responseAPI = new ResponseAPI<>();
-			responseAPI.setHeaders(headers);
-			responseAPI.setBody(movies);
-			return responseAPI;
-		} catch (IOException e) {
-			 throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public Movie getSummaryMovie(String id, String extended) {
-		Call<Movie> call = movieAPIService.getSummaryMovie(id, extended);
-		Call<Movie> callClone = call.clone();
-		Response<Movie> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public List<Movie> getMovieTranslation(String id, String language, String extended) {
-		Call<List<Movie>> call = movieAPIService.getMovieTranslation(id, language, extended);
-		Call<List<Movie>> callClone = call.clone();
-		Response<List<Movie>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public List<Movie> getRelatedMovies(String id, String page, String limit, String extended) {
-		Call<List<Movie>> call = movieAPIService.getRelatedMovies(id, page, limit, extended);
-		Call<List<Movie>> callClone = call.clone();
-		Response<List<Movie>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public List<Released> getAllMovies(String start_date, int days, String extended, String query, String genres) {
-		Call<List<Released>> call = movieAPIService.getAllMovies(start_date, days, extended, query, genres);
-		Call<List<Released>> callClone = call.clone();
-		Response<List<Released>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
+			String genres);
+	
+	/**
+	 * Retorna o resumo do filme
+	 * @param id o id do filme
+	 * @param extended a quantidade de detalhamento das informacoes retornadas
+	 * @return o resumo do filme
+	 */
+	@PreAuthorize("permitAll")
+	public Movie getSummaryMovie(String id, String extended);
+	
+	/**
+	 * Retorna a traducao das informacoes de determinado filme
+	 * @param id o id do filme a ser traduzido
+	 * @param language a lingua na qual a traducao sera feita
+	 * @return as informacoes do filme traduzidas
+	 */
+	@PreAuthorize("permitAll")
+	public List<Movie> getMovieTranslation(String id, String language);
+	
+	/**
+	 * Retorna todos os filmes relacionados a um filme em especifico
+	 * 
+	 * @param id o id do filme
+	 * @param page a pagina solicitada
+	 * @param limit a quantidade de resultados por pagina
+	 * @param extended o detalhamento de informacoes
+	 * @return os filmes relacionados
+	 */
+	@PreAuthorize("permitAll")
+	public ResponseAPI<List<Movie>> getRelatedMovies(String id, String page, String limit, String extended);
+	
+	/**
+	 * Retorna todos os filmes a partir de determinada data
+	 * 
+	 * @param start_date data de inicio
+	 * @param days numero de dias
+	 * @param extended detalhamento de informacoes
+	 * @param query texto de pesquisa
+	 * @param genres os generos
+	 * @return os lancamentos para aquela pesquisa
+	 */
+	@PreAuthorize("permitAll")
+	public List<Released> getAllMovies(String start_date, int days, String extended, String query, String genres);
+	
+	/**
+	 * Retorna todas as pessoas envolvidas no filme
+	 * 
+	 * @param movieId o id do filme
+	 * @param extented quantidade de informacoes retornadas
+	 * @return o filme
+	 */
+	@PreAuthorize("permitAll")
+	public Movie getAllPeopleForAMovie(String movieId, String extented);
+	
 }
