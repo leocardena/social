@@ -5,9 +5,9 @@
         .module('social.user.home')
         .controller('HomeLoggedController', HomeLoggedController);
 
-    HomeLoggedController.$inject = ['PrincipalService'];
+    HomeLoggedController.$inject = ['PrincipalService', '$http'];
 
-    function HomeLoggedController (PrincipalService) {
+    function HomeLoggedController (PrincipalService, $http) {
         var vm = this;
         
         getAccount();
