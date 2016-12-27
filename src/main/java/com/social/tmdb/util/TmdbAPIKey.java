@@ -9,7 +9,7 @@ package com.social.tmdb.util;
  */
 public enum TmdbAPIKey {
 
-	KEY("06ce94032c24634ce042bd03c2ca7e81");
+	KEY("");
 
 	private String valor;
 

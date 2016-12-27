@@ -42,5 +42,12 @@
         	return TmdbRandomTitleService.getRandomTitle();
     	}
 	}
+	
+	backgroundPrepService.$inject = ['TmdbRandomTitleService'];
+
+    /* @ngInject */
+    function backgroundPrepService (TmdbRandomTitleService) {
+    	return TmdbRandomTitleService.getRandomTitle();
+	}
 
 })();
