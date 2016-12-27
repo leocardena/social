@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.social.business.ListsBusiness;
 import com.social.business.MovieBusiness;
-import com.social.business.TvShowBusiness;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
 
@@ -17,8 +16,6 @@ public class TestREST {
 
 	@Autowired
 	private ListsBusiness listBusiness;
-	@Autowired
-	private TvShowBusiness tvShowBusiness;
 	@Autowired
 	private MovieBusiness movieBusiness;
 	
@@ -35,10 +32,14 @@ public class TestREST {
 		return movieBusiness.getMovieByName("Amazing Spider Man");
 	}	
 	
-	@GetMapping(value="/get-all-movies")
+	
 	public List<Movie> getAllMoviesByName(){
 		return movieBusiness.getAllMoviesByName("ar");
 	}	
 
-	
-}
+	@GetMapping(value="/get-rating")
+	public void avgRatingByRatinParent(){
+		movieBusiness.getAvgRatingById(2L);
+	}
+}   
+

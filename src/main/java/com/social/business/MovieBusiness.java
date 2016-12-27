@@ -11,16 +11,17 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.social.domain.Movie;
 import com.social.domain.QMovie;
 import com.social.repository.MovieRepository;
+import com.social.repository.RatingRepository;
 
 @Service
 public class MovieBusiness {
 
 	@Autowired
 	private EntityManager entity;
-//	@Autowired
-//	private static final JPAQuery query = new JPAQuery(entity);
 	@Autowired
 	private MovieRepository movieRepository;
+	@Autowired
+	private RatingRepository ratingRepository;
 	
 	public List<Movie> getAllMovies(){
 		return movieRepository.findAll();
@@ -56,5 +57,9 @@ public class MovieBusiness {
 		return results;
 	}
 
+	public Long getAvgRatingById(Long idRatingParent){
+		return ratingRepository.avgByIdRatingParent(idRatingParent);
+	}
+	
 	
 }

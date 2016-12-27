@@ -7,4 +7,5 @@ import com.social.domain.Movie;
 public interface MovieRepository 
 	extends JpaRepository<Movie, Long>{
 
+	
 }
