@@ -76,8 +76,8 @@ country VARCHAR(100) NOT NULL
 CREATE TABLE Movie(
 idMovie INT NOT NULL, 
 idTitle INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL
+idCommentParent INT NOT NULL DEFAULT 0,
+idRatingParent INT NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Actor

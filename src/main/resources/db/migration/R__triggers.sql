@@ -5,6 +5,7 @@ DROP TRIGGER IF EXISTS TGR_EPISODE_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_MOVIE_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_ACTOR_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_PROFILE_ANTES_INSERT;
+DROP TRIGGER IF EXISTS TGR_RATING_DEPOIS_INSERT;
 
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para o cada Titulo quando este for colocado
@@ -193,3 +194,33 @@ CREATE trigger TGR_PROFILE_ANTES_INSERT BEFORE INSERT ON PROFILE
 			SET NEW.idCommentParent = @idCommentParent;
 		END IF;
 	END##
+
+/*
+ 	Trigger para atualizar a quantidade de votos que um titulo recebeu após lhe darem uma nota 
+ */ 
+DELIMITER ##
+CREATE TRIGGER TGR_RATING_DEPOIS_INSERT AFTER INSERT ON RATING
+	FOR EACH ROW
+	BEGIN
+		
+        SET @ratingParentTgr = NEW.idRatingParent;
+        SET @idRatingTgr = NEW.idRating;
+    
+		-- Buscar valores necessarios para atualizar
+        -- IFNULL == IF IS NOT NULL
+		SET @codigo = (SELECT IFNULL(filme.idTitle,serie.idTitle) 
+								FROM RATING rating 
+								LEFT JOIN TVSHOW serie 
+								ON rating.idRatingParent = serie.idRatingParent 
+								LEFT JOIN MOVIE filme 
+								ON rating.idRatingParent = filme.idRatingParent
+								WHERE rating.idRatingParent = @ratingParentTgr AND
+									  rating.idRating = @idRatingTgr);   
+        SET @votesTgr = (SELECT votes FROM TITLE t WHERE t.idTitle = @codigo) + 1;
+        
+        -- incrementando mais um para votos
+        UPDATE TITLE SET
+        votes = @votesTgr
+        where idTitle = @codigo;
+        
+  END##

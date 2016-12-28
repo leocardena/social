@@ -11,6 +11,6 @@ public interface RatingRepository
 
 	@Query(value = "SELECT AVG(NOTE) FROM RATING WHERE IDRATINGPARENT = :idRatingParentParam GROUP BY IDRATINGPARENT;",
 			nativeQuery = true)
-	Long avgByIdRatingParent(@Param("idRatingParentParam") Long idRatingParent);
+	long avgByIdRatingParent(@Param("idRatingParentParam") Long idRatingParent);
 	
 }

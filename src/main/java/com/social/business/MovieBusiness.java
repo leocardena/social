@@ -57,7 +57,7 @@ public class MovieBusiness {
 		return results;
 	}
 
-	public Long getAvgRatingById(Long idRatingParent){
+	public long getAvgRatingById(Long idRatingParent){
 		return ratingRepository.avgByIdRatingParent(idRatingParent);
 	}
 	
