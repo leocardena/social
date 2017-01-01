@@ -25,8 +25,8 @@ public interface ShowTraktAPIService {
 			@Query("extented") String extented);
 
 	/* Returns related and similar shows. */
-	@GET("/shows/id/related")
-	public Call<List<Show>> getRelatedShows(@Query("id") String id, @Query("page") String page,
+	@GET("/shows/{id}/related")
+	public Call<List<Show>> getRelatedShows(@Path("id") String id, @Query("page") String page,
 			@Query("limit") String limit, @Query("extended") String extended);
 
 	/* Returns all shows airing during the time period specified. */
@@ -36,7 +36,21 @@ public interface ShowTraktAPIService {
 
 	/* Returns all new show premieres during the time period specified. */
 	@GET("/calendars/all/shows/new/{start_date}/{days}")
-	public Call<List<FirstAired>> getNewAllShows(@Query("start_date") String start_date, @Path("days") int days,
+	public Call<List<FirstAired>> getNewAllShows(@Path("start_date") String start_date, @Path("days") int days,
 			@Query("extended") String extended, @Query("query") String query, @Query("genres") String genres);
-
+	
+	/**
+	 * Retorna as pessoas relacionadas a serie
+	 * 
+	 * @param showId 
+	 *        o id da serie
+	 *        
+	 * @param extended 
+	 *        o detalhamento de informacoes
+	 *        
+	 * @return as pessoas relacionadas ao filme
+	 */
+	@GET("/shows/{showId}/people")
+	public Call<Show> getAllPeopleForAShow(@Path("showId") String showId, @Query("extended") String extended);
+	
 }

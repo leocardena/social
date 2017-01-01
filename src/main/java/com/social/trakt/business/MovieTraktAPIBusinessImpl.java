@@ -106,19 +106,4 @@ public class MovieTraktAPIBusinessImpl implements MovieTraktAPIBusiness {
 		}
 	}
 	
-	@Override
-	public Movie getAllPeopleForAMovie(String movieId, String extented) {
-		Call<Movie> call = movieAPIService.getAllPeopleForAMovie(movieId, extented);
-		Call<Movie> callClone = call.clone();
-		Response<Movie> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
 }

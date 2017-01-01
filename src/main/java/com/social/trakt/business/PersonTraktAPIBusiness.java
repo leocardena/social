@@ -18,9 +18,9 @@ public interface PersonTraktAPIBusiness {
 	public List<Show> getShowsPeople(String id, String extended);
 	
 	@PreAuthorize("permitAll")
-	public List<Person> getPeopleMovie(String id, String extended);
+	public Movie getAllPeopleForAMovie(String id, String extended);
 	
 	@PreAuthorize("permitAll")
-	public List<Person> getPeopleShow(String id, String extended);
+	public Show getAllPeopleForAShow(String id, String extended);
 
 }

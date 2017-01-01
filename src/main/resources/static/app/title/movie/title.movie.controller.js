@@ -22,8 +22,8 @@
 		vm.openTrailer = _openTrailer;
 		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
 		var startCast = 0;
-		var endCast = 5; 
-		var maxVisualisedCast = 5;
+		var endCast = vm.movie.cast.length >= 5 ? 5 : vm.movie.cast.length; 
+		var maxVisualisedCast = endCast;
 		vm.castArray = vm.movie.cast.slice(startCast, endCast);
 		vm.loadMore = _loadMore;
 		vm.exibirTitulo = _exibirTitulo;
@@ -96,7 +96,8 @@
     	}
     	
     	function _loadRelatedMovies() {
-    		for (var i = 0; i < 5; i++) {
+    		var finalLength = vm.movie.relatedMovies.length >= 5 ? 5 : vm.movie.relatedMovies.length;
+    		for (var i = 0; i < finalLength; i++) {
 				_get(i, vm.movie.relatedMovies);
 			}
     		
@@ -114,7 +115,7 @@
     	
     	function _loadPersonImage() {
     		
-    		for (var i = 0; i < 5; i++) {
+    		for (var i = 0; i < endCast; i++) {
 				_get(i, vm.movie);
 			}
     		
@@ -150,8 +151,12 @@
     		if (!$stateParams.title) {
     			 _loadImages(vm.movie.ids.tmdb);
     		} else {
-    			vm.movie.images = $stateParams.title.images;
-    			_insertBackground(vm.movie.images.backdrop.file_path);
+    			if ($stateParams.title.ids.slug != $stateParams.traktSlug) {
+    				 _loadImages(vm.movie.ids.tmdb);
+    			} else {
+    				vm.movie.images = $stateParams.title.images;
+        			_insertBackground(vm.movie.images.backdrop.file_path);
+    			}
     		}
     		
     		$window.document.title = vm.movie.title;

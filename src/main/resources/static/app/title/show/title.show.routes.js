@@ -8,11 +8,10 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-
-        
+    	
     	$stateProvider
             
-    	.state('movie', {
+    	.state('show', {
     		parent: 'title',
     		url: '',
     		params: {
@@ -26,24 +25,24 @@
     		},
 			views : {
 				'content@' : {
-					templateUrl : 'app/title/movie/title.movie.html',
-					controller: 'TitleMovieController',
+					templateUrl : 'app/title/show/title.show.html',
+					controller: 'TitleShowController',
 					controllerAs: 'vm'
 				}
 			},
 			resolve : {
-				movieSummaryPrepService : movieSummaryPrepService,
-				moviePeoplePrepService : moviePeoplePrepService,
-				movieTranslationsPrepService : movieTranslationsPrepService,
-				relatedMoviesPrepService : relatedMoviesPrepService
+				showSummaryPrepService : showSummaryPrepService,
+				showPeoplePrepService : showPeoplePrepService,
+				showTranslationsPrepService : showTranslationsPrepService,
+				relatedShowsPrepService : relatedShowsPrepService
 			}
     	});
     	
-    	movieSummaryPrepService.$inject = ['$stateParams', 'TraktMovieService'];
+    	showSummaryPrepService.$inject = ['$stateParams', 'TraktShowService'];
         
         /*@ngInject*/
-        function movieSummaryPrepService ($stateParams, TraktMovieService) {
-        	return TraktMovieService.getSummaryMovie({
+        function showSummaryPrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getSummaryShow({
         		movieId : $stateParams.traktSlug,
         		extended : 'full'
         	}).$promise.then(function (data) {
@@ -51,22 +50,22 @@
         	});
         }
         
-        moviePeoplePrepService.$inject = ['$stateParams', 'TraktMovieService'];
+        showPeoplePrepService.$inject = ['$stateParams', 'TraktShowService'];
         
         /*@ngInject*/
-        function moviePeoplePrepService ($stateParams, TraktMovieService) {
-        	return TraktMovieService.getAllPeopleForAMovie({
+        function showPeoplePrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getAllPeopleForAShow({
         		movieId : $stateParams.traktSlug
         	}).$promise.then(function (data) {
         		return data;
         	});
         }
         
-        movieTranslationsPrepService.$inject = ['$stateParams', 'TraktMovieService'];
+        showTranslationsPrepService.$inject = ['$stateParams', 'TraktShowService'];
         
         /*@ngInject*/
-        function movieTranslationsPrepService ($stateParams, TraktMovieService) {
-        	return TraktMovieService.getTranslationMovie({
+        function showTranslationsPrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getTranslationShow({
         		movieId : $stateParams.traktSlug,
         		language : 'pt'
         	}).$promise.then(function (data) {
@@ -74,11 +73,11 @@
         	});
         }
         
-        relatedMoviesPrepService.$inject = ['$stateParams', 'TraktMovieService'];
+        relatedShowsPrepService.$inject = ['$stateParams', 'TraktShowService'];
         
         /*@ngInject*/
-        function relatedMoviesPrepService ($stateParams, TraktMovieService) {
-        	return TraktMovieService.getRelatedMovies({
+        function relatedShowsPrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getRelatedShows({
         		movieId : $stateParams.traktSlug,
         		page : '1',
         		limit : '5'

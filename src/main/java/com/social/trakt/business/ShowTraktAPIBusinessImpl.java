@@ -2,15 +2,18 @@ package com.social.trakt.business;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+
 import com.social.domain.ResponseAPI;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Show;
 import com.social.trakt.services.ShowTraktAPIService;
 import com.social.web.rest.util.PaginationUtil;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -72,7 +75,7 @@ public class ShowTraktAPIBusinessImpl implements ShowTraktAPIBusiness {
 	}
 	
 	@Override
-	public List<Show> getRelatedShows(String id, String page, String limit, String extended) {
+	public ResponseAPI<List<Show>> getRelatedShows(String id, String page, String limit, String extended) {
 		Call<List<Show>> call = showAPIService.getRelatedShows(id, page, limit, extended);
 		Call<List<Show>> callClone = call.clone();
 		Response<List<Show>> resp;
@@ -80,7 +83,12 @@ public class ShowTraktAPIBusinessImpl implements ShowTraktAPIBusiness {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())
 				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
+			List<Show> show = resp.body();
+			HttpHeaders headers = PaginationUtil.getHeadersFromTraktResponse(resp.headers());
+			ResponseAPI<List<Show>> responseAPI = new ResponseAPI<>();
+			responseAPI.setHeaders(headers);
+			responseAPI.setBody(show);
+			return responseAPI;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}

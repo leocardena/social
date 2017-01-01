@@ -23,12 +23,28 @@ public interface PersonTraktAPIService {
 	@GET("/people/{id}/shows")
 	public Call<List<Show>> getShowsPeople(@Path("id") String id, @Query("extended") String extended);
 
-	/* Returns all cast and crew for a movie. */
-	@GET("/movies/{id}/people")
-	public Call<List<Person>> getPeopleMovie(@Path("id") String id, @Query("extended") String extended);
+	/**
+	 * Retorna as pessoas relacionadas ao filme
+	 * 
+	 * @param movieId o id do filme
+	 * @param extended o detalhamento de informacoes
+	 * @return as pessoas relacionadas ao filme
+	 */
+	@GET("/movies/{movieId}/people")
+	public Call<Movie> getAllPeopleForAMovie(@Path("movieId") String movieId, @Query("extended") String extended);
 
-	/* Returns all cast and crew for a show. */
-	@GET("/shows/{id}/people")
-	public Call<List<Person>> getPeopleShow(@Path("id") String id, @Query("extended") String extended);
+	/**
+	 * Retorna as pessoas relacionadas a serie
+	 * 
+	 * @param showId 
+	 *        o id da serie
+	 *        
+	 * @param extended 
+	 *        o detalhamento de informacoes
+	 *        
+	 * @return as pessoas relacionadas ao filme
+	 */
+	@GET("/shows/{showId}/people")
+	public Call<Show> getAllPeopleForAShow(@Path("showId") String showId, @Query("extended") String extended);
 
 }

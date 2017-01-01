@@ -16,7 +16,7 @@ public interface SeasonTraktAPIService {
 	
 	/* Returns all show premieres airing during the time period specified. */
 	@GET("/calendars/all/shows/premieres/{start_date}/{days}")
-	public Call<List<FirstAired>> getAllSeasonPremieres(@Path("start_date") String start_date, @Query("days") int days,
+	public Call<List<FirstAired>> getAllSeasonPremieres(@Path("start_date") String start_date, @Path("days") int days,
 			@Query("extended") String extended, @Query("query") String query, @Query("genres") String genres);
 
 }
