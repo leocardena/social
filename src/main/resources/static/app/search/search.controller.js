@@ -53,6 +53,7 @@
         				backdropSize: 'w1280',
         				language: 'pt'
         				});
+        			break;
         		case 'show':
         			return TmdbShowService.getShowImage({
         				showId: tmdb,
@@ -60,6 +61,7 @@
         				backdropSize: 'w1280',
         				language: 'pt'
         				});
+        			break;
         		case 'person':
         			return TmdbPersonService.getPersonImage({
         				personId: tmdb,
@@ -111,10 +113,14 @@
 				case 'movie':
 					$state.go('movie', {
 						'title' : title, 
-						'traktSlug' : traktSlug,
-						'type' : type
+						'traktSlug' : traktSlug
 					});
+					break;
 				case 'show':
+					$state.go('show', {
+						'title' : title, 
+						'traktSlug' : traktSlug
+					});
 					break;
 				case 'season':
 					break;

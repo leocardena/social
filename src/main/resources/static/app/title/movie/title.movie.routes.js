@@ -9,16 +9,14 @@
 
     function stateConfig($stateProvider) {
 
-        
     	$stateProvider
             
     	.state('movie', {
-    		parent: 'title',
-    		url: '',
+    		parent: 'social',
+    		url: '/movie/{traktSlug}',
     		params: {
     			title : null,
-    			traktSlug : null,
-    			type : null
+    			traktSlug : null
     		},
     		data: {
     			authorities: [],
