@@ -48,8 +48,7 @@
         function _exibirTitulo(traktSlug, title) {
         	$state.go('movie', {
 				'title' : title, 
-				'traktSlug' : traktSlug,
-				'type' : 'movie'
+				'traktSlug' : traktSlug
 			});
         }
         
@@ -119,12 +118,12 @@
 				_get(i, vm.movie);
 			}
     		
-    		function _get(pos, movies) {
+    		function _get(pos, movie) {
     	   		TmdbPersonService.getPersonImage({
     				profileSize : 'w185',
-    				personId : movies.cast[pos].person.ids.tmdb
+    				personId : movie.cast[pos].person.ids.tmdb
     			}).$promise.then(function (data) {
-    				movies.cast[pos].person.image =  data.file_path;
+    				vm.movie.cast[pos].person.image =  data.file_path;
     			}); 
     		}
  

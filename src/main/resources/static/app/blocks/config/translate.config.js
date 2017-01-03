@@ -32,11 +32,13 @@
 			    'none' : 'Nenhum',
 			    'road' : 'Estrada',
 			    'science fiction' : 'Ficção Científica',
+			    'science-fiction' : 'Ficção Científica',
 			    'short' : 'Curta Metragem',
 			    'sporting event' : 'Evento Esportivo',
 			    'sports' : 'Esporte',
 			    'tv movie' : 'Novela',
-			    'war' : 'guerra'
+			    'war' : 'guerra',
+			    'drama' : 'Drama'
 		  });
 		  
 		  $translateProvider.preferredLanguage('pt');
