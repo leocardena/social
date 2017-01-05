@@ -185,7 +185,7 @@
 								<goal>process</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${project.artifactId}/generated-sources</outputDirectory>
+								<outputDirectory>target/generated-sources</outputDirectory>
 								<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 							</configuration>
 						</execution>
