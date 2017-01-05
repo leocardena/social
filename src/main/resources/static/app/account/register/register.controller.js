@@ -7,11 +7,11 @@
 			.controller('RegisterController', RegisterController);
 	
     RegisterController.$inject = ['AuthService', 'countriesPrepareService', 'backgroundPrepService', 
-                                  '$rootScope', 'WizardHandler'];
+                                  '$state', 'WizardHandler'];
 
 	/* @ngInject */
 	function RegisterController(AuthService, countriesPrepareService, backgroundPrepService, 
-			$rootScope, WizardHandler) {
+			$state, WizardHandler) {
 		var vm = this;
 		vm.altInputFormats = ['d!/M!/yyyy'];
 		vm.countries = countriesPrepareService;
@@ -26,11 +26,7 @@
 		vm.openCalendar = _openCalendar;
 		vm.popup = { opened : false };
 		vm.register = _register;
-		if (backgroundPrepService instanceof Array) {
-			$rootScope.background = backgroundPrepService[0].images.fanart.full;
-		} else {
-			$rootScope.background = backgroundPrepService;
-		}
+		$state.current.data.background = backgroundPrepService.backdrop_path;
 		
 		function _dismissAlerts() {
 			vm.alertEnable = false;

@@ -1,16 +1,13 @@
-<div>
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <h1>Ativação</h1>
+	 <div class="col-md-8 col-md-offset-2 activeAccount text-center">
+            <h1 class="activeTitle">Ativação</h1>
 
-            <div ng-show="vm.success">
+            <div class="activeMessage" ng-show="vm.success">
                 <strong>Seu usuário foi ativado</strong> Por favor, <a class="alert-link" href="" ui-sref="login">logue-se</a>.
             </div>
 
-            <div ng-show="vm.error">
-                <strong>Seu usuário não pode ser ativado.</strong> Por favor, utilize o formulário de <a class="alert-link" ui-sref="register">cadastro</a> para entrar.
+            <div class="activeMessage" ng-show="vm.error">
+                <strong>Seu usuário não pode ser ativado.</strong> Por favor, cadastre-se novamente utilizando a tela de <a class="alert-link" ui-sref="register">cadastro</a>.
             </div>
 
-        </div>
-    </div>
-</div>
+	 </div>
+

@@ -5,29 +5,25 @@
         .module('social.user.home')
         .controller('HomeLoggedController', HomeLoggedController);
 
-    HomeLoggedController.$inject = ['PrincipalService', '$state', '$scope', 'AuthService'];
+    HomeLoggedController.$inject = ['PrincipalService', '$http'];
 
-    function HomeLoggedController (PrincipalService, $state, $scope, AuthService) {
+    function HomeLoggedController (PrincipalService, $http) {
         var vm = this;
-        vm.logout = _logout;
-        $scope.$on('authenticationSuccess', function() {
-            getAccount();
-        });
-
+        
         getAccount();
+        
+        //$rootScope.$broadcast('authenticationSuccess');
 
         function getAccount() {
-            PrincipalService.identity().then(function(account) {
-                vm.account = account;
-                vm.isAuthenticated = PrincipalService.isAuthenticated;
-            });
+//            PrincipalService.identity().then(function(account) {
+//                vm.account = account;
+//                vm.isAuthenticated = PrincipalService.isAuthenticated;
+//            });
+        	
+        	vm.account = PrincipalService.getUserInformation();
+        	vm.isAuthenticated = PrincipalService.isAuthenticated;
         }
         
-        function _logout() {
-            AuthService.logout();
-            $state.go('login');
-        }
-
     }
     
 })();

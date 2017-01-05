@@ -1,13 +1,12 @@
 package com.social.security.util;
 
+import java.util.Collection;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 /**
  * Utility class for Spring Security.
@@ -28,7 +27,7 @@ public final class SecurityUtils {
         String userName = null;
         if (authentication != null) {
             if (authentication.getPrincipal() instanceof UserDetails) {
-                UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
+            	UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
                 userName = springSecurityUser.getUsername();
             } else if (authentication.getPrincipal() instanceof String) {
                 userName = (String) authentication.getPrincipal();
@@ -36,7 +35,7 @@ public final class SecurityUtils {
         }
         return userName;
     }
-
+    
     /**
      * Check if a user is authenticated.
      *
@@ -72,7 +71,7 @@ public final class SecurityUtils {
         Authentication authentication = securityContext.getAuthentication();
         if (authentication != null) {
             if (authentication.getPrincipal() instanceof UserDetails) {
-                UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
+            	UserDetails springSecurityUser = (UserDetails) authentication.getPrincipal();
                 return springSecurityUser.getAuthorities().contains(new SimpleGrantedAuthority(authority));
             }
         }

@@ -1,5 +1,11 @@
 package com.social.util;
 
+/**
+ * Enum que representa o tipo de relação entre usuários
+ * 
+ * @author Leonardo Cardena
+ *
+ */
 public enum FriendStatus {
 	
 	ACCEPT("Accept"), 

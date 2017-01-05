@@ -7,6 +7,7 @@ public class SocialProperties {
 
 	private final Security security = new Security();
 	private final Mail mail = new Mail();
+    private final Async async = new Async();
 
 	public Security getSecurity() {
 		return security;
@@ -14,6 +15,10 @@ public class SocialProperties {
 
 	public Mail getMail() {
 		return mail;
+	}
+	
+	public Async getAsync() {
+		return async;
 	}
 
 	public static class Mail {
@@ -79,5 +84,38 @@ public class SocialProperties {
 			}
 		}
 	}
+	
+    public static class Async {
+
+        private int corePoolSize = 2;
+
+        private int maxPoolSize = 50;
+
+        private int queueCapacity = 10000;
+
+        public int getCorePoolSize() {
+            return corePoolSize;
+        }
+
+        public void setCorePoolSize(int corePoolSize) {
+            this.corePoolSize = corePoolSize;
+        }
+
+        public int getMaxPoolSize() {
+            return maxPoolSize;
+        }
+
+        public void setMaxPoolSize(int maxPoolSize) {
+            this.maxPoolSize = maxPoolSize;
+        }
+
+        public int getQueueCapacity() {
+            return queueCapacity;
+        }
+
+        public void setQueueCapacity(int queueCapacity) {
+            this.queueCapacity = queueCapacity;
+        }
+    }
 
 }

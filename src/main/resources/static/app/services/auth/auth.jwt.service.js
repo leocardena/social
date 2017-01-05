@@ -65,6 +65,7 @@
         function logout () {
             delete $localStorage.authenticationToken;
             delete $sessionStorage.authenticationToken;
+            delete $localStorage.account;
         }
     }
 })();

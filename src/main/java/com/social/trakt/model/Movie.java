@@ -24,7 +24,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "available_translations",
     "genres",
     "certification",
-    "images"
+    "images",
+    "cast",
+    "crew"
 })
 public class Movie {
 
@@ -62,6 +64,10 @@ public class Movie {
     private String certification;
     @JsonProperty("images")
     private Images images;
+    @JsonProperty("cast")
+    private List<Cast> cast;
+    @JsonProperty("crew")
+    private Crew crew;
 
     @JsonProperty("title")
     public String getTitle() {
@@ -231,6 +237,26 @@ public class Movie {
     @JsonProperty("images")
     public void setImages(Images images) {
         this.images = images;
+    }
+    
+    @JsonProperty("cast")
+    public List<Cast> getCast() {
+        return cast;
+    }
+
+    @JsonProperty("cast")
+    public void setCast(List<Cast> cast) {
+        this.cast = cast;
+    }
+
+    @JsonProperty("crew")
+    public Crew getCrew() {
+        return crew;
+    }
+
+    @JsonProperty("crew")
+    public void setCrew(Crew crew) {
+        this.crew = crew;
     }
 
     @Override

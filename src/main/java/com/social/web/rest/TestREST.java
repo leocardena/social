@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.business.ListsBusiness;
-import com.social.business.MovieBusiness;
+import com.social.business.MovieBusinessImpl;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
 
@@ -17,7 +17,7 @@ public class TestREST {
 	@Autowired
 	private ListsBusiness listBusiness;
 	@Autowired
-	private MovieBusiness movieBusiness;
+	private MovieBusinessImpl movieBusiness;
 	
 	@GetMapping(value="/get-lists")
 	public String getAllLists(){

@@ -1,115 +1,132 @@
 package com.social.trakt.business;
 
-import java.io.IOException;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Service;
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.social.domain.ResponseAPI;
-import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Show;
-import com.social.trakt.services.ShowAPIService;
-import com.social.web.rest.util.PaginationUtil;
 
-import retrofit2.Call;
-import retrofit2.Response;
-
-@Service
-public class ShowTraktAPIBusiness {
-
-	@Autowired
-	private ShowAPIService showAPIService;
-
+public interface ShowTraktAPIBusiness {
+	
+	/**
+	 * Retorna as series populares
+	 * 
+	 * @param page
+	 *    	  A pagina atual
+	 *    
+	 * @param limit
+	 * 		  A quantidade de resultados por pagina
+	 * 
+	 * @param extended
+	 *    	  O detalhamento das informacoes
+	 *    
+	 * @param query
+	 *    	  O texto de pesquisa
+	 *    
+	 * @param genres
+	 * 		  Os generos
+	 * 
+	 * @return As series populares
+	 */
+	@PreAuthorize("permitAll")
 	public ResponseAPI<List<Show>> getPopularShows(String page, String limit, String extended, String query,
-			String genres) {
-		Call<List<Show>> call = showAPIService.getPopularShows(page, limit, extended, query, genres);
-		Call<List<Show>> callClone = call.clone();
-		Response<List<Show>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			List<Show> show = resp.body();
-			HttpHeaders headers = PaginationUtil.getHeadersFromTraktResponse(resp.headers());
-			ResponseAPI<List<Show>> responseAPI = new ResponseAPI<>();
-			responseAPI.setHeaders(headers);
-			responseAPI.setBody(show);
-			return responseAPI;
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public Show getSummaryShow(String id, String extended) {
-		Call<Show> call = showAPIService.getSummaryShow(id, extended);
-		Call<Show> callClone = call.clone();
-		Response<Show> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public Show getTranslationShow(String id, String language) {
-		Call<Show> call = showAPIService.getTranslationShow(id, language);
-		Call<Show> callClone = call.clone();
-		Response<Show> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public List<Show> getRelatedShows(String id, String page, String limit, String extended) {
-		Call<List<Show>> call = showAPIService.getRelatedShows(id, page, limit, extended);
-		Call<List<Show>> callClone = call.clone();
-		Response<List<Show>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public List<FirstAired> getAllShows(String start_date, int days, String extended, String query, String genres) {
-		Call<List<FirstAired>> call = showAPIService.getAllShows(start_date, days, extended, query, genres);
-		Call<List<FirstAired>> callClone = call.clone();
-		Response<List<FirstAired>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
-	public List<FirstAired> getNewAllShows(String start_date, int days, String extended, String query, String genres) {
-		Call<List<FirstAired>> call = showAPIService.getNewAllShows(start_date, days, extended, query, genres);
-		Call<List<FirstAired>> callClone = call.clone();
-		Response<List<FirstAired>> resp;
-		try {
-			resp = callClone.execute();
-			if (!resp.isSuccessful())
-				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
-		} catch (IOException e) {
-			throw new RetrofitException("Erro ao executar request através da API");
-		}
-	}
-
+			String genres);
+	
+	/**
+	 * Retorna as infomacoes de uma serie
+	 * 
+	 * @param id	
+	 * 		  O id da serie
+	 * 
+	 * @param extended
+	 * 		  O detalhamento das informacoes
+	 * 
+	 * @return A serie pesquisada
+	 */
+	@PreAuthorize("permitAll")
+	public Show getSummaryShow(String id, String extended);
+	
+	/**
+	 * Retorna a traducao das informacoes da serie
+	 * 
+	 * @param id
+	 * 		  O id da serie a ser traduzida
+	 * 
+	 * @param language
+	 * 		  A lingua desejada para traducao
+	 * 
+	 * @param extended
+	 * 		  O detalhamento das informacoes
+	 * 
+	 * @return As informacoes da serie traduzidas
+	 */
+	@PreAuthorize("permitAll")
+	public List<Show> getShowTranslation(String id, String language, String extended);
+	
+	/**
+	 * Retorna as series relacionadas em relacao a serie pesquisada
+	 * 
+	 * @param id
+	 * 		  O id da serie
+	 * 
+	 * @param page
+	 * 		  A pagina atual
+	 * 
+	 * @param limit
+	 * 		  A quantidade de resultados por pagina
+	 * 
+	 * @param extended
+	 * 		  O detalhamento das informacoes retornadas
+	 * 
+	 * @return As series relacionadas
+	 */
+	@PreAuthorize("permitAll")
+	public ResponseAPI<List<Show>> getRelatedShows(String id, String page, String limit, String extended);
+	
+	/**
+	 * Retorna todos os show de acordo com os filtros de pesquisa requisitados
+	 * 
+	 * @param start_date
+	 *        a data de inicio
+	 *        
+	 * @param days
+	 *        a quantidade de dias
+	 *        
+	 * @param extended
+	 * 		  o detalhamento das informacoes retornadas
+	 * 
+	 * @param query
+	 *        o texto de pesquisa
+	 *        
+	 * @param genres
+	 *        os gerenos
+	 *        
+	 * @return As series de acordo com a pesquisa requisitada
+	 */
+	@PreAuthorize("permitAll")
+	public List<FirstAired> getAllShows(String start_date, int days, String extended, String query, String genres);
+	
+	/**
+	 * Retorna as novas series lancadas
+	 * 
+	 * @param start_date
+	 *        a data de inicio
+	 *        
+	 * @param days
+	 *        a quantidade de dias
+	 *        
+	 * @param extended
+	 * 		  o detalhamento das informacoes retornadas
+	 * 
+	 * @param query
+	 *        o texto de pesquisa
+	 *        
+	 * @param genres
+	 *        os gerenos
+	 *        
+	 * @return As novas series de acordo com a pesquisa requisitada
+	 */
+	@PreAuthorize("permitAll")
+	public List<FirstAired> getNewAllShows(String start_date, int days, String extended, String query, String genres);
+	
 }
