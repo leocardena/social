@@ -43,11 +43,11 @@ public class QComment extends EntityPathBase<Comment> {
     }
 
     public QComment(Path<? extends Comment> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QComment(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QComment(PathMetadata metadata, PathInits inits) {

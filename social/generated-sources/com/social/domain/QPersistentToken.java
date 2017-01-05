@@ -39,11 +39,11 @@ public class QPersistentToken extends EntityPathBase<PersistentToken> {
     }
 
     public QPersistentToken(Path<? extends PersistentToken> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QPersistentToken(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QPersistentToken(PathMetadata metadata, PathInits inits) {

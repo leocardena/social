@@ -35,11 +35,11 @@ public class QFriend extends EntityPathBase<Friend> {
     }
 
     public QFriend(Path<? extends Friend> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QFriend(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QFriend(PathMetadata metadata, PathInits inits) {

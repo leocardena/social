@@ -137,20 +137,14 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		<!-- Querydsl 
-		<dependency>
-		    <groupId>com.mysema.querydsl</groupId>
-		    <artifactId>querydsl-jpa</artifactId>
-		    <version>3.4.3</version>
-		</dependency>-->
 		
 		<!-- Querydsl -->
 		<dependency>
-			<groupId>com.querydsl</groupId>
-			<artifactId>querydsl-jpa</artifactId>
-			<version>4.1.0</version>
+		    <groupId>com.querydsl</groupId>
+		    <artifactId>querydsl-jpa</artifactId>
+		    <version>4.1.4</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
+
 
 		<!-- Logging -->
 		<dependency>
@@ -200,7 +194,7 @@
 						<dependency>
 							<groupId>com.querydsl</groupId>
 							<artifactId>querydsl-apt</artifactId>
-							<version>4.1.0</version>
+							<version>4.1.4</version>
 						</dependency>
 					</dependencies>
 				</plugin>

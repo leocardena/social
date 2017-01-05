@@ -37,11 +37,11 @@ public class QRating extends EntityPathBase<Rating> {
     }
 
     public QRating(Path<? extends Rating> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QRating(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QRating(PathMetadata metadata, PathInits inits) {

@@ -50,11 +50,11 @@ public class QMovie extends EntityPathBase<Movie> {
     }
 
     public QMovie(Path<? extends Movie> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QMovie(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QMovie(PathMetadata metadata, PathInits inits) {

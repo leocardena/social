@@ -52,11 +52,11 @@ public class QProfile extends EntityPathBase<Profile> {
     }
 
     public QProfile(Path<? extends Profile> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QProfile(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QProfile(PathMetadata metadata, PathInits inits) {

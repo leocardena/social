@@ -41,11 +41,11 @@ public class QLists extends EntityPathBase<Lists> {
     }
 
     public QLists(Path<? extends Lists> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QLists(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QLists(PathMetadata metadata, PathInits inits) {

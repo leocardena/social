@@ -43,11 +43,11 @@ public class QSeason extends EntityPathBase<Season> {
     }
 
     public QSeason(Path<? extends Season> path) {
-        this(path.getType(), path.getMetadata(), path.getMetadata().isRoot() ? INITS : PathInits.DEFAULT);
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QSeason(PathMetadata metadata) {
-        this(metadata, metadata.isRoot() ? INITS : PathInits.DEFAULT);
+        this(metadata, PathInits.getFor(metadata, INITS));
     }
 
     public QSeason(PathMetadata metadata, PathInits inits) {
