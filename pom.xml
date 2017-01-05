@@ -138,11 +138,18 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Querydsl -->
+		<!-- Querydsl 
 		<dependency>
 		    <groupId>com.mysema.querydsl</groupId>
 		    <artifactId>querydsl-jpa</artifactId>
 		    <version>3.4.3</version>
+		</dependency>-->
+		
+		<!-- Querydsl -->
+		<dependency>
+			<groupId>com.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+			<version>4.1.0</version>
 		</dependency>
 
 		<!-- Logging -->
@@ -170,20 +177,20 @@
 								<goal>process</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>target/generated-sources/apt</outputDirectory>
-								<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+								<outputDirectory>${project.artifactId}/generated-sources</outputDirectory>
+								<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 							</configuration>
 						</execution>
 					</executions>
 					<dependencies>
 						<dependency>
-							<groupId>com.mysema.querydsl</groupId>
+							<groupId>com.querydsl</groupId>
 							<artifactId>querydsl-apt</artifactId>
-							<version>3.4.3</version>
+							<version>4.1.0</version>
 						</dependency>
 					</dependencies>
 				</plugin>
-			<!-- Querydsl -->		
+				<!-- Querydsl -->		
 			</plugins>
 	</build>
 

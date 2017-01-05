@@ -12,7 +12,7 @@ import com.querydsl.core.types.Path;
 /**
  * QTitle is a Querydsl query type for Title
  */
-@Generated("com.querydsl.codegen.SupertypeSerializer")
+@Generated("com.querydsl.codegen.EntitySerializer")
 public class QTitle extends EntityPathBase<Title> {
 
     private static final long serialVersionUID = -213329534L;
