@@ -96,6 +96,7 @@ country VARCHAR(100) NOT NULL
 -- -----------------------------------------------------
 CREATE TABLE Title(
 idTitle INT NOT NULL,
+slug VARCHAR(100) NOT NULL,
 imdb  INT UNIQUE NOT NULL,
 name VARCHAR(100) UNIQUE NOT NULL,
 trailer VARCHAR(1000) NOT NULL,

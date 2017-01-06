@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -22,9 +21,12 @@ public abstract class Title {
 	@Column(name = "idtitle")
 	private long id;
 	
+	@Column(name = "slug")
+	private String slug;
+	
 	@Column(name = "imdb")
 	private String imdb;
-	
+		
 	@Column(name = "name")
 	private String name;
 	
