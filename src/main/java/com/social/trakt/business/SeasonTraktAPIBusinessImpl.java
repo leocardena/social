@@ -53,8 +53,8 @@ public class SeasonTraktAPIBusinessImpl implements SeasonTraktAPIBusiness {
 	}
 
 	@Override
-	public List<Episode> getSingleSeasonForAShow(String showId, String seasonNumber, String translations) {
-		Call<List<Episode>> call = seasonAPIService.getSingleSeasonForAShow(showId, seasonNumber, translations);
+	public List<Episode> getSingleSeasonForAShow(String showId, String seasonNumber, String translations, String extended) {
+		Call<List<Episode>> call = seasonAPIService.getSingleSeasonForAShow(showId, seasonNumber, translations, extended);
 		Call<List<Episode>> callClone = call.clone();
 		Response<List<Episode>> resp;
 		try {

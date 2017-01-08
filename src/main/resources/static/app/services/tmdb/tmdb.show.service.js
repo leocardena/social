@@ -42,7 +42,7 @@
 			},
 			'getEpisodeImage' : {
 				method: 'GET',
-				url: TmdbBase.show + '/:showId/seasons/:seasonNumber/episode/:episodeNumber/images',
+				url: TmdbBase.show + '/:showId/seasons/:seasonNumber/episodes/:episodeNumber/images',
 				params: {
 					stillSize : '@stillSize',
 					showId : '@showId',

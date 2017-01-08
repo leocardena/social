@@ -43,6 +43,7 @@
     		url: '/seasons/{seasonNumber}',
     		params: {
     			season : null,
+    			show  : null,
     			traktSlug : null
     		},
     		data : {
@@ -127,7 +128,8 @@
         	return TraktShowService.getASingleSeason({
         		showId : $stateParams.traktSlug,
         		seasonNumber : $stateParams.seasonNumber,
-        		translations : 'pt'
+        		translations : 'pt',
+        		extended : 'full'
         	}).$promise.then(function (data) {
         		return data;
         	});

@@ -34,8 +34,9 @@ public class SeasonTraktREST {
 	 */
 	@GetMapping(value = "/{showId}/seasons/{seasonNumber}")
 	public ResponseEntity<?> get(@PathVariable("showId") String showId, @PathVariable("seasonNumber") String seasonNumber,
-			@RequestParam(value = "translations", required = false) String translations) {
-		return ResponseEntity.ok(seasonBusiness.getSingleSeasonForAShow(showId, seasonNumber, translations));
+			@RequestParam(value = "translations", required = false) String translations,
+			@RequestParam(value = "extended", required = false) String extended) {
+		return ResponseEntity.ok(seasonBusiness.getSingleSeasonForAShow(showId, seasonNumber, translations, extended));
 	}
 
 	/**

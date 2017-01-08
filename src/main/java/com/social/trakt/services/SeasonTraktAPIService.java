@@ -42,7 +42,7 @@ public interface SeasonTraktAPIService {
 	 */
 	@GET("/shows/{showId}/seasons/{seasonNumber}")
 	public Call<List<Episode>> getSingleSeasonForAShow(@Path("showId") String showId, @Path("seasonNumber") String seasonNumber, 
-			@Query("translations") String translations);
+			@Query("translations") String translations, @Query("extended") String extended);
 	
 	/**
 	 *  Returns all show premieres airing during the time period specified.

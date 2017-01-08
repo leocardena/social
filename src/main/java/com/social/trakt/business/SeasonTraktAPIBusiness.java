@@ -37,7 +37,7 @@ public interface SeasonTraktAPIBusiness {
 	 * @return Todos os episodios da temporada
 	 */
 	@PreAuthorize("permitAll")
-	List<Episode> getSingleSeasonForAShow(String showId, String seasonNumber, String translations);
+	List<Episode> getSingleSeasonForAShow(String showId, String seasonNumber, String translations, String extended);
 	
 	/**
 	 *  Returns all show premieres airing during the time period specified.

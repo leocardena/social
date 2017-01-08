@@ -77,7 +77,8 @@
 				params : {
 					showId : '@showId',
 					seasonNumber : '@seasonNumber',
-					translations : '@translations'
+					translations : '@translations',
+					extended : '@extended'
 				},
 				ignoreLoadingBar: true,
 				isArray : true
