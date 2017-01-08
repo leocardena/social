@@ -54,7 +54,7 @@
 			}, 
 			'getAllPeopleForAShow' : {
 				method: 'GET',
-				url: TraktBase.show + '/:showId/people',
+				url: TraktBase.show + '/:showId/peoples',
 				params : {
 					showId : '@showId',
 					extended : '@extended'
@@ -67,6 +67,17 @@
 				params : {
 					showId : '@showId',
 					extended : '@extended'
+				},
+				ignoreLoadingBar: true,
+				isArray : true
+			},
+			'getASingleSeason' : {
+				method: 'GET',
+				url: TraktBase.show + '/:showId/seasons/:seasonNumber',
+				params : {
+					showId : '@showId',
+					seasonNumber : '@seasonNumber',
+					translations : '@translations'
 				},
 				ignoreLoadingBar: true,
 				isArray : true

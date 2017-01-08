@@ -45,8 +45,13 @@
         	//request to backend
         }
         
-        function  _exibirSeason(season) {
-        	//go to season state
+        function  _exibirSeason(season, show) {
+        	$state.go('season', {
+				'seasonNumber' : season.number,
+				'season' : season,
+        		'show' : show, 
+				'traktSlug' : show.ids.slug
+			});
         }
         
         function _exibirTitulo(title) {

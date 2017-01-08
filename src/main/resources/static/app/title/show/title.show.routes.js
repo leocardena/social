@@ -13,7 +13,7 @@
             
     	.state('show', {
     		parent: 'social',
-    		url: '/show/{traktSlug}',
+    		url: '/shows/{traktSlug}',
     		params: {
     			title : null,
     			traktSlug : null
@@ -36,6 +36,29 @@
 				relatedShowsPrepService : relatedShowsPrepService,
 				seasonsShowPrepService : seasonsShowPrepService
 			}
+    	})
+    	
+    	.state('season', {
+    		parent: 'show',
+    		url: '/seasons/{seasonNumber}',
+    		params: {
+    			season : null,
+    			traktSlug : null
+    		},
+    		data : {
+    			authorities: [],
+    			pageTitle: ''
+    		}, 
+    		views : {
+				'content@' : {
+					templateUrl : 'app/title/show/title.show.season.html',
+					controller: 'TitleShowSeasonController',
+					controllerAs: 'vm'
+				}
+			},
+			resolve : {
+				seasonPrepService : seasonPrepService
+			} 
     	});
     	
         showTranslationsPrepService.$inject = ['$stateParams', 'TraktShowService'];
@@ -92,6 +115,19 @@
         function seasonsShowPrepService ($stateParams, TraktShowService) {
         	return TraktShowService.getAllSeasonsShow({
         		showId : $stateParams.traktSlug
+        	}).$promise.then(function (data) {
+        		return data;
+        	});
+        }
+        
+        seasonPrepService.$inject = ['$stateParams', 'TraktShowService'];
+        
+        /*@ngInject*/
+        function seasonPrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getASingleSeason({
+        		showId : $stateParams.traktSlug,
+        		seasonNumber : $stateParams.seasonNumber,
+        		translations : 'pt'
         	}).$promise.then(function (data) {
         		return data;
         	});

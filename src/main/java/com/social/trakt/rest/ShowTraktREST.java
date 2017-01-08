@@ -134,7 +134,7 @@ public class ShowTraktREST {
 	 * 
 	 * @return as pessoas envolvidas na serie
 	 */
-	@GetMapping(value = "/{showId}/people")
+	@GetMapping(value = "/{showId}/peoples")
 	public ResponseEntity<?> getAllPeopleForAShow(@PathVariable("showId") String showId,
 			@RequestParam(value = "extended", required = false) String extented) {
 		return ResponseEntity.ok(personBusiness.getAllPeopleForAShow(showId, extented));

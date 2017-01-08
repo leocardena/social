@@ -32,7 +32,7 @@ public class SeasonTraktREST {
 	 * @return Um objeto do tipo ResponseEntity contendo a lista de espisodios
 	 * 	       da temporada pesquisada
 	 */
-	@GetMapping(value = "/{showId}/season/{seasonNumber}")
+	@GetMapping(value = "/{showId}/seasons/{seasonNumber}")
 	public ResponseEntity<?> get(@PathVariable("showId") String showId, @PathVariable("seasonNumber") String seasonNumber,
 			@RequestParam(value = "translations", required = false) String translations) {
 		return ResponseEntity.ok(seasonBusiness.getSingleSeasonForAShow(showId, seasonNumber, translations));

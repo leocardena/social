@@ -13,7 +13,7 @@
             
     	.state('movie', {
     		parent: 'social',
-    		url: '/movie/{traktSlug}',
+    		url: '/movies/{traktSlug}',
     		params: {
     			title : null,
     			traktSlug : null

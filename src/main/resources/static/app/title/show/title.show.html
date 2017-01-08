@@ -125,7 +125,7 @@
              
              <div class="row">
              	<div ng-repeat="season in vm.show.seasons track by season.number">
-             		<div class="col-md-2" ng-click="vm.exibirSeason(season)">
+             		<div class="col-md-2" ng-click="vm.exibirSeason(season, vm.show)">
              			<div class="row">
                        		<img ng-src="{{season.images.file_path ? season.images.file_path : 
                        			vm.imageNotAvailable}}" 
