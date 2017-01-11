@@ -47,6 +47,14 @@ public abstract class Title {
 		this.id = id;
 	}
 
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+	
 	public String getImdb() {
 		return imdb;
 	}

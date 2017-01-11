@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.business.ListsBusiness;
+import com.social.business.MovieBusiness;
 import com.social.business.MovieBusinessImpl;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
@@ -17,13 +18,14 @@ public class TestREST {
 	@Autowired
 	private ListsBusiness listBusiness;
 	@Autowired
-	private MovieBusinessImpl movieBusiness;
+	private MovieBusiness movieBusiness;
 	
 	@GetMapping(value="/get-lists")
 	public String getAllLists(){
 		Profile profile = new Profile();
 		profile.setId((long) 2);
 		listBusiness.getAllListByProfile(profile);
+		System.out.println("TESTE AQUI");
 		return "Pegou todas as listas";
 	}
 	
@@ -31,7 +33,6 @@ public class TestREST {
 	public Movie getMovieByName(){
 		return movieBusiness.getMovieByName("Amazing Spider Man");
 	}	
-	
 	
 	public List<Movie> getAllMoviesByName(){
 		return movieBusiness.getAllMoviesByName("ar");

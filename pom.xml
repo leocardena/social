@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-			<version>4.0</version><!--$NO-MVN-MAN-VER$ -->
+			<version>4.0.1</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 
 		<!-- API REST Client -->
@@ -142,8 +142,8 @@
 		<dependency>
 		    <groupId>com.querydsl</groupId>
 		    <artifactId>querydsl-jpa</artifactId>
-		    <version>4.1.4</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
+		    <version>4.1.4</version><!-- $NO-MVN-MAN-VER$ -->
+		</dependency> 
 
 
 		<!-- Logging -->

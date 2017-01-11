@@ -19,6 +19,9 @@ public abstract class People {
 	
 	@Column(name = "country")
 	private String country;
+	
+	@Column(name = "slug")
+	private String slug;
 
 	public DateTime getBirthday() {
 		return birthday;
@@ -44,6 +47,14 @@ public abstract class People {
 		this.country = country;
 	}
 
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

@@ -11,7 +11,6 @@ import com.social.domain.Episode;
 import com.social.domain.Lists;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
-import com.social.domain.QMovie;
 import com.social.domain.Season;
 import com.social.domain.TvShow;
 import com.social.repository.MovieRepository;

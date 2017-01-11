@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.business.MovieBusiness;
+import com.social.domain.Movie;
+import com.social.domain.ResponseAPI;
 import com.social.web.rest.dto.CommentDTO;
 import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.util.APIEndpoint;
@@ -41,6 +43,8 @@ public class MovieREST {
 	 */
 	@GetMapping(value = "/{movieId}")
 	public ResponseEntity<?> get(@PathVariable("movieId") String movieId) {
+//		ResponseEntity<Movie> response
+		System.out.println("OUTRO TESTE AQUI COM ID : "+movieId);
 		return ResponseEntity.ok().build();
 	}
 	

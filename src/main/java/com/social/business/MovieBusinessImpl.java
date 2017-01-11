@@ -7,12 +7,13 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.social.domain.Movie;
 import com.social.domain.QMovie;
 import com.social.repository.MovieRepository;
 import com.social.repository.RatingRepository;
+
+import retrofit2.Call;
 
 @Service
 public class MovieBusinessImpl implements MovieBusiness {
@@ -24,10 +25,12 @@ public class MovieBusinessImpl implements MovieBusiness {
 	@Autowired
 	private RatingRepository ratingRepository;
 	
+	@Override
 	public List<Movie> getAllMovies(){
 		return movieRepository.findAll();
 	}
-	
+		
+	@Override
 	public Movie getMovieById(Long id){
 		JPAQueryFactory query = new JPAQueryFactory(entity);
 		
@@ -38,6 +41,7 @@ public class MovieBusinessImpl implements MovieBusiness {
 		return result;
 	}
 
+	@Override
 	public Movie getMovieByName(String name){
 		//VERIFICAR JPAQueryFactory para JPAQuery (diference)
 		JPAQueryFactory query = new JPAQueryFactory(entity);
@@ -49,6 +53,7 @@ public class MovieBusinessImpl implements MovieBusiness {
 		return result;
 	}
 	
+	@Override
 	public List<Movie> getAllMoviesByName(String name){
 		JPAQueryFactory query = new JPAQueryFactory(entity);
 		
@@ -59,6 +64,7 @@ public class MovieBusinessImpl implements MovieBusiness {
 		return results;
 	}
 
+	@Override
 	public long getAvgRatingById(Long idRatingParent){
 		return ratingRepository.avgByIdRatingParent(idRatingParent);
 	}
