@@ -22,7 +22,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 	"updated_at",
 	"available_translations",
 	"images",
-	"translations"
+	"translations",
+	"language"
 })
 public class Episode {
 
@@ -52,7 +53,9 @@ public class Episode {
 	private Images images;
 	@JsonProperty("translations")
 	private List<Translation> translations;
-
+	@JsonProperty("language")
+	private String language;
+	
 	@JsonProperty("season")
 	public Integer getSeason() {
 		return season;
@@ -181,6 +184,16 @@ public class Episode {
 	@JsonProperty("translations")
 	public void setTranslations(List<Translation> translations) {
 		this.translations = translations;
+	}
+	
+	@JsonProperty("language")
+	public String getLanguage() {
+		return language;
+	}
+	
+	@JsonProperty("language")
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	@Override
