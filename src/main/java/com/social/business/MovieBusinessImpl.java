@@ -13,8 +13,6 @@ import com.social.domain.QMovie;
 import com.social.repository.MovieRepository;
 import com.social.repository.RatingRepository;
 
-import retrofit2.Call;
-
 @Service
 public class MovieBusinessImpl implements MovieBusiness {
 

@@ -44,7 +44,7 @@ public class MovieREST {
 	@GetMapping(value = "/{movieId}")
 	public ResponseEntity<?> get(@PathVariable("movieId") String movieId) {
 //		ResponseEntity<Movie> response
-		System.out.println("OUTRO TESTE AQUI COM ID : "+movieId);
+//		movieBusiness.getMovieById(movieId);
 		return ResponseEntity.ok().build();
 	}
 	

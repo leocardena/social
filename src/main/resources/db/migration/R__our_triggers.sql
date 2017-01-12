@@ -1,4 +1,3 @@
-
 DROP TRIGGER IF EXISTS TGR_TVSHOW_ANTES_INSERT; 
 DROP TRIGGER IF EXISTS TGR_SEASON_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_EPISODE_ANTES_INSERT;
@@ -6,6 +5,7 @@ DROP TRIGGER IF EXISTS TGR_MOVIE_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_ACTOR_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_PROFILE_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_RATING_DEPOIS_INSERT;
+DROP TRIGGER IF EXISTS TGR_RATING_DEPOIS_DELETE;
 
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para o cada Titulo quando este for colocado
@@ -223,4 +223,33 @@ CREATE TRIGGER TGR_RATING_DEPOIS_INSERT AFTER INSERT ON RATING
         votes = @votesTgr
         where idTitle = @codigo;
         
+  END##
+  
+/*
+ 	Trigger para atualizar a quantidade de votos que um titulo recebeu após excluirem uma nota 
+ */ 
+DELIMITER ##
+CREATE TRIGGER TGR_RATING_DEPOIS_DELETE BEFORE DELETE ON RATING
+	FOR EACH ROW
+	BEGIN
+        
+        SET @ratingParentTgr = OLD.idRatingParent;
+        SET @idRatingTgr = OLD.idRating;
+    
+		-- Buscar valores necessarios para atualizar a tabela TITLE
+        -- IFNULL == IF IS NOT NULL
+		SET @codigo = (SELECT IFNULL(filme.idTitle,serie.idTitle) 
+								FROM RATING rating 
+								LEFT JOIN TVSHOW serie 
+								ON rating.idRatingParent = serie.idRatingParent 
+								LEFT JOIN MOVIE filme 
+								ON rating.idRatingParent = filme.idRatingParent
+								WHERE rating.idRatingParent = @ratingParentTgr AND
+									rating.idRating = @idRatingTgr); 
+       
+        SET @votesTgr = (SELECT votes FROM TITLE t WHERE t.idTitle = @codigo) - 1;
+        
+        -- decrementando mais um para votos
+        UPDATE TITLE SET votes = @votesTgr WHERE idTitle = @codigo;
+       
   END##
