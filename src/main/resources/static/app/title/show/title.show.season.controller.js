@@ -19,6 +19,7 @@
 		vm.season = { episodes : seasonPrepService };
 		vm.season.number = $stateParams.seasonNumber;
 		vm.returnToShow = _returnToShow;
+		vm.openEpisode = _openEpisode;
 		
 		_init();
 		
@@ -108,6 +109,16 @@
         		vm.show.images = data;
         		_insertBackground(vm.show.images.backdrop.file_path);
         	});
+    	}
+    	
+    	function _openEpisode(episodeNumber, seasonNumber, traktSlug, episodeImages, showImages) {
+    		$state.go('episode', {
+    			episodeNumber : episodeNumber,
+    			seasonNumber : seasonNumber,
+    			traktSlug : traktSlug,
+    			episodeImages : episodeImages,
+    			showImages : showImages
+    		});
     	}
     	
     	function _returnToShow() {

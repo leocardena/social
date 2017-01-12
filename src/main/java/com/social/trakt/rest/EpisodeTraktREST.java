@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.trakt.business.EpisodeTraktAPIBusiness;
 import com.social.trakt.util.APITraktEndpoint;
-import retrofit2.http.GET;
 
 @RestController
 @RequestMapping(value = APITraktEndpoint.SHOW)

@@ -44,7 +44,7 @@
     		params: {
     			season : null,
     			show  : null,
-    			traktSlug : null
+    			seasonNumber : null
     		},
     		data : {
     			authorities: [],
@@ -60,6 +60,35 @@
 			resolve : {
 				seasonPrepService : seasonPrepService
 			} 
+    	})
+    	
+    	.state('episode', {
+    		parent: 'social',
+    		url: '/shows/{traktSlug}/seasons/{seasonNumber}/episodes/{episodeNumber}',
+    		params: {
+    			episodeNumber : null,
+    			seasonNumber : null,
+    			traktSlug : null,
+    			episodeImages : null,
+    			showImages : null
+    		},
+    		data : {
+    			authorities: [],
+    			pageTitle: ''
+    		}, 
+    		views : {
+    			'content@' : {
+    				templateUrl : 'app/title/show/title.show.episode.html',
+    				controller: 'TitleShowEpisodeController',
+    				controllerAs: 'vm'
+    			}
+    		},
+    		resolve : {
+    			showTranslationsPrepService : showTranslationsPrepService,
+    			episodePrepService : episodePrepService,
+    			episodeTranslationsPrepService : episodeTranslationsPrepService,
+    			minimalInfoShowSummaryPrepService : minimalInfoShowSummaryPrepService
+    		}
     	});
     	
         showTranslationsPrepService.$inject = ['$stateParams', 'TraktShowService'];
@@ -130,6 +159,46 @@
         		seasonNumber : $stateParams.seasonNumber,
         		translations : 'pt',
         		extended : 'full'
+        	}).$promise.then(function (data) {
+        		return data;
+        	});
+        }
+        
+        episodePrepService.$inject = ['$stateParams', 'TraktShowService'];
+        
+        /*@ngInject*/
+        function episodePrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getASingleEpisode({
+        		showId : $stateParams.traktSlug,
+        		seasonNumber : $stateParams.seasonNumber,
+        		episodeNumber : $stateParams.episodeNumber,
+        		extended : 'full'
+        	}).$promise.then(function (data) {
+        		return data;
+        	});
+        }
+        
+        episodeTranslationsPrepService.$inject = ['$stateParams', 'TraktShowService'];
+        
+        /*@ngInject*/
+        function episodeTranslationsPrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getTranslationsEpisode({
+        		showId : $stateParams.traktSlug,
+        		seasonNumber : $stateParams.seasonNumber,
+        		episodeNumber : $stateParams.episodeNumber,
+        		extended : 'full',
+        		language : 'pt'
+        	}).$promise.then(function (data) {
+        		return data;
+        	});
+        }
+        
+        minimalInfoShowSummaryPrepService.$inject = ['$stateParams', 'TraktShowService'];
+        
+        /*@ngInject*/
+        function minimalInfoShowSummaryPrepService ($stateParams, TraktShowService) {
+        	return TraktShowService.getSummaryShow({
+        		showId : $stateParams.traktSlug
         	}).$promise.then(function (data) {
         		return data;
         	});

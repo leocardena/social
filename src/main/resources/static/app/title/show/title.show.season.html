@@ -22,16 +22,16 @@
             
             <div class="">
             	<div class="col-md-2">
-                	<h4 class="text-center">Avalia��o Geral</h4>
+                	<h4 class="text-center">Avaliação Geral</h4>
                  </div>
                  <div class="col-md-2">
                     <h4>{{vm.season.rating}}</h4>
                  </div>
                  <div class="col-md-2">
-                    <h4>Total de avalia��es: 500</h4>
+                    <h4>Total de avaliações: 500</h4>
                  </div>
                  <div>
-                    <p>D� sua avalia��o:</p>
+                    <p>Dê sua avaliaçãoo:</p>
                     <ng-rate-it 
                     	ng-model="vm.season.userRating" 
 						resetable="false"
@@ -46,10 +46,10 @@
              </div>
              
              <div class="">
-             	<p class="col-md-3">Lan�amento {{vm.show.released | date:'dd/MM/yyyy'}}</p>
-                <p class="col-md-3">Dura��o {{vm.show.runtime}} minutos</p>
+             	<p class="col-md-3">Lançaamento {{vm.show.released | date:'dd/MM/yyyy'}}</p>
+                <p class="col-md-3">Duraçãoo {{vm.show.runtime}} minutos</p>
                 <p class="col-md-3">
-                    G�nero(s): 
+                    Gênero(s): 
 	                <div ng-repeat="genre in vm.show.genres">
 	                	{{genre | translate}}, 
 	                </div>
@@ -62,12 +62,14 @@
                 </p>
                 <a ng-show="vm.show.homepage" class="col-md-3" ng-href="{{vm.show.homepage}}" 
                 	target="_blank">
-                    P�gina Oficial
+                    Página Oficial
                 </a>
              </div>
              
              <div class="row">
-             	<div ng-repeat="episode in vm.season.episodes track by episode.number">
+             	<div ng-repeat="episode in vm.season.episodes track by episode.number" 
+             		ng-click="vm.openEpisode(episode.number, vm.season.number, vm.show.ids.slug,
+             		 episode.images, vm.show.images.backdrop)">
              		<div class="col-md-3 col-md-push">
              			<img ng-src="{{episode.images.file_path ? episode.images.file_path : 
                        			vm.imageNotAvailable}}" 
