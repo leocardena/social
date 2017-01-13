@@ -17,6 +17,10 @@
 		
 		var vm = this;
 		vm.episode = episodePrepService;
+		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
+		vm.imageNotAvailable
+		vm.goToShow = _goToShow;
+		vm.goToSeason = _goToSeason;
 		var show = minimalInfoShowSummaryPrepService;
 		
 		_init();
@@ -24,10 +28,11 @@
 		function _init() {
 			
 			_checkEpisodeTranslations();
-			_checkImages();
 			_checkShowTranslations();
+			_checkSeasonImages();
 			_checkBackground();
-			$window.document.title = vm.episode.showTitle + ' ' + vm.episode.season + 'X'
+			_loadEpisodeImages();
+			$window.document.title = vm.show.title + ' ' + vm.episode.season + 'X'
 				+ vm.episode.number + ' - ' + vm.episode.title;
 			
 			function _checkEpisodeTranslations() {
@@ -37,25 +42,26 @@
 				}
 			}
 			
-			function _checkImages() {
-				if ($stateParams.episodeImages) {
-					vm.episode.images = $stateParams.episodeImages;
-				} else {
-					TmdbShowService.getEpisodeImage({
-						stillSize : 'w300',
+			function _loadEpisodeImages() {
+				TmdbShowService.getEpisodeImage({
+						stillSize : 'original',
 						showId : show.ids.tmdb,
 						seasonNumber : vm.episode.season,
 						episodeNumber : vm.episode.number
 			    	}).$promise.then(function (data) {
 			    		vm.episode.images = data;
-			    	});
-				}
+			   });
 			}
 			
 			function _checkShowTranslations() {
 				if (!(showTranslationsPrepService[0].overview === '')) {
-					vm.episode.showTitle = showTranslationsPrepService[0].title;
+					vm.show = { title : showTranslationsPrepService[0].title };
 				} 
+			}
+			
+			function _checkSeasonImages() {
+				if ($stateParams.seasonImages) 
+					vm.season = { images : { poster : $stateParams.seasonImages} };
 			}
 			
 	    	function _checkBackground() {
@@ -68,7 +74,8 @@
 						backdropSize: 'w1280',
 						language: 'pt'
 		        	}).$promise.then(function (data) {
-		        		_insertBackground(data.backdrop.file_path);
+		        		vm.season = { images : data };
+		        		_insertBackground(vm.season.images.backdrop.file_path);
 		        	});
 	    		}
 	    		
@@ -82,6 +89,19 @@
 	    		
 	    	}
 			
+		}
+		
+		function _goToShow() {
+			$state.go('show', {
+				traktSlug : $stateParams.traktSlug
+			});
+		}
+		
+		function _goToSeason(seasonNumber) {
+			$state.go('season', {
+				seasonNumber : seasonNumber,
+				traktSlug : $stateParams.traktSlug
+			});
 		}
 		
 	}

@@ -70,7 +70,8 @@
     			seasonNumber : null,
     			traktSlug : null,
     			episodeImages : null,
-    			showImages : null
+    			showImages : null, 
+    			seasonImages : null
     		},
     		data : {
     			authorities: [],

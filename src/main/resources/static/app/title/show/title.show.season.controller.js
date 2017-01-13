@@ -15,6 +15,7 @@
 		
 		var vm = this;
 		vm.evaluate = _evaluate;
+		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
 		vm.show = showSummaryPrepService
 		vm.season = { episodes : seasonPrepService };
 		vm.season.number = $stateParams.seasonNumber;
@@ -111,13 +112,13 @@
         	});
     	}
     	
-    	function _openEpisode(episodeNumber, seasonNumber, traktSlug, episodeImages, showImages) {
+    	function _openEpisode(episodeNumber, seasonNumber, traktSlug, showImages, seasonImages) {
     		$state.go('episode', {
     			episodeNumber : episodeNumber,
     			seasonNumber : seasonNumber,
     			traktSlug : traktSlug,
-    			episodeImages : episodeImages,
-    			showImages : showImages
+    			showImages : showImages,
+    			seasonImages : seasonImages
     		});
     	}
     	

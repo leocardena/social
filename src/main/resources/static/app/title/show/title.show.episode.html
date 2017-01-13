@@ -1,0 +1,58 @@
+<div>
+
+      <!-- Sidebar -->
+      <div class="col-md-2">
+	        	<img style="height: 220px" ng-src="{{vm.season.images.poster.file_path ? 
+	        		vm.season.images.poster.file_path : vm.imageNotAvailable}}" alt="" 
+				    class=""/>
+        	    <ul class="sidebar-nav">
+	                <li><a href="#">Assistido</a></li>
+	                <li><a href="#">Quero Assistir</a></li>
+	                <li><a href="#">Outras Listas</a></li>
+            	</ul>
+        </div>
+        
+                <!-- Page content -->
+        <div id="page-content-wrapper" class="col-md-10">
+            
+            <img ng-src="{{vm.episode.images.file_path}}" style="height: 200px; width: 300px"></img>
+            
+            <div class="">
+            	<h3>
+            		<span ng-click="vm.goToShow()">{{vm.show.title}}</span><span>:</span> <span ng-click="vm.goToSeason(vm.episode.season)">Temporada {{vm.episode.season}}</span>
+            	</h3>
+            	<h4>{{vm.episode.number}}X{{vm.episode.season}} {{vm.episode.title}}</h4>
+            </div>
+            
+            <div class="">
+            	<div class="col-md-2">
+                	<h4 class="text-center">Avaliação Geral</h4>
+                 </div>
+                 <div class="col-md-2">
+                    <h4>3</h4>
+                 </div>
+                 <div class="col-md-2">
+                    <h4>Total de avaliações: 500</h4>
+                 </div>
+                 <div>
+                    <p>Dê sua avaliaçãoo:</p>
+                    <ng-rate-it 
+                    	ng-model="vm.season.userRating" 
+						resetable="false"
+						step="1"
+						rated="vm.evaluate">
+					</ng-rate-it>
+             	</div>
+             </div>
+             
+             <div class="">
+                 <p>{{vm.episode.overview}}</p>
+             </div>
+             
+             <div class="">
+             	<p class="col-md-3">Lançamento {{vm.episode.first_aired | date:'dd/MM/yyyy'}}</p>
+             </div>
+            
+        </div>
+
+</div>
