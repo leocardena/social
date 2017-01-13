@@ -51,8 +51,8 @@
 						             result[result.type].images.poster.file_path : vm.imageNotAvailable}}" alt="" 
 						             class="img-responsive center-block imgPoster"/>
 						     	</div>
-						     	<div class="searchName text-center">
-						     		<span class="searchTextName text-center"> Nome do Filme caso não tenha foto</span>
+						     	<div ng-hide="result[result.type].images.poster.file_path" class="searchName text-center">
+						     		<span class="searchTextName text-center"> {{result[result.type].title}} </span>
 						     	</div>
 						     	<div class="searchType">
 						     		  <span class="searchTag">{{result.type | translate}} </span>
