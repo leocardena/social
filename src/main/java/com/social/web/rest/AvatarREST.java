@@ -1,9 +1,10 @@
 package com.social.web.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,9 +29,20 @@ public class AvatarREST {
 	 * @param files o arquivo
 	 * @return o caminho onde o avatar foi salvo
 	 */
-	@RequestMapping(value = "/{code}", method = RequestMethod.POST)
-	public String upload(@PathVariable Long codigo, @RequestParam("files[]") MultipartFile[] files) {
-		return accountBusiness.saveAvatar(codigo, files[0]);
+	@PostMapping
+	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
+		return ResponseEntity.ok(accountBusiness.saveAvatar(file));
+	}
+	
+	/**
+	 * Delete o avatar do usuario
+	 * 
+	 * @return codigo 200 informando que o avatar foi deletado
+	 */
+	@DeleteMapping
+	public ResponseEntity<?> delete() {
+		accountBusiness.deleteAvatar();
+		return ResponseEntity.ok().build();
 	}
 
 }

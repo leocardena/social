@@ -124,14 +124,38 @@ public class AccountBusinessImpl implements AccountBusiness {
 	}
 	
 	@Override
-	public String saveAvatar(Long code, MultipartFile avatar) {
+	public String saveAvatar(MultipartFile avatar) {
+		String username = SecurityUtils.getCurrentUserLogin();
+		Optional<User> userOptional = userRepository.findOneByUsername(username);
 		
-		String avatarName = avatarStorage.saveAvatar(avatar);
-		Profile profile = profileRepository.findOne(code);
+		if (!userOptional.isPresent())
+			throw new LoginNotFoundException("Login não encontrado");
+
+		String avatarName = username.concat(userOptional.get().getId().toString());
+		avatarName = avatarStorage.saveAvatar(avatar, avatarName);
+		String url = avatarStorage.getUrl(avatarName);
+
+		Profile profile = profileRepository.findOneByUser(userOptional.get()).get();
 		profile.setAvatar(avatarName);
 		profileRepository.save(profile);
+
+		return url;
+	}
+
+	@Override
+	public void deleteAvatar() {
+		String username = SecurityUtils.getCurrentUserLogin();
+		Optional<User> userOptional = userRepository.findOneByUsername(username);
 		
-		return avatarStorage.getUrl(avatarName);
+		if (!userOptional.isPresent())
+			throw new LoginNotFoundException("Login não encontrado");
+		
+		Profile profile = profileRepository.findOneByUser(userOptional.get()).get();
+		profile.setAvatar(null);
+		profileRepository.save(profile);
+		
+		String avatarKey = username.concat(userOptional.get().getId().toString());
+		avatarStorage.deleteAvatar(avatarKey);
 		
 	}
 	

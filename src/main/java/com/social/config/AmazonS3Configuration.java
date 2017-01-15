@@ -2,6 +2,7 @@ package com.social.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -18,7 +19,7 @@ public class AmazonS3Configuration {
 				"AKIAIOSFODNN7EXAMPLE",
 				"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
 		AmazonS3 s3Client = new AmazonS3Client(credentials, new ClientConfiguration());
-		s3Client.setS3ClientOptions(S3ClientOptions.builder().setPathStyleAccess(true).build());
+		s3Client.setS3ClientOptions(S3ClientOptions.builder().setPathStyleAccess(true).disableChunkedEncoding().build());
 		s3Client.setEndpoint("http://localhost:9444/s3");
 		return s3Client;
 	}
