@@ -3,5 +3,6 @@
 	
 	angular
 			.module('social.user', 
-			['social.user.home']);
+			['social.user.home',
+			 'social.user.profile']);
 })();

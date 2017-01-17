@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.social.business.AccountBusiness;
+import com.social.web.rest.dto.AvatarDTO;
 import com.social.web.rest.util.APIEndpoint;
 
 /**
@@ -31,7 +32,7 @@ public class AvatarREST {
 	 */
 	@PostMapping
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file) {
-		return ResponseEntity.ok(accountBusiness.saveAvatar(file));
+		return ResponseEntity.ok(new AvatarDTO(accountBusiness.saveAvatar(file)));
 	}
 	
 	/**

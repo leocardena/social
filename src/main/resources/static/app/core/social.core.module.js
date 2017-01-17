@@ -15,6 +15,7 @@
 		                        'ui.utils.masks',
 		                        'pascalprecht.translate',
 		                        'ngYoutubeEmbed',
-		                        'ngRateIt']);
+		                        'ngRateIt',
+		                        'ngFileUpload']);
 	
 })();

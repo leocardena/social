@@ -136,7 +136,7 @@ public class AccountBusinessImpl implements AccountBusiness {
 		String url = avatarStorage.getUrl(avatarName);
 
 		Profile profile = profileRepository.findOneByUser(userOptional.get()).get();
-		profile.setAvatar(avatarName);
+		profile.setAvatar(url);
 		profileRepository.save(profile);
 
 		return url;
@@ -158,5 +158,5 @@ public class AccountBusinessImpl implements AccountBusiness {
 		avatarStorage.deleteAvatar(avatarKey);
 		
 	}
-	
+
 }

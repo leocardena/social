@@ -1,0 +1,11 @@
+<body ng-app="fileUpload" ng-controller="MyCtrl">
+  <form name="vm.formUpload">
+    <fieldset>
+      <input type="file" ngf-select ng-model="vm.avatarFile" name="avatar"    
+             accept="image/*" ngf-max-size="20MB" required
+             ngf-model-invalid="errorFile">
+      <img ng-show="vm.formUpload.avatar.$valid" ngf-thumbnail="vm.avatarFile" style="width: 100px; height: 100px;"> 
+      <button ng-click="vm.uploadAvatar(vm.avatarFile)">Submit</button>
+    </fieldset>
+  </form>
+</body>
