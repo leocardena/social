@@ -1,13 +1,12 @@
 <div class="container">
 	
-	<div class="col-md-offset-5" style="display:inline-block; position:relative; margin-top: 10px"
-		ng-mouseenter="vm.options=true" ng-mouseleave="vm.options=false">
-		<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}"
-			 alt="" class="img-rounded" style="height: 180px; width: 180px; border: 2px solid black; border-radius: 50%">
-		<button type="button" class="btn btn-default" ng-show="vm.options" style="position:absolute;right:10%;top:40%;"
-			ng-click="vm.openUploadModal()">
+	<div class="col-md-offset-5 profile-image-container" ng-mouseenter="vm.options=true" 
+		ng-mouseleave="vm.options=false">
+		<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}" alt="" class="profile-image">
+		<button type="button" class="btn btn-default btn-alterar-image-profile" 
+			ng-show="vm.options" ng-click="vm.openUploadModal(vm.user.avatar)">
       		<span class="glyphicon glyphicon-camera"></span> 
-      		Trocar Imagem
+      		Trocar Avatar
      	</button>
 	</div>
 	

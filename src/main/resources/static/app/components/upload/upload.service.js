@@ -22,14 +22,19 @@
 
 		return service;
 
-		function _openModal() {
+		function _openModal(avatar) {
 			var modalInstance = $uibModal.open({
 				animation : true,
 				ariaLabelledBy : 'modal-title',
 				ariaDescribedBy : 'modal-body',
 				templateUrl : 'app/components/upload/upload-avatar-modal.html',
 				controller : 'ModalUploadAvatarController',
-				controllerAs : 'vm'
+				controllerAs : 'vm',
+				resolve: {
+			        actualAvatar: function () {
+			            return avatar;
+			        }
+			    }
 			});
 
 			modalInstance.result.then(resetModal, resetModal);

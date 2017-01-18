@@ -1,0 +1,18 @@
+.profile-image-container {
+	display:inline-block;
+	position:relative; 
+	margin-top: 10px;
+}
+
+.profile-image {
+	height: 180px; 
+	width: 180px; 
+	border: 2px solid black; 
+	border-radius: 50%;
+}
+
+.btn-alterar-image-profile {
+	position:absolute;
+	right:10%;
+	top:40%;
+}
