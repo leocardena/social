@@ -29,13 +29,12 @@ public class MovieBusinessImpl implements MovieBusiness {
 	}
 		
 	@Override
-	public Movie getMovieById(Long id){
-		JPAQueryFactory query = new JPAQueryFactory(entity);
-		
-		Movie result = query.select(QMovie.movie)
-				.where(QMovie.movie.id.eq(id))
-				.fetchOne();
-		
+	public Movie getMovieById(String slug){
+		// TRAZER O RATING QUE O USUARIO DEU
+
+		Movie result = movieRepository.getMovieBySlugAndUser("pepeu", slug);
+		System.out.println("Total votos do filme :"+result.getVotes());
+		System.out.println("Voto que o mano deu  :"+result.getRatingParent().getRating().getProfile().getUser().getUsername());
 		return result;
 	}
 

@@ -12,7 +12,7 @@ public interface MovieBusiness {
 	public List<Movie> getAllMovies();
 	
 	@PreAuthorize("permitAll")
-	public Movie getMovieById(Long id);
+	public Movie getMovieById(String slug);
 	
 	@PreAuthorize("permitAll")
 	public Movie getMovieByName(String name);

@@ -81,5 +81,6 @@ ALTER TABLE Episode ADD CONSTRAINT FK_Episode_RatingParent FOREIGN KEY (idRating
 ALTER TABLE ProfileComments ADD CONSTRAINT FK_ProfileComments_Comment FOREIGN KEY (idComment) REFERENCES Comment(idComment);
 ALTER TABLE ProfileComments ADD CONSTRAINT FK_ProfileComments_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
 ALTER TABLE Rating ADD CONSTRAINT FK_Rating_RatingParent FOREIGN KEY (idRatingParent) REFERENCES RatingParent(idRatingParent);
+ALTER TABLE Rating ADD CONSTRAINT FK_Rating_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
 ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Comment FOREIGN KEY (idRating) REFERENCES Rating(idRating);
 ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
