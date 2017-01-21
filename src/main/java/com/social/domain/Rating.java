@@ -25,8 +25,6 @@ public class Rating {
 	@Column(name = "idrating")
 	private long id;
 	
-//	@OneToMany(mappedBy = "ratings", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-//	@JoinColumn(name="idprofile")
 	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="idprofile")
 	private Profile profile;
