@@ -1,15 +1,16 @@
 package com.social.trakt.business;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Movie;
+import com.social.trakt.model.MoviesPerson;
 import com.social.trakt.model.Person;
 import com.social.trakt.model.Show;
+import com.social.trakt.model.ShowsPerson;
 import com.social.trakt.services.PersonTraktAPIService;
 
 import retrofit2.Call;
@@ -37,10 +38,10 @@ public class PersonTraktAPIBusinessImpl implements PersonTraktAPIBusiness {
 	}
 	
 	@Override
-	public List<Movie> getMoviesPeople(String id, String extended) {
-		Call<List<Movie>> call = peopleAPIService.getMoviesPeople(id, extended);
-		Call<List<Movie>> callClone = call.clone();
-		Response<List<Movie>> resp;
+	public MoviesPerson getMoviesPeople(String id, String extended) {
+		Call<MoviesPerson> call = peopleAPIService.getMoviesPeople(id, extended);
+		Call<MoviesPerson> callClone = call.clone();
+		Response<MoviesPerson> resp;
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())
@@ -52,10 +53,10 @@ public class PersonTraktAPIBusinessImpl implements PersonTraktAPIBusiness {
 	}
 	
 	@Override
-	public List<Show> getShowsPeople(String id, String extended) {
-		Call<List<Show>> call = peopleAPIService.getShowsPeople(id, extended);
-		Call<List<Show>> callClone = call.clone();
-		Response<List<Show>> resp;
+	public ShowsPerson getShowsPeople(String id, String extended) {
+		Call<ShowsPerson> call = peopleAPIService.getShowsPeople(id, extended);
+		Call<ShowsPerson> callClone = call.clone();
+		Response<ShowsPerson> resp;
 		try {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())

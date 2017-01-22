@@ -23,6 +23,8 @@
 		}
 		
 		function _uploadAvatar(file) {
+			if (!file) return;
+			
 			if (vm.deleteAvatar) {
 				_delete();
 			} else {

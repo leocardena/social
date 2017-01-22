@@ -52,7 +52,12 @@
 						             class="img-responsive center-block imgPoster"/>
 						     	</div>
 						     	<div ng-hide="result[result.type].images.poster.file_path" class="searchName text-center">
-						     		<span class="searchTextName text-center"> {{result[result.type].title}} </span>
+						     		<span ng-show="result.type !== 'person'" class="searchTextName text-center">
+						     		 	{{result[result.type].title}} 
+						     		</span>
+						     		<span ng-show="result.type === 'person'" class="searchTextName text-center"> 
+						     			{{result[result.type].name}} 
+						     		</span>
 						     	</div>
 						     	<div class="searchType">
 						     		  <span class="searchTag">{{result.type | translate}} </span>

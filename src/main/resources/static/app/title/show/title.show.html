@@ -76,7 +76,7 @@
               <div class="row">
                        	
               	<div class="col-md-1">
-                	<button ng-click="vm.loadMore('less')">-</button>
+                	<button ng-click="vm.loadMore('less')" ng-disabled="vm.first">-</button>
                 </div>
                        		
                 <div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt">
@@ -95,7 +95,7 @@
                 </div>
                        		
                 <div class="col-md-1">
-                	<button ng-click="vm.loadMorePerson('more')">+</button>
+                	<button ng-click="vm.loadMorePerson('more')" ng-disabled="vm.last">+</button>
                 </div>
                        		
               </div>

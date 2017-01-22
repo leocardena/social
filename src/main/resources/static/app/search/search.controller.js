@@ -83,7 +83,7 @@
         		page :  page ,
         		query : query,
         		type : type === 'all' ? 'movie,show,person' : type,
-        		fields : 'translations,title'
+        		fields : 'translations,title,name'
         	}).$promise.then(function(data){
         		vm.results = data.data;
         		_loadHeaders(data.headers);

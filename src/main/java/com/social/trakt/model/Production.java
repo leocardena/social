@@ -7,50 +7,37 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "character",
-    "person",
+    "job",
     "movie",
     "show"
 })
-public class Cast {
+public class Production {
 
-    @JsonProperty("character")
-    private String character;
-    @JsonProperty("person")
-    private Person person;
+    @JsonProperty("job")
+    private String job;
     @JsonProperty("movie")
     private Movie movie;
     @JsonProperty("show")
     private Show show;
 
-    @JsonProperty("character")
-    public String getCharacter() {
-        return character;
+    @JsonProperty("job")
+    public String getJob() {
+        return job;
     }
 
-    @JsonProperty("character")
-    public void setCharacter(String character) {
-        this.character = character;
+    @JsonProperty("job")
+    public void setJob(String job) {
+        this.job = job;
     }
 
-    @JsonProperty("person")
-    public Person getPerson() {
-        return person;
-    }
-
-    @JsonProperty("person")
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-    
     @JsonProperty("movie")
     public Movie getMovie() {
-    return movie;
+        return movie;
     }
 
     @JsonProperty("movie")
     public void setMovie(Movie movie) {
-    this.movie = movie;
+        this.movie = movie;
     }
     
     @JsonProperty("show")

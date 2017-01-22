@@ -1,9 +1,10 @@
 package com.social.trakt.services;
 
-import java.util.List;
 import com.social.trakt.model.Movie;
+import com.social.trakt.model.MoviesPerson;
 import com.social.trakt.model.Person;
 import com.social.trakt.model.Show;
+import com.social.trakt.model.ShowsPerson;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -17,11 +18,11 @@ public interface PersonTraktAPIService {
 
 	/* Returns all movies where this person is in the cast or crew. */
 	@GET("/people/{id}/movies")
-	public Call<List<Movie>> getMoviesPeople(@Path("id") String id, @Query("extended") String extended);
+	public Call<MoviesPerson> getMoviesPeople(@Path("id") String id, @Query("extended") String extended);
 
 	/* Returns all shows where this person is in the cast or crew. */
 	@GET("/people/{id}/shows")
-	public Call<List<Show>> getShowsPeople(@Path("id") String id, @Query("extended") String extended);
+	public Call<ShowsPerson> getShowsPeople(@Path("id") String id, @Query("extended") String extended);
 
 	/**
 	 * Retorna as pessoas relacionadas ao filme
