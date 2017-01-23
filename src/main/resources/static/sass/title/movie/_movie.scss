@@ -1,0 +1,76 @@
+// Sidebar
+
+.sidebarMovie{
+	margin-top: 20px;
+	.imgPosterMovie{
+		border-style: solid;
+		border-width: 10px;
+		border-radius: 20px;
+		border-color: $black;
+		height: 300px;
+		margin: 0 auto;
+	}
+	.btnTrailerMovie{
+		margin-top: 15px;
+		color: $white;
+		font-size: 20px;
+		width: 100%;
+		background-color: $black;
+		margin: 5px auto;
+		border-color: $black;
+	}
+	.navMovie{
+		background-color: $red-primary;
+		font-size: 20px;
+		.listNavMovie{
+			color: $white;
+			border-radius: 0;
+		}
+		.listNavMovie:hover{
+			color: $white;
+			border-radius: 0;
+			background-color: $red-secondary;
+		}
+		.listNavMovie > active{
+			color: $white;
+			border-radius: 0;
+			background-color: $red-secondary;
+		}
+	}
+}
+
+// Page content
+
+.pageContentMovie{
+	margin-left: 15px;
+	margin-top: 20px;
+	.titleMovie{
+		color: $white;
+		font-size: 35px;
+		text-shadow: -2px 2px 1px #000;
+	}
+	.yearMovie{
+		color: $white;
+		font-size: 20px;
+		text-shadow: -2px 2px 1px #000;
+	}
+	.overviewMovie{
+		background-color: $white;
+		.overviewText{
+			margin: 30px;
+			text-align: justify;
+   			text-justify: inter-word;
+		}
+		.actorInformationMovie{
+			background-color: #A9A9A9;
+			height: 200px;
+			.moreActorMovie, .lessActorMovie{
+				top: 45%;
+			}
+		}
+	}
+}
+
+
+
+
