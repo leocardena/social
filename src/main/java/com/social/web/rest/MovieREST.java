@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.business.MovieBusiness;
 import com.social.web.rest.dto.CommentDTO;
+import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.util.APIEndpoint;
 
 /**
@@ -42,6 +43,89 @@ public class MovieREST {
 	public ResponseEntity<?> get(@PathVariable("movieId") String movieId) {
 		return ResponseEntity.ok().build();
 	}
+	
+	/**
+	 * Retorna o rating dado pelo usuario logado ao filme em questão
+	 * 
+	 * @param movieId
+	 * 		  O id do filme que sera pesquisado
+	 * 
+	 * @return O objeto ResponseEntity contendo o rating pesquisado caso seja
+	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
+	 *         informando que o rating para determinado filme nao foi encontrado
+	 */
+	@GetMapping(value = "/{movieId}/user-rating")
+	public ResponseEntity<?> getUserRating(@PathVariable("movieId") String movieId) {
+		return ResponseEntity.ok().build();
+	}
+	
+	/**
+	 * Insere o rating dado pelo usuario logado ao filme em questão
+	 * 
+	 * @param movieId
+	 * 		  O id do filme no qual o rating sera inserido
+	 * 
+	 * @param rating
+	 *        O objeto do tipo rating contendo as informacoes necessarias
+	 *        para a insercao do rating
+	 *        
+	 * @return O objeto ResponseEntity contendo o rating inserido, um objeto do 
+	 *         tipo ErrorDetailDTO com o codigo 500 informando que ocorreu um 
+	 *         erro na insercao ou um objeto do tipo ErrorDetailDTO com o 
+	 *         codigo 404 informando que o filme com o id informado nao
+	 *         foi encontrado
+	 */
+	@PostMapping(value = "/{movieId}/user-rating")
+	public ResponseEntity<?> postUserRating(@PathVariable("movieId") String movieId, 
+			@RequestBody RatingDTO rating) {
+		return ResponseEntity.ok().build();
+	}
+	
+	/**
+	 * Edita o rating dado pelo usuario logado ao filme em questão
+	 * 
+	 * @param movieId
+	 * 		  O id do filme no qual o rating sera inserido
+	 * 
+	 * @param ratingId
+	 * 		  O id do rating que sera editado
+	 * 
+	 * @param rating
+	 *        O objeto do tipo rating contendo as informacoes necessarias
+	 *        para a edicao do rating
+	 * 
+	 * @return O objeto ResponseEntity contendo o rating inserido, um objeto do 
+	 *         tipo ErrorDetailDTO com o codigo 500 informando que ocorreu um 
+	 *         erro na insercao ou um objeto do tipo ErrorDetailDTO com o 
+	 *         codigo 404 informando que o filme com o id informado nao
+	 *         foi encontrado
+	 */
+	@PutMapping(value = "/{movieId}/user-rating/{ratingId}")
+	public ResponseEntity<?> putUserRating(@PathVariable("movieId") String movieId, 
+			@PathVariable("ratingId") String ratingId, @RequestBody RatingDTO rating) {
+		return ResponseEntity.ok().build();
+	}
+	
+	/**
+	 * Deleta o rating dado pelo usuario logado ao filme em questão
+	 * 
+	 * @param movieId
+	 * 		  O id do filme no qual o rating sera inserido
+	 * 
+	 * @param ratingId
+	 * 		  O id do rating que sera editado
+	 * 
+	 * @return O objeto ResponseEntity contendo o rating inserido, um objeto do 
+	 *         tipo ErrorDetailDTO com o codigo 500 informando que ocorreu um 
+	 *         erro na insercao ou um objeto do tipo ErrorDetailDTO com o 
+	 *         codigo 404 informando que o filme com o id informado nao
+	 *         foi encontrado
+	 */
+	@DeleteMapping(value = "/{movieId}/user-rating/{ratingId}")
+	public ResponseEntity<?> deleteUserRating(@PathVariable("movieId") String movieId, 
+			@PathVariable("ratingId") String ratingId) {
+		return ResponseEntity.ok().build();
+	}
 
 	/**
 	 * Retorna os comentarios de um filme em especifico
@@ -67,26 +151,6 @@ public class MovieREST {
 	}
 	
 	/**
-	 * Retorna um comentario (incluindo as respostas daquele comentario)
-	 * de um filme em especifico
-	 * 
-	 * @param movieId
-	 *        O id do filme que sera pesquisado o comentario
-	 *        
-	 * @param commentId
-	 *        O id do comentario daquele filme
-	 *        
-	 * @return O objeto ResponseEntity contendo o comentario especifico do filme
-	 *         pesquisado ou um objeto do tipo ErrorDetailDTO contendo o codigo
-	 *         404 informando que aquele filme nao foi encontrado
-	 */
-	@GetMapping(value = "/{movieId}/comments/{commentId}")
-	public ResponseEntity<?> getMovieComment(@PathVariable("movieId") String movieId, 
-			@PathVariable("commentId") String commentId) {
-		return ResponseEntity.ok().build();
-	}
-	
-	/**
 	 * Insere um comentario para determinado filme
 	 * 
 	 * @param movieId
@@ -107,6 +171,99 @@ public class MovieREST {
 	}
 	
 	/**
+	 * Deleta um comentario para determinado filme
+	 * 
+	 * @param movieId
+	 *         O id do filme que sera deletado o comentario
+	 *         
+     * @param commentId
+	 *         O id do comentario que sera deletado o comentario
+	 *         
+	 * @return O objeto ResponseEntity contendo o comentario, de determinado filme,
+	 *         que acabou de ser deletado ou um objeto do tipo ErrorDetailDTO 
+	 *         contendo o codigo 404 informando que aquele filme nao foi encontrado
+	 */
+	@DeleteMapping(value = "/{movieId}/comments/{commentId}")
+	public ResponseEntity<?> deleteMovieComment(@PathVariable("movieId") String movieId, 
+			@PathVariable("commentId") String commentId) {
+		return ResponseEntity.ok().build();
+	}
+	
+	/**
+	 * Edita um comentario para determinado filme
+	 * 
+	 * @param movieId
+	 *         O id do filme que sera editado o comentario
+	 *         
+	 * @param comment
+	 *        O objeto do tipo comentario contendo as informacoes do comentario
+	 *        que sera editado
+	 * 
+	 * @param comment
+	 *        O id do comentario que sera editado
+	 * 
+	 * @return O objeto ResponseEntity contendo o comentario, de determinado filme,
+	 *         que acabou de ser inserido ou um objeto do tipo ErrorDetailDTO 
+	 *         contendo o codigo 404 informando que aquele filme nao foi encontrado
+	 */
+	@PutMapping(value = "/{movieId}/comments/{commentId}")
+	public ResponseEntity<?> putMovieComment(@PathVariable("movieId") String movieId, 
+			@PathVariable("commentId") String commentId, @RequestBody CommentDTO comment) {
+		return ResponseEntity.ok().build();
+	}
+	
+	/**
+	 * Retorna os subcomentarios de um comentario de um filme em especifico
+	 * 
+	 * @param movieId
+	 *        O id do filme que sera pesquisado o comentario
+	 *        
+	 * @param commentId
+	 *        O id do comentario daquele filme
+	 *        
+	 * @param page
+	 *        A pagina que sera pesquisada contendo os filmes
+	 * 
+	 * @param limit
+	 *        O limite de itens por pagina
+	 *        
+	 * @return O objeto ResponseEntity contendo o comentario especifico do filme
+	 *         pesquisado ou um objeto do tipo ErrorDetailDTO contendo o codigo
+	 *         404 informando que aquele filme/comentario nao foi encontrado
+	 */
+	@GetMapping(value = "/{movieId}/comment/{commentId}/comments")
+	public ResponseEntity<?> getMovieComment(@PathVariable("movieId") String movieId, 
+			@PathVariable("commentId") String commentId, 
+			@RequestParam(value = "page", defaultValue = "1") String page,
+			@RequestParam(value = "limit", defaultValue = "5") String limit) {
+		return ResponseEntity.ok().build();
+	}
+	
+	/**
+	 * Insere um subcomentario para um comentario de um determinado filme
+	 * 
+	 * @param movieId
+	 *         O id do filme que sera inserido o comentario
+	 *         
+	 * @param comment
+	 *        O objeto do tipo comentario contendo as informacoes do comentario
+	 *        que sera inserido
+	 *        
+	 * @param commentId
+	 *        O id do comentario daquele filme      
+	 * 
+	 * @return O objeto ResponseEntity contendo o comentario, de determinado filme,
+	 *         que acabou de ser inserido ou um objeto do tipo ErrorDetailDTO 
+	 *         contendo o codigo 404 informando que aquele filme/comentario nao foi 
+	 *         encontrado
+	 */
+	@PostMapping(value = "/{movieId}/comment/{commentId}/comments")
+	public ResponseEntity<?> postMovieComment(@PathVariable("movieId") String movieId, 
+			@PathVariable("commentId") String commentId, @RequestBody CommentDTO comment) {
+		return ResponseEntity.ok().build();
+	}
+	
+	/**
 	 * Edita um comentario para determinado filme
 	 * 
 	 * @param movieId
@@ -118,34 +275,41 @@ public class MovieREST {
 	 *        
 	 * @param commentId
 	 *        O id do comentario daquele filme      
+	 *        
+	 * @param subCommentId
+	 *        O id do subcomentario daquele comentario pertencente a um filme   
 	 * 
 	 * @return O objeto ResponseEntity contendo o comentario, de determinado filme,
 	 *         que acabou de ser editado ou um objeto do tipo ErrorDetailDTO 
 	 *         contendo o codigo 404 informando que aquele filme nao foi encontrado
 	 */
-	@PutMapping(value = "/{movieId}/comments/{commentId}")
+	@PutMapping(value = "/{movieId}/comment/{commentId}/comments/{subCommentId}")
 	public ResponseEntity<?> putMovieComment(@PathVariable("movieId") String movieId, 
-			@PathVariable("commentId") String commentId, @RequestBody CommentDTO comment) {
+			@PathVariable("commentId") String commentId, @PathVariable("subCommentId") String subCommentId, 
+			@RequestBody CommentDTO comment) {
 		return ResponseEntity.ok().build();
 	}
 	
 	/**
-	 * Deleta um comentario para determinado filme
+	 * Deleta um subcomentario para determinado filme
 	 * 
 	 * @param movieId
-	 *        O id do filme que sera deletado o comentario
-	 *        
+	 *         O id do filme que sera editado o comentario
+	 *         
 	 * @param commentId
 	 *        O id do comentario daquele filme      
+	 *        
+	 * @param subCommentId
+	 *        O id do subcomentario daquele comentario pertencente a um filme   
 	 * 
 	 * @return O objeto ResponseEntity contendo o comentario, de determinado filme,
-	 *         que acabou de ser excluido ou um objeto do tipo ErrorDetailDTO 
+	 *         que acabou de ser editado ou um objeto do tipo ErrorDetailDTO 
 	 *         contendo o codigo 404 informando que aquele filme nao foi encontrado
 	 */
-	@DeleteMapping(value = "/{movieId}/comments/{commentId}")
+	@DeleteMapping(value = "/{movieId}/comment/{commentId}/comments/{subCommentId}")
 	public ResponseEntity<?> deleteMovieComment(@PathVariable("movieId") String movieId, 
-			@PathVariable("commentId") String commentId) {
+			@PathVariable("commentId") String commentId, @PathVariable("subCommentId") String subCommentId) {
 		return ResponseEntity.ok().build();
 	}
-
+	
 }

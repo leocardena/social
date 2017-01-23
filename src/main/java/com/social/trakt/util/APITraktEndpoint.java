@@ -9,8 +9,9 @@ package com.social.trakt.util;
  */
 public interface APITraktEndpoint {
 
-	public final String MOVIE = "/api/rest/trakt/movie";
-	public final String SHOW = "/api/rest/trakt/show";
+	public final String MOVIE = "/api/rest/trakt/movies";
+	public final String SHOW = "/api/rest/trakt/shows";
 	public final String SEARCH = "/api/rest/trakt/search";
-
+	public final String PERSON = "/api/rest/trakt/persons";
+	
 }

@@ -2,14 +2,12 @@
 package com.social.trakt.model;
 
 import java.util.List;
-import javax.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Generated("org.jsonschema2pojo")
 @JsonPropertyOrder({
     "title",
     "year",
@@ -31,7 +29,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "available_translations",
     "genres",
     "aired_episodes",
-    "images"
+    "images",
+    "cast",
+    "crew"
 })
 public class Show {
 
@@ -77,6 +77,10 @@ public class Show {
     private Integer airedEpisodes;
     @JsonProperty("images")
     private Images images;
+    @JsonProperty("cast")
+    private List<Cast> cast;
+    @JsonProperty("crew")
+    private Crew crew;
 
    
     @JsonProperty("title")
@@ -287,6 +291,26 @@ public class Show {
     @JsonProperty("images")
     public void setImages(Images images) {
         this.images = images;
+    }
+    
+    @JsonProperty("cast")
+    public List<Cast> getCast() {
+        return cast;
+    }
+
+    @JsonProperty("cast")
+    public void setCast(List<Cast> cast) {
+        this.cast = cast;
+    }
+
+    @JsonProperty("crew")
+    public Crew getCrew() {
+        return crew;
+    }
+
+    @JsonProperty("crew")
+    public void setCrew(Crew crew) {
+        this.crew = crew;
     }
 
     @Override

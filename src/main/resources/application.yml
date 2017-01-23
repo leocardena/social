@@ -13,6 +13,11 @@ spring:
     url: jdbc:mysql://localhost/SocialNetwork?useSSL=false
     username: root
     password: root
+    
+  http:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB 
 
 logging:
   level:
@@ -22,7 +27,7 @@ logging:
       hibernate.SQL: DEBUG
       hiberante.type.descriptor.sql.BasicBinder: TRACE
       eu.kielczewski: DEBUG
-                  
+
 # ===================================================================
 # Social specific properties
 # ===================================================================

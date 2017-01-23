@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.domain.ResponseAPI;
 import com.social.trakt.business.MovieTraktAPIBusiness;
+import com.social.trakt.business.PersonTraktAPIBusiness;
 import com.social.trakt.model.Movie;
 import com.social.trakt.util.APITraktEndpoint;
 
@@ -19,6 +20,9 @@ public class MovieTraktREST {
 
 	@Autowired
 	private MovieTraktAPIBusiness business;
+	
+	@Autowired
+	private PersonTraktAPIBusiness personBusiness;
 
 	/**
 	 * Returna os filmes populares do trakttv baseados na quantidade de rating e
@@ -63,10 +67,10 @@ public class MovieTraktREST {
 	 * @param extented detalhamento das informacoes retornadas
 	 * @return as pessoas envolvidas no filme
 	 */
-	@GetMapping(value = "/{movieId}/people")
+	@GetMapping(value = "/{movieId}/peoples")
 	public ResponseEntity<?> getAllPeopleForAMovie(@PathVariable("movieId") String movieId,
 			@RequestParam(value = "extended", required = false) String extented) {
-		return ResponseEntity.ok(business.getAllPeopleForAMovie(movieId, extented));
+		return ResponseEntity.ok(personBusiness.getAllPeopleForAMovie(movieId, extented));
 	}
 	
 	/**
@@ -100,6 +104,4 @@ public class MovieTraktREST {
 		return ResponseEntity.ok().headers(response.getHeaders()).body(response.getBody());
 	}
 	
-	
-
 }

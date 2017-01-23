@@ -17,6 +17,9 @@ public interface AccountBusiness {
 	public UserDTO getUserWithAuthorities();
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	public String saveAvatar(Long code, MultipartFile avatar);
+	public String saveAvatar(MultipartFile avatar);
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public void deleteAvatar();
 
 }

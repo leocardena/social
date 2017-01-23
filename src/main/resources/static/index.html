@@ -35,6 +35,8 @@
 	<script src="bower_components/angular-translate/angular-translate.min.js"></script>
 	<script src="bower_components/ng-youtube-embed/build/ng-youtube-embed.min.js"></script>
 	<script src="bower_components/angular-rateit/dist/ng-rateit.min.js"></script>
+	<script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+	<script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
 	
 	<!-- Core -->
 	<script src="app/core/social.main.module.js"></script>
@@ -57,7 +59,9 @@
 	<script src="app/services/trakt/trakt.services.module.js"></script>
 	<script src="app/search/search.module.js"></script>
 	<script src="app/title/title.module.js"></script>
-	<script src="/app/components/components.module.js"></script>
+	<script src="app/components/components.module.js"></script>
+	<script src="app/user/profile/user.profile.module.js"></script>
+	<script src="app/services/domain/domain.services.module.js"></script>
 
 	<!-- Blocks -->
 	<script src="app/blocks/interceptor/errorhandler.interceptor.js"></script>
@@ -78,6 +82,7 @@
 	<script src="app/services/region/base/country-base-url.value.js"></script>
 	<script src="app/services/auth/base/account-base-url.value.js"></script>
 	<script src="app/services/trakt/base/trakt-base-url.value.js"></script>
+	<script src="app/services/domain/base/domain-base-url.value.js"></script>
 	
 	<!-- Services -->
 	<script src="app/services/auth/register.service.js"></script>
@@ -98,6 +103,7 @@
 	<script src="app/services/tmdb/tmdb.show.service.js"></script>
 	<script src="app/services/tmdb/tmdb-random-title.service.js"></script>
 	<script src="app/services/tmdb/tmdb.person.service.js"></script>
+	<script src="app/services/domain/domain.avatar.service.js"></script>
 	
 	<!-- Auth -->
     <script src="app/services/auth/has-any-authority.directive.js"></script>
@@ -127,21 +133,29 @@
 	<script src="app/user/home/home.public.controller.js"></script>
 	<script src="app/user/home/home.principal.controller.js"></script>
 	
+	<!-- Profile -->
+	<script src="app/user/profile/user.profile.controller.js"></script>
+	<script src="app/user/profile/user.profile.routes.js"></script>
+
 	<!-- Search -->
 	<script src="app/search/search.state.js"></script>
 	<script src="app/search/search.controller.js"></script>
-	
-	<!-- Title -->
-	<script src="app/title/title.controller.js"></script>
-	<script src="app/title/title.routes.js"></script>
 	
 	<!-- Title - Movie -->
 	<script src="app/title/movie/title.movie.routes.js"></script>
 	<script src="app/title/movie/title.movie.controller.js"></script>
 	
+	<!-- Title - Show -->
+	<script src="app/title/show/title.show.routes.js"></script>
+	<script src="app/title/show/title.show.controller.js"></script>
+	<script src="app/title/show/title.show.season.controller.js"></script>
+	<script src="app/title/show/title.show.episode.controller.js"></script>
+	
 	<!-- Components -->
 	<script src="app/components/trailer/trailer-modal.service.js"></script>
 	<script src="app/components/trailer/trailler-modal.controller.js"></script>
+	<script src="app/components/upload/upload.service.js"></script>
+	<script src="app/components/upload/avatar-modal.controller.js"></script>
 	
 	<footer class="footer" ng-cloak></footer>
 	

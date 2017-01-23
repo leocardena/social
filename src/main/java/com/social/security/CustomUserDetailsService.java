@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 /**
  * Authenticate a user from the database.
  */
-@Component("userDetailsService")
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+@Component
+public class CustomUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-    private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
+    private final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
 
     @Inject
     private UserRepository userRepository;

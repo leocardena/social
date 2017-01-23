@@ -65,14 +65,4 @@ public interface MovieTraktAPIBusiness {
 	@PreAuthorize("permitAll")
 	public List<Released> getAllMovies(String start_date, int days, String extended, String query, String genres);
 	
-	/**
-	 * Retorna todas as pessoas envolvidas no filme
-	 * 
-	 * @param movieId o id do filme
-	 * @param extented quantidade de informacoes retornadas
-	 * @return o filme
-	 */
-	@PreAuthorize("permitAll")
-	public Movie getAllPeopleForAMovie(String movieId, String extented);
-	
 }

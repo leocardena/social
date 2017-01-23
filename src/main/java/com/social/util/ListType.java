@@ -8,10 +8,10 @@ package com.social.util;
  */
 public enum ListType {
 
-	WHATCHLIST("WhatchList"), 
-	WHATCHED("Whatched"),
-	CUSTOM("Custom"),
-	WHATCHING("Watching");
+	WHATCHLIST("whatchList"), 
+	WHATCHED("whatched"),
+	CUSTOM("custom"),
+	WHATCHING("watching");
 
 	private String valor;
 

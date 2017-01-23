@@ -1,10 +1,11 @@
 package com.social.trakt.business;
 
-import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import com.social.trakt.model.Movie;
+import com.social.trakt.model.MoviesPerson;
 import com.social.trakt.model.Person;
 import com.social.trakt.model.Show;
+import com.social.trakt.model.ShowsPerson;
 
 public interface PersonTraktAPIBusiness {
 	
@@ -12,15 +13,15 @@ public interface PersonTraktAPIBusiness {
 	public Person getSummaryPeople(String id, String extended);
 	
 	@PreAuthorize("permitAll")
-	public List<Movie> getMoviesPeople(String id, String extended);
+	public MoviesPerson getMoviesPeople(String id, String extended);
 	
 	@PreAuthorize("permitAll")
-	public List<Show> getShowsPeople(String id, String extended);
+	public ShowsPerson getShowsPeople(String id, String extended);
 	
 	@PreAuthorize("permitAll")
-	public List<Person> getPeopleMovie(String id, String extended);
+	public Movie getAllPeopleForAMovie(String id, String extended);
 	
 	@PreAuthorize("permitAll")
-	public List<Person> getPeopleShow(String id, String extended);
+	public Show getAllPeopleForAShow(String id, String extended);
 
 }
