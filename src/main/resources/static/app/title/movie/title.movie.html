@@ -6,6 +6,7 @@
 					vm.movie.images.poster.file_path : vm.imageNotAvailable}}" alt="" 
 				    class="imgPosterMovie img-responsive"/>
         		<button ng-show="vm.movie.trailer" class="btn btn-default center-block btnTrailerMovie" ng-click="vm.openTrailer()">
+        			<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
         			TRAILER
         		</button>
         	    <ul class="nav nav-pills nav-stacked navMovie text-center">
@@ -25,98 +26,102 @@
                 </div>
          
          		<!-- Rating -->
-         		<div class="col-md-12">
-                    		<div class="col-md-2">
-                    			<h4 class="text-center">Avaliação Geral</h4>
-                    		</div>
-                    		<div class="col-md-2">
-                    			<h4>{{vm.movie.rating}}</h4>
-                    		</div>
-                    		<div class="col-md-2">
-                    			<h4>Total de avaliações: 500</h4>
-                    		</div>
-                    		<div>
-                    			<p>Dê sua avaliação:</p>
+         		<div class="col-md-12 ratingMovie">
+                    		<div class="col-md-4 text-center ratingText">
+                    			<h4 class="">Deixe sua avaliação: </h4>
                     			<ng-rate-it 
                     				ng-model="vm.movie.userRating" 
 									resetable="false"
 									step="1"
 									rated="vm.evaluate">
 								</ng-rate-it>
-                    		  
                     		</div>
+                    		
+                    		<div class="col-md-4">
+                    			<h4 class="text-center ratingText ratingTextMargin">Avaliação Geral: {{vm.movie.rating}}</h4>
+                    		</div>
+                    		
+                    		<div class="col-md-4">
+                    			<h4 class="text-center ratingText ratingTextMargin">Total de avaliações: 500</h4>
+                    		</div>
+                    		
                 </div>
                     	
                     	<!-- Overview-->
-                   
                     	<div class="overviewMovie col-md-12">
 	                      
-	                       	<p class="overviewText clearfix">{{vm.movie.overview}}</p>
-	                       
-	                       		<p class="col-md-3">Lançamento: {{vm.movie.released | date:'dd/MM/yyyy'}}</p>
-	                       		<p class="col-md-3">Duração: {{vm.movie.runtime}} minutos</p>
-	                       		<p class="col-md-3">
-	                       			Gênero(s): 
+		                       	<div class="overviewText">
+		                       		<p> {{vm.movie.overview}}</p>
+		                       	</div>
+		  
+		                       	<div class="col-md-3">
+			                       		<span style="font-weight: 900;">Lançamento:</span>
+			                       		<span>{{vm.movie.released | date:'dd/MM/yyyy'}} </span>
+		                       	</div>
+		                       	
+	                       		<div class="col-md-3">
+		                       		 <span style="font-weight: 900;"> Duração: </span>
+		                       		  <span>{{vm.movie.runtime}} minutos.</span>
+	                       		</div>
+	                       		
+	                       		<div class="col-md-3">
+	                       			<span style="font-weight: 900;"> Gênero(s): </span>
 	                       			<div ng-repeat="genre in vm.movie.genres">
 	                       				{{genre | translate}}, 
 	                       			</div>
-	                       		</p>
+	                       		</div>
 	                       	
-	                   
-	                       		<p class="col-md-3">Diretor {{vm.movie.crew.directing[0].person.name}}</p>
-	                       		<a ng-show="vm.movie.homepage" class="col-md-3" ng-href="{{vm.movie.homepage}}" 
-	                       			target="_blank">
-	                       			Página Oficial
-	                       		</a>
-	                 
+	                   			<div class="col-md-3">
+		                       		<span style="font-weight: 900;">Diretor:</span> 
+		                       		<span>{{vm.movie.crew.directing[0].person.name}} </span>
+		                       	<br>
+		                       		<a ng-show="vm.movie.homepage" ng-href="{{vm.movie.homepage}}" 
+		                       			target="_blank">
+		                       			Página Oficial
+		                       		</a>
+	                 			</div>
 	                       	
-	                       	<div class="col-md-12"> 	
+	                       	
 	                       	<!-- Actors -->
+	                       	<div class="col-md-12"> 	
 	                       
-	                       		<p>Atores</p>
+	                       		<p style="font-weight: 900;">Atores:</p>
 	                       
 	                       		<div class="col-md-12 actorInformationMovie">
 		                       	    <div class="col-md-1 moreActorMovie">
-		                       			<button ng-click="vm.loadMore('less')" ng-disabled="vm.first">-</button>
+		                       			<button ng-click="vm.loadMore('less')" ng-disabled="vm.first"><</button>
 		                       		</div>
 		                       		
-		                       		<div class="">
-		                       		<div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt">
-		                       			<div class="col-md-2 center-text">
+		                       		<div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt" class="col-md-2 center-text" >
+		                       					
 		                       					<img ng-src="{{cast.person.image ? cast.person.image : vm.imageNotAvailable}}" 
-		                       						style="height: 100%;" class="img-responsive imgActorMovie">
-		                       					<p>{{cast.character}}</p>
-		                       					<p>{{cast.person.name}}</p>
-		                       				
-		                       			</div>
+		                       						class="img-responsive imgActorMovie">
+		                       					<span class="nameActorMovie"> {{cast.person.name}} </span>
+		                       					<span class="nameCharacterMovie"> {{cast.character}}</span>	
 		                       		</div>
-	                       		</div>
 	                       		
 	                       		<div class="col-md-1 lessActorMovie">
-	                       			 <button ng-click="vm.loadMore('more')" ng-disabled="vm.last">+</button>
+	                       			 <button ng-click="vm.loadMore('more')" ng-disabled="vm.last">></button>
 	                       		</div>
 	                       		
+	                       		</div>
 	                       	</div>
-	                       		</div>
 	                       	
+	                       	<!-- Related Movies -->
+	                       	<div class="col-md-12 divRelatedMovies"> 
 	                       	
-	                       	<div class="col-md-12"> 
-	                       			<p>Filmes Relacionados</p>
-	                       		
-	                       		
-	                       		
-	                       			<div ng-repeat="movie in vm.movie.relatedMovies track by movie.ids.trakt">
-	                       				<div class="col-md-2" ng-click="vm.exibirTitulo(movie.ids.slug, movie)">
-	                       					<div class="row">
-	                       					<img ng-src="{{movie.images.poster.file_path ? movie.images.poster.file_path : 
-	                       						vm.imageNotAvailable}}" 
-	                       						style="height: 120px; width: 80px">
-	                       					</div>
-	                       					<div class="row">
-	                       						<p>{{movie.title}}</p>
-	                       					</div>
-	                       				</div>
-	                       			</div>
+	                       			<p class="relatedMovieTitle">Filmes Relacionados:</p>
+	                       			
+	                       			<div class="col-md-11  col-md-offset-1 relatedMovies">
+		                       			<div ng-repeat="movie in vm.movie.relatedMovies track by movie.ids.trakt">
+		                       				<div class="col-md-2" ng-click="vm.exibirTitulo(movie.ids.slug, movie)">
+		                       					<img ng-src="{{movie.images.poster.file_path ? movie.images.poster.file_path : 
+		                       						vm.imageNotAvailable}}" 
+		                       						class="imgRelatedMovie">
+		                       						<p class="nameRelatedMovie">{{movie.title}}</p>
+		                       				</div>
+		                       			</div>
+		                       		</div>
 	                       	</div>
 	                       		
 	                       	</div>
@@ -126,7 +131,7 @@
                        	
                        	
                        	
-                       			<h3>Comentários</h3>
+                       		<h3>Comentários</h3>
                        		
                        		<div class="row col-md-8">
 		                    	<textarea

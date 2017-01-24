@@ -6,20 +6,23 @@
 		border-style: solid;
 		border-width: 10px;
 		border-radius: 20px;
-		border-color: $black;
+		border-color: rgba(0, 0, 0, 1);
 		height: 300px;
 		margin: 0 auto;
 	}
 	.btnTrailerMovie{
-		margin-top: 15px;
 		color: $white;
 		font-size: 20px;
 		width: 100%;
-		background-color: $black;
-		margin: 5px auto;
+		background-color: rgba(0, 0, 0, 1);
+		margin: 5px auto 0 auto;
 		border-color: $black;
+		.glyphicon-play{
+			color: $red-primary;
+		}
 	}
 	.navMovie{
+		margin-top: 5px;
 		background-color: $red-primary;
 		font-size: 20px;
 		.listNavMovie{
@@ -31,7 +34,7 @@
 			border-radius: 0;
 			background-color: $red-secondary;
 		}
-		.listNavMovie > active{
+		.listNavMovie:active{
 			color: $white;
 			border-radius: 0;
 			background-color: $red-secondary;
@@ -54,18 +57,64 @@
 		font-size: 20px;
 		text-shadow: -2px 2px 1px #000;
 	}
+	.ratingMovie{
+		margin-top: 20px;
+		background-color: rgba(0, 0, 0, 0.7);
+			.ratingText{
+			color: $white;
+			padding-bottom: 7px;
+				.ratingTextMargin{
+					margin-top: 7px;
+				}
+			}	
+	}
 	.overviewMovie{
-		background-color: $white;
+		background-color: rgba(255, 255, 255, 1);
 		.overviewText{
-			margin: 30px;
+			margin: 15px;
 			text-align: justify;
    			text-justify: inter-word;
 		}
+		.divRelatedMovies{
+			margin-bottom: 50px;
+			.relatedMovieTitle{
+				font-weight: 900;
+				margin-top: 15px;
+				margin-bottom: 7px;
+			}
+			.relatedMovies{
+				margin-top: 15px;
+				.nameRelatedMovie{
+					color: $black;
+					font-size: 12px;
+					display: block;
+					margin: 0 auto;
+				}
+				.imgRelatedMovie{
+					height: 200px;
+					margin: 0 auto;
+				}
+			}
+		}
 		.actorInformationMovie{
-			background-color: #A9A9A9;
-			height: 200px;
-			.moreActorMovie, .lessActorMovie{
-				top: 45%;
+			padding: 5px;
+			background-color: rgba(0, 0, 0, 0.8);
+			height: auto;
+			.nameActorMovie{
+				color: $white;
+				font-size: 12px;
+				display: block;
+				margin: 0 auto;
+			}
+			.nameCharacterMovie{
+				color: $white;
+				font-size: 10px;
+				display: block;
+				margin: 0 auto;
+			}
+			.imgActorMovie{
+				height: 150px;
+				margin: 0 auto;
 			}
 		}
 	}
