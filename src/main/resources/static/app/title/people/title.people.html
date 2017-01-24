@@ -1,0 +1,60 @@
+<div id="wrapper">
+
+	<!-- Sidebar -->
+	<div class="col-md-2 col-md-offset-1 sidebarPerson">
+		<img
+			ng-src="{{vm.people.images.file_path ? 
+					vm.people.images.file_path : vm.imageNotAvailable}}"
+			alt="" class="imgPosterPerson img-responsive" />
+	</div>
+
+	<!-- Page content -->
+	<div class=" row col-md-8 pageContentPerson clearfix">
+
+		<!-- People Name -->
+		<div class="col-md-12">
+			<span class="peopleName">{{vm.people.name}}</span> 
+		</div>
+
+		<!-- Rating -->
+		<div class="col-md-12">
+			<div class="col-md-2">
+				<h4 class="text-center">Avaliação Geral</h4>
+			</div>
+			<div class="col-md-2">
+				<h4>4.3</h4>
+			</div>
+			<div class="col-md-2">
+				<h4>Total de avaliações: 500</h4>
+			</div>
+			<div>
+				<p>Dê sua avaliação:</p>
+				<ng-rate-it ng-model="vm.people.userRating" resetable="false"
+					step="1" rated="vm.evaluate"> 
+				</ng-rate-it>
+			</div>
+		</div>
+		
+		<!-- Age -->
+		<div class="col-md-2">
+			<p>Idade: {{vm.people.age}}</p>
+		</div>
+		
+		<!-- Born -->
+		<div class="col-md-10">
+			<p>Nascimento: {{vm.people.birthday | date:'longDate'}} em {{vm.people.birthplace}}</p>
+		</div>
+		
+		<!-- HomePage -->
+		<div class="col-md-12" ng-show="vm.people.homepage">
+			<p> <a ng-href="{{vm.people.homepage}}" target="_blank">Página Oficial</a> </p>
+		</div>
+		
+		<!-- Biografy -->
+		<div class="col-md-12">
+			<p>{{vm.people.biography}}</p>
+		</div>
+
+	</div>
+	
+</div>
