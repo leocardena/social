@@ -8,11 +8,11 @@
 	
 	TitlePeopleController.$inject = ['personSummaryPrepService', 'personMoviesPrepService',
 	                                 'personShowsPrepService', '$stateParams', 'TmdbPersonService', 'TmdbMovieService',
-	                                 'TmdbShowService'];
+	                                 'TmdbShowService', '$state'];
 	
 	/*@ngInject*/
 	function TitlePeopleController(personSummaryPrepService, personMoviesPrepService,
-			personShowsPrepService, $stateParams, TmdbPersonService, TmdbMovieService, TmdbShowService) {
+			personShowsPrepService, $stateParams, TmdbPersonService, TmdbMovieService, TmdbShowService, $state) {
 		
 		var vm = this;
 		vm.people = personSummaryPrepService;
@@ -31,6 +31,8 @@
 		/*methods*/
 		vm.loadMoreActor = _loadMoreActor;
 		vm.loadMoreProduction = _loadMoreProduction;
+		vm.goToMovie = _goToMovie;
+		vm.goToShow = _goToShow;
 		
 		_init();
 		
@@ -44,7 +46,7 @@
 			function _checkPeopleImages() {
 				if ($stateParams.people) {
 					if ($stateParams.people.ids.slug === $stateParams.traktSlug) {
-						vm.people.images = $stateParams.people.images.poster;
+						vm.people.images = $stateParams.people.images;
 					} else {
 						_loadPersonImages();
 					}
@@ -185,6 +187,20 @@
         		data.pos = pos;
         		return data;
         	});
+		}
+		
+		function _goToMovie(movie) {
+			$state.go('movie', {
+				traktSlug : movie.ids.slug,
+				title: movie
+			});
+		}
+		
+		function _goToShow(show) {
+			$state.go('show', {
+				traktSlug : show.ids.slug,
+				title: show
+			});
 		}
 		
 	}
