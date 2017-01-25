@@ -7,23 +7,30 @@
 			.controller('TitlePeopleController', TitlePeopleController);
 	
 	TitlePeopleController.$inject = ['personSummaryPrepService', 'personMoviesPrepService',
-	                                 'personShowsPrepService', '$stateParams', 'TmdbPersonService'];
+	                                 'personShowsPrepService', '$stateParams', 'TmdbPersonService', 'TmdbMovieService',
+	                                 'TmdbShowService'];
 	
 	/*@ngInject*/
 	function TitlePeopleController(personSummaryPrepService, personMoviesPrepService,
-			personShowsPrepService, $stateParams, TmdbPersonService) {
+			personShowsPrepService, $stateParams, TmdbPersonService, TmdbMovieService, TmdbShowService) {
 		
 		var vm = this;
 		vm.people = personSummaryPrepService;
-		vm.people.actor = personMoviesPrepService.cast.concat(personShowsPrepService.cast);
+		vm.people.actor = personShowsPrepService.cast.concat(personMoviesPrepService.cast);
 		vm.people.production = personMoviesPrepService.crew.production.concat(personShowsPrepService.crew.production);
 		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
-		vm.startActor = 0;
-		vm.startProduction = 0;
-		vm.finalActor = vm.people.actor.length;
-		vm.finalProduction = vm.people.production.length;	
-		var maxVisitedActor = vm.finalActor;
-		var maxVisitedProduction = vm.finalProduction;
+		var startActor = 0;
+		var startProduction = 0;
+		var endActor = vm.people.actor.length >= 8 ? 8 : vm.people.actor.length;
+		var endProduction = vm.people.production.length >= 8 ? 8 : vm.people.production.length
+		var maxVisualisedActor = endActor;
+		var maxVisitedProduction = endProduction;
+		vm.loadMoreActorIsDisabled = vm.people.actor.length == endActor ? true : false;
+		vm.loadMoreProductionIsDisabled = vm.people.production.length == endProduction ? true : false;
+		
+		/*methods*/
+		vm.loadMoreActor = _loadMoreActor;
+		vm.loadMoreProduction = _loadMoreProduction;
 		
 		_init();
 		
@@ -31,6 +38,8 @@
 
 			_checkPeopleImages();
 			_calculateAge(new Date(vm.people.birthday));
+			_loadMoviesAndShowsActorImages();
+			_loadMoviesAndShowProductionImages();
 			
 			function _checkPeopleImages() {
 				if ($stateParams.people) {
@@ -55,6 +64,94 @@
 				  vm.people.age = age;
 			}
 			
+			function _loadMoviesAndShowsActorImages() {
+				for (var i = startActor; i < endActor; i++) {
+					if (vm.people.actor[i].movie) {
+						_loadMovieImage(vm.people.actor[i].movie.ids.tmdb, i).then(function (data) {
+							vm.people.actor[data.pos].movie.images = data;
+						})
+					} else {
+						_loadShowImage(vm.people.actor[i].show.ids.tmdb, i).then(function (data) {
+							vm.people.actor[data.pos].show.images = data;
+						})
+					}
+				}
+				vm.displayActorArray = vm.people.actor.slice(startActor, endActor);
+				startActor = endActor;
+			}
+			
+			function _loadMoviesAndShowProductionImages() {
+				for (var i = startProduction; i < endProduction; i++) {
+					if (vm.people.production[i].movie) {
+						_loadMovieImage(vm.people.production[i].movie.ids.tmdb, i).then(function (data) {
+							vm.people.production[data.pos].movie.images = data;
+						})
+					} else {
+						_loadShowImage(vm.people.production[i].show.ids.tmdb, i).then(function (data) {
+							vm.people.production[data.pos].show.images = data;
+						})
+					}
+				}
+				vm.displayProductionArray = vm.people.production.slice(startProduction, endProduction);
+				startProduction = endProduction;
+			}
+			
+		}
+		
+		function _loadMoreActor() {
+			if (endActor == vm.people.actor.length) {
+					return;
+			}
+			var valueToAdd = ((endActor + 4) <= vm.people.actor.length) ? 4 : (vm.people.actor.length - endActor);
+			
+			if (valueToAdd !== 4)
+				vm.loadMoreActorIsDisabled = true;
+			
+			endActor += valueToAdd;
+
+			for (var i = startActor; i < endActor; i++) {
+				if (vm.people.actor[i].movie) {
+					_loadMovieImage(vm.people.actor[i].movie.ids.tmdb, i).then(function (data) {
+						vm.people.actor[data.pos].movie.images = data;
+					})
+				} else {
+					_loadShowImage(vm.people.actor[i].show.ids.tmdb, i).then(function (data) {
+						vm.people.actor[data.pos].show.images = data;
+					})
+				}
+			}
+			
+			startActor = endActor;
+			
+			vm.displayActorArray = vm.people.actor.slice(0, endActor);
+		}
+		
+		function _loadMoreProduction() {
+			if (endProduction == vm.people.production.length) {
+					return;
+			}
+			var valueToAdd = ((endProduction + 4) <= vm.people.production.length) ? 4 : (vm.people.production.length - endProduction);
+			
+			if (valueToAdd !== 4)
+				vm.loadMoreProductionIsDisabled = true;
+			
+			endProduction += valueToAdd;
+			
+			for (var i = startProduction; i < endProduction; i++) {
+				if (vm.people.production[i].movie) {
+					_loadMovieImage(vm.people.production[i].movie.ids.tmdb, i).then(function (data) {
+						vm.people.production[data.pos].movie.images = data;
+					})
+				} else {
+					_loadShowImage(vm.people.production[i].show.ids.tmdb, i).then(function (data) {
+						vm.people.production[data.pos].show.images = data;
+					})
+				}
+			}
+				
+			startProduction = endProduction;
+			
+			vm.displayProductionArray = vm.people.production.slice(0, endProduction);
 		}
 		
 		function _loadPersonImages() {
@@ -64,6 +161,30 @@
 			}).$promise.then(function (data) {
 				vm.people.images = data;
     		});
+		}
+		
+		function _loadMovieImage(tmdb, pos) {
+	        return TmdbMovieService.getMovieImage({
+	        	movieId: tmdb,
+	        	posterSize: 'w300',
+				backdropSize: 'w1280',
+				language: 'pt'
+	        }).$promise.then(function (data) {
+        		data.pos = pos;
+	        	return data;
+	        });
+		}
+		
+		function _loadShowImage(tmdb, pos) {
+			return TmdbShowService.getShowImage({
+        		showId: tmdb,
+        		posterSize: 'w300',
+				backdropSize: 'w1280',
+				language: 'pt'
+        	}).$promise.then(function (data) {
+        		data.pos = pos;
+        		return data;
+        	});
 		}
 		
 	}

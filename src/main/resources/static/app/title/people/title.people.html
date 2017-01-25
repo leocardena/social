@@ -54,6 +54,86 @@
 		<div class="col-md-12">
 			<p>{{vm.people.biography}}</p>
 		</div>
+		
+		<!-- Ator's job -->
+		<label class="col-md-12">Ator</label>
+		<div ng-repeat="actor in vm.displayActorArray" class="col-md-3">
+			<div ng-if="actor.movie">
+				<img ng-src="{{actor.movie.images.poster.file_path ? 
+					actor.movie.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+				<div class="movieAndShowTextBoxPersonImages">
+					<p class="col-md-12 text-center control-label">
+						{{actor.movie.title}}
+					</p>
+					<p class="col-md-12 text-center control-label">
+						{{actor.movie.year}}
+					</p>
+					<p class="col-md-12 text-center control-label" ng-show="actor.character">
+						"{{actor.character}}"
+					</p>
+				</div>
+			</div>
+			
+			<div ng-if="actor.show">
+				<img ng-src="{{actor.show.images.poster.file_path ? 
+					actor.show.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+				<div class="movieAndShowTextBoxPersonImages">
+					<p class="col-md-12 text-center control-label">
+						{{actor.show.title}}
+					</p>
+					<p class="col-md-12 text-center control-label">
+						{{actor.show.year}}
+					</p>
+					<p class="col-md-12 text-center control-label" ng-show="actor.character">
+						"{{actor.character}}"
+					</p>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-default col-md-offset-5" 
+			ng-click="vm.loadMoreActor()" ng-disabled="vm.loadMoreActorIsDisabled">
+			Carregar mais
+		</button>
+		
+		<!-- Ator's production -->
+		<label class="col-md-12">Produção</label>
+		<div ng-repeat="actor in vm.displayProductionArray" class="col-md-3">
+			<div ng-if="actor.movie">
+				<img ng-src="{{actor.movie.images.poster.file_path ? 
+					actor.movie.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+				<div class="movieAndShowBoxTextPersonImages">
+					<p class="col-md-12">
+						{{actor.movie.title}}
+					</p>
+					<p class="col-md-12">
+						{{actor.movie.year}}
+					</p>
+					<p class="col-md-12" ng-show="actor.job">
+						"{{actor.job}}"
+					</p>
+				</div>
+			</div>
+			
+			<div ng-if="actor.show">
+				<img ng-src="{{actor.show.images.poster.file_path ? 
+					actor.show.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+				<div class="movieAndShowBoxTextPersonImages">
+					<p class="col-md-12">
+						{{actor.show.title}}
+					</p>
+					<p class="col-md-12">
+						{{actor.show.year}}
+					</p>
+					<p class="col-md-12" ng-show="actor.job">
+						"{{actor.job}}"
+					</p>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-default col-md-offset-5" 
+			ng-click="vm.loadMoreProduction()" ng-disabled="vm.loadMoreProductionIsDisabled">
+			Carregar mais
+		</button>
 
 	</div>
 	
