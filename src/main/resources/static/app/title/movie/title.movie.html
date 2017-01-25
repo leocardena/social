@@ -1,32 +1,33 @@
 <div id="wrapper">
 
         <!-- Sidebar -->
-        <div class="col-md-2 col-md-offset-1 sidebarMovie">
+        <div class="col-md-2 col-md-offset-1 genericSidebar">
 	        	<img ng-src="{{vm.movie.images.poster.file_path ? 
 					vm.movie.images.poster.file_path : vm.imageNotAvailable}}" alt="" 
-				    class="imgPosterMovie img-responsive"/>
-        		<button ng-show="vm.movie.trailer" class="btn btn-default center-block btnTrailerMovie" ng-click="vm.openTrailer()">
+				    class="imgPosterSidebar img-responsive"/>
+        		<button ng-show="vm.movie.trailer" class="btn btn-default center-block btnTrailerSidebar" ng-click="vm.openTrailer()">
         			<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
         			TRAILER
         		</button>
-        	    <ul class="nav nav-pills nav-stacked navMovie text-center">
-	                <li class="listNavMovie" role="presentation"><a class="listNavMovie" href="#">Assistido</a></li>
-	                <li class="listNavMovie" role="presentation"><a class="listNavMovie" href="#">Quero Assistir</a></li>
-	                <li  role="presentation"><a class="listNavMovie" href="#">Outras Listas</a></li>
+        	    <ul class="nav nav-pills nav-stacked navSidebar text-center">
+	                <li class="listNav" role="presentation"><a class="listNav" href="#">Assistido</a></li>
+	                <li class="listNav" role="presentation"><a class="listNav" href="#">Quero Assistir</a></li>
+	                <li  role="presentation"><a class="listNav" href="#">Outras Listas</a></li>
             	</ul>
         </div>
+        
 
         <!-- Page content -->
-        <div id="page-content-wrapper" class=" row col-md-8 pageContentMovie clearfix">
+        <div id="page-content-wrapper" class=" row col-md-8 pageContent clearfix">
     			
     			<!-- Title -->
     			<div class="col-md-12">
-                    <span class="titleMovie">{{vm.movie.title}}</span>
-                    <span class="yearMovie">({{vm.movie.year}})</span>
+                    <span class="title">{{vm.movie.title}}</span>
+                    <span class="year">({{vm.movie.year}})</span>
                 </div>
          
          		<!-- Rating -->
-         		<div class="col-md-12 ratingMovie">
+         		<div class="col-md-12 rating">
                     		<div class="col-md-4 text-center ratingText">
                     			<h4 class="">Deixe sua avaliação: </h4>
                     			<ng-rate-it 
@@ -87,38 +88,39 @@
 	                       
 	                       		<p style="font-weight: 900;">Atores:</p>
 	                       
-	                       		<div class="col-md-12 actorInformationMovie">
-		                       	    <div class="col-md-1 moreActorMovie">
+	                       		<div class="col-md-12 actorInformation">
+		                       	    <div class="col-md-1 moreActor">
 		                       			<button ng-click="vm.loadMore('less')" ng-disabled="vm.first"><</button>
 		                       		</div>
 		                       		
 		                       		<div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt" class="col-md-2 center-text" >
 		                       					
 		                       					<img ng-src="{{cast.person.image ? cast.person.image : vm.imageNotAvailable}}" 
-		                       						class="img-responsive imgActorMovie">
-		                       					<span class="nameActorMovie"> {{cast.person.name}} </span>
-		                       					<span class="nameCharacterMovie"> {{cast.character}}</span>	
+		                       						class="img-responsive imgActor">
+		                       					<span class="nameActor"> {{cast.person.name}} </span>
+		                       					<span class="nameCharacter"> {{cast.character}}</span>	
 		                       		</div>
 	                       		
-	                       		<div class="col-md-1 lessActorMovie">
+	                       		<div class="col-md-1 lessActor">
 	                       			 <button ng-click="vm.loadMore('more')" ng-disabled="vm.last">></button>
 	                       		</div>
 	                       		
 	                       		</div>
 	                       	</div>
 	                       	
-	                       	<!-- Related Movies -->
-	                       	<div class="col-md-12 divRelatedMovies"> 
 	                       	
-	                       			<p class="relatedMovieTitle">Filmes Relacionados:</p>
+	                       	<!-- Related Movies -->
+	                       	<div class="col-md-12 divRelated"> 
+	                       	
+	                       			<p class="relatedTitle">Filmes Relacionados:</p>
 	                       			
-	                       			<div class="col-md-11  col-md-offset-1 relatedMovies">
+	                       			<div class="col-md-11  col-md-offset-1 related">
 		                       			<div ng-repeat="movie in vm.movie.relatedMovies track by movie.ids.trakt">
 		                       				<div class="col-md-2" ng-click="vm.exibirTitulo(movie.ids.slug, movie)">
 		                       					<img ng-src="{{movie.images.poster.file_path ? movie.images.poster.file_path : 
 		                       						vm.imageNotAvailable}}" 
-		                       						class="imgRelatedMovie">
-		                       						<p class="nameRelatedMovie">{{movie.title}}</p>
+		                       						class="imgRelated">
+		                       						<p class="nameRelated">{{movie.title}}</p>
 		                       				</div>
 		                       			</div>
 		                       		</div>

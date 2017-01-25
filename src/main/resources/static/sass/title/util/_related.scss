@@ -1,0 +1,21 @@
+.divRelated{
+	margin-bottom: 50px;
+	.relatedTitle{
+		font-weight: 900;
+		margin-top: 15px;
+		margin-bottom: 7px;
+	}
+	.related{
+		margin-top: 15px;
+		.nameRelated{
+			color: $black;
+			font-size: 12px;
+			display: block;
+			margin: 0 auto;
+		}
+		.imgRelated{
+			height: 180px;
+			margin: 0 auto;
+		}
+	}
+}
