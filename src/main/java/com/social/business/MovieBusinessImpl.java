@@ -13,6 +13,8 @@ import com.social.domain.Movie;
 import com.social.domain.Profile;
 import com.social.domain.QMovie;
 import com.social.domain.QProfile;
+import com.social.domain.QRating;
+import com.social.domain.Rating;
 import com.social.domain.User;
 import com.social.repository.MovieRepository;
 import com.social.repository.ProfileRepository;
@@ -49,12 +51,16 @@ public class MovieBusinessImpl implements MovieBusiness {
 //		Movie resultMovie = movieRepository.findOneById(1L);
 //		Optional<User> user = userRepository.findOneById(1L);
 		
+//		JPAQueryFactory query = new JPAQueryFactory(entity);
+//		List<Profile> resultMovie = query.selectFrom(QProfile.profile)
+//				.fetch();
+		
 		JPAQueryFactory query = new JPAQueryFactory(entity);
-		List<Profile> resultMovie = query.selectFrom(QProfile.profile)
+		List<Rating> resultRating = query.selectFrom(QRating.rating)
 				.fetch();
 				
 
-		System.out.println("Total: "+resultMovie.size());
+		System.out.println("Total: "+resultRating.size());
 //		System.out.println("Nome do filme: "+resultMovie.get(0).getName());
 //		System.out.println("Total votos do filme: "+resultMovie.get(0).getVotes());
 //		System.out.println("Id Rating: "+resultMovie.get(0).getRatingParent().getId());
@@ -62,16 +68,15 @@ public class MovieBusinessImpl implements MovieBusiness {
 //		System.out.println("Nota para o filme: "+resultMovie.get(0).getRatingParent().getRating().getNote());
 //		System.out.println("Nome da pessoa: "+resultMovie.get(0).getRatingParent().getRating().getProfile().getName());
 				
-		resultMovie.forEach((profile) -> {
+		resultRating.forEach((rating) -> {
 			System.out.println("--------------------------------------------------");
-			System.out.println("ITERATOR user username: "+profile.getUser().getUsername());
-			System.out.println("ITERATOR profile name: "+profile.getName());
-			System.out.println("ITERATOR profile id: "+profile.getId());
-			System.out.println("ITERATOR profile tamanho ratings: "+profile.getRatings().get(0).getId());
-			profile.getRatings().forEach((rating) -> {
-				System.out.println("	ITERATOR rating id: "+rating.getId());
-				System.out.println("	ITERATOR ratingParent id: "+rating.getIdRatingParent().getId());
-			});			
+			System.out.println("ITERATOR user username: "+rating.getId());
+			System.out.println("ITERATOR profile name: "+rating.getIdRatingParent().getId());
+			System.out.println("ITERATOR profile id: "+rating.getProfile().getName());
+//			profile.getRatings().forEach((rating) -> {
+//				System.out.println("	ITERATOR rating id: "+rating.getId());
+//				System.out.println("	ITERATOR ratingParent id: "+rating.getIdRatingParent().getId());
+//			});			
 			
 //			System.out.println("ITERATOR pessoa id: "+profile.getRatingParent().getRating().getProfile().getId());
 //			System.out.println("ITERATOR pessoa name: "+profile.getRatingParent().getRating().getProfile().getName());
