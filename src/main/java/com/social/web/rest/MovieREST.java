@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.business.MovieBusiness;
+import com.social.domain.Movie;
 import com.social.web.rest.dto.CommentDTO;
 import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.util.APIEndpoint;
@@ -79,6 +80,20 @@ public class MovieREST {
 	@PostMapping(value = "/{slug}/user-rating")
 	public ResponseEntity<?> postUserRating(@PathVariable("slug") String slug, 
 			@RequestBody RatingDTO rating) {
+		return ResponseEntity.ok().build();
+	}
+	
+	@PostMapping(value = "/insert-movie")
+	public ResponseEntity<?> postMovie(Movie movie){
+		
+		movie = new Movie();
+		movie.setName("Filme Teste");
+		movie.setImdb("Filme imdb");
+		movie.setSlug("Filme slug");
+		movie.setVotes(9);
+		movie.setHomePage("Filme Home page");
+		movie.setTrailer("Filme Trailer");
+		movieBusiness.insert(movie);
 		return ResponseEntity.ok().build();
 	}
 	

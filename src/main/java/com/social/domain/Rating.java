@@ -1,9 +1,7 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +23,7 @@ public class Rating {
 	@Column(name = "idrating")
 	private long id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="idprofile")
 	private Profile profile;
 	

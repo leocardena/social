@@ -22,4 +22,7 @@ public interface MovieBusiness {
 	
 	@PreAuthorize("permitAll")
 	public long getAvgRatingById(Long idRatingParent);
+	
+	@PreAuthorize("permitAll")
+	public void insert(Movie movie);
 }
