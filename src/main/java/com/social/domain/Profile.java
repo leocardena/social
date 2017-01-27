@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ public class Profile extends People {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idprofile")
-	private long id;
+	private Long id;
 	
 	@Column(name = "genre")
 	private String genre;
@@ -41,21 +42,24 @@ public class Profile extends People {
 					@JoinColumn(name = "idcomment", referencedColumnName = "idcomment") })
 	private List<Comment> comments = new ArrayList<>();
 	
-	@ManyToMany
-	@JoinTable(name = "profileratings", joinColumns = {
-			@JoinColumn(name = "idprofile", referencedColumnName = "idprofile") }, inverseJoinColumns = {
-					@JoinColumn(name = "idrating", referencedColumnName = "idrating") })
+//	@OneToMany
+//	@JoinTable(name = "profileratings", joinColumns = {
+//			@JoinColumn(name = "idprofile", referencedColumnName = "idprofile") }, inverseJoinColumns = {
+//					@JoinColumn(name = "idrating", referencedColumnName = "idrating") })
+//	private List<Rating> ratings = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "profile")
 	private List<Rating> ratings = new ArrayList<>();
 	
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

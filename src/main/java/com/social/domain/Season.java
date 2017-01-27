@@ -25,19 +25,19 @@ public class Season {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idseason")
-	private long id;
+	private Long id;
 	
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "rating")
-	private long rating;
+/*	@Column(name = "rating")
+	private long rating;*/
 	
 	@Column(name = "votes")
 	private long votes;
 	
 	@ManyToOne
-	@JoinColumn(name="idtvshow")
+	@JoinColumn(name = "idtvshow")
 	private TvShow tvShow;
 	
 	@OneToMany(fetch = FetchType.LAZY)
@@ -56,21 +56,21 @@ public class Season {
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public long getRating() {
+/*	public long getRating() {
 		return rating;
 	}
 
 	public void setRating(long rating) {
 		this.rating = rating;
-	}
+	}*/
 
 	public long getVotes() {
 		return votes;

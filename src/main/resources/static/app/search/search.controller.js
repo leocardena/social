@@ -126,7 +126,11 @@
 					break;
 				case 'episode':
 					break;
-				case 'people':
+				case 'person':
+					$state.go('people', {
+						'people' : title, 
+						'traktSlug' : traktSlug
+					});
 					break;
         	}
         }

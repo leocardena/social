@@ -1,6 +1,7 @@
 package com.social.web.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.business.MovieBusiness;
+import com.social.domain.Movie;
 import com.social.web.rest.dto.CommentDTO;
 import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.util.APIEndpoint;
@@ -32,38 +34,38 @@ public class MovieREST {
 	/**
 	 * Retorna as informacoes de um filme em especifico
 	 * 
-	 * @param movieId
+	 * @param slug
 	 *        O id do filme que sera pesquisado
 	 * 
 	 * @return O objeto ResponseEntity contendo o filme pesquisado caso seja
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que aquele filme nao foi encontrado
 	 */
-	@GetMapping(value = "/{movieId}")
-	public ResponseEntity<?> get(@PathVariable("movieId") String movieId) {
-		return ResponseEntity.ok().build();
+	@GetMapping(value = "/{slug}")
+	public ResponseEntity<?> get(@PathVariable("slug") String slug) {
+		return ResponseEntity.status(HttpStatus.OK).body(movieBusiness.getMovieById(slug));
 	}
 	
 	/**
 	 * Retorna o rating dado pelo usuario logado ao filme em questão
 	 * 
-	 * @param movieId
-	 * 		  O id do filme que sera pesquisado
+	 * @param slug
+	 * 		  O slug do filme que sera pesquisado
 	 * 
 	 * @return O objeto ResponseEntity contendo o rating pesquisado caso seja
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado filme nao foi encontrado
 	 */
 	@GetMapping(value = "/{movieId}/user-rating")
-	public ResponseEntity<?> getUserRating(@PathVariable("movieId") String movieId) {
+	public ResponseEntity<?> getUserRating(@PathVariable("slug") String slug) {
 		return ResponseEntity.ok().build();
 	}
 	
 	/**
 	 * Insere o rating dado pelo usuario logado ao filme em questão
 	 * 
-	 * @param movieId
-	 * 		  O id do filme no qual o rating sera inserido
+	 * @param slug
+	 * 		  O slug do filme no qual o rating sera inserido
 	 * 
 	 * @param rating
 	 *        O objeto do tipo rating contendo as informacoes necessarias
@@ -75,9 +77,23 @@ public class MovieREST {
 	 *         codigo 404 informando que o filme com o id informado nao
 	 *         foi encontrado
 	 */
-	@PostMapping(value = "/{movieId}/user-rating")
-	public ResponseEntity<?> postUserRating(@PathVariable("movieId") String movieId, 
+	@PostMapping(value = "/{slug}/user-rating")
+	public ResponseEntity<?> postUserRating(@PathVariable("slug") String slug, 
 			@RequestBody RatingDTO rating) {
+		return ResponseEntity.ok().build();
+	}
+	
+	@PostMapping(value = "/insert-movie")
+	public ResponseEntity<?> postMovie(Movie movie){
+		
+		movie = new Movie();
+		movie.setName("Filme Teste");
+		movie.setImdb("Filme imdb");
+		movie.setSlug("Filme slug");
+		movie.setVotes(9);
+		movie.setHomePage("Filme Home page");
+		movie.setTrailer("Filme Trailer");
+		movieBusiness.insert(movie);
 		return ResponseEntity.ok().build();
 	}
 	

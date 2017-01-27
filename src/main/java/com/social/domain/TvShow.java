@@ -23,10 +23,13 @@ public class TvShow extends Title {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idtvshow")
 	private long id;
-	
-	@OneToMany(targetEntity=Season.class, mappedBy="tvShow", fetch=FetchType.EAGER)
-	//@JoinColumn(name = "idTvShow")
-	private List<Season> seasons;
+		
+	/*VERIFICAR O MAPPEDBY*/
+//	mappedBy="tvShow",
+//	@JoinColumn(name = "idtvshow")
+//	@OneToMany(targetEntity=Season.class, mappedBy="tvShow", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="tvShow")
+	private List<Season> season;
 	
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idcommentparent")
@@ -44,12 +47,12 @@ public class TvShow extends Title {
 		this.id = id;
 	}
 
-	public List<Season> getSeasons() {
-		return seasons;
+	public List<Season> getSeason() {
+		return season;
 	}
 
-	public void setSeasons(List<Season> seasons) {
-		this.seasons = seasons;
+	public void setSeason(List<Season> season) {
+		this.season = season;
 	}
 
 	public CommentParent getCommentParent() {

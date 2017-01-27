@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,10 +34,11 @@ public class Comment {
 	private Long replies;
 	
 	@OneToOne
+	@JoinColumn(name = "parent")
 	private Comment parent;
 	
-	@Column(name = "dislike")
-	private Long dislike;
+	@Column(name = "dislikes")
+	private Long dislikes;
 	
 	@OneToOne
 	private CommentParent idCommentParent;
@@ -97,12 +99,12 @@ public class Comment {
 		this.idCommentParent = idCommentParent;
 	}
 
-	public Long getDislike() {
-		return dislike;
+	public Long getDislikes() {
+		return dislikes;
 	}
 
 	public void setDislike(Long dislike) {
-		this.dislike = dislike;
+		this.dislikes = dislike;
 	}
 	
 	@Override

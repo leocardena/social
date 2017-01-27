@@ -64,9 +64,10 @@ CREATE TABLE Profile(
 idProfile INT NOT NULL,
 idCommentParent INT NOT NULL,
 idUser INT UNIQUE NOT NULL,
+slug VARCHAR(100) NOT NULL,
 name VARCHAR (100) NOT NULL,
 genre VARCHAR (1) NOT NULL ,
-avatar VARCHAR(1000) DEFAULT NULL,
+avatar VARCHAR(200) DEFAULT NULL,
 birthay TIMESTAMP NOT NULL,
 country VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
@@ -76,8 +77,8 @@ country VARCHAR(100) NOT NULL
 CREATE TABLE Movie(
 idMovie INT NOT NULL, 
 idTitle INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL
+idCommentParent INT NOT NULL DEFAULT 0,
+idRatingParent INT NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Actor
@@ -86,6 +87,7 @@ CREATE TABLE Actor(
 idActor INT UNIQUE NOT NULL,
 idCommentParent INT NOT NULL,
 idRatingParent INT NOT NULL,
+slug VARCHAR(100) NOT NULL,
 imdb INT UNIQUE NOT NULL,
 name VARCHAR (100) NOT NULL,
 birthay DATE NOT NULL,
@@ -96,10 +98,11 @@ country VARCHAR(100) NOT NULL
 -- -----------------------------------------------------
 CREATE TABLE Title(
 idTitle INT NOT NULL,
+slug VARCHAR(100) NOT NULL,
 imdb  INT UNIQUE NOT NULL,
 name VARCHAR(100) UNIQUE NOT NULL,
-trailer VARCHAR(1000) NOT NULL,
-homePage VARCHAR(1000) NOT NULL,
+trailer VARCHAR(200) NOT NULL,
+homePage VARCHAR(200) NOT NULL,
 votes INT NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
 
@@ -109,8 +112,8 @@ votes INT NOT NULL DEFAULT 0
 CREATE TABLE TvShow( 
 idTvShow INT NOT NULL,
 idTitle INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL
+idCommentParent INT NOT NULL DEFAULT 0,
+idRatingParent INT NOT NULL  DEFAULT 0
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Season
@@ -118,8 +121,8 @@ idRatingParent INT NOT NULL
 CREATE TABLE Season(
 idSeason INT UNIQUE NOT NULL, 
 idTvShow INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL,
+idCommentParent INT NOT NULL DEFAULT 0,
+idRatingParent INT NOT NULL DEFAULT 0,
 name VARCHAR(100) NOT NULL,
 aired DATE NOT NULL,
 votes INT NOT NULL DEFAULT 0
@@ -130,8 +133,8 @@ votes INT NOT NULL DEFAULT 0
 CREATE TABLE Episode(
 idEpisode INT UNIQUE NOT NULL, 
 idSeason INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL,
+idCommentParent INT NOT NULL DEFAULT 0,
+idRatingParent INT NOT NULL DEFAULT 0,
 name VARCHAR(100) NOT NULL,
 aired DATE NOT NULL,
 votes INT NOT NULL DEFAULT 0
@@ -219,6 +222,7 @@ idProfile INT NOT NULL
 CREATE TABLE Rating(
 idRating INT NOT NULL,
 idRatingParent INT NOT NULL,
+idProfile INT NOT NULL,
 date TIMESTAMP NOT NULL DEFAULT NOW(),
 note FLOAT NOT NULL DEFAULT 0.0
 )ENGINE=InnoDB;

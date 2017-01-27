@@ -1,4 +1,3 @@
-
 package com.social.trakt.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;

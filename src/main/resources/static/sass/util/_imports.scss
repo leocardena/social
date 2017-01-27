@@ -1,4 +1,4 @@
-@import "util/variables"; 
+
 @import "util/loading-bar";
 @import "layouts/wizard";
 @import "layouts/navbar";
@@ -8,6 +8,7 @@
 @import "account/register"; 
 @import "account/activate";
 @import "search/menubar";
+@import "title/person/person";
 @import "title/movie/movie";
 @import "title/show/show";
 @import "title/util/sidebar";

@@ -19,13 +19,13 @@ import org.joda.time.DateTime;
 @Table(name = "episode")
 public class Episode {
 	
-	@Column(name = "name")
-	private String name;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idepisode")
-	private long id;
+	private Long id;
+	
+	@Column(name = "name")
+	private String name;
 	
 	@Column(name = "votes")
 	private long votes;
@@ -35,7 +35,7 @@ public class Episode {
 	private DateTime aired;
 	
 	@ManyToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="idseason")
 	private Season season;
 	
     @OneToOne(cascade = CascadeType.ALL)
@@ -46,11 +46,11 @@ public class Episode {
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -32,10 +32,10 @@ public class Lists {
 	@Column(name = "name")
 	private String name;
 	
-	
-	@JoinTable(name = "listtitle", joinColumns = {
-			@JoinColumn(name = "idlist", referencedColumnName = "idlist") }, inverseJoinColumns = {
-					@JoinColumn(name = "idtitle", referencedColumnName = "idtitle") })
+
+	@JoinTable(name = "listtitle", 
+			joinColumns = {@JoinColumn(name = "idlist", referencedColumnName = "idlist") }, 
+			inverseJoinColumns = {@JoinColumn(name = "idtitle", referencedColumnName = "idtitle") })
 	@ManyToMany
 	private List<Title> title;
 

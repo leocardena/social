@@ -14,23 +14,26 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Table(name = "title")
-public class Title {
+public abstract class Title {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idtitle")
 	private long id;
 	
+	@Column(name = "slug")
+	private String slug;
+	
 	@Column(name = "imdb")
 	private String imdb;
-	
+		
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "trailler")
-	private String trailler;
+	@Column(name = "trailer")
+	private String trailer;
 	
-	@Column(name = "homePage")
+	@Column(name = "homepage")
 	private String homePage;
 	
 	@Column(name = "votes")
@@ -44,6 +47,14 @@ public class Title {
 		this.id = id;
 	}
 
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+	
 	public String getImdb() {
 		return imdb;
 	}
@@ -60,12 +71,12 @@ public class Title {
 		this.name = name;
 	}
 
-	public String getTrailler() {
-		return trailler;
+	public String getTrailer() {
+		return trailer;
 	}
 
-	public void setTrailler(String trailler) {
-		this.trailler = trailler;
+	public void setTrailer(String trailer) {
+		this.trailer = trailer;
 	}
 
 	public String getHomePage() {

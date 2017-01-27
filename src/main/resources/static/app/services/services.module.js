@@ -7,5 +7,3 @@
 			                            'social.services.domain']);
 	
 })();
-
-

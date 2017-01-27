@@ -31,7 +31,7 @@ ALTER TABLE RatingParent ADD CONSTRAINT PK_RatingParent PRIMARY KEY (idRatingPar
 ALTER TABLE User CHANGE COLUMN idUser idUser INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Profile CHANGE COLUMN idProfile idProfile INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Movie CHANGE COLUMN idMovie idMovie INT NOT NULL AUTO_INCREMENT;
-ALTER TABLE Actor CHANGE COLUMN idActor idActor INT UNIQUE NOT NULL AUTO_INCREMENT;
+ALTER TABLE Actor CHANGE COLUMN idActor idActor INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Title CHANGE COLUMN idTitle idTitle INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE TvShow CHANGE COLUMN idTvShow idTvShow INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Season CHANGE COLUMN idSeason idSeason INT UNIQUE NOT NULL AUTO_INCREMENT;
@@ -44,6 +44,7 @@ ALTER TABLE Comment CHANGE COLUMN idComment idComment INT NOT NULL AUTO_INCREMEN
 ALTER TABLE Rating CHANGE COLUMN idRating idRating INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE CommentParent CHANGE COLUMN idCommentParent idCommentParent INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE RatingParent CHANGE COLUMN idRatingParent idRatingParent INT NOT NULL AUTO_INCREMENT;
+
 -- -----------------------------------------------------
 -- FOREIGN KEY
 -- -----------------------------------------------------
@@ -80,5 +81,6 @@ ALTER TABLE Episode ADD CONSTRAINT FK_Episode_RatingParent FOREIGN KEY (idRating
 ALTER TABLE ProfileComments ADD CONSTRAINT FK_ProfileComments_Comment FOREIGN KEY (idComment) REFERENCES Comment(idComment);
 ALTER TABLE ProfileComments ADD CONSTRAINT FK_ProfileComments_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
 ALTER TABLE Rating ADD CONSTRAINT FK_Rating_RatingParent FOREIGN KEY (idRatingParent) REFERENCES RatingParent(idRatingParent);
+ALTER TABLE Rating ADD CONSTRAINT FK_Rating_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
 ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Comment FOREIGN KEY (idRating) REFERENCES Rating(idRating);
 ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
