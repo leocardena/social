@@ -24,6 +24,9 @@ public class Actor extends People {
 	@Column(name = "imdb")
 	private String imdb;
 	
+	@Column(name = "slug")
+	private String slug;
+	
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
@@ -46,6 +49,14 @@ public class Actor extends People {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	public CommentParent getCommentParent() {
