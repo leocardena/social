@@ -17,6 +17,10 @@
 		
 		var vm = this;
 		
+		/* vm objects */
+		vm.last = false;
+		vm.first = true;
+		
 		/* Show object */
 		vm.show = showSummaryPrepService;
 		vm.show.cast = showPeoplePrepService.cast;
@@ -45,8 +49,13 @@
         	//request to backend
         }
         
-        function  _exibirSeason(season) {
-        	//go to season state
+        function  _exibirSeason(season, show) {
+        	$state.go('season', {
+				'seasonNumber' : season.number,
+				'season' : season,
+        		'show' : show, 
+				'traktSlug' : show.ids.slug
+			});
         }
         
         function _exibirTitulo(title) {
@@ -104,7 +113,11 @@
         
 		function _loadMorePerson(action) {
 			if (action === 'more') {
-				if (endCast == vm.show.cast.length) return;
+				if (endCast == vm.show.cast.length) {
+					vm.last = true;
+					return;
+				}
+				vm.first = false;
 				startCast++;
 				endCast++;
 				if (maxVisualisedCast < vm.show.cast.length && maxVisualisedCast < endCast) {
@@ -119,7 +132,11 @@
 				
 				}
 			} else {
-				if (startCast == 0) return;
+				if (startCast == 0) {
+					vm.first = true;
+					return;
+				}
+				vm.last = false;
 				startCast--;
 				endCast--;
 			}

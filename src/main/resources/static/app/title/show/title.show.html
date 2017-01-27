@@ -1,143 +1,150 @@
 <div id="wrapper">
 
         <!-- Sidebar -->
-        <div class="col-md-2">
-	        	<img style="height: 220px" ng-src="{{vm.show.images.poster.file_path ? 
-					vm.show.images.poster.file_path : vm.imageNotAvailable}}" alt="" 
-				    class=""/>
-        		<button ng-show="vm.show.trailer" class="btn btn-default" ng-click="vm.openTrailer()">
-        			Trailer
+        
+        <div class="col-md-2 col-md-offset-1 genericSidebar">
+	        	<img ng-src="{{vm.show.images.poster.file_path ? 
+					vm.show.images.poster.file_path : vm.imageNotAvailable}}" alt=""
+				    class="imgPosterSidebar img-responsive"/>
+        		<button ng-show="vm.show.trailer" class="btn btn-default center-block btnTrailerSidebar" ng-click="vm.openTrailer()">
+        			<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+        			TRAILER
         		</button>
-        	    <ul class="sidebar-nav">
-	                <li><a href="#">Assistido</a></li>
-	                <li><a href="#">Quero Assistir</a></li>
-	                <li><a href="#">Outras Listas</a></li>
+        	    <ul class="nav nav-pills nav-stacked navSidebar text-center">
+	                <li class="listNav" role="presentation"><a class="listNav" href="#">Assistido</a></li>
+	                <li class="listNav" role="presentation"><a class="listNav" href="#">Quero Assistir</a></li>
+	                <li  role="presentation"><a class="listNav" href="#">Outras Listas</a></li>
             	</ul>
         </div>
+      </div>
 
         <!-- Page content -->
-        <div id="page-content-wrapper" class="col-md-10">
+        <div id="page-content-wrapper" class=" row col-md-8 pageContent clearfix">
             
-            <div class="">
-            	<h3>{{vm.show.title}}</h3>
-                <h5>({{vm.show.year}})</h5>
-            </div>
+            <!-- Title -->
+    			<div class="col-md-12">
+                    <span class="title">{{vm.show.title}}</span>
+                    <span class="year">({{vm.show.year}})</span>
+                </div>
+         
             
-            <div class="">
-            	<div class="col-md-2">
-                	<h4 class="text-center">Avaliação Geral</h4>
-                 </div>
-                 <div class="col-md-2">
-                    <h4>{{vm.show.rating}}</h4>
-                 </div>
-                 <div class="col-md-2">
-                    <h4>Total de avaliações: 500</h4>
-                 </div>
-                 <div>
-                    <p>Dê sua avaliação:</p>
-                    <ng-rate-it 
-                    	ng-model="vm.show.userRating" 
-						resetable="false"
-						step="1"
-						rated="vm.evaluate">
-					</ng-rate-it>
-             	</div>
-             </div>
-             
-             <div class="">
-                 <p>{{vm.show.overview}}</p>
-             </div>
-             
-             <div class="">
-             	<p class="col-md-3">Lançamento {{vm.show.released | date:'dd/MM/yyyy'}}</p>
-                <p class="col-md-3">Duração {{vm.show.runtime}} minutos</p>
-                <p class="col-md-3">
-                    Gênero(s): 
-	                <div ng-repeat="genre in vm.show.genres">
-	                	{{genre | translate}}, 
-	                </div>
-                </p>
-             </div>
-             
-             <div class="">
-             	<p class="col-md-3" ng-show="vm.show.crew.directing">
-             		Diretor {{vm.show.crew.directing[0].person.name}}
-                </p>
-                <a ng-show="vm.show.homepage" class="col-md-3" ng-href="{{vm.show.homepage}}" 
-                	target="_blank">
-                    Página Oficial
-                </a>
-              </div>
-                       	
-              <div class="row">
-                 <h4>Atores</h4>
-              </div>
-              
-              <div class="row">
-                       	
-              	<div class="col-md-1">
-                	<button ng-click="vm.loadMore('less')">-</button>
+            <!-- Rating -->
+         		<div class="col-md-12 rating">
+                    		<div class="col-md-4 text-center ratingText">
+                    			<h4 class="">Deixe sua avaliação: </h4>
+                    			<ng-rate-it 
+                    				ng-model="vm.show.userRating" 
+									resetable="false"
+									step="1"
+									rated="vm.evaluate">
+								</ng-rate-it>
+                    		</div>
+                    		
+                    		<div class="col-md-4">
+                    			<h4 class="text-center ratingText ratingTextMargin">Avaliação Geral: {{vm.show.rating}}</h4>
+                    		</div>
+                    		
+                    		<div class="col-md-4">
+                    			<h4 class="text-center ratingText ratingTextMargin">Total de avaliações: 500</h4>
+                    		</div>
+                    		
                 </div>
-                       		
-                <div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt">
-                	<div class="col-md-2">
-                    	<div class="row">
-                       		<img ng-src="{{cast.person.image ? cast.person.image : vm.imageNotAvailable}}" 
-                       			style="height: 120px; width: 80px">
-                       		</div>
-                       		<div class="row">
-                       			<p>{{cast.person.name}}</p>
-                       		</div>
-                       		<div class="row">
-                       			<p>{{cast.character}}</p>
-                       		</div>
-                	</div>
-                </div>
-                       		
-                <div class="col-md-1">
-                	<button ng-click="vm.loadMorePerson('more')">+</button>
-                </div>
-                       		
-              </div>
-                       	
-              <div class="row">
-              	<h4>Filmes Relacionados</h4>
-              </div>
-                       		
-              <div class="row">
-                	<div ng-repeat="show in vm.show.relatedShows track by show.ids.trakt">
-                    	<div class="col-md-2" ng-click="vm.exibirTitulo(show)">
-                       		<div class="row">
-                       			<img ng-src="{{show.images.poster.file_path ? show.images.poster.file_path : 
-                       				vm.imageNotAvailable}}" 
-                       				style="height: 120px; width: 80px">
-                       		</div>
-                       		<div class="row">
-                       			<p>{{show.title}}</p>
-                       		</div>
-                    	</div>
-                 	</div>
-             </div>
              
-             <div class="row">
-              	<h4>Temporadas</h4>
-              </div>
+             <div class="overview col-md-12">
+             	<div class="overviewText">
+		                       		<p> {{vm.show.overview}}</p>
+		                       	</div>
+		  
+		                       	<div class="col-md-3">
+			                       		<span style="font-weight: 900;">Lançamento:</span>
+			                       		<span>{{vm.show.released | date:'dd/MM/yyyy'}} </span>
+		                       	</div>
+		                       	
+	                       		<div class="col-md-3">
+		                       		 <span style="font-weight: 900;"> Duração: </span>
+		                       		  <span>{{vm.show.runtime}} minutos.</span>
+	                       		</div>
+	                       		
+	                       		<div class="col-md-3">
+	                       			<span style="font-weight: 900;"> Gênero(s): </span>
+	                       			 <div ng-repeat="genre in vm.show.genres">
+	                					{{genre | translate}}, 
+	               					 </div>
+	                       		</div>
+	                       	
+	                   			<div class="col-md-3">
+		                       		<span style="font-weight: 900;">Diretor:</span> 
+		                       		<span> {{vm.show.crew.directing[0].person.name}} </span>
+		                       	<br>
+		                       		<a ng-show="vm.show.homepage" class="col-md-3" ng-href="{{vm.show.homepage}}" 
+					                	target="_blank">
+					                    Página Oficial
+					                </a>
+	                 			</div>
+	                 			
+	                 			
+	                 			<!-- Actors -->
+	                 			<div class="col-md-12"> 	
+	                       
+	                       		<p style="font-weight: 900;">Atores:</p>
+	                       
+	                       		<div class="col-md-12 actorInformation">
+		                       	    <div class="col-md-1 moreActor">
+		                       			<button ng-click="vm.loadMorePerson('less')" ng-disabled="vm.first"><</button>
+		                       		</div>
+		                       		
+		                       		<div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt" class="col-md-2 center-text" >
+		                       					
+		                       					<img ng-src="{{cast.person.image ? cast.person.image : vm.imageNotAvailable}}" 
+		                       						class="img-responsive imgActor">
+		                       					<span class="nameActor"> {{cast.person.name}} </span>
+		                       					<span class="nameCharacter"> {{cast.character}}</span>	
+		                       		</div>
+	                       		
+	                       		<div class="col-md-1 lessActor">
+	                       			 <button ng-click="vm.loadMorePerson('more')" ng-disabled="vm.last">></button>
+	                       		</div>
+	                       		
+	                       		</div>
+	                       	</div>
+	                       	
+	                       	
+	                       	<!-- Seasons -->
+	                       	<div class="col-md-12"> 
+	                       	
+              					<p style="font-weight: 900; margin-top: 15px;">Temporadas:</p>
              
-             <div class="row">
-             	<div ng-repeat="season in vm.show.seasons track by season.number">
-             		<div class="col-md-2" ng-click="vm.exibirSeason(season)">
-             			<div class="row">
-                       		<img ng-src="{{season.images.file_path ? season.images.file_path : 
-                       			vm.imageNotAvailable}}" 
-                       			style="height: 120px; width: 80px">
-                       	</div>
-                       	<div class="row">
-                       		<p>{{season.number == 0 ? 'Temporada Especial' : season.number + 'ª temporada'}} </p>
-                       	</div>
-             		</div>
-             	</div>
+             					<div ng-repeat="season in vm.show.seasons track by season.number">
+				             		<div class="col-md-2" ng-click="vm.exibirSeason(season, vm.show)">
+				             			<div class="row">
+				                       		<img ng-src="{{season.images.file_path ? season.images.file_path : 
+				                       			vm.imageNotAvailable}}" 
+				                       			style="height: 120px; width: 80px">
+				                       	</div>
+				                       	<div class="row">
+				                       		<p>{{season.number == 0 ? 'Temporada Especial' : season.number + 'ª temporada'}} </p>
+				                       	</div>
+				             		</div>
+             					</div>
+           				  </div>
+	                       	
+	                       	<!-- Related Shows -->
+	                       	<div class="col-md-12 divRelated"> 
+	                       	
+	                       			<p class="relatedTitle">Séries Relacionadas</p>
+	                       			
+	                       			<div class="col-md-11  col-md-offset-1 related">
+		                       			<div ng-repeat="show in vm.show.relatedShows track by show.ids.trakt">
+		                       				<div class="col-md-2" ng-click="vm.exibirTitulo(show)">
+		                       					<img ng-src="{{show.images.poster.file_path ? show.images.poster.file_path : 
+                       									vm.imageNotAvailable}}" 
+		                       						class="imgRelated">
+		                       						<p class="nameRelated">{{show.title}}</p>
+		                       				</div>
+		                       			</div>
+		                       		</div>
+	                       	</div>
+	                       	
              </div>
-                 
-        </div>
 
-</div>
+        </div>

@@ -53,7 +53,7 @@
 			}, 
 			'getAllPeopleForAMovie' : {
 				method: 'GET',
-				url: TraktBase.movie + '/:movieId/people',
+				url: TraktBase.movie + '/:movieId/peoples',
 				params : {
 					movieId : '@movieId',
 					extended : '@extended'

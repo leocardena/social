@@ -67,7 +67,7 @@ public class MovieTraktREST {
 	 * @param extented detalhamento das informacoes retornadas
 	 * @return as pessoas envolvidas no filme
 	 */
-	@GetMapping(value = "/{movieId}/people")
+	@GetMapping(value = "/{movieId}/peoples")
 	public ResponseEntity<?> getAllPeopleForAMovie(@PathVariable("movieId") String movieId,
 			@RequestParam(value = "extended", required = false) String extented) {
 		return ResponseEntity.ok(personBusiness.getAllPeopleForAMovie(movieId, extented));

@@ -38,7 +38,7 @@ public class ShowTmdbREST {
 		return ResponseEntity.ok().body(map);
 	}
 
-	@GetMapping(value = "/{showId}/season/{seasonNumber}/images")
+	@GetMapping(value = "/{showId}/seasons/{seasonNumber}/images")
 	public ResponseEntity<?> getSeasonImages(@RequestParam(value = "language", required = false) String language,
 			@RequestParam(value = "posterSize", required = true) String posterSize,
 			@PathVariable(value = "showId") String showId, @PathVariable(value = "seasonNumber") String seasonNumber) {
@@ -46,7 +46,7 @@ public class ShowTmdbREST {
 		return ResponseEntity.ok().body(poster);
 	}
 
-	@GetMapping(value = "/{showId}/season/{seasonNumber}/episode/{episodeNumber}/images")
+	@GetMapping(value = "/{showId}/seasons/{seasonNumber}/episodes/{episodeNumber}/images")
 	public ResponseEntity<?> getEpidodeImages(@RequestParam(value = "stillSize", required = true) String stillSize,
 			@PathVariable(value = "episodeNumber") String episodeNumber, @PathVariable(value = "showId") String showId,
 			@PathVariable(value = "seasonNumber") String seasonNumber) {

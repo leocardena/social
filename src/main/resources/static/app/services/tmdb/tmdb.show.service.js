@@ -32,7 +32,7 @@
 			},
 			'getSeasonImage' : {
 				method: 'GET',
-				url: TmdbBase.show + '/:showId/season/:seasonNumber/images',
+				url: TmdbBase.show + '/:showId/seasons/:seasonNumber/images',
 				params: {
 					language : '@language',
 					posterSize : '@posterSize',
@@ -42,7 +42,7 @@
 			},
 			'getEpisodeImage' : {
 				method: 'GET',
-				url: TmdbBase.show + '/:showId/season/:seasonNumber/episode/:episodeNumber/images',
+				url: TmdbBase.show + '/:showId/seasons/:seasonNumber/episodes/:episodeNumber/images',
 				params: {
 					stillSize : '@stillSize',
 					showId : '@showId',

@@ -28,6 +28,8 @@
 		vm.loadMore = _loadMore;
 		vm.exibirTitulo = _exibirTitulo;
 		vm.evaluate = _evaluate;
+		vm.last = false;
+		vm.first = true;
 		vm.comments = [{
 			user : 'Gustavo',
 			comment : 'Filme muito bom'
@@ -59,7 +61,11 @@
 		
 		function _loadMore(action) {
 			if (action === 'more') {
-				if (endCast == vm.movie.cast.length) return;
+				if (endCast == vm.movie.cast.length) {
+					vm.last = true;
+					return;
+				};
+				vm.first = false;
 				startCast++;
 				endCast++;
 				if (maxVisualisedCast < vm.movie.cast.length && maxVisualisedCast < endCast) {
@@ -74,7 +80,11 @@
 				
 				}
 			} else {
-				if (startCast == 0) return;
+				if (startCast == 0) {
+					vm.first = true;
+					return;
+				}
+				vm.last = false;
 				startCast--;
 				endCast--;
 			}

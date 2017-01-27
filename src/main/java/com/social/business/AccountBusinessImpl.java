@@ -3,6 +3,9 @@ package com.social.business;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,29 +113,68 @@ public class AccountBusinessImpl implements AccountBusiness {
 	@Override
 	public UserDTO getUserWithAuthorities() {
 		Optional<User> userOptional = userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin());
+		
 		if (!userOptional.isPresent())
 			throw new LoginNotFoundException("Login não encontrado");
+		
 		User user = userOptional.get();
 		user.getAuthorities().size(); 
+		
 		// eagerly load the association
 		Optional<Profile> profileOptional = profileRepository.findOneByUser(user);
+		
 		if (!profileOptional.isPresent())
 			throw new LoginNotFoundException("Profile não encontrado");
+		
 		Profile profile = profileOptional.get();
-        log.debug("User with Authorities pesquisado, profile: {}", profile);
+		
+		if (profile.getAvatar() != null)
+			profile.setAvatar(avatarStorage.getUrl(profile.getAvatar()));
+       
+		log.debug("User with Authorities pesquisado, profile: {}", profile);
         return new UserDTO(profile);
 	}
 	
 	@Override
-	public String saveAvatar(Long code, MultipartFile avatar) {
+	public String saveAvatar(MultipartFile avatar) {
+		String username = SecurityUtils.getCurrentUserLogin();
+		Optional<User> userOptional = userRepository.findOneByUsername(username);
 		
-		String avatarName = avatarStorage.saveAvatar(avatar);
-		Profile profile = profileRepository.findOne(code);
+		if (!userOptional.isPresent())
+			throw new LoginNotFoundException("Login não encontrado");
+		
+		String avatarName = UUID.randomUUID().toString().concat("-").concat(DigestUtils
+				.md5Hex(username.concat(userOptional.get().getId().toString())));
+		avatarName = avatarStorage.saveAvatar(avatar, avatarName);
+		String url = avatarStorage.getUrl(avatarName);
+
+		Profile profile = profileRepository.findOneByUser(userOptional.get()).get();
+		
+		if (profile.getAvatar() != null)
+			avatarStorage.deleteAvatar(profile.getAvatar());
+		
 		profile.setAvatar(avatarName);
 		profileRepository.save(profile);
+
+		return url;
+	}
+
+	@Override
+	public void deleteAvatar() {
+		String username = SecurityUtils.getCurrentUserLogin();
+		Optional<User> userOptional = userRepository.findOneByUsername(username);
 		
-		return avatarStorage.getUrl(avatarName);
+		if (!userOptional.isPresent())
+			throw new LoginNotFoundException("Login não encontrado");
+		
+		Profile profile = profileRepository.findOneByUser(userOptional.get()).get();
+		
+		if (profile.getAvatar() != null) {
+			avatarStorage.deleteAvatar(profile.getAvatar());
+			profile.setAvatar(null);
+			profileRepository.save(profile);
+		}
 		
 	}
-	
+
 }

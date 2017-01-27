@@ -54,7 +54,7 @@
 			}, 
 			'getAllPeopleForAShow' : {
 				method: 'GET',
-				url: TraktBase.show + '/:showId/people',
+				url: TraktBase.show + '/:showId/peoples',
 				params : {
 					showId : '@showId',
 					extended : '@extended'
@@ -66,6 +66,42 @@
 				url: TraktBase.show + '/:showId/seasons',
 				params : {
 					showId : '@showId',
+					extended : '@extended'
+				},
+				ignoreLoadingBar: true,
+				isArray : true
+			},
+			'getASingleSeason' : {
+				method: 'GET',
+				url: TraktBase.show + '/:showId/seasons/:seasonNumber',
+				params : {
+					showId : '@showId',
+					seasonNumber : '@seasonNumber',
+					translations : '@translations',
+					extended : '@extended'
+				},
+				ignoreLoadingBar: true,
+				isArray : true
+			},
+			'getASingleEpisode' : {
+				method: 'GET',
+				url: TraktBase.show + '/:showId/seasons/:seasonNumber/episodes/:episodeNumber',
+				params : {
+					showId : '@showId',
+					seasonNumber : '@seasonNumber',
+					episodeNumber : '@episodeNumber',
+					extended : '@extended'
+				},
+				ignoreLoadingBar: true,
+			},
+			'getTranslationsEpisode' : {
+				method: 'GET',
+				url: TraktBase.show + '/:showId/seasons/:seasonNumber/episodes/:episodeNumber/translations/:language',
+				params : {
+					showId : '@showId',
+					seasonNumber : '@seasonNumber',
+					episodeNumber : '@episodeNumber',
+					language : '@language',
 					extended : '@extended'
 				},
 				ignoreLoadingBar: true,

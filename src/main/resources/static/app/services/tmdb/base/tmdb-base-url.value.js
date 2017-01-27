@@ -6,11 +6,9 @@
 			.module('social.services.tmdb')
 			.value('TmdbBase', {
 				url : '/api/rest/tmdb',
-				movie : '/api/rest/tmdb/movie',
-				show : '/api/rest/tmdb/show',
-				person : '/api/rest/tmdb/person'
+				movie : '/api/rest/tmdb/movies',
+				show : '/api/rest/tmdb/shows',
+				person : '/api/rest/tmdb/persons'
 			});
 	
 })();
-
-

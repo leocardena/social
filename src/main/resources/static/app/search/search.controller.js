@@ -83,7 +83,7 @@
         		page :  page ,
         		query : query,
         		type : type === 'all' ? 'movie,show,person' : type,
-        		fields : 'translations,title'
+        		fields : 'translations,title,name'
         	}).$promise.then(function(data){
         		vm.results = data.data;
         		_loadHeaders(data.headers);
@@ -126,7 +126,11 @@
 					break;
 				case 'episode':
 					break;
-				case 'people':
+				case 'person':
+					$state.go('people', {
+						'people' : title, 
+						'traktSlug' : traktSlug
+					});
 					break;
         	}
         }

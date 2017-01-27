@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-			<version>4.0.1</version><!--$NO-MVN-MAN-VER$ -->
+			<version>4.0</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 
 		<!-- API REST Client -->
@@ -137,14 +137,13 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<!-- Querydsl -->
 		<dependency>
 		    <groupId>com.querydsl</groupId>
 		    <artifactId>querydsl-jpa</artifactId>
 		    <version>4.1.4</version><!-- $NO-MVN-MAN-VER$ -->
 		</dependency> 
-
 
 		<!-- Logging -->
 		<dependency>
@@ -156,7 +155,7 @@
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
-			<version>1.11.43</version>
+			<version>1.11.78</version>
 		</dependency>
 		
 		<!-- URL Rewrite -->
@@ -168,7 +167,7 @@
 
 	</dependencies>
 
-	<build>
+<build>
 		<finalName>${project.artifactId}</finalName>
 			<plugins>
 				<plugin>
