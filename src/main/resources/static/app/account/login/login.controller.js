@@ -19,7 +19,7 @@
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
         vm.username = null;
-		$state.current.data.background = backgroundPrepService.backdrop_path;
+		$state.current.data.background = backgroundPrepService;
 		
         function cancel () {
             vm.credentials = {

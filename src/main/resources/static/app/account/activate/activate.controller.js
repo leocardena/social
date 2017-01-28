@@ -10,7 +10,7 @@
     function ActivationController ($stateParams, AuthService, $state, backgroundPrepService) {
         var vm = this;
         
-    	$state.current.data.background = backgroundPrepService.backdrop_path;
+    	$state.current.data.background = backgroundPrepService;
 
         AuthService.activateAccount({key: $stateParams.key}).then(function () {
             vm.error = null;
