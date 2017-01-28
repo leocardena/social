@@ -26,7 +26,7 @@
 		vm.openCalendar = _openCalendar;
 		vm.popup = { opened : false };
 		vm.register = _register;
-		$state.current.data.background = backgroundPrepService.backdrop_path;
+		$state.current.data.background = backgroundPrepService;
 		
 		function _dismissAlerts() {
 			vm.alertEnable = false;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "social",
   "homepage": "https://github.com/leocardena/social",
@@ -34,4 +35,42 @@
     "angular-rateit": "^3.0.2",
     "ng-file-upload": "^12.2.13"
   }
+=======
+{
+  "name": "social",
+  "homepage": "https://github.com/leocardena/social",
+  "authors": [
+    "Leonardo Cardena <leomcardena@hotmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.8",
+    "bootstrap": "^3.3.7",
+    "angular-ui-router": "^0.3.1",
+    "angular-wizard": "^0.9.0",
+    "angular-bootstrap": "^2.2.0",
+    "angular-i18n": "^1.5.8",
+    "angular-resource": "1.5.8",
+    "angular-loading-bar": "^0.9.0",
+    "angular-cache-buster": "^0.4.3",
+    "ngstorage": "^0.3.11",
+    "angular-cookies": "1.5.8",
+    "angular-input-masks": "^2.5.0",
+    "angular-ui-mask": "^1.8.7",
+    "angular-translate": "^2.13.1",
+    "ng-youtube-embed": "^0.4.3",
+    "angular-rateit": "^3.0.2",
+    "ng-file-upload": "^12.2.13"
+  }
+>>>>>>> origin/leonardo.cardena
 }

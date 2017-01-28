@@ -46,7 +46,7 @@
 			function _checkPeopleImages() {
 				if ($stateParams.people) {
 					if ($stateParams.people.ids.slug === $stateParams.traktSlug) {
-						vm.people.images = $stateParams.people.images;
+						vm.people.images = $stateParams.people.images.poster;
 					} else {
 						_loadPersonImages();
 					}

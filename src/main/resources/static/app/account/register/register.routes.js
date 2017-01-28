@@ -52,7 +52,7 @@
 
         /* @ngInject */
         function backgroundPrepService (TmdbRandomTitleService) {
-        	return TmdbRandomTitleService.getRandomTitle();
+        	return TmdbRandomTitleService.getRandomStaticTitle();
     	}
 		
 	}
