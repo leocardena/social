@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.social.business.MovieBusiness;
 import com.social.domain.Movie;
 import com.social.web.rest.dto.CommentDTO;
-import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.util.APIEndpoint;
+import com.social.web.rest.vm.TitleRatingVM;
 
 /**
  * Camada REST responsável por expor os serviços do recurso Movie
@@ -79,7 +79,7 @@ public class MovieREST {
 	 */
 	@PostMapping(value = "/{slug}/user-rating")
 	public ResponseEntity<?> postUserRating(@PathVariable("slug") String slug, 
-			@RequestBody RatingDTO rating) {
+			@RequestBody TitleRatingVM rating) {
 		return ResponseEntity.ok().build();
 	}
 	
@@ -118,7 +118,7 @@ public class MovieREST {
 	 */
 	@PutMapping(value = "/{movieId}/user-rating/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("movieId") String movieId, 
-			@PathVariable("ratingId") String ratingId, @RequestBody RatingDTO rating) {
+			@PathVariable("ratingId") String ratingId, @RequestBody TitleRatingVM rating) {
 		return ResponseEntity.ok().build();
 	}
 	

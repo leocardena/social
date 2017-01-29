@@ -111,6 +111,7 @@
 			}
     		
     		function _get(pos, relatedMovies) {
+    			if (!relatedMovies[pos].ids.tmdb) return;
             	TmdbMovieService.getMovieImage({
             		movieId: relatedMovies[pos].ids.tmdb,
             		posterSize: 'w300',

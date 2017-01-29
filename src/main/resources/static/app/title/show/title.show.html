@@ -31,7 +31,7 @@
             <!-- Rating -->
          		<div class="col-md-12 rating">
                     		<div class="col-md-4 text-center ratingText">
-                    			<h4 class="">Deixe sua avaliação: </h4>
+                    			<h4 class="">Deixe sua avaliÃ§Ã£o: </h4>
                     			<ng-rate-it 
                     				ng-model="vm.show.userRating" 
 									resetable="false"
@@ -41,11 +41,11 @@
                     		</div>
                     		
                     		<div class="col-md-4">
-                    			<h4 class="text-center ratingText ratingTextMargin">Avaliação Geral: {{vm.show.rating}}</h4>
+                    			<h4 class="text-center ratingText ratingTextMargin">AvaliaÃ§Ã£o Geral: {{vm.show.rating}}</h4>
                     		</div>
                     		
                     		<div class="col-md-4">
-                    			<h4 class="text-center ratingText ratingTextMargin">Total de avaliações: 500</h4>
+                    			<h4 class="text-center ratingText ratingTextMargin">Total de avaliaÃ§Ãµes: 500</h4>
                     		</div>
                     		
                 </div>
@@ -55,24 +55,24 @@
 		                       		<p> {{vm.show.overview}}</p>
 		                       	</div>
 		  
-		                       	<div class="col-md-3">
+		                       	<div class="col-md-3" ng-show="vm.show.released">
 			                       		<span style="font-weight: 900;">LanÃ§amento:</span>
 			                       		<span>{{vm.show.released | date:'dd/MM/yyyy'}} </span>
 		                       	</div>
 		                       	
-	                       		<div class="col-md-3">
+	                       		<div class="col-md-3" ng-show="vm.show.runtime">
 		                       		 <span style="font-weight: 900;"> DuraÃ§Ã£o: </span>
 		                       		  <span>{{vm.show.runtime}} minutos.</span>
 	                       		</div>
 	                       		
-	                       		<div class="col-md-3">
+	                       		<div class="col-md-3" ng-show="vm.show.genres">
 	                       			<span style="font-weight: 900;"> GÃªnero(s): </span>
 	                       			 <div ng-repeat="genre in vm.show.genres">
-	                					{{genre | translate}}, 
+	                					{{genre | translate}}
 	               					 </div>
 	                       		</div>
 	                       	
-	                   			<div class="col-md-3">
+	                   			<div class="col-md-3"  ng-show="vm.show.crew.directing">
 		                       		<span style="font-weight: 900;">Diretor:</span> 
 		                       		<span> {{vm.show.crew.directing[0].person.name}} </span>
 		                       	<br>

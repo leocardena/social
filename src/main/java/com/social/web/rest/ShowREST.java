@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.business.ShowBusiness;
 import com.social.web.rest.dto.CommentDTO;
-import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.util.APIEndpoint;
+import com.social.web.rest.vm.TitleRatingVM;
 
 /**
  * Camada REST responsável por expor os serviços do recurso Show
@@ -77,8 +77,8 @@ public class ShowREST {
 	 */
 	@PostMapping(value = "/{showId}/user-rating")
 	public ResponseEntity<?> postUserRating(@PathVariable("showId") String showId, 
-			@RequestBody RatingDTO rating) {
-		return ResponseEntity.ok().build();
+			@RequestBody TitleRatingVM rating) {
+		return ResponseEntity.ok(showBusiness.postUserRating(showId, rating));
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class ShowREST {
 	 */
 	@PutMapping(value = "/{showId}/user-rating/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("showId") String showId, 
-			@PathVariable("ratingId") String ratingId, @RequestBody RatingDTO rating) {
+			@PathVariable("ratingId") String ratingId, @RequestBody TitleRatingVM rating) {
 		return ResponseEntity.ok().build();
 	}
 	

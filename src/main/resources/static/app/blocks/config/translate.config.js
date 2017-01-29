@@ -38,7 +38,8 @@
 			    'sports' : 'Esporte',
 			    'tv movie' : 'Novela',
 			    'war' : 'guerra',
-			    'drama' : 'Drama'
+			    'drama' : 'Drama',
+			    'horror' : 'Horror'
 		  });
 		  
 		  $translateProvider.preferredLanguage('pt');

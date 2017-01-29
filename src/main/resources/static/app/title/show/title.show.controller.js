@@ -168,6 +168,7 @@
 			}
     		
     		function _get(pos, relatedShows) {
+    			if (!relatedShows[pos].ids.tmdb) return;
     			TmdbShowService.getShowImage({
             		showId: relatedShows[pos].ids.tmdb,
             		posterSize: 'w300',
