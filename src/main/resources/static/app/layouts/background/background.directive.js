@@ -20,7 +20,8 @@
 	             element.css({
 	                 'background-image': 'url(' + value +')',
 	                 'background-size' : 'cover',
-	                 'background-repeat': 'no-repeat'
+	                 'background-repeat': 'no-repeat',
+	                 'background-attachment': 'fixed'
 	             });
 	         });
 	     }
