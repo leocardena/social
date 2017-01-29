@@ -8,11 +8,12 @@
 	
 	TitlePeopleController.$inject = ['personSummaryPrepService', 'personMoviesPrepService',
 	                                 'personShowsPrepService', '$stateParams', 'TmdbPersonService', 'TmdbMovieService',
-	                                 'TmdbShowService', '$state'];
+	                                 'TmdbShowService', '$state', '$window'];
 	
 	/*@ngInject*/
 	function TitlePeopleController(personSummaryPrepService, personMoviesPrepService,
-			personShowsPrepService, $stateParams, TmdbPersonService, TmdbMovieService, TmdbShowService, $state) {
+			personShowsPrepService, $stateParams, TmdbPersonService, TmdbMovieService, TmdbShowService, $state,
+			$window) {
 		
 		var vm = this;
 		vm.people = personSummaryPrepService;
@@ -42,6 +43,7 @@
 			_calculateAge(new Date(vm.people.birthday));
 			_loadMoviesAndShowsActorImages();
 			_loadMoviesAndShowProductionImages();
+			$window.document.title = vm.people.name;
 			
 			function _checkPeopleImages() {
 				if ($stateParams.people) {

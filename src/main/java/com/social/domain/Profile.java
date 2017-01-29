@@ -44,7 +44,7 @@ public class Profile extends People {
 	
 //	@OneToMany
 //	@JoinTable(name = "profileratings", joinColumns = {
-//			@JoinColumn(name = "idprofile", referencedColumnName = "idprofile") }, inverseJoinColumns = {
+//			@JoinColumn(name = "idprofile", referencedColumnName  = "idprofile") }, inverseJoinColumns = {
 //					@JoinColumn(name = "idrating", referencedColumnName = "idrating") })
 //	private List<Rating> ratings = new ArrayList<>();
 	

@@ -72,7 +72,7 @@ public class MovieBusinessImpl implements MovieBusiness {
 			System.out.println("--------------------------------------------------");
 			System.out.println("ITERATOR user username: "+rating.getId());
 			System.out.println("ITERATOR profile name: "+rating.getIdRatingParent().getId());
-			System.out.println("ITERATOR profile id: "+rating.getProfile().getName());
+//			System.out.println("ITERATOR profile id: "+rating.getProfiles());
 //			profile.getRatings().forEach((rating) -> {
 //				System.out.println("	ITERATOR rating id: "+rating.getId());
 //				System.out.println("	ITERATOR ratingParent id: "+rating.getIdRatingParent().getId());
