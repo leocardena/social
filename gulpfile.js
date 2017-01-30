@@ -5,7 +5,7 @@ var notify = require("gulp-notify");
 gulp.task('compile-css', function(){
 	return gulp.src("./src/main/resources/static/sass/*.scss")
 			.pipe(sass({outputStyle:'compressed'}))
-			.on('error', notify.onError({ title: 'Erro ao compilar', message: '<%= erro.message %>'}))
+			.on('error', notify.onError())
 			.pipe(gulp.dest("./src/main/resources/static/content/css"));
 });
 
