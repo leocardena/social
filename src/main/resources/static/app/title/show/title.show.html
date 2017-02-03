@@ -51,9 +51,10 @@
                 </div>
              
              <div class="overview col-md-12">
+             	
              	<div class="overviewText">
-		                       		<p> {{vm.show.overview}}</p>
-		                       	</div>
+		            <p> {{vm.show.overview}}</p>
+		         </div>
 		  
 		                       	<div class="col-md-3" ng-show="vm.show.released">
 			                       		<span style="font-weight: 900;">Lançamento:</span>
@@ -90,7 +91,9 @@
 	                       
 	                       		<div class="col-md-12 actorInformation">
 		                       	    <div class="col-md-1 moreActor">
-		                       			<button ng-click="vm.loadMorePerson('less')" ng-disabled="vm.first"><</button>
+		                       			<button ng-click="vm.loadMorePerson('less')" ng-disabled="vm.first" class="btn btn-default btnSlide">
+		                       					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		                       			</button>
 		                       		</div>
 		                       		
 		                       		<div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt" class="col-md-2 center-text" >
@@ -102,7 +105,9 @@
 		                       		</div>
 	                       		
 	                       		<div class="col-md-1 lessActor">
-	                       			 <button ng-click="vm.loadMorePerson('more')" ng-disabled="vm.last">></button>
+	                       			 <button ng-click="vm.loadMorePerson('more')" ng-disabled="vm.last" class="btn btn-default btnSlide">
+	                       			 	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	                       			 </button>
 	                       		</div>
 	                       		
 	                       		</div>

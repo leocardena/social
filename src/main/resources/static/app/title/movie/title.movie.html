@@ -90,7 +90,9 @@
 
 				<div class="col-md-12 actorInformation">
 					<div class="col-md-1 moreActor">
-						<button ng-click="vm.loadMore('less')" ng-disabled="vm.first"><</button>
+						<button ng-click="vm.loadMore('less')" ng-disabled="vm.first" class="btn btn-default btnSlide">
+	                       	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	                     </button>
 					</div>
 
 					<div
@@ -105,7 +107,9 @@
 					</div>
 
 					<div class="col-md-1 lessActor">
-						<button ng-click="vm.loadMore('more')" ng-disabled="vm.last">></button>
+						<button ng-click="vm.loadMore('more')" ng-disabled="vm.last" class="btn btn-default btnSlide">
+	                       	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	                     </button>
 					</div>
 
 				</div>
