@@ -1,17 +1,17 @@
-package com.social.web.rest.dto;
+package com.social.web.rest.response;
 
-public class PostResponseDTO<T> {
+public class PostResponseAPI<T> {
 	
 	private String href;
 	private T content;
 	
-	public PostResponseDTO() {}
+	public PostResponseAPI() {}
 
-	public PostResponseDTO(T objectResponse) {
+	public PostResponseAPI(T objectResponse) {
 		this.content = objectResponse;
 	}
 	
-	public PostResponseDTO(String href, T objectResponse) {
+	public PostResponseAPI(String href, T objectResponse) {
 		super();
 		this.href = href;
 		this.content = objectResponse;

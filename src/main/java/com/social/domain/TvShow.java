@@ -1,35 +1,25 @@
 package com.social.domain;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "tvshow")
+@PrimaryKeyJoinColumn(name="idtitle")
 public class TvShow extends Title {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idtvshow")
-	private long id;
-		
-	/*VERIFICAR O MAPPEDBY*/
-//	mappedBy="tvShow",
-//	@JoinColumn(name = "idtvshow")
-//	@OneToMany(targetEntity=Season.class, mappedBy="tvShow", fetch=FetchType.EAGER)
-	@OneToMany(mappedBy="tvShow")
-	private List<Season> season;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tvShow")
+	private Set<Season> season = new HashSet<Season>();
 	
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idcommentparent")
@@ -39,19 +29,11 @@ public class TvShow extends Title {
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public List<Season> getSeason() {
+	public Set<Season> getSeason() {
 		return season;
 	}
 
-	public void setSeason(List<Season> season) {
+	public void setSeason(Set<Season> season) {
 		this.season = season;
 	}
 

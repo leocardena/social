@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
-import com.social.domain.ResponseAPI;
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Show;
 import com.social.trakt.services.ShowTraktAPIService;
+import com.social.web.rest.response.ResponseAPI;
 import com.social.web.rest.util.PaginationUtil;
 
 import retrofit2.Call;

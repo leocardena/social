@@ -9,8 +9,8 @@ ALTER TABLE UserAuthority ADD CONSTRAINT PK_UserAuthority PRIMARY KEY (idUser, a
 ALTER TABLE PersistentToken ADD CONSTRAINT PK_PersistentToken PRIMARY KEY(series);
 ALTER TABLE Profile ADD CONSTRAINT PK_Profile PRIMARY KEY (idProfile, idUser);
 ALTER TABLE Actor ADD CONSTRAINT PK_Actor PRIMARY KEY (idActor);
-ALTER TABLE Movie ADD CONSTRAINT PK_Movie PRIMARY KEY (idMovie, idTitle);
-ALTER TABLE TvShow ADD CONSTRAINT PK_TvShow PRIMARY KEY (idTvShow, idTitle);
+ALTER TABLE Movie ADD CONSTRAINT PK_Movie PRIMARY KEY (idTitle);
+ALTER TABLE TvShow ADD CONSTRAINT PK_TvShow PRIMARY KEY (idTitle);
 ALTER TABLE Season ADD CONSTRAINT PK_Season PRIMARY KEY (idSeason, idTvShow);
 ALTER TABLE Episode ADD CONSTRAINT PK_Episode PRIMARY KEY (idEpisode, idSeason);
 ALTER TABLE Title ADD CONSTRAINT PK_Title PRIMARY KEY (idTitle);
@@ -21,7 +21,7 @@ ALTER TABLE ListTitle ADD CONSTRAINT PK_ListTitle PRIMARY KEY (idList, idTitle);
 ALTER TABLE EpisodeManager ADD CONSTRAINT PK_EpisodeManager PRIMARY KEY (idEpisode, idProfile);
 ALTER TABLE Friend ADD CONSTRAINT PK_Friend PRIMARY KEY (idProfile, idFriend);
 ALTER TABLE Message ADD CONSTRAINT PK_Message PRIMARY KEY (idMessage);
-ALTER TABLE ProfileRatings ADD CONSTRAINT PK_ProfileRating PRIMARY KEY (idRating, idProfile); 
+--ALTER TABLE ProfileRatings ADD CONSTRAINT PK_ProfileRating PRIMARY KEY (idRating, idProfile); 
 ALTER TABLE ProfileComments ADD CONSTRAINT PK_ProfileComments PRIMARY KEY (idComment, idProfile);
 ALTER TABLE CommentParent ADD CONSTRAINT PK_CommentParent PRIMARY KEY (idCommentParent);
 ALTER TABLE RatingParent ADD CONSTRAINT PK_RatingParent PRIMARY KEY (idRatingParent);
@@ -30,10 +30,10 @@ ALTER TABLE RatingParent ADD CONSTRAINT PK_RatingParent PRIMARY KEY (idRatingPar
 -- -----------------------------------------------------
 ALTER TABLE User CHANGE COLUMN idUser idUser INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Profile CHANGE COLUMN idProfile idProfile INT NOT NULL AUTO_INCREMENT;
-ALTER TABLE Movie CHANGE COLUMN idMovie idMovie INT NOT NULL AUTO_INCREMENT;
+--ALTER TABLE Movie CHANGE COLUMN idMovie idMovie INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Actor CHANGE COLUMN idActor idActor INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Title CHANGE COLUMN idTitle idTitle INT NOT NULL AUTO_INCREMENT;
-ALTER TABLE TvShow CHANGE COLUMN idTvShow idTvShow INT NOT NULL AUTO_INCREMENT;
+--ALTER TABLE TvShow CHANGE COLUMN idTvShow idTvShow INT NOT NULL AUTO_INCREMENT;
 ALTER TABLE Season CHANGE COLUMN idSeason idSeason INT UNIQUE NOT NULL AUTO_INCREMENT;
 ALTER TABLE Episode CHANGE COLUMN idEpisode idEpisode INT UNIQUE NOT NULL AUTO_INCREMENT;
 ALTER TABLE Message CHANGE COLUMN idMessage idMessage INT NOT NULL AUTO_INCREMENT;
@@ -54,7 +54,7 @@ ALTER TABLE PersistentToken ADD CONSTRAINT FK_PersistentToken_User FOREIGN KEY (
 ALTER TABLE Profile ADD CONSTRAINT FK_Profile_User FOREIGN KEY (idUser) REFERENCES User(idUser);
 ALTER TABLE Movie ADD CONSTRAINT FK_Movie_Title FOREIGN KEY (idTitle) REFERENCES Title(idTitle);
 ALTER TABLE TvShow ADD CONSTRAINT FK_TvShow_Title FOREIGN KEY (idTitle) REFERENCES Title(idTitle);
-ALTER TABLE Season ADD CONSTRAINT FK_Season_TvShow FOREIGN KEY (idTvShow) REFERENCES TvShow(idTvShow);
+ALTER TABLE Season ADD CONSTRAINT FK_Season_TvShow FOREIGN KEY (idTvShow) REFERENCES TvShow(idtitle);
 ALTER TABLE Episode ADD CONSTRAINT FK_Episode_Season FOREIGN KEY(idSeason) REFERENCES Season(idSeason);
 ALTER TABLE List ADD CONSTRAINT FK_List_Profile FOREIGN KEY(idProfile) REFERENCES Profile(idProfile);
 ALTER TABLE ListTitle ADD CONSTRAINT FK_ListTitle_List FOREIGN KEY (idList) REFERENCES List(idList);
@@ -67,7 +67,7 @@ ALTER TABLE EpisodeManager ADD CONSTRAINT FK_EpisodeManager_Episode FOREIGN KEY 
 ALTER TABLE EpisodeManager ADD CONSTRAINT FK_EpisodeManager_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
 ALTER TABLE Comment ADD CONSTRAINT FK_Parent FOREIGN KEY (parent) REFERENCES Comment(idComment);
 ALTER TABLE Comment ADD CONSTRAINT FK_Comment_CommentParent FOREIGN KEY (idCommentParent) REFERENCES CommentParent(idCommentParent);
-ALTER TABLE Profile ADD CONSTRAINT FK_Profile_CommentParent FOREIGN KEY (idCommentParent) REFERENCES CommentParent(idCommentParent);
+--ALTER TABLE Profile ADD CONSTRAINT FK_Profile_CommentParent FOREIGN KEY (idCommentParent) REFERENCES CommentParent(idCommentParent);
 ALTER TABLE Movie ADD CONSTRAINT FK_Movie_CommentParent FOREIGN KEY (idCommentParent) REFERENCES CommentParent(idCommentParent);
 ALTER TABLE Movie ADD CONSTRAINT FK_Movie_RatingParent FOREIGN KEY (idRatingParent) REFERENCES RatingParent(idRatingParent);
 ALTER TABLE Actor ADD CONSTRAINT FK_Actor_CommentParent FOREIGN KEY (idCommentParent) REFERENCES CommentParent(idCommentParent);
@@ -82,5 +82,5 @@ ALTER TABLE ProfileComments ADD CONSTRAINT FK_ProfileComments_Comment FOREIGN KE
 ALTER TABLE ProfileComments ADD CONSTRAINT FK_ProfileComments_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
 ALTER TABLE Rating ADD CONSTRAINT FK_Rating_RatingParent FOREIGN KEY (idRatingParent) REFERENCES RatingParent(idRatingParent);
 ALTER TABLE Rating ADD CONSTRAINT FK_Rating_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
-ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Comment FOREIGN KEY (idRating) REFERENCES Rating(idRating);
-ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);
+--ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Comment FOREIGN KEY (idRating) REFERENCES Rating(idRating);
+--ALTER TABLE ProfileRatings ADD CONSTRAINT FK_ProfileRatings_Profile FOREIGN KEY (idProfile) REFERENCES Profile(idProfile);

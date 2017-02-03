@@ -9,7 +9,7 @@
 	
 	/*@ngInject*/
 	function CountryService(CountryBase, $resource) {
-		return $resource( CountryBase.url, {}, {} );
+		return $resource('app/services/region/countries.json', {}, {} );
 	}
 	
 })();

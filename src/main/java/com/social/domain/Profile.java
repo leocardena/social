@@ -1,10 +1,14 @@
 package com.social.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,19 +46,9 @@ public class Profile extends People {
 					@JoinColumn(name = "idcomment", referencedColumnName = "idcomment") })
 	private List<Comment> comments = new ArrayList<>();
 	
-//	@OneToMany
-//	@JoinTable(name = "profileratings", joinColumns = {
-//			@JoinColumn(name = "idprofile", referencedColumnName  = "idprofile") }, inverseJoinColumns = {
-//					@JoinColumn(name = "idrating", referencedColumnName = "idrating") })
-//	private List<Rating> ratings = new ArrayList<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profile")
+	private Set<Rating> ratings = new HashSet<Rating>();
 	
-	@OneToMany(mappedBy = "profile")
-	private List<Rating> ratings = new ArrayList<>();
-	
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idcommentparent")
-	private CommentParent commentParent;
-
 	public Long getId() {
 		return id;
 	}
@@ -95,22 +89,14 @@ public class Profile extends People {
 		this.comments = comments;
 	}
 
-	public List<Rating> getRatings() {
+	public Set<Rating> getRatings() {
 		return ratings;
 	}
 
-	public void setRatings(List<Rating> ratings) {
+	public void setRatings(Set<Rating> ratings) {
 		this.ratings = ratings;
 	}
 
-	public CommentParent getCommentParent() {
-		return commentParent;
-	}
-
-	public void setCommentParent(CommentParent commentParent) {
-		this.commentParent = commentParent;
-	}
-	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

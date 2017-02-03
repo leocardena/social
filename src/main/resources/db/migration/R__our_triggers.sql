@@ -1,16 +1,16 @@
-DROP TRIGGER IF EXISTS TGR_TVSHOW_ANTES_INSERT; 
-DROP TRIGGER IF EXISTS TGR_SEASON_ANTES_INSERT;
-DROP TRIGGER IF EXISTS TGR_EPISODE_ANTES_INSERT;
-DROP TRIGGER IF EXISTS TGR_MOVIE_ANTES_INSERT;
-DROP TRIGGER IF EXISTS TGR_ACTOR_ANTES_INSERT;
-DROP TRIGGER IF EXISTS TGR_PROFILE_ANTES_INSERT;
+--DROP TRIGGER IF EXISTS TGR_TVSHOW_ANTES_INSERT; 
+--DROP TRIGGER IF EXISTS TGR_SEASON_ANTES_INSERT;
+--DROP TRIGGER IF EXISTS TGR_EPISODE_ANTES_INSERT;
+--DROP TRIGGER IF EXISTS TGR_MOVIE_ANTES_INSERT;
+--DROP TRIGGER IF EXISTS TGR_ACTOR_ANTES_INSERT;
+--DROP TRIGGER IF EXISTS TGR_PROFILE_ANTES_INSERT;
 DROP TRIGGER IF EXISTS TGR_RATING_DEPOIS_INSERT;
 DROP TRIGGER IF EXISTS TGR_RATING_DEPOIS_DELETE;
 
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para o cada Titulo quando este for colocado
 	 como uma Série (Table TVSHOW) 
- */ 
+
 DELIMITER ##
 CREATE TRIGGER TGR_TVSHOW_ANTES_INSERT BEFORE INSERT ON TVSHOW
 	FOR EACH ROW
@@ -40,11 +40,11 @@ CREATE TRIGGER TGR_TVSHOW_ANTES_INSERT BEFORE INSERT ON TVSHOW
 						SET NEW.idRatingParent = 1;
 				END IF;
 	END##
-
+ */ 
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para o cada Titulo quando este for colocado
 	 como uma Filme (Table MOVIE) 
- */ 
+ 
 DELIMITER ##
 CREATE TRIGGER TGR_MOVIE_ANTES_INSERT BEFORE INSERT ON MOVIE
 	FOR EACH ROW
@@ -74,10 +74,10 @@ CREATE TRIGGER TGR_MOVIE_ANTES_INSERT BEFORE INSERT ON MOVIE
 						SET NEW.idRatingParent = 1;
 				END IF;
 	END##
-
+ */
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para cada Ator 
- */ 
+
 DELIMITER ##
 CREATE TRIGGER TGR_ACTOR_ANTES_INSERT BEFORE INSERT ON ACTOR
 	FOR EACH ROW
@@ -107,11 +107,11 @@ CREATE TRIGGER TGR_ACTOR_ANTES_INSERT BEFORE INSERT ON ACTOR
 						SET NEW.idRatingParent = 1;
 				END IF;
 	END##
-	
+	 */ 
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para o cada Temporada quando este for colocado
 	 como uma temporada (SEASON) para um Seriado
- */ 
+
 DELIMITER ##
 CREATE trigger TGR_SEASON_ANTES_INSERT BEFORE INSERT ON SEASON
 	FOR EACH ROW
@@ -141,12 +141,12 @@ CREATE trigger TGR_SEASON_ANTES_INSERT BEFORE INSERT ON SEASON
 						SET NEW.idRatingParent = 1;
 				END IF;
 	END##
-
+ */ 
 
 /*
 	 Trigger para criar um idRatingParent e idCommentParent para o cada Episodio quando este for colocado
 	 como episodio (EPISODE) para uma temporada
- */ 
+
 DELIMITER ##
 CREATE trigger TGR_EPISODE_ANTES_INSERT BEFORE INSERT ON EPISODE
 	FOR EACH ROW
@@ -176,10 +176,10 @@ CREATE trigger TGR_EPISODE_ANTES_INSERT BEFORE INSERT ON EPISODE
 						SET NEW.idRatingParent = 1;
 				END IF;
 	END##
-	
+	 */ 
 /*
  	Trigger para criar um idCommentParent para o cada Perfil quando este tiver alguém inserido (PROFILE) 
- */ 
+
 DELIMITER ##
 CREATE trigger TGR_PROFILE_ANTES_INSERT BEFORE INSERT ON PROFILE
 	FOR EACH ROW
@@ -194,7 +194,7 @@ CREATE trigger TGR_PROFILE_ANTES_INSERT BEFORE INSERT ON PROFILE
 			SET NEW.idCommentParent = @idCommentParent;
 		END IF;
 	END##
-
+ */ 
 /*
  	Trigger para atualizar a quantidade de votos que um titulo recebeu após lhe darem uma nota 
  */ 

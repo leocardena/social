@@ -2,9 +2,10 @@ package com.social.trakt.business;
 
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
-import com.social.domain.ResponseAPI;
+
 import com.social.trakt.model.Movie;
 import com.social.trakt.model.Released;
+import com.social.web.rest.response.ResponseAPI;
 
 public interface MovieTraktAPIBusiness {
 	

@@ -33,14 +33,11 @@ public class Comment {
 	@Column(name = "replies")
 	private Long replies;
 	
-	@OneToOne
-	@JoinColumn(name = "parent")
-	private Comment parent;
-	
 	@Column(name = "dislikes")
 	private Long dislikes;
 	
 	@OneToOne
+	@JoinColumn(name = "idcommmentparent")
 	private CommentParent idCommentParent;
 
 	public Long getId() {
@@ -81,14 +78,6 @@ public class Comment {
 
 	public void setReplies(Long replies) {
 		this.replies = replies;
-	}
-
-	public Comment getParent() {
-		return parent;
-	}
-
-	public void setParent(Comment parent) {
-		this.parent = parent;
 	}
 
 	public CommentParent getIdCommentParent() {

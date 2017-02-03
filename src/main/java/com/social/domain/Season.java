@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -29,9 +28,6 @@ public class Season {
 	
 	@Column(name = "name")
 	private String name;
-	
-/*	@Column(name = "rating")
-	private long rating;*/
 	
 	@Column(name = "votes")
 	private long votes;
@@ -63,14 +59,6 @@ public class Season {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-/*	public long getRating() {
-		return rating;
-	}
-
-	public void setRating(long rating) {
-		this.rating = rating;
-	}*/
 
 	public long getVotes() {
 		return votes;

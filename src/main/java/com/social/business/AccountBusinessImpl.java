@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.social.domain.Authority;
-import com.social.domain.CommentParent;
 import com.social.domain.Profile;
 import com.social.domain.User;
 import com.social.repository.AuthorityRepository;
@@ -78,15 +76,12 @@ public class AccountBusinessImpl implements AccountBusiness {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         
-        CommentParent commentParent = new CommentParent();
-        
         Profile newProfile = new Profile();
         newProfile.setName(userDTO.getFirstName().trim() + " " + userDTO.getLastName().trim());
         newProfile.setBirthday(userDTO.getBirthday());
         newProfile.setCountry(userDTO.getCountry());
         newProfile.setGenre(userDTO.getGenre());
         newProfile.setUser(newUser);
-        newProfile.setCommentParent(commentParent);
         
         profileRepository.save(newProfile);
 		mailBusiness.sendActivationEmail(newUser , "http://localhost:8080");

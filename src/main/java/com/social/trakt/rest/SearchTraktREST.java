@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.social.domain.ResponseAPI;
+
 import com.social.trakt.business.SearchTraktAPIBusiness;
 import com.social.trakt.model.Search;
 import com.social.trakt.util.APITraktEndpoint;
+import com.social.web.rest.response.ResponseAPI;
 
 @RestController
 @RequestMapping(value = APITraktEndpoint.SEARCH)

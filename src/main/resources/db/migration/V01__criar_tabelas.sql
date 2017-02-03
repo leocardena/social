@@ -62,7 +62,6 @@ name VARCHAR(255) NOT NULL
 -- -----------------------------------------------------
 CREATE TABLE Profile(
 idProfile INT NOT NULL,
-idCommentParent INT NOT NULL,
 idUser INT UNIQUE NOT NULL,
 name VARCHAR (100) NOT NULL,
 genre VARCHAR (1) NOT NULL ,
@@ -74,20 +73,19 @@ country VARCHAR(100) NOT NULL
 -- Table SocialNetwork.Movie
 -- -----------------------------------------------------
 CREATE TABLE Movie(
-idMovie INT NOT NULL, 
-idTitle INT NOT NULL,
-idCommentParent INT NOT NULL DEFAULT 0,
-idRatingParent INT NOT NULL DEFAULT 0
+idTitle INT NOT NULL, 
+idCommentParent INT,
+idRatingParent INT
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Actor
 -- -----------------------------------------------------
 CREATE TABLE Actor(
 idActor INT UNIQUE NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL,
+idCommentParent INT,
+idRatingParent INT,
 slug VARCHAR(100) NOT NULL,
-imdb INT UNIQUE NOT NULL,
+imdb VARCHAR(100) UNIQUE NOT NULL,
 name VARCHAR (100) NOT NULL,
 birthay DATE NOT NULL,
 country VARCHAR(100) NOT NULL
@@ -98,10 +96,10 @@ country VARCHAR(100) NOT NULL
 CREATE TABLE Title(
 idTitle INT NOT NULL,
 slug VARCHAR(100) NOT NULL,
-imdb  INT UNIQUE NOT NULL,
+imdb VARCHAR(100) UNIQUE NOT NULL,
 name VARCHAR(100) UNIQUE NOT NULL,
-trailer VARCHAR(200) NOT NULL,
-homePage VARCHAR(200) NOT NULL,
+trailer VARCHAR(200),
+homePage VARCHAR(200),
 votes INT NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
 
@@ -109,10 +107,9 @@ votes INT NOT NULL DEFAULT 0
 -- Table SocialNetwork.TvShow
 -- -----------------------------------------------------
 CREATE TABLE TvShow( 
-idTvShow INT NOT NULL,
 idTitle INT NOT NULL,
-idCommentParent INT NOT NULL DEFAULT 0,
-idRatingParent INT NOT NULL  DEFAULT 0
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Season
@@ -120,10 +117,10 @@ idRatingParent INT NOT NULL  DEFAULT 0
 CREATE TABLE Season(
 idSeason INT UNIQUE NOT NULL, 
 idTvShow INT NOT NULL,
-idCommentParent INT NOT NULL DEFAULT 0,
-idRatingParent INT NOT NULL DEFAULT 0,
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL,
 name VARCHAR(100) NOT NULL,
-aired DATE NOT NULL,
+aired DATE,
 votes INT NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
@@ -132,10 +129,10 @@ votes INT NOT NULL DEFAULT 0
 CREATE TABLE Episode(
 idEpisode INT UNIQUE NOT NULL, 
 idSeason INT NOT NULL,
-idCommentParent INT NOT NULL DEFAULT 0,
-idRatingParent INT NOT NULL DEFAULT 0,
+idCommentParent INT NOT NULL,
+idRatingParent INT NOT NULL,
 name VARCHAR(100) NOT NULL,
-aired DATE NOT NULL,
+aired DATE,
 votes INT NOT NULL DEFAULT 0
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
@@ -192,7 +189,7 @@ idTitle INT NOT NULL
 -- -----------------------------------------------------
 CREATE TABLE Comment(
 idComment INT NOT NULL, 
-idCommentParent INT NOT NULL,
+idCommentParent INT,
 text TEXT NOT NULL,
 date TIMESTAMP DEFAULT NOW() NOT NULL,
 likes INT(10) DEFAULT 0 ,
@@ -234,7 +231,9 @@ idRatingParent INT NOT NULL
 -- -----------------------------------------------------
 -- Table SocialNetwork.ProfileRatings
 -- -----------------------------------------------------
+/*
 CREATE TABLE ProfileRatings(
 idRating INT NOT NULL,
 idProfile INT NOT NULL
 )ENGINE=InnoDB;
+*/

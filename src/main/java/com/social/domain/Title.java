@@ -11,10 +11,10 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Table(name = "title")
-public abstract class Title {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Title {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

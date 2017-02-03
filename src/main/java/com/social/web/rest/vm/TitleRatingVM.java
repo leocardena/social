@@ -4,20 +4,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class TitleRatingVM {
 	
-	private String slug;
 	private String imdb;
 	private String name;
 	private String trailer;
 	private String homePage;
 	private RatingVM rating;
-	
-	public String getSlug() {
-		return slug;
-	}
-	
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
 	
 	public String getImdb() {
 		return imdb;

@@ -88,7 +88,7 @@ public class MovieREST {
 		
 		movie = new Movie();
 		movie.setName("Filme Teste");
-		movie.setImdb("Filme imdb");
+//		movie.setImdb("Filme imdb");
 		movie.setSlug("Filme slug");
 		movie.setVotes(9);
 		movie.setHomePage("Filme Home page");

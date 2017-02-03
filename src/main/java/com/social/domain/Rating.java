@@ -1,15 +1,14 @@
 package com.social.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -21,36 +20,45 @@ public class Rating {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idrating")
-	private long id;
+	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="idprofile")
-	private Profile profile;
+	@Column(name = "idprofile", nullable = false)
+	private Long profile;
 	
 	@Column(name = "date")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime date;
 	
 	@Column(name = "note")
-	private long note;
-	
-	@OneToOne
-	@JoinColumn(name = "idratingparent")
-	private RatingParent idRatingParent;
+	private Integer note;
 
-	public long getId() {
+    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idratingparent", unique= true)
+	private RatingParent idRatingParent;
+    
+    public Rating () { }
+
+	public Rating(Long id, Long profile, DateTime date, Integer note, RatingParent idRatingParent) {
+		this.id = id;
+		this.profile = profile;
+		this.date = date;
+		this.note = note;
+		this.idRatingParent = idRatingParent;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Profile getProfile() {
+	public Long getProfile() {
 		return profile;
 	}
 
-	public void setProfile(Profile profile) {
+	public void setProfile(Long profile) {
 		this.profile = profile;
 	}
 
@@ -62,11 +70,11 @@ public class Rating {
 		this.date = date;
 	}
 
-	public long getNote() {
+	public Integer getNote() {
 		return note;
 	}
 
-	public void setNote(long note) {
+	public void setNote(Integer note) {
 		this.note = note;
 	}
 

@@ -1,25 +1,17 @@
 package com.social.domain;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
-@Table(name = "Movie")
+@Table(name = "movie")
+@PrimaryKeyJoinColumn(name="idtitle")
 public class Movie extends Title {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idmovie")
-	private long id;
 	
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idcommentparent")
@@ -28,14 +20,6 @@ public class Movie extends Title {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public CommentParent getCommentParent() {
 		return commentParent;

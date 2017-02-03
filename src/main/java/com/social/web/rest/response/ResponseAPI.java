@@ -1,4 +1,4 @@
-package com.social.domain;
+package com.social.web.rest.response;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.http.HttpHeaders;
