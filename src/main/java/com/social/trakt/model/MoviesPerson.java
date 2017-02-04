@@ -17,7 +17,7 @@ public class MoviesPerson {
     private List<Cast> cast;
     @JsonProperty("crew")
     private PersonCrew crew;
-
+    
     @JsonProperty("cast")
     public List<Cast> getCast() {
         return cast;

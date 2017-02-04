@@ -18,7 +18,7 @@
 		var vm = this;
 		vm.people = personSummaryPrepService;
 		vm.people.actor = personShowsPrepService.cast.concat(personMoviesPrepService.cast);
-		vm.people.production = personMoviesPrepService.crew.production.concat(personShowsPrepService.crew.production);
+		vm.people.production =  personMoviesPrepService.crew.production.concat(personShowsPrepService.crew.production);
 		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
 		var startActor = 0;
 		var startProduction = 0;

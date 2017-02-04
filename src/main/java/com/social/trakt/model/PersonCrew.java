@@ -13,8 +13,15 @@ public class PersonCrew {
 
     @JsonProperty("production")
     private List<Production> production;
+    
+    public PersonCrew(List<Production> production) {
+		super();
+		this.production = production;
+	}
+    public PersonCrew() {
+    }
 
-    @JsonProperty("production")
+	@JsonProperty("production")
     public List<Production> getProduction() {
         return production;
     }

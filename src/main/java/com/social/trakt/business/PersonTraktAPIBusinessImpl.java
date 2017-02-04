@@ -1,18 +1,18 @@
 package com.social.trakt.business;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.social.retrofit.exception.RetrofitException;
 import com.social.trakt.model.Movie;
 import com.social.trakt.model.MoviesPerson;
 import com.social.trakt.model.Person;
+import com.social.trakt.model.PersonCrew;
 import com.social.trakt.model.Show;
 import com.social.trakt.model.ShowsPerson;
 import com.social.trakt.services.PersonTraktAPIService;
-
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -46,7 +46,12 @@ public class PersonTraktAPIBusinessImpl implements PersonTraktAPIBusiness {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())
 				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
+			
+			MoviesPerson moviesPerson = resp.body();
+			if (moviesPerson.getCrew() == null) 
+				moviesPerson.setCrew(new PersonCrew(new ArrayList<>()));
+			
+			return moviesPerson;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}
@@ -61,7 +66,13 @@ public class PersonTraktAPIBusinessImpl implements PersonTraktAPIBusiness {
 			resp = callClone.execute();
 			if (!resp.isSuccessful())
 				throw new RetrofitException("A resposta não foi bem sucedida");
-			return resp.body();
+			
+			ShowsPerson showsPerson = resp.body();
+			
+			if (showsPerson.getCrew() == null)
+				showsPerson.setCrew(new PersonCrew(new ArrayList<>()));
+			
+			return showsPerson;
 		} catch (IOException e) {
 			throw new RetrofitException("Erro ao executar request através da API");
 		}

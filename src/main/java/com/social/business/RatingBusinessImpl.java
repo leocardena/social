@@ -49,5 +49,11 @@ public class RatingBusinessImpl implements RatingBusiness {
 		u.setNote(ratingStoraged.getNote());
 		return new PostResponseAPI<>("/api/rest/shows/" + showId + "/user-rating", u);
 	}
+
+	@Override
+	public void get(String showId) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -62,109 +62,112 @@
 			</div>
 			
 			<!-- Ator's job -->
-			<h4 class="col-md-12 relatedTitle" style="font-weight: 900;">Ator</h4>
-			<div ng-repeat="actor in vm.displayActorArray" class="col-md-3">
-				<div ng-if="actor.movie" ng-click="vm.goToMovie(actor.movie)">
-					<img ng-src="{{actor.movie.images.poster.file_path ? 
-						actor.movie.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
-					<div class="movieAndShowTextBoxPersonImages">
-						<p class="text-center control-label">
-							<a>
-								<span class="movieAndShowTitleTextPersonImages">
-									{{actor.movie.title}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages">
-									{{actor.movie.year}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages" ng-show="actor.character">
-									"{{actor.character}}"
-								</span>
-							</a>
-						</p>
+			<div ng-show="vm.displayActorArray.length > 0">
+				<h4 class="col-md-12 relatedTitle" style="font-weight: 900;">Ator</h4>
+				<div ng-repeat="actor in vm.displayActorArray" class="col-md-3">
+					<div ng-if="actor.movie" ng-click="vm.goToMovie(actor.movie)">
+						<img ng-src="{{actor.movie.images.poster.file_path ? 
+							actor.movie.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+						<div class="movieAndShowTextBoxPersonImages">
+							<p class="text-center control-label">
+								<a>
+									<span class="movieAndShowTitleTextPersonImages">
+										{{actor.movie.title}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages">
+										{{actor.movie.year}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages" ng-show="actor.character">
+										"{{actor.character}}"
+									</span>
+								</a>
+							</p>
+						</div>
+					</div>
+					
+					<div ng-if="actor.show" ng-click="vm.goToShow(actor.show)">
+						<img ng-src="{{actor.show.images.poster.file_path ? 
+							actor.show.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+						<div class="movieAndShowTextBoxPersonImages">
+							<p class="text-center control-label">
+								<a>
+									<span class="movieAndShowTitleTextPersonImages">
+										{{actor.show.title}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages">
+										{{actor.show.year}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages" ng-show="actor.character">
+										"{{actor.character}}"
+									</span>
+								</a>
+							</p>
+						</div>
 					</div>
 				</div>
-				
-				<div ng-if="actor.show" ng-click="vm.goToShow(actor.show)">
-					<img ng-src="{{actor.show.images.poster.file_path ? 
-						actor.show.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
-					<div class="movieAndShowTextBoxPersonImages">
-						<p class="text-center control-label">
-							<a>
-								<span class="movieAndShowTitleTextPersonImages">
-									{{actor.show.title}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages">
-									{{actor.show.year}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages" ng-show="actor.character">
-									"{{actor.character}}"
-								</span>
-							</a>
-						</p>
-					</div>
-				</div>
+				<button class="btn btn-default col-md-offset-5" 
+					ng-click="vm.loadMoreActor()" ng-disabled="vm.loadMoreActorIsDisabled">
+					Carregar mais
+				</button>
 			</div>
-			<button class="btn btn-default col-md-offset-5" 
-				ng-click="vm.loadMoreActor()" ng-disabled="vm.loadMoreActorIsDisabled">
-				Carregar mais
-			</button>
 			
 			<!-- Ator's production -->
-			<h4 class="col-md-12" style="font-weight: 900;">Produção</h4>
-			<div ng-repeat="actor in vm.displayProductionArray" class="col-md-3">
-				<div ng-if="actor.movie" ng-click="vm.goToMovie(actor.movie)">
-					<img ng-src="{{actor.movie.images.poster.file_path ? 
-						actor.movie.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
-					<div class="movieAndShowTextBoxPersonImages">
-						<p class="text-center control-label">
-							<a>
-								<span class="movieAndShowTitleTextPersonImages">
-									{{actor.movie.title}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages">
-									{{actor.movie.year}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages" ng-show="actor.job">
-									"{{actor.job}}"
-								</span>
-							</a>
-						</p>
+			<div ng-show="vm.displayProductionArray.length > 0">
+				<h4 class="col-md-12" style="font-weight: 900;">Produção</h4>
+				<div ng-repeat="actor in vm.displayProductionArray" class="col-md-3">
+					<div ng-if="actor.movie" ng-click="vm.goToMovie(actor.movie)">
+						<img ng-src="{{actor.movie.images.poster.file_path ? 
+							actor.movie.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+						<div class="movieAndShowTextBoxPersonImages">
+							<p class="text-center control-label">
+								<a>
+									<span class="movieAndShowTitleTextPersonImages">
+										{{actor.movie.title}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages">
+										{{actor.movie.year}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages" ng-show="actor.job">
+										"{{actor.job}}"
+									</span>
+								</a>
+							</p>
+						</div>
+					</div>
+					
+					<div ng-if="actor.show" ng-click="vm.goToShow(actor.show)">
+						<img ng-src="{{actor.show.images.poster.file_path ? 
+							actor.show.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
+						<div class="movieAndShowTextBoxPersonImages">
+							<p class="text-center control-label">
+								<a>
+									<span class="movieAndShowTitleTextPersonImages">
+										{{actor.show.title}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages">
+										{{actor.show.year}}
+									</span>
+									<br>
+									<span class="movieAndShowContentTextPersonImages" ng-show="actor.job">
+										"{{actor.job}}"
+									</span>
+								</a>
+							</p>
+						</div>
 					</div>
 				</div>
-				
-				<div ng-if="actor.show" ng-click="vm.goToShow(actor.show)">
-					<img ng-src="{{actor.show.images.poster.file_path ? 
-						actor.show.images.poster.file_path : vm.imageNotAvailable}}" class="movieAndShowPersonImages">
-					<div class="movieAndShowTextBoxPersonImages">
-						<p class="text-center control-label">
-							<a>
-								<span class="movieAndShowTitleTextPersonImages">
-									{{actor.show.title}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages">
-									{{actor.show.year}}
-								</span>
-								<br>
-								<span class="movieAndShowContentTextPersonImages" ng-show="actor.job">
-									"{{actor.job}}"
-								</span>
-							</a>
-						</p>
-					</div>
-				</div>
+				<button class="btn btn-default col-md-offset-5" 
+					ng-click="vm.loadMoreProduction()" ng-disabled="vm.loadMoreProductionIsDisabled">
+					Carregar mais
+				</button>
 			</div>
-			<button class="btn btn-default col-md-offset-5" 
-				ng-click="vm.loadMoreProduction()" ng-disabled="vm.loadMoreProductionIsDisabled">
-				Carregar mais
-			</button>
-			
 		</div>
 
 	</div>
