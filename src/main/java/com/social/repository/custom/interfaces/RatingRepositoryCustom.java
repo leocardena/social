@@ -4,6 +4,6 @@ import com.social.domain.Rating;
 
 public interface RatingRepositoryCustom {
 	
-	public Rating getUserShowRatingBySlug(Long idProfile);
+	public Rating getUserShowRatingBySlug(Long idProfile, String slug);
 	
 }

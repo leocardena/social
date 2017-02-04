@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.social.business.interfaces.RatingBusiness;
 import com.social.business.interfaces.TvShowBusiness;
 import com.social.web.rest.dto.CommentDTO;
 import com.social.web.rest.util.APIEndpoint;
+import com.social.web.rest.vm.RatingVM;
 import com.social.web.rest.vm.TitleRatingVM;
 
 /**
@@ -61,7 +61,7 @@ public class ShowREST {
 	 */
 	@GetMapping(value = "/{showId}/user-rating")
 	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId) {
-		ratingBusiness.get(showId);
+		ratingBusiness.getUserRatingForTvShowBySlug(showId);
 		return ResponseEntity.ok().build();
 	}
 	
@@ -107,9 +107,9 @@ public class ShowREST {
 	 *         foi encontrado
 	 */
 	@PutMapping(value = "/{showId}/user-rating/{ratingId}")
-	public ResponseEntity<?> putUserRating(@PathVariable("showId") String showId, 
-			@PathVariable("ratingId") String ratingId, @RequestBody TitleRatingVM rating) {
-		return ResponseEntity.ok().build();
+	public ResponseEntity<?> putUserRating(@PathVariable("showId") Long showId, 
+			@PathVariable("ratingId") String ratingId, @RequestBody RatingVM rating) {
+		return ResponseEntity.ok(ratingBusiness.putRatingForTvShow(showId, rating));
 	}
 	
 	/**
@@ -129,7 +129,8 @@ public class ShowREST {
 	 */
 	@DeleteMapping(value = "/{showId}/user-rating/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("showId") String showId, 
-			@PathVariable("ratingId") String ratingId) {
+			@PathVariable("ratingId") Long ratingId) {
+		ratingBusiness.deleteRatingForTvShow(ratingId);
 		return ResponseEntity.ok().build();
 	}
 

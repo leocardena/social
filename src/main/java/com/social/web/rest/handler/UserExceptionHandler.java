@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
+import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.dto.ErrorDetailDTO;
 import com.social.web.rest.exception.EmailAlreadyInUseException;
 import com.social.web.rest.exception.KeyNotFoundException;
@@ -97,6 +97,26 @@ public class UserExceptionHandler {
 		error.setMensagem(exception.getMessage());
 		error.setTimestamp(System.currentTimeMillis());
 
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+	/**
+	 * @param exception
+	 *            a exception gerada
+	 * @param request
+	 *            a request que ocasionou a exception
+	 * @return response contendo a causa da exception
+	 */
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<?> handleResourceNotFoundExceptionException(ResourceNotFoundException exception,
+			HttpServletRequest request) {
+		ErrorDetailDTO error = new ErrorDetailDTO();
+		
+		error.setStatus(404L);
+		error.setTitulo("Recurso nao encontrado");
+		error.setMensagem(exception.getMessage());
+		error.setTimestamp(System.currentTimeMillis());
+		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
 
