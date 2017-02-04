@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.social.business.RatingBusiness;
 import com.social.business.TvShowBusiness;
 import com.social.web.rest.dto.CommentDTO;
 import com.social.web.rest.util.APIEndpoint;
@@ -28,6 +29,9 @@ public class ShowREST {
 	
 	@Autowired
 	private TvShowBusiness showBusiness;
+	
+	@Autowired
+	private RatingBusiness ratingBusiness;
 
 	/**
 	 * Retorna as informacoes de um show em especifico
@@ -78,7 +82,7 @@ public class ShowREST {
 	@PostMapping(value = "/{showId}/user-rating")
 	public ResponseEntity<?> postUserRating(@PathVariable("showId") String showId, 
 			@RequestBody TitleRatingVM rating) {
-		return ResponseEntity.ok(showBusiness.postUserRating(showId, rating));
+		return ResponseEntity.ok(ratingBusiness.postRatingForTvShow(showId, rating));
 	}
 	
 	/**
