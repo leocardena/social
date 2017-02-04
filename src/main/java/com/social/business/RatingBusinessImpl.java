@@ -4,6 +4,10 @@ import java.util.Optional;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.social.business.interfaces.AccountBusiness;
+import com.social.business.interfaces.RatingBusiness;
+import com.social.business.interfaces.TvShowBusiness;
 import com.social.domain.Profile;
 import com.social.domain.Rating;
 import com.social.domain.TvShow;
@@ -52,8 +56,8 @@ public class RatingBusinessImpl implements RatingBusiness {
 
 	@Override
 	public void get(String showId) {
-		// TODO Auto-generated method stub
-		
+		Rating a = ratingRepository.getUserShowRatingBySlug(1L);
+		System.out.println(a);
 	}
 	
 }

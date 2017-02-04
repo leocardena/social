@@ -1,4 +1,4 @@
-package com.social.business;
+package com.social.business.interfaces;
 
 import com.social.web.rest.dto.UserRatingDTO;
 import com.social.web.rest.response.PostResponseAPI;

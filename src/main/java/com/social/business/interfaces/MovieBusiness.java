@@ -1,4 +1,4 @@
-package com.social.business;
+package com.social.business.interfaces;
 
 import java.util.List;
 

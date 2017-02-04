@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
+import com.social.trakt.business.interfaces.EpisodeTraktAPIBusiness;
 import com.social.trakt.model.Episode;
 import com.social.trakt.services.EpisodeTraktAPIService;
 import retrofit2.Call;

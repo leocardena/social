@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
+import com.social.tmdb.business.interfaces.PersonTmdbAPIBusiness;
 import com.social.tmdb.exception.TMDBImageNotFound;
 import com.social.tmdb.model.Images;
 import com.social.tmdb.model.Profile;

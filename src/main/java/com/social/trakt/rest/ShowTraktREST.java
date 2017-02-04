@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.social.trakt.business.PersonTraktAPIBusiness;
-import com.social.trakt.business.SeasonTraktAPIBusiness;
-import com.social.trakt.business.ShowTraktAPIBusiness;
+import com.social.trakt.business.interfaces.PersonTraktAPIBusiness;
+import com.social.trakt.business.interfaces.SeasonTraktAPIBusiness;
+import com.social.trakt.business.interfaces.ShowTraktAPIBusiness;
 import com.social.trakt.model.Show;
 import com.social.trakt.util.APITraktEndpoint;
 import com.social.web.rest.response.ResponseAPI;

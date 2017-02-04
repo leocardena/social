@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.social.business.AccountBusiness;
+
+import com.social.business.interfaces.AccountBusiness;
 import com.social.web.rest.dto.UserDTO;
 import com.social.web.rest.util.APIEndpoint;
 import javax.servlet.http.HttpServletRequest;

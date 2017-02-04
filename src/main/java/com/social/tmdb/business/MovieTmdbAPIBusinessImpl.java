@@ -8,6 +8,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
+import com.social.tmdb.business.interfaces.MovieTmdbAPIBusiness;
 import com.social.tmdb.exception.TMDBImageNotFound;
 import com.social.tmdb.model.Backdrop;
 import com.social.tmdb.model.Images;

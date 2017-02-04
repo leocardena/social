@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import com.social.retrofit.exception.RetrofitException;
+import com.social.trakt.business.interfaces.MovieTraktAPIBusiness;
 import com.social.trakt.model.Movie;
 import com.social.trakt.model.Released;
 import com.social.trakt.services.MovieTraktAPIService;

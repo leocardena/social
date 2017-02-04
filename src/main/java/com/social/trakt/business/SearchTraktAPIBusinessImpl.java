@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import com.social.retrofit.exception.RetrofitException;
+import com.social.trakt.business.interfaces.SearchTraktAPIBusiness;
 import com.social.trakt.model.Search;
 import com.social.trakt.services.SearchTraktAPIService;
 import com.social.web.rest.response.ResponseAPI;

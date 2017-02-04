@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.social.retrofit.exception.RetrofitException;
+import com.social.trakt.business.interfaces.SeasonTraktAPIBusiness;
 import com.social.trakt.model.Episode;
 import com.social.trakt.model.FirstAired;
 import com.social.trakt.model.Season;

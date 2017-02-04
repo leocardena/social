@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.social.tmdb.business.PersonTmdbAPIBusiness;
+
+import com.social.tmdb.business.interfaces.PersonTmdbAPIBusiness;
 import com.social.tmdb.model.Profile;
 import com.social.tmdb.util.ApiTmdbEndpoint;
 

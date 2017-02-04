@@ -1,4 +1,4 @@
-package com.social.trakt.business;
+package com.social.trakt.business.interfaces;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import com.social.trakt.model.Movie;

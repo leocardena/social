@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.social.business.interfaces.AccountBusiness;
+import com.social.business.interfaces.MailBusiness;
 import com.social.domain.Authority;
 import com.social.domain.Profile;
 import com.social.domain.User;

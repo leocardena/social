@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.retrofit.exception.RetrofitException;
+import com.social.trakt.business.interfaces.PersonTraktAPIBusiness;
 import com.social.trakt.model.Movie;
 import com.social.trakt.model.MoviesPerson;
 import com.social.trakt.model.Person;

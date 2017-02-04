@@ -10,6 +10,8 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
+
+import com.social.business.interfaces.MailBusiness;
 import com.social.config.SocialProperties;
 import com.social.domain.User;
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.social.business.interfaces.MovieBusiness;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
 import com.social.domain.QMovie;

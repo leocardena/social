@@ -1,4 +1,4 @@
-package com.social.business;
+package com.social.business.interfaces;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.multipart.MultipartFile;

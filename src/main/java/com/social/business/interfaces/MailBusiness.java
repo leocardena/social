@@ -1,4 +1,4 @@
-package com.social.business;
+package com.social.business.interfaces;
 
 import org.springframework.scheduling.annotation.Async;
 import com.social.domain.User;

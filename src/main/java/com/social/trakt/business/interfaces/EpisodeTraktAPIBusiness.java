@@ -1,4 +1,4 @@
-package com.social.trakt.business;
+package com.social.trakt.business.interfaces;
 
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
