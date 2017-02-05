@@ -3,14 +3,16 @@ package com.social.business;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.social.business.interfaces.TvShowBusiness;
 import com.social.domain.CommentParent;
 import com.social.domain.RatingParent;
 import com.social.domain.TvShow;
 import com.social.repository.CommentParentRepository;
 import com.social.repository.RatingParentRepository;
+import com.social.repository.RatingRepository;
 import com.social.repository.TvShowRepository;
+import com.social.web.rest.dto.TvShowDTO;
+import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.vm.TitleRatingVM;
 
 @Service
@@ -24,6 +26,9 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 	
 	@Autowired
 	private CommentParentRepository commentParentRepository;
+	
+	@Autowired
+	private RatingRepository ratingRepository;
 	
 	public TvShow createTvShow(TitleRatingVM titleRating, String showId) {
 		//criando um novo comentParent e ratingParent para o show que sera inserido
@@ -46,6 +51,31 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 	
 	public Optional<TvShow> findBySlug(String slug) {
 		return tvShowRepository.findBySlug(slug);
+	}
+
+	@Override
+	public TvShowDTO getTvShow(String id) {
+		Optional<TvShow> tvShowOptional = findBySlug(id);
+			
+		if (!tvShowOptional.isPresent())
+			throw new ResourceNotFoundException("Show nao encontrado");
+			
+		TvShow tvShow = tvShowOptional.get();
+		
+		TvShowDTO tvShowDTO = new TvShowDTO();
+		tvShowDTO.setId(tvShow.getId());
+		tvShowDTO.setHomePage(tvShow.getHomePage());
+		tvShowDTO.setImdb(tvShow.getImdb());
+		tvShowDTO.setName(tvShow.getName());
+		tvShowDTO.setSlug(tvShow.getSlug());
+		tvShowDTO.setTrailer(tvShow.getTrailer());
+		tvShowDTO.setVotes(tvShow.getVotes());
+		
+		Double noteAverage = ratingRepository.averageByIdRatingParent(tvShow.getRatingParent().getId());
+		
+		tvShowDTO.setNoteAverage(noteAverage);
+		
+		return tvShowDTO;
 	}
 
 }

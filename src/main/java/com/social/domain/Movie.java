@@ -1,6 +1,5 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -13,11 +12,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @PrimaryKeyJoinColumn(name="idtitle")
 public class Movie extends Title {
 	
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
 

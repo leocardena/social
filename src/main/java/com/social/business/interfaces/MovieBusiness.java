@@ -21,7 +21,7 @@ public interface MovieBusiness {
 	public List<Movie> getAllMoviesByName(String name);
 	
 	@PreAuthorize("permitAll")
-	public long getAvgRatingById(Long idRatingParent);
+	public Double getAvgRatingById(Long idRatingParent);
 	
 	@PreAuthorize("permitAll")
 	public void insert(Movie movie);

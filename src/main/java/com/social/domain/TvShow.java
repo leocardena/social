@@ -2,7 +2,6 @@ package com.social.domain;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -21,14 +20,14 @@ public class TvShow extends Title {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tvShow")
 	private Set<Season> season = new HashSet<Season>();
 	
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
-
+    
 	public Set<Season> getSeason() {
 		return season;
 	}

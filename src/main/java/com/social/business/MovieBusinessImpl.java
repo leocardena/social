@@ -1,19 +1,13 @@
 package com.social.business;
 
 import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.social.business.interfaces.MovieBusiness;
 import com.social.domain.Movie;
-import com.social.domain.Profile;
 import com.social.domain.QMovie;
-import com.social.domain.QProfile;
 import com.social.domain.QRating;
 import com.social.domain.Rating;
 import com.social.domain.User;
@@ -124,8 +118,8 @@ public class MovieBusinessImpl implements MovieBusiness {
 	}
 
 	@Override
-	public long getAvgRatingById(Long idRatingParent){
-		return ratingRepository.avgByIdRatingParent(idRatingParent);
+	public Double getAvgRatingById(Long idRatingParent){
+		return ratingRepository.averageByIdRatingParent(idRatingParent);
 	}
 
 	@Override

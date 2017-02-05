@@ -58,10 +58,18 @@ public class RatingBusinessImpl implements RatingBusiness {
 	public UserRatingDTO getUserRatingForTvShowBySlug(String slug) {
 		Profile profile = accountBusiness.findProfileByLoggedUser();
 		
-		Optional<Rating> ratingOptional = ratingRepository.findRatingShowBySlug(profile.getId(), slug);
+		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(slug);
+		
+		if (!tvShowOptional.isPresent())
+			throw new ResourceNotFoundException("Show nao encontrado");
+		
+		TvShow tvShow = tvShowOptional.get();
+		
+		Optional<Rating> ratingOptional = ratingRepository
+				.findRatingByRatingParentAndProfile(profile.getId(), tvShow.getRatingParent().getId());
 		
 		if (!ratingOptional.isPresent())
-			throw new ResourceNotFoundException("O rating para o tvshow " + slug + "nao foi encontrado");
+			throw new ResourceNotFoundException("Usuario nao possui rating para o show");
 		
 		Rating rating = ratingOptional.get();
 		
@@ -75,8 +83,19 @@ public class RatingBusinessImpl implements RatingBusiness {
 	}
 	
 	@Override
-	public UserRatingDTO putRatingForTvShow(Long id, RatingVM ratingVM) {
+	public UserRatingDTO putRatingForTvShow(Long id, RatingVM ratingVM, String slug) {
+		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(slug);
+		
+		if (!tvShowOptional.isPresent())
+			throw new ResourceNotFoundException("Show nao encontrado");
+		
+		TvShow tvShow = tvShowOptional.get();
+		
 		Rating rating = findRatingById(id);
+		
+		if (tvShow.getRatingParent().getId() != rating.getIdRatingParent().getId())
+			throw new ResourceNotFoundException("Rating nao encontrado para o show");
+		
 		rating.setDate(new DateTime());
 		rating.setNote(ratingVM.getNote());
 		
@@ -86,7 +105,7 @@ public class RatingBusinessImpl implements RatingBusiness {
 	}
 	
 	private Rating findRatingById(Long id) {
-		Optional<Rating> ratingOptional = Optional.of(ratingRepository.findOne(id));
+		Optional<Rating> ratingOptional = Optional.ofNullable(ratingRepository.findOne(id));
 		if (!ratingOptional.isPresent())
 			throw new ResourceNotFoundException("O rating de id " + id + "nao foi encontrado");
 		return ratingOptional.get();

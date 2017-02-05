@@ -1,6 +1,5 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,7 +31,7 @@ public class Rating {
 	@Column(name = "note")
 	private Integer note;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
 	@JoinColumn(name = "idratingparent", unique= true)
 	private RatingParent idRatingParent;
     

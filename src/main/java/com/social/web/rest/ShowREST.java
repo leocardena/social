@@ -46,7 +46,7 @@ public class ShowREST {
 	 */
 	@GetMapping(value = "/{showId}")
 	public ResponseEntity<?> get(@PathVariable("showId") String showId) {
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(showBusiness.getTvShow(showId));
 	}
 	
 	/**
@@ -106,9 +106,9 @@ public class ShowREST {
 	 *         foi encontrado
 	 */
 	@PutMapping(value = "/{showId}/user-rating/{ratingId}")
-	public ResponseEntity<?> putUserRating(@PathVariable("showId") Long showId, 
-			@PathVariable("ratingId") String ratingId, @RequestBody RatingVM rating) {
-		return ResponseEntity.ok(ratingBusiness.putRatingForTvShow(showId, rating));
+	public ResponseEntity<?> putUserRating(@PathVariable("showId") String showId, 
+			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating) {
+		return ResponseEntity.ok(ratingBusiness.putRatingForTvShow(ratingId, rating, showId));
 	}
 	
 	/**
