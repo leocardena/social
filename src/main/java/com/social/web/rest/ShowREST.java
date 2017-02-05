@@ -61,8 +61,7 @@ public class ShowREST {
 	 */
 	@GetMapping(value = "/{showId}/user-rating")
 	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId) {
-		ratingBusiness.getUserRatingForTvShowBySlug(showId);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId));
 	}
 	
 	/**

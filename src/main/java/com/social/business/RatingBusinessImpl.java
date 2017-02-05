@@ -1,7 +1,6 @@
 package com.social.business;
 
 import java.util.Optional;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,11 +55,17 @@ public class RatingBusinessImpl implements RatingBusiness {
 	}
 
 	@Override
-	public void getUserRatingForTvShowBySlug(String slug) {
+	public UserRatingDTO getUserRatingForTvShowBySlug(String slug) {
 		Profile profile = accountBusiness.findProfileByLoggedUser();
 		
-		Rating a = ratingRepository.getUserShowRatingBySlug(profile.getId(), slug);
-		System.out.println(a);
+		Optional<Rating> ratingOptional = ratingRepository.findRatingShowBySlug(profile.getId(), slug);
+		
+		if (!ratingOptional.isPresent())
+			throw new ResourceNotFoundException("O rating para o tvshow " + slug + "nao foi encontrado");
+		
+		Rating rating = ratingOptional.get();
+		
+		return new UserRatingDTO(rating.getNote(), rating.getId());
 	}
 
 	@Override

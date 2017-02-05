@@ -10,5 +10,5 @@ public interface RatingBusiness {
 	PostResponseAPI<UserRatingDTO> postRatingForTvShow(String showId, TitleRatingVM rating); 
 	UserRatingDTO putRatingForTvShow(Long id, RatingVM rating);
 	void deleteRatingForTvShow(Long id);
-	void getUserRatingForTvShowBySlug(String slug);
+	UserRatingDTO getUserRatingForTvShowBySlug(String slug);
 }
