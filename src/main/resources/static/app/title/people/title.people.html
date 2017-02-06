@@ -9,7 +9,8 @@
 	</div>
 
 	<!-- Page content -->
-	<div class=" row col-md-8 pageContent clearfix">
+	<div id="page-content-wrapper"
+		class=" row col-md-8 pageContent clearfix">
 
 		<!-- People Name -->
 		<div class="col-md-12">
@@ -40,14 +41,14 @@
 		<div class="overview col-md-12">
 			
 			<!-- Biografy -->
-			<div class="col-md-12">
+			<div class="col-md-12 overviewText" >
 				<p>{{vm.people.biography}}</p>
 			</div>
 		
 			<!-- Age -->
 			<div class="col-md-2">
 				<span style="font-weight: 900;">Idade:</span>
-				<span>{{vm.people.age}}</span>
+				<span>{{vm.people.age}} anos</span>
 			</div>
 			
 			<!-- Born -->
