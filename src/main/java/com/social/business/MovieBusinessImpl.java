@@ -1,132 +1,76 @@
 package com.social.business;
 
-import java.util.List;
-import javax.persistence.EntityManager;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.social.business.interfaces.MovieBusiness;
+import com.social.domain.CommentParent;
 import com.social.domain.Movie;
-import com.social.domain.QMovie;
-import com.social.domain.QRating;
-import com.social.domain.Rating;
-import com.social.domain.User;
+import com.social.domain.RatingParent;
+import com.social.repository.CommentParentRepository;
 import com.social.repository.MovieRepository;
-import com.social.repository.ProfileRepository;
+import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
-import com.social.repository.UserRepository;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
+import com.social.web.rest.dto.MovieDTO;
+import com.social.web.rest.exception.ResourceNotFoundException;
+import com.social.web.rest.vm.TitleRatingVM;
 
 @Service
 public class MovieBusinessImpl implements MovieBusiness {
 
 	@Autowired
-	private EntityManager entity;
-	@Autowired
 	private MovieRepository movieRepository;
 	@Autowired
 	private RatingRepository ratingRepository;
-	@Autowired	
-	private ProfileRepository profileRepository;
-	@Autowired	
-	private UserRepository userRepository;
-	
-	@Override
-	public List<Movie> getAllMovies(){
-		return movieRepository.findAll();
-	}
+	@Autowired
+	private RatingParentRepository ratingParentRepository;
+	@Autowired
+	private CommentParentRepository commentParentRepository;
 		
 	@Override
-	public Movie getMovieById(String slug){
-
-//		String username = "pepeu";
-//		List<Movie> resultMovie = movieRepository.getMovieBySlugAndUser();
-//		Profile profileResult = profileRepository.findOneByName("Pedro Afonso");
-//		Movie resultMovie = movieRepository.findOneById(1L);
-//		Optional<User> user = userRepository.findOneById(1L);
+	public MovieDTO getMovie(String id) {
 		
-//		JPAQueryFactory query = new JPAQueryFactory(entity);
-//		List<Profile> resultMovie = query.selectFrom(QProfile.profile)
-//				.fetch();
+		Optional<Movie> movieOptinal = findBySlug(id);
 		
-		JPAQueryFactory query = new JPAQueryFactory(entity);
-		List<Rating> resultRating = query.selectFrom(QRating.rating)
-				.fetch();
+		if(!movieOptinal.isPresent()) 
+			throw new ResourceNotFoundException("Show nao encontrado");
+		
+		Movie movie = movieOptinal.get();
+		MovieDTO movieDTO = new MovieDTO();
+		movieDTO.setId(movie.getId());
+		movieDTO.setImdb(movie.getImdb());
+		movieDTO.setName(movie.getName());
+		movieDTO.setSlug(movie.getSlug());
+		movieDTO.setTrailer(movie.getTrailer());
+		movieDTO.setHomePage(movie.getHomePage());
+		movieDTO.setNoteAverage(ratingRepository.averageByIdRatingParent(movie.getRatingParent().getId()));
 				
-
-		System.out.println("Total: "+resultRating.size());
-//		System.out.println("Nome do filme: "+resultMovie.get(0).getName());
-//		System.out.println("Total votos do filme: "+resultMovie.get(0).getVotes());
-//		System.out.println("Id Rating: "+resultMovie.get(0).getRatingParent().getId());
-//		System.out.println("Username: "+resultMovie.get(0).getRatingParent().getRating().getProfile().getUser().getUsername());
-//		System.out.println("Nota para o filme: "+resultMovie.get(0).getRatingParent().getRating().getNote());
-//		System.out.println("Nome da pessoa: "+resultMovie.get(0).getRatingParent().getRating().getProfile().getName());
-				
-		resultRating.forEach((rating) -> {
-			System.out.println("--------------------------------------------------");
-			System.out.println("ITERATOR user username: "+rating.getId());
-			System.out.println("ITERATOR profile name: "+rating.getIdRatingParent().getId());
-//			System.out.println("ITERATOR profile id: "+rating.getProfiles());
-//			profile.getRatings().forEach((rating) -> {
-//				System.out.println("	ITERATOR rating id: "+rating.getId());
-//				System.out.println("	ITERATOR ratingParent id: "+rating.getIdRatingParent().getId());
-//			});			
-			
-//			System.out.println("ITERATOR pessoa id: "+profile.getRatingParent().getRating().getProfile().getId());
-//			System.out.println("ITERATOR pessoa name: "+profile.getRatingParent().getRating().getProfile().getName());
-//			System.out.println("ITERATOR rating id: "+profile.getRatingParent().getRating().getId());
-//			System.out.println("ITERATOR rating idRatingParent: "+profile.getRatingParent().getId());
-			System.out.println("--------------------------------------------------");
-		});
-		
-//		System.out.println("Total votos do filme: "+user.get().getUsername());
-//		System.out.println("Total votos do filme: "+resultMovie.getVotes());
-//		System.out.println("Nome do filme: "+resultMovie.getName());
-//		System.out.println("Id Rating: "+resultMovie.getRatingParent().getId());
-//		System.out.println("Username: "+resultMovie.getRatingParent().getRating().getProfile().getUser().getUsername());
-//		System.out.println("Nota para o filme: "+resultMovie.getRatingParent().getRating().getNote());
-//		System.out.println("Nome da pessoa: "+resultMovie.getRatingParent().getRating().getProfile().getName());
-//		System.out.println("Nome do filme: "+resultMovie.getName());
-//		System.out.println("-------------------------------------");
-//		System.out.println("Nome do profile: "+profileResult.getName());
-		
-		return new Movie();
+		return movieDTO;
 	}
 
 	@Override
-	public Movie getMovieByName(String name){
-		//VERIFICAR JPAQueryFactory para JPAQuery (diference)
-		JPAQueryFactory query = new JPAQueryFactory(entity);
+	public Movie createMovie(TitleRatingVM titleRating, String slug) {
+
+		RatingParent ratingParent = ratingParentRepository.saveAndFlush(new RatingParent());
+		CommentParent commentParent = commentParentRepository.saveAndFlush(new CommentParent());
+
+		Movie movie = new Movie();
+		movie.setHomePage(titleRating.getHomePage());
+		movie.setImdb(titleRating.getImdb());
+		movie.setName(titleRating.getName());
+		movie.setSlug(slug);
+		movie.setTrailer(titleRating.getTrailer());
+		movie.setCommentParent(commentParent);
+		movie.setRatingParent(ratingParent);
 		
-		Movie result = query.selectFrom(QMovie.movie)
-				.where(QMovie.movie.name.eq(name))
-				.fetchFirst();
-		
-		return result;
+		return movieRepository.saveAndFlush(movie);
+	}
+
+	@Override
+	public Optional<Movie> findBySlug(String slug) {
+		return movieRepository.findBySlug(slug);
 	}
 	
-	@Override
-	public List<Movie> getAllMoviesByName(String name){
-		JPAQueryFactory query = new JPAQueryFactory(entity);
-		
-		List<Movie> results = query.select(QMovie.movie)
-				.where(QMovie.movie.name.eq(name)).
-				fetch();
-		
-		return results;
-	}
 
-	@Override
-	public Double getAvgRatingById(Long idRatingParent){
-		return ratingRepository.averageByIdRatingParent(idRatingParent);
-	}
-
-	@Override
-	public void insert(Movie movie) {
-		Movie result = movieRepository.saveAndFlush(movie);
-		System.out.println("Resultado insert: "+result.getId());
-	}
-	
-	
 }

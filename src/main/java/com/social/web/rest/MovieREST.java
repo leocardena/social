@@ -44,7 +44,7 @@ public class MovieREST {
 	 */
 	@GetMapping(value = "/{slug}")
 	public ResponseEntity<?> get(@PathVariable("slug") String slug) {
-		return ResponseEntity.status(HttpStatus.OK).body(movieBusiness.getMovieById(slug));
+		return ResponseEntity.status(HttpStatus.OK).body(movieBusiness.getMovie(slug));
 	}
 	
 	/**
@@ -87,14 +87,14 @@ public class MovieREST {
 	@PostMapping(value = "/insert-movie")
 	public ResponseEntity<?> postMovie(Movie movie){
 		
-		movie = new Movie();
-		movie.setName("Filme Teste");
+//		movie = new Movie();
+//		movie.setName("Filme Teste");
 //		movie.setImdb("Filme imdb");
-		movie.setSlug("Filme slug");
-		movie.setVotes(9);
-		movie.setHomePage("Filme Home page");
-		movie.setTrailer("Filme Trailer");
-		movieBusiness.insert(movie);
+//		movie.setSlug("Filme slug");
+//		movie.setVotes(9);
+//		movie.setHomePage("Filme Home page");
+//		movie.setTrailer("Filme Trailer");
+//		movieBusiness.insert(movie);
 		return ResponseEntity.ok().build();
 	}
 	

@@ -7,7 +7,7 @@ import com.social.web.rest.response.PostResponseAPI;
 import com.social.web.rest.vm.RatingVM;
 import com.social.web.rest.vm.TitleRatingVM;
 
-public interface RatingBusiness {
+public interface RatingTvShowBusiness {
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
 	PostResponseAPI<UserRatingDTO> postRatingForTvShow(String showId, TitleRatingVM rating); 
