@@ -1,11 +1,28 @@
 .rating{
-		margin-top: 20px;
-		background-color: rgba(0, 0, 0, 0.7);
-			.ratingText{
-			color: $white;
-			padding-bottom: 7px;
-				.ratingTextMargin{
-					margin-top: 7px;
-				}
-	}	
+	.mediaGeral{
+		background-color: $red-primary;
+		margin-top: 40px;
+		color: $white;
+		.mediaGeralTitle{
+			height: 60px;
+			padding-top: 10px;
+			background: linear-gradient($red-primary, $red-secondary);
+			border-top-left-radius: 50%;
+		}
+		.mediaGeralText{
+			height: 60px;
+			background: linear-gradient($red-primary, $red-secondary);
+			font-size: 35px;
+			padding-bottom: 30px;
+			border-left: 2px solid $white;
+			border-bottom-right-radius: 50%;
+			
+		}
+		
+	}
+	.ratingText{
+		font-size: 10px;
+	}
+
+
 }
