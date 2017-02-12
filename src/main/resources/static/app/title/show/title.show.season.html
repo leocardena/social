@@ -22,31 +22,35 @@
                     <span class="year">({{vm.show.year}})</span>
                 </div>
             
-            
-             <!-- Rating -->
-         		<div class="col-md-12 rating">
-                    <div class="col-md-4 text-center ratingText">
-                    	<h4 class="">Deixe sua avalição: </h4>
-                    	<ng-rate-it 
-                    		ng-model="vm.show.userRating" 
-							resetable="false"
-							step="1"
-							rated="vm.evaluate">
-						</ng-rate-it>
-                    </div>
-                    		
-                    <div class="col-md-4">
-                    	<h4 class="text-center ratingText ratingTextMargin">Avaliação Geral: {{vm.show.rating}}</h4>
-                    </div>
-                    		
-                    <div class="col-md-4">
-                    	<h4 class="text-center ratingText ratingTextMargin">Total de avaliações: 500</h4>
-                    </div>
-                </div>
+ 
              
              <div class="overview col-md-12">
 	            
-	             <div class="overviewText">
+	            <div class="col-md-3 rating">
+						<div class="mediaGeral">
+							<div class="mediaGeralTitle col-md-5 col-md-offset-1"> 
+								<p> MÉDIA
+								<br>
+								GERAL</p>
+							</div>
+							
+							<div class="mediaGeralText col-md-5">
+								<span> 3  </span>
+							</div>
+						</div>
+		
+					<div class="col-md-12">
+						<h4 class="text-center ratingText"> 500 avaliações totais</h4>
+					</div>
+					<div class="col-md-12 text-center">
+						<p class="">Deixe sua avaliação: 
+						<ng-rate-it ng-model="vm.movie.userRating" resetable="false"
+							step="1" rated="vm.evaluate"> </ng-rate-it>
+						</p>
+					</div>
+				</div>
+				
+	             <div class="overviewText col-md-9">
 			     	<p> {{vm.show.overview}}</p>
 			     </div>
 	             

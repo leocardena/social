@@ -16,35 +16,43 @@
 		<div class="col-md-12">
 			<span class="title">{{vm.people.name}}</span> 
 		</div>
-
-		<!-- Rating -->
-        <div class="col-md-12 rating">
-        	<div class="col-md-4 text-center ratingText">
-	            <h4 class="">Deixe sua avaliação: </h4>
-	            <ng-rate-it 
-	            	ng-model="vm.show.userRating" 
-					resetable="false"
-					step="1"
-					rated="vm.evaluate">
-				</ng-rate-it>
-         	</div>
-                    		
-            <div class="col-md-4">
-            	<h4 class="text-center ratingText ratingTextMargin">Avaliação Geral: 2.3</h4>
-            </div>
-                    		
-           <div class="col-md-4">
-           		<h4 class="text-center ratingText ratingTextMargin">Total de avaliações: 500</h4>
-           </div>
-        </div>
 		
 		<div class="overview col-md-12">
+		
+		
+			<!-- Rating -->
+			
+			<div class="col-md-3 rating">
+				<div class="mediaGeral">
+					<div class="mediaGeralTitle col-md-5 col-md-offset-1"> 
+						<p> MÉDIA
+						<br>
+						GERAL</p>
+					</div>
+					
+					<div class="mediaGeralText col-md-5">
+						<span> 2.3  </span>
+					</div>
+			</div>
+
+			<div class="col-md-12">
+				<h4 class="text-center ratingText"> 500 avaliações totais</h4>
+			</div>
+			<div class="col-md-12 text-center">
+				<p class="">Deixe sua avaliação: 
+				<ng-rate-it ng-model="vm.movie.userRating" resetable="false"
+					step="1" rated="vm.evaluate"> </ng-rate-it>
+				</p>
+			</div>
+
+		</div>
 			
 			<!-- Biografy -->
-			<div class="col-md-12 overviewText" >
+			<div class="col-md-9 overviewText" >
 				<p>{{vm.people.biography}}</p>
 			</div>
-		
+			
+		<div class="col-md-12">
 			<!-- Age -->
 			<div class="col-md-2">
 				<span style="font-weight: 900;">Idade:</span>
@@ -61,6 +69,7 @@
 			<div class="col-md-12" ng-show="vm.people.homepage">
 				<p> <a ng-href="{{vm.people.homepage}}" target="_blank">Página Oficial</a> </p>
 			</div>
+		</div>
 			
 			<!-- Ator's job -->
 			<div ng-show="vm.displayActorArray.length > 0">
