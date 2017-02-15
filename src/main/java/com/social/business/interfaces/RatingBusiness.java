@@ -13,10 +13,11 @@ public interface RatingBusiness {
 	PostResponseAPI<UserRatingDTO> postRatingForTvShow(String showId, TitleRatingVM rating); 
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	UserRatingDTO putRatingForTvShow(Long id, RatingVM rating, String slug);
-	
-	void deleteRatingForTvShow(Long id);
+	UserRatingDTO putRatingForTvShow(Long ratingIdidRating, RatingVM rating, String slug);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	UserRatingDTO getUserRatingForTvShowBySlug(String slug);
+	void deleteRatingForTvShow(Long idRating, String showId);
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	UserRatingDTO getUserRatingForTvShowBySlug(String slug, Long idRating);
 }

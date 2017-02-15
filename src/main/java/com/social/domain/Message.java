@@ -1,18 +1,15 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -24,16 +21,16 @@ public class Message {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idfriendship")
+	@Column(name = "idmessage")
 	private long id;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idprofile", insertable=false, updatable=false)
-	private Profile sender;
+	@ManyToOne
+	@JoinColumn(name = "idchat")
+	private Chat chat;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="idprofile", insertable=false, updatable=false)
-	private Profile receiver;
+	@ManyToOne
+	@JoinColumn(name = "idprofile")
+	private Profile profile;
 	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "date")
@@ -53,25 +50,13 @@ public class Message {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	public Profile getSender() {
-		return sender;
+	
+	public Chat getChat() {
+		return chat;
 	}
 
-	public void setSender(Profile sender) {
-		this.sender = sender;
-	}
-
-	public Profile getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(Profile receiver) {
-		this.receiver = receiver;
-	}
-
-	public DateTime getDate() {
-		return date;
+	public void setChat(Chat chat) {
+		this.chat = chat;
 	}
 
 	public void setDate(DateTime date) {
@@ -94,6 +79,18 @@ public class Message {
 		this.text = text;
 	}
 	
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
+	public DateTime getDate() {
+		return date;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

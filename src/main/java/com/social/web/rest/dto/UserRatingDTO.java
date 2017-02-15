@@ -3,14 +3,11 @@ package com.social.web.rest.dto;
 public class UserRatingDTO {
 	
 	private Integer note;
-	private Long id;
 	
 	public UserRatingDTO() {}
 
-	public UserRatingDTO(Integer note, Long id) {
-		super();
+	public UserRatingDTO(Integer note) {
 		this.note = note;
-		this.id = id;
 	}
 
 	public Integer getNote() {
@@ -21,12 +18,4 @@ public class UserRatingDTO {
 		this.note = note;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 }

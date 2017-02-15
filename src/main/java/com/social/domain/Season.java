@@ -1,7 +1,7 @@
 package com.social.domain;
 
-import java.util.List;
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,67 +21,50 @@ import org.joda.time.DateTime;
 @Table(name = "season")
 public class Season {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idseason")
-	private Long id;
-	
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "votes")
-	private long votes;
-	
 	@ManyToOne
 	@JoinColumn(name = "idtvshow")
 	private TvShow tvShow;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idseason")
-	private List<Episode> epidodes;
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idseason")
+	private Long idSeason;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "votes")
+	private long votes;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "season")
+	private Set<Episode> epidodes = new HashSet<Episode>();
+
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "aired")
 	private DateTime aired;
-	
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idcommentparent")
+
+	@OneToOne
+	@JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idratingparent")
-    private RatingParent ratingParent;
+
+	@OneToOne
+	@JoinColumn(name = "idratingparent")
+	private RatingParent ratingParent;
+
+	public TvShow getTvShow() {
+		return tvShow;
+	}
+
+	public void setTvShow(TvShow tvShow) {
+		this.tvShow = tvShow;
+	}
 	
-	public Long getId() {
-		return id;
+	public Long getIdSeason() {
+		return idSeason;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public long getVotes() {
-		return votes;
-	}
-
-	public void setVotes(long votes) {
-		this.votes = votes;
-	}
-
-	public List<Episode> getEpidodes() {
-		return epidodes;
-	}
-
-	public void setEpidodes(List<Episode> epidodes) {
-		this.epidodes = epidodes;
-	}
-
-	public DateTime getAired() {
-		return aired;
-	}
-
-	public void setAired(DateTime aired) {
-		this.aired = aired;
+	public void setIdSeason(Long idSeason) {
+		this.idSeason = idSeason;
 	}
 
 	public String getName() {
@@ -92,12 +75,28 @@ public class Season {
 		this.name = name;
 	}
 
-	public TvShow getTvShow() {
-		return tvShow;
+	public long getVotes() {
+		return votes;
 	}
 
-	public void setTvShow(TvShow tvShow) {
-		this.tvShow = tvShow;
+	public void setVotes(long votes) {
+		this.votes = votes;
+	}
+
+	public Set<Episode> getEpidodes() {
+		return epidodes;
+	}
+
+	public void setEpidodes(Set<Episode> epidodes) {
+		this.epidodes = epidodes;
+	}
+
+	public DateTime getAired() {
+		return aired;
+	}
+
+	public void setAired(DateTime aired) {
+		this.aired = aired;
 	}
 
 	public CommentParent getCommentParent() {
@@ -115,7 +114,7 @@ public class Season {
 	public void setRatingParent(RatingParent ratingParent) {
 		this.ratingParent = ratingParent;
 	}
-	
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

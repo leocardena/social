@@ -1,6 +1,5 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -22,7 +20,11 @@ public class Episode {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idepisode")
-	private Long id;
+	private Long idEpisode;
+	
+	@ManyToOne
+	@JoinColumn(name = "idseason")
+	private Season season;
 	
 	@Column(name = "name")
 	private String name;
@@ -34,24 +36,30 @@ public class Episode {
 	@Column(name = "aired")
 	private DateTime aired;
 	
-	@ManyToOne
-	@JoinColumn(name="idseason")
-	private Season season;
-	
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
-
-	public Long getId() {
-		return id;
+    
+    public Episode() {}
+    
+    public Long getIdEpisode() {
+		return idEpisode;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdEpisode(Long idEpisode) {
+		this.idEpisode = idEpisode;
+	}
+
+	public Season getSeason() {
+		return season;
+	}
+
+	public void setSeason(Season season) {
+		this.season = season;
 	}
 
 	public long getVotes() {
@@ -76,14 +84,6 @@ public class Episode {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Season getSeason() {
-		return season;
-	}
-
-	public void setSeason(Season season) {
-		this.season = season;
 	}
 
 	public CommentParent getCommentParent() {

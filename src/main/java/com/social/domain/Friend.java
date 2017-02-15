@@ -1,65 +1,31 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.social.util.FriendStatus;
 
 @Entity
 @Table(name = "friend")
+@AssociationOverrides({
+    @AssociationOverride(name = "id.profile",
+        joinColumns = @JoinColumn(name = "idprofile")),
+    @AssociationOverride(name = "id.friend",
+        joinColumns = @JoinColumn(name = "idfriend")) })
 public class Friend {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idfriendship")
-	private long id;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
-	@JoinColumn(name="idprofile", insertable=false, updatable=false)
-	private Profile profile;
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, optional=false)
-	@JoinColumn(name="idprofile", insertable=false, updatable=false)
-	private Profile friend;
+	@EmbeddedId
+	private FriendPK id;
 	
 	@Enumerated(EnumType.STRING)
 	private FriendStatus status;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
-
-	public Profile getFriend() {
-		return friend;
-	}
-
-	public void setFriend(Profile friend) {
-		this.friend = friend;
-	}
 
 	public FriendStatus getStatus() {
 		return status;
@@ -69,6 +35,32 @@ public class Friend {
 		this.status = status;
 	}
 	
+	public FriendPK getId() {
+		return id;
+	}
+
+	public void setId(FriendPK id) {
+		this.id = id;
+	}
+	
+	@Transient
+	public Profile getProfile() {
+		return getId().getProfile();
+	}
+	
+	public void setProfile(Profile profile) {
+		getId().setProfile(profile);
+	}
+	
+	@Transient
+	public Profile getFriend() {
+		return getId().getFriend();
+	}
+	
+	public void setFriend(Profile friend) {
+		getId().setFriend(friend);
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

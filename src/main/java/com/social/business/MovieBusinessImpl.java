@@ -10,13 +10,10 @@ import com.social.domain.Movie;
 import com.social.domain.QMovie;
 import com.social.domain.QRating;
 import com.social.domain.Rating;
-import com.social.domain.User;
 import com.social.repository.MovieRepository;
 import com.social.repository.ProfileRepository;
 import com.social.repository.RatingRepository;
 import com.social.repository.UserRepository;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Service
 public class MovieBusinessImpl implements MovieBusiness {
@@ -65,8 +62,8 @@ public class MovieBusinessImpl implements MovieBusiness {
 				
 		resultRating.forEach((rating) -> {
 			System.out.println("--------------------------------------------------");
-			System.out.println("ITERATOR user username: "+rating.getId());
-			System.out.println("ITERATOR profile name: "+rating.getIdRatingParent().getId());
+			System.out.println("ITERATOR user username: "+rating.getIdRating());
+			System.out.println("ITERATOR profile name: "+rating.getIdRating());
 //			System.out.println("ITERATOR profile id: "+rating.getProfiles());
 //			profile.getRatings().forEach((rating) -> {
 //				System.out.println("	ITERATOR rating id: "+rating.getId());

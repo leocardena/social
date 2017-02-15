@@ -19,96 +19,94 @@ import com.social.web.rest.vm.TitleRatingVM;
 
 @Service
 public class RatingBusinessImpl implements RatingBusiness {
-	
+
 	@Autowired
 	private TvShowBusiness tvShowBusiness;
-	
+
 	@Autowired
 	private RatingRepository ratingRepository;
-	
+
 	@Autowired
 	private AccountBusiness accountBusiness;
-	
+
 	@Override
 	public PostResponseAPI<UserRatingDTO> postRatingForTvShow(String showId, TitleRatingVM titleRating) {
 		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(showId);
 		TvShow tvShow;
-		
+
 		if (!tvShowOptional.isPresent()) {
 			tvShow = tvShowBusiness.createTvShow(titleRating, showId);
 		} else {
 			tvShow = tvShowOptional.get();
 		}
-		
+
+		Profile profile = accountBusiness.findProfileByLoggedUser();
+
 		Rating rating = new Rating();
 		rating.setDate(new DateTime());
 		rating.setNote(titleRating.getRating().getNote());
-		rating.setIdRatingParent(tvShow.getRatingParent());
-		
-		Profile profile = accountBusiness.findProfileByLoggedUser();
 		rating.setProfile(profile.getId());
-	
+		rating.setIdRatingParent(tvShow.getRatingParent());
+
 		Rating ratingStoraged = ratingRepository.save(rating);
-		
-		UserRatingDTO u = new UserRatingDTO(ratingStoraged.getNote(), ratingStoraged.getId());
-		return new PostResponseAPI<>("/api/rest/shows/" + showId + "/user-rating", u);
+
+		UserRatingDTO u = new UserRatingDTO(ratingStoraged.getNote());
+		return new PostResponseAPI<>("/api/rest/shows/" + showId + "/user-rating/" + ratingStoraged.getIdRating(), u);
 	}
 
 	@Override
-	public UserRatingDTO getUserRatingForTvShowBySlug(String slug) {
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+	public UserRatingDTO getUserRatingForTvShowBySlug(String slug, Long idRating) {
 		
 		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(slug);
-		
+
 		if (!tvShowOptional.isPresent())
 			throw new ResourceNotFoundException("Show nao encontrado");
-		
-		TvShow tvShow = tvShowOptional.get();
-		
-		Optional<Rating> ratingOptional = ratingRepository
-				.findRatingByRatingParentAndProfile(profile.getId(), tvShow.getRatingParent().getId());
+
+		Optional<Rating> ratingOptional = ratingRepository.findRatingByIdRating(idRating);
 		
 		if (!ratingOptional.isPresent())
-			throw new ResourceNotFoundException("Usuario nao possui rating para o show");
-		
+			throw new ResourceNotFoundException("Rating nao encontrado");
+
 		Rating rating = ratingOptional.get();
-		
-		return new UserRatingDTO(rating.getNote(), rating.getId());
+
+		return new UserRatingDTO(rating.getNote());
 	}
 
 	@Override
-	public void deleteRatingForTvShow(Long id) {
-		findRatingById(id);
-		ratingRepository.delete(id);
-	}
-	
-	@Override
-	public UserRatingDTO putRatingForTvShow(Long id, RatingVM ratingVM, String slug) {
-		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(slug);
-		
+	public void deleteRatingForTvShow(Long idRating, String showId) {
+		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(showId);
+
 		if (!tvShowOptional.isPresent())
 			throw new ResourceNotFoundException("Show nao encontrado");
 		
-		TvShow tvShow = tvShowOptional.get();
+		Optional<Rating> ratingOptional = ratingRepository.findRatingByIdRating(idRating);
+			
+		if (!ratingOptional.isPresent())
+			throw new ResourceNotFoundException("Rating nao encontrado");
 		
-		Rating rating = findRatingById(id);
+		ratingRepository.delete(ratingOptional.get());
+	}
+
+	@Override
+	public UserRatingDTO putRatingForTvShow(Long idRating, RatingVM ratingVM, String slug) {
+		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(slug);
+
+		if (!tvShowOptional.isPresent())
+			throw new ResourceNotFoundException("Show nao encontrado");
+
+		Optional<Rating> ratingOptional = ratingRepository.findRatingByIdRating(idRating);
 		
-		if (tvShow.getRatingParent().getId() != rating.getIdRatingParent().getId())
-			throw new ResourceNotFoundException("Rating nao encontrado para o show");
-		
+		if (!ratingOptional.isPresent())
+			throw new ResourceNotFoundException("Rating nao encontrado");
+
+		Rating rating = ratingOptional.get();
+
 		rating.setDate(new DateTime());
 		rating.setNote(ratingVM.getNote());
-		
+
 		Rating ratingUpdated = ratingRepository.save(rating);
-		
-		return new UserRatingDTO(ratingUpdated.getNote(), ratingUpdated.getId());
+
+		return new UserRatingDTO(ratingUpdated.getNote());
 	}
-	
-	private Rating findRatingById(Long id) {
-		Optional<Rating> ratingOptional = Optional.ofNullable(ratingRepository.findOne(id));
-		if (!ratingOptional.isPresent())
-			throw new ResourceNotFoundException("O rating de id " + id + "nao foi encontrado");
-		return ratingOptional.get();
-	}
-	
+
 }

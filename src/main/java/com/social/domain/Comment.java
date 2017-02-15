@@ -15,29 +15,29 @@ import org.joda.time.DateTime;
 @Table(name = "comment")
 @Entity
 public class Comment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idcomment")
 	private Long id;
-	
+
 	@Column(name = "text")
 	private String text;
-	
+
 	@Column(name = "date")
 	private DateTime date;
-	
+
 	@Column(name = "likes")
 	private Long likes;
-	
+
 	@Column(name = "replies")
 	private Long replies;
-	
+
 	@Column(name = "dislikes")
 	private Long dislikes;
-	
+
 	@OneToOne
-	@JoinColumn(name = "idcommmentparent")
+	@JoinColumn(name = "idcommentparent")
 	private CommentParent idCommentParent;
 
 	public Long getId() {
@@ -95,7 +95,7 @@ public class Comment {
 	public void setDislike(Long dislike) {
 		this.dislikes = dislike;
 	}
-	
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

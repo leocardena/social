@@ -59,9 +59,10 @@ public class ShowREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado show nao foi encontrado
 	 */
-	@GetMapping(value = "/{showId}/user-rating")
-	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId) {
-		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId));
+	@GetMapping(value = "/{showId}/user-rating/{ratingId}")
+	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId, 
+			@PathVariable("ratingId") Long ratingId) {
+		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId, ratingId));
 	}
 	
 	/**
@@ -129,7 +130,7 @@ public class ShowREST {
 	@DeleteMapping(value = "/{showId}/user-rating/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("showId") String showId, 
 			@PathVariable("ratingId") Long ratingId) {
-		ratingBusiness.deleteRatingForTvShow(ratingId);
+		ratingBusiness.deleteRatingForTvShow(ratingId, showId);
 		return ResponseEntity.ok().build();
 	}
 

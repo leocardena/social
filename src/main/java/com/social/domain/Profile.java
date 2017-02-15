@@ -40,14 +40,26 @@ public class Profile extends People {
 	@JoinColumn(name = "iduser")
 	private User user;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "profilecomments", joinColumns = {
 			@JoinColumn(name = "idprofile", referencedColumnName = "idprofile") }, inverseJoinColumns = {
 					@JoinColumn(name = "idcomment", referencedColumnName = "idcomment") })
 	private List<Comment> comments = new ArrayList<>();
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profile")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "profile")
 	private Set<Rating> ratings = new HashSet<Rating>();
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "profile")
+	private Set<Lists> lists = new HashSet<Lists>();
+	
+	@OneToMany(mappedBy = "id.profile", fetch = FetchType.EAGER)
+	private Set<Friend> friends =  new HashSet<Friend>();
+	
+	@OneToMany(mappedBy = "profile", fetch = FetchType.EAGER)
+	private Set<Message> messages =  new HashSet<Message>();
+	
+	@OneToMany(mappedBy = "profile", fetch = FetchType.EAGER)
+	private Set<EpisodeManager> managers =  new HashSet<EpisodeManager>();
 	
 	public Long getId() {
 		return id;
@@ -95,6 +107,38 @@ public class Profile extends People {
 
 	public void setRatings(Set<Rating> ratings) {
 		this.ratings = ratings;
+	}
+
+	public Set<Friend> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(Set<Friend> friends) {
+		this.friends = friends;
+	}
+	
+	public Set<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Set<Message> messages) {
+		this.messages = messages;
+	}
+
+	public Set<EpisodeManager> getManagers() {
+		return managers;
+	}
+
+	public void setManagers(Set<EpisodeManager> managers) {
+		this.managers = managers;
+	}
+
+	public Set<Lists> getLists() {
+		return lists;
+	}
+
+	public void setLists(Set<Lists> lists) {
+		this.lists = lists;
 	}
 
 	@Override

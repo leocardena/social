@@ -1,6 +1,5 @@
 package com.social.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,11 +26,14 @@ public class Actor extends People {
 	@Column(name = "slug")
 	private String slug;
 	
-    @OneToOne(cascade = CascadeType.ALL)
+	@Column(name = "votes")
+	private long votes;
+	
+    @OneToOne
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
 	
@@ -57,6 +59,14 @@ public class Actor extends People {
 
 	public void setSlug(String slug) {
 		this.slug = slug;
+	}
+
+	public long getVotes() {
+		return votes;
+	}
+
+	public void setVotes(long votes) {
+		this.votes = votes;
 	}
 
 	public CommentParent getCommentParent() {

@@ -30,6 +30,7 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 	@Autowired
 	private RatingRepository ratingRepository;
 	
+	@Override
 	public TvShow createTvShow(TitleRatingVM titleRating, String showId) {
 		//criando um novo comentParent e ratingParent para o show que sera inserido
 		RatingParent ratingParent = ratingParentRepository.saveAndFlush(new RatingParent());
@@ -49,6 +50,7 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		return tvShowRepository.saveAndFlush(tvShow);
 	}
 	
+	@Override
 	public Optional<TvShow> findBySlug(String slug) {
 		return tvShowRepository.findBySlug(slug);
 	}

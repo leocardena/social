@@ -18,14 +18,14 @@ password VARCHAR (100) NOT NULL
 -- -----------------------------------------------------
 -- Table SocialNetwork.PersistentToken
 -- -----------------------------------------------------
-CREATE TABLE PersistentToken(
+/*CREATE TABLE PersistentToken(
 series VARCHAR(255) NOT NULL,
 idUser INT,
 ipAddress VARCHAR(39),
 tokenDate TIMESTAMP,
 tokenValue VARCHAR(255) NOT NULL,
 userAgent VARCHAR(255)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB;*/
 -- -----------------------------------------------------
 -- Table SocialNetwork.UserAuthority
 -- -----------------------------------------------------
@@ -88,7 +88,8 @@ slug VARCHAR(100) NOT NULL,
 imdb VARCHAR(100) UNIQUE NOT NULL,
 name VARCHAR (100) NOT NULL,
 birthay DATE NOT NULL,
-country VARCHAR(100) NOT NULL
+country VARCHAR(100) NOT NULL,
+votes INT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Title
@@ -108,7 +109,7 @@ votes INT NOT NULL DEFAULT 0
 -- -----------------------------------------------------
 CREATE TABLE TvShow( 
 idTitle INT NOT NULL,
-idCommentParent INT NOT NULL,
+idCommentParent INT,
 idRatingParent INT NOT NULL
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
@@ -140,17 +141,26 @@ votes INT NOT NULL DEFAULT 0
 -- -----------------------------------------------------
 CREATE TABLE Message(
 idMessage INT NOT NULL, 
-idSender INT NOT NULL,
-idReceiver INT NOT NULL,
+idProfile INT NOT NULL,
+idChat INT NOT NULL,
 date TIMESTAMP NOT NULL DEFAULT NOW(),
 text TEXT,
 status VARCHAR(7) NOT NULL DEFAULT 'UNREAD'
 ) ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table SocialNetwork.Chat
+-- -----------------------------------------------------
+CREATE TABLE Chat (
+  idChat INT NOT NULL,
+  idProfileOne INT NOT NULL,
+  idProfileTwo INT NOT NULL
+) ENGINE = InnoDB;
+
 -- -----------------------------------------------------
 -- Table SocialNetwork.Friend
 -- -----------------------------------------------------
 CREATE TABLE Friend(
-idFriendShip INT UNIQUE NOT NULL, 
 idProfile INT  NOT NULL,
 idFriend INT NOT NULL,
 status VARCHAR(7) NOT NULL DEFAULT 'WAITING'

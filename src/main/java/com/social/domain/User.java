@@ -3,7 +3,6 @@ package com.social.domain;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
@@ -87,10 +84,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 			@JoinColumn(name = "iduser", referencedColumnName = "iduser") }, inverseJoinColumns = {
 					@JoinColumn(name = "authorityname", referencedColumnName = "name") })
 	private Set<Authority> authorities = new HashSet<>();
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
-	private Set<PersistentToken> persistentTokens = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -163,14 +156,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	public void setAuthorities(Set<Authority> authorities) {
 		this.authorities = authorities;
-	}
-
-	public Set<PersistentToken> getPersistentTokens() {
-		return persistentTokens;
-	}
-
-	public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
-		this.persistentTokens = persistentTokens;
 	}
 
 	public String getPhone() {

@@ -23,34 +23,26 @@ public class EpisodeManager {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idepisodemanager")
-	private long id;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idprofile")
+	private Long idEpisodeManager;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idprofile")
 	private Profile profile;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idepisode")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idepisode")
 	private Episode episode;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "episodestatus")
 	private EpisodeStatus epidoseStatus;
 
-	public long getId() {
-		return id;
+	public Long getIdEpisodeManager() {
+		return idEpisodeManager;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+	public void setIdEpisodeManager(Long idEpisodeManager) {
+		this.idEpisodeManager = idEpisodeManager;
 	}
 
 	public Episode getEpisode() {
@@ -68,7 +60,15 @@ public class EpisodeManager {
 	public void setEpidoseStatus(EpisodeStatus epidoseStatus) {
 		this.epidoseStatus = epidoseStatus;
 	}
-	
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
