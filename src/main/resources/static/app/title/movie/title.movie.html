@@ -32,33 +32,40 @@
 			<span class="title">{{vm.movie.title}}</span> <span class="year">({{vm.movie.year}})</span>
 		</div>
 
+		<!-- Overview-->
+		<div class="overview col-md-12">
+		
 		<!-- Rating -->
-		<div class="col-md-12 rating">
-			<div class="col-md-4 text-center ratingText">
-				<h4 class="">Deixe sua avaliação:</h4>
+		<div class="col-md-3 rating">
+				<div class="mediaGeral">
+					<div class="mediaGeralTitle col-md-5 col-md-offset-1"> 
+						<p> MÉDIA
+						<br>
+						GERAL</p>
+					</div>
+					
+					<div class="mediaGeralText col-md-5">
+						<span> {{vm.movie.rating}}  </span>
+					</div>
+				</div>
+
+			<div class="col-md-12">
+				<h4 class="text-center ratingText"> 500 avaliações totais</h4>
+			</div>
+			<div class="col-md-12 text-center">
+				<p class="">Deixe sua avaliação: 
 				<ng-rate-it ng-model="vm.movie.userRating" resetable="false"
 					step="1" rated="vm.evaluate"> </ng-rate-it>
-			</div>
-
-			<div class="col-md-4">
-				<h4 class="text-center ratingText ratingTextMargin">Avaliação
-					Geral: {{vm.movie.rating}}</h4>
-			</div>
-
-			<div class="col-md-4">
-				<h4 class="text-center ratingText ratingTextMargin">Total de
-					avaliações: 500</h4>
+				</p>
 			</div>
 
 		</div>
 
-		<!-- Overview-->
-		<div class="overview col-md-12">
-
-			<div class="overviewText">
-				<p>{{vm.movie.overview}}</p>
-			</div>
-
+		<div class="overviewText col-md-9">
+			<p>{{vm.movie.overview}}</p>
+		</div>
+		
+		<div class="col-md-12">
 			<div class="col-md-3">
 				<span style="font-weight: 900;">Lançamento:</span> <span>{{vm.movie.released
 					| date:'dd/MM/yyyy'}} </span>
@@ -81,10 +88,10 @@
 					ng-href="{{vm.movie.homepage}}" target="_blank"> Página Oficial
 				</a>
 			</div>
-
+		</div>
 
 			<!-- Actors -->
-			<div class="col-md-12">
+			<div class="col-md-12 Actors">
 
 				<p style="font-weight: 900;">Atores:</p>
 

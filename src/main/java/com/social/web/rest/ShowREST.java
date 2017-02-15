@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.social.business.interfaces.RatingBusiness;
+import com.social.business.interfaces.RatingTvShowBusiness;
 import com.social.business.interfaces.TvShowBusiness;
 import com.social.web.rest.dto.CommentDTO;
 import com.social.web.rest.util.APIEndpoint;
@@ -32,7 +32,7 @@ public class ShowREST {
 	private TvShowBusiness showBusiness;
 	
 	@Autowired
-	private RatingBusiness ratingBusiness;
+	private RatingTvShowBusiness ratingBusiness;
 
 	/**
 	 * Retorna as informacoes de um show em especifico

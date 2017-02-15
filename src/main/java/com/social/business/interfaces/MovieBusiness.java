@@ -1,28 +1,19 @@
 package com.social.business.interfaces;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import com.social.domain.Movie;
+import com.social.web.rest.dto.MovieDTO;
+import com.social.web.rest.vm.TitleRatingVM;
 
 public interface MovieBusiness {
+		
+	Movie createMovie(TitleRatingVM titleRating, String slug);
 	
-	@PreAuthorize("permitAll")
-	public List<Movie> getAllMovies();
+	Optional<Movie> findBySlug(String slug);
 	
-	@PreAuthorize("permitAll")
-	public Movie getMovieById(String slug);
-	
-	@PreAuthorize("permitAll")
-	public Movie getMovieByName(String name);
-	
-	@PreAuthorize("permitAll")
-	public List<Movie> getAllMoviesByName(String name);
-	
-	@PreAuthorize("permitAll")
-	public Double getAvgRatingById(Long idRatingParent);
-	
-	@PreAuthorize("permitAll")
-	public void insert(Movie movie);
+	@PreAuthorize("hasRole('ROLE_USER')")
+	MovieDTO getMovie(String id);
 }

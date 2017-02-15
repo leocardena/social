@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.business.interfaces.AccountBusiness;
-import com.social.business.interfaces.RatingBusiness;
+import com.social.business.interfaces.RatingTvShowBusiness;
 import com.social.business.interfaces.TvShowBusiness;
 import com.social.domain.Profile;
 import com.social.domain.Rating;
@@ -18,8 +18,8 @@ import com.social.web.rest.vm.RatingVM;
 import com.social.web.rest.vm.TitleRatingVM;
 
 @Service
-public class RatingBusinessImpl implements RatingBusiness {
-
+public class RatingTvShowBusinessImpl implements RatingTvShowBusiness {
+	
 	@Autowired
 	private TvShowBusiness tvShowBusiness;
 
