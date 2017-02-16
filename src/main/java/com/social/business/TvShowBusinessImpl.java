@@ -11,7 +11,7 @@ import com.social.repository.CommentParentRepository;
 import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
 import com.social.repository.TvShowRepository;
-import com.social.repository.dto.RatingQueryDTO;
+import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.dto.TvShowDTO;
 import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.vm.TitleRatingVM;
@@ -74,13 +74,12 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		tvShowDTO.setSlug(tvShow.getSlug());
 		tvShowDTO.setTrailer(tvShow.getTrailer());
 
-		Optional<RatingQueryDTO> ratingQueryDTOOptional = ratingRepository
-				.averageByIdRatingParent(tvShow.getRatingParent().getId());
+		Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
+				.averageAndVotesByIdRatingParent(tvShow.getRatingParent().getId());
 		
 		if (ratingQueryDTOOptional.isPresent()) {
-			RatingQueryDTO ratingQueryDTO = ratingQueryDTOOptional.get();
-			tvShowDTO.setNoteAverage(ratingQueryDTO.getAverage());
-			tvShowDTO.setVotes(ratingQueryDTO.getVotes());
+			RatingDTO ratingDTO = ratingQueryDTOOptional.get();
+			tvShowDTO.setRating(ratingDTO);
 		}
 
 		return tvShowDTO;

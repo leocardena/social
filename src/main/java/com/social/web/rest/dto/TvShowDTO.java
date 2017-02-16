@@ -8,8 +8,7 @@ public class TvShowDTO {
 	private String name;
 	private String trailer;
 	private String homePage;
-	private Long votes = 0L;
-	private Double noteAverage = 0.0;
+	private RatingDTO rating;
 
 	public long getId() {
 		return id;
@@ -59,20 +58,12 @@ public class TvShowDTO {
 		this.homePage = homePage;
 	}
 
-	public Long getVotes() {
-		return votes;
+	public RatingDTO getRating() {
+		return rating;
 	}
 
-	public void setVotes(Long votes) {
-		this.votes = votes;
-	}
-
-	public Double getNoteAverage() {
-		return noteAverage;
-	}
-
-	public void setNoteAverage(Double noteAverage) {
-		this.noteAverage = noteAverage;
+	public void setRating(RatingDTO rating) {
+		this.rating = rating;
 	}
 	
 }
