@@ -77,9 +77,11 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		Optional<RatingQueryDTO> ratingQueryDTOOptional = ratingRepository
 				.averageByIdRatingParent(tvShow.getRatingParent().getId());
 		
-		RatingQueryDTO ratingQueryDTO = ratingQueryDTOOptional.get();
-		tvShowDTO.setNoteAverage(ratingQueryDTO.getAverage());
-		tvShowDTO.setVotes(ratingQueryDTO.getVotes());
+		if (ratingQueryDTOOptional.isPresent()) {
+			RatingQueryDTO ratingQueryDTO = ratingQueryDTOOptional.get();
+			tvShowDTO.setNoteAverage(ratingQueryDTO.getAverage());
+			tvShowDTO.setVotes(ratingQueryDTO.getVotes());
+		}
 
 		return tvShowDTO;
 	}

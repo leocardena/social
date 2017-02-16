@@ -48,10 +48,12 @@ public class MovieBusinessImpl implements MovieBusiness {
 		Optional<RatingQueryDTO> ratingQueryDTOOptional = ratingRepository
 				.averageByIdRatingParent(movie.getRatingParent().getId());
 		
-		RatingQueryDTO ratingQueryDTO = ratingQueryDTOOptional.get();
-		movieDTO.setNoteAverage(ratingQueryDTO.getAverage());
-		movieDTO.setVotes(ratingQueryDTO.getVotes());
-				
+		if (ratingQueryDTOOptional.isPresent()) {
+			RatingQueryDTO ratingQueryDTO = ratingQueryDTOOptional.get();
+			movieDTO.setNoteAverage(ratingQueryDTO.getAverage());
+			movieDTO.setVotes(ratingQueryDTO.getVotes());
+		}
+		
 		return movieDTO;
 	}
 

@@ -8,8 +8,8 @@ public class TvShowDTO {
 	private String name;
 	private String trailer;
 	private String homePage;
-	private Long votes;
-	private Double noteAverage;
+	private Long votes = 0L;
+	private Double noteAverage = 0.0;
 
 	public long getId() {
 		return id;
