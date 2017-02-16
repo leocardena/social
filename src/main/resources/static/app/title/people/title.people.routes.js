@@ -20,7 +20,8 @@
     		},
     		data: {
     			authorities: [],
-    			pageTitle: ''
+    			pageTitle: '',
+    			background : 'content/images/background/actor-1280x720.png'
     		},
 			views : {
 				'content@' : {
