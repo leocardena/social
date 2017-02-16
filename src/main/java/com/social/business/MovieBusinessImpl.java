@@ -1,7 +1,6 @@
 package com.social.business;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.business.interfaces.MovieBusiness;
@@ -12,6 +11,7 @@ import com.social.repository.CommentParentRepository;
 import com.social.repository.MovieRepository;
 import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
+import com.social.repository.dto.RatingQueryDTO;
 import com.social.web.rest.dto.MovieDTO;
 import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.vm.TitleRatingVM;
@@ -44,7 +44,13 @@ public class MovieBusinessImpl implements MovieBusiness {
 		movieDTO.setSlug(movie.getSlug());
 		movieDTO.setTrailer(movie.getTrailer());
 		movieDTO.setHomePage(movie.getHomePage());
-		movieDTO.setNoteAverage(ratingRepository.averageByIdRatingParent(movie.getRatingParent().getId()));
+		
+		Optional<RatingQueryDTO> ratingQueryDTOOptional = ratingRepository
+				.averageByIdRatingParent(movie.getRatingParent().getId());
+		
+		RatingQueryDTO ratingQueryDTO = ratingQueryDTOOptional.get();
+		movieDTO.setNoteAverage(ratingQueryDTO.getAverage());
+		movieDTO.setVotes(ratingQueryDTO.getVotes());
 				
 		return movieDTO;
 	}

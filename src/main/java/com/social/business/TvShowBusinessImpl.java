@@ -11,32 +11,34 @@ import com.social.repository.CommentParentRepository;
 import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
 import com.social.repository.TvShowRepository;
+import com.social.repository.dto.RatingQueryDTO;
 import com.social.web.rest.dto.TvShowDTO;
 import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.vm.TitleRatingVM;
 
 @Service
 public class TvShowBusinessImpl implements TvShowBusiness {
-	
+
 	@Autowired
 	private TvShowRepository tvShowRepository;
-	
+
 	@Autowired
 	private RatingParentRepository ratingParentRepository;
-	
+
 	@Autowired
 	private CommentParentRepository commentParentRepository;
-	
+
 	@Autowired
 	private RatingRepository ratingRepository;
-	
+
 	@Override
 	public TvShow createTvShow(TitleRatingVM titleRating, String showId) {
-		//criando um novo comentParent e ratingParent para o show que sera inserido
+		// criando um novo comentParent e ratingParent para o show que sera
+		// inserido
 		RatingParent ratingParent = ratingParentRepository.saveAndFlush(new RatingParent());
 		CommentParent commentParent = commentParentRepository.saveAndFlush(new CommentParent());
-		
-		//Realizando o de/para entre a classe DTO e a classe de dominio
+
+		// Realizando o de/para entre a classe DTO e a classe de dominio
 		TvShow tvShow = new TvShow();
 		tvShow.setHomePage(titleRating.getHomePage());
 		tvShow.setImdb(titleRating.getImdb());
@@ -45,11 +47,11 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		tvShow.setTrailer(titleRating.getTrailer());
 		tvShow.setCommentParent(commentParent);
 		tvShow.setRatingParent(ratingParent);
-		
-		//criando o novo tvShow 
+
+		// criando o novo tvShow
 		return tvShowRepository.saveAndFlush(tvShow);
 	}
-	
+
 	@Override
 	public Optional<TvShow> findBySlug(String slug) {
 		return tvShowRepository.findBySlug(slug);
@@ -58,12 +60,12 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 	@Override
 	public TvShowDTO getTvShow(String id) {
 		Optional<TvShow> tvShowOptional = findBySlug(id);
-			
+
 		if (!tvShowOptional.isPresent())
 			throw new ResourceNotFoundException("Show nao encontrado");
-			
+
 		TvShow tvShow = tvShowOptional.get();
-		
+
 		TvShowDTO tvShowDTO = new TvShowDTO();
 		tvShowDTO.setId(tvShow.getId());
 		tvShowDTO.setHomePage(tvShow.getHomePage());
@@ -71,12 +73,14 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		tvShowDTO.setName(tvShow.getName());
 		tvShowDTO.setSlug(tvShow.getSlug());
 		tvShowDTO.setTrailer(tvShow.getTrailer());
-		tvShowDTO.setVotes(tvShow.getVotes());
+
+		Optional<RatingQueryDTO> ratingQueryDTOOptional = ratingRepository
+				.averageByIdRatingParent(tvShow.getRatingParent().getId());
 		
-		Double noteAverage = ratingRepository.averageByIdRatingParent(tvShow.getRatingParent().getId());
-		
-		tvShowDTO.setNoteAverage(noteAverage);
-		
+		RatingQueryDTO ratingQueryDTO = ratingQueryDTOOptional.get();
+		tvShowDTO.setNoteAverage(ratingQueryDTO.getAverage());
+		tvShowDTO.setVotes(ratingQueryDTO.getVotes());
+
 		return tvShowDTO;
 	}
 

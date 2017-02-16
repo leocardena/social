@@ -1,13 +1,16 @@
 package com.social.repository.custom;
 
 import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.social.domain.QRating;
 import com.social.domain.Rating;
 import com.social.repository.custom.interfaces.RatingRepositoryCustom;
+import com.social.repository.dto.RatingQueryDTO;
 
 public class RatingRepositoryImpl implements RatingRepositoryCustom {
 	
@@ -27,13 +30,19 @@ public class RatingRepositoryImpl implements RatingRepositoryCustom {
 	}
 
 	@Override
-	public Double averageByIdRatingParent(Long idRatingParent) {
+	public Optional<RatingQueryDTO> averageByIdRatingParent(Long idRatingParent) {
 		QRating rating = QRating.rating;
 		
-		return new JPAQueryFactory(em).select(rating.note.avg())
+		return new JPAQueryFactory(em)
+			.select(rating.note.avg(), rating.idRating.count())
 			.from(rating)
 			.where(rating.idRatingParent.id.eq(idRatingParent))
-			.fetchOne();
+			.groupBy(rating.idRatingParent)
+			.fetch()
+			.stream()
+			.map(r -> new RatingQueryDTO( r.get(rating.note.avg()).doubleValue(),
+					r.get(rating.idRating.count()).longValue()))
+			.findFirst();
 	}
 
 }
