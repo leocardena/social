@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.business.interfaces.MovieBusiness;
-import com.social.domain.Movie;
+import com.social.business.interfaces.RatingMovieBusiness;
 import com.social.web.rest.dto.CommentDTO;
 import com.social.web.rest.util.APIEndpoint;
+import com.social.web.rest.vm.RatingVM;
 import com.social.web.rest.vm.TitleRatingVM;
 
 /**
@@ -31,42 +32,46 @@ public class MovieREST {
 	
 	@Autowired
 	private MovieBusiness movieBusiness;
+	
+	@Autowired
+	private RatingMovieBusiness ratingMovieBusiness;
 
 	/**
 	 * Retorna as informacoes de um filme em especifico
 	 * 
-	 * @param slug
+	 * @param movieId
 	 *        O id do filme que sera pesquisado
 	 * 
 	 * @return O objeto ResponseEntity contendo o filme pesquisado caso seja
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que aquele filme nao foi encontrado
 	 */
-	@GetMapping(value = "/{slug}")
-	public ResponseEntity<?> get(@PathVariable("slug") String slug) {
-		return ResponseEntity.status(HttpStatus.OK).body(movieBusiness.getMovie(slug));
+	@GetMapping(value = "/{movieId}")
+	public ResponseEntity<?> get(@PathVariable("movieId") String movieId) {
+		return ResponseEntity.status(HttpStatus.OK).body(movieBusiness.getMovie(movieId));
 	}
 	
 	/**
 	 * Retorna o rating dado pelo usuario logado ao filme em questão
 	 * 
-	 * @param slug
-	 * 		  O slug do filme que sera pesquisado
+	 * @param movieId
+	 * 		  O id do filme que sera pesquisado
 	 * 
 	 * @return O objeto ResponseEntity contendo o rating pesquisado caso seja
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado filme nao foi encontrado
 	 */
 	@GetMapping(value = "/{movieId}/user-rating")
-	public ResponseEntity<?> getUserRating(@PathVariable("slug") String slug) {
-		return ResponseEntity.ok().build();
+	public ResponseEntity<?> getUserRating(@PathVariable("movieId") String movieId,
+			@PathVariable("ratingId") Long ratingId) {
+		return ResponseEntity.ok(ratingMovieBusiness.getUserRatingForMovieBySlug(movieId, ratingId));
 	}
 	
 	/**
 	 * Insere o rating dado pelo usuario logado ao filme em questão
 	 * 
-	 * @param slug
-	 * 		  O slug do filme no qual o rating sera inserido
+	 * @param movieId
+	 * 		  O id do filme no qual o rating sera inserido
 	 * 
 	 * @param rating
 	 *        O objeto do tipo rating contendo as informacoes necessarias
@@ -78,24 +83,10 @@ public class MovieREST {
 	 *         codigo 404 informando que o filme com o id informado nao
 	 *         foi encontrado
 	 */
-	@PostMapping(value = "/{slug}/user-rating")
-	public ResponseEntity<?> postUserRating(@PathVariable("slug") String slug, 
+	@PostMapping(value = "/{movieId}/user-rating")
+	public ResponseEntity<?> postUserRating(@PathVariable("movieId") String movieId, 
 			@RequestBody TitleRatingVM rating) {
-		return ResponseEntity.ok().build();
-	}
-	
-	@PostMapping(value = "/insert-movie")
-	public ResponseEntity<?> postMovie(Movie movie){
-		
-//		movie = new Movie();
-//		movie.setName("Filme Teste");
-//		movie.setImdb("Filme imdb");
-//		movie.setSlug("Filme slug");
-//		movie.setVotes(9);
-//		movie.setHomePage("Filme Home page");
-//		movie.setTrailer("Filme Trailer");
-//		movieBusiness.insert(movie);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(ratingMovieBusiness.postRatingForMovie(movieId, rating));
 	}
 	
 	/**
@@ -119,8 +110,8 @@ public class MovieREST {
 	 */
 	@PutMapping(value = "/{movieId}/user-rating/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("movieId") String movieId, 
-			@PathVariable("ratingId") String ratingId, @RequestBody TitleRatingVM rating) {
-		return ResponseEntity.ok().build();
+			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating) {
+		return ResponseEntity.ok(ratingMovieBusiness.putRatingForMovie(ratingId, rating, movieId));
 	}
 	
 	/**
@@ -140,7 +131,8 @@ public class MovieREST {
 	 */
 	@DeleteMapping(value = "/{movieId}/user-rating/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("movieId") String movieId, 
-			@PathVariable("ratingId") String ratingId) {
+			@PathVariable("ratingId") Long ratingId) {
+		ratingMovieBusiness.deleteRatingForMovie(ratingId, movieId);
 		return ResponseEntity.ok().build();
 	}
 
