@@ -88,8 +88,7 @@ slug VARCHAR(100) NOT NULL,
 imdb VARCHAR(100) UNIQUE NOT NULL,
 name VARCHAR (100) NOT NULL,
 birthay DATE NOT NULL,
-country VARCHAR(100) NOT NULL,
-votes INT NOT NULL DEFAULT 0
+country VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Title
@@ -100,8 +99,7 @@ slug VARCHAR(100) NOT NULL,
 imdb VARCHAR(100) UNIQUE NOT NULL,
 name VARCHAR(100) UNIQUE NOT NULL,
 trailer VARCHAR(200),
-homePage VARCHAR(200),
-votes INT NOT NULL DEFAULT 0
+homePage VARCHAR(200)
 )ENGINE=InnoDB;
 
 -- -----------------------------------------------------
@@ -122,7 +120,7 @@ idCommentParent INT NOT NULL,
 idRatingParent INT NOT NULL,
 name VARCHAR(100) NOT NULL,
 aired DATE,
-votes INT NOT NULL DEFAULT 0
+number INT
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Episode
@@ -134,7 +132,7 @@ idCommentParent INT NOT NULL,
 idRatingParent INT NOT NULL,
 name VARCHAR(100) NOT NULL,
 aired DATE,
-votes INT NOT NULL DEFAULT 0
+number INT
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Message

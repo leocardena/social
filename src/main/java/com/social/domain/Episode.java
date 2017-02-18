@@ -29,8 +29,8 @@ public class Episode {
 	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "votes")
-	private long votes;
+	@Column(name = "number")
+	private Integer number;
 	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "aired")
@@ -60,14 +60,6 @@ public class Episode {
 
 	public void setSeason(Season season) {
 		this.season = season;
-	}
-
-	public long getVotes() {
-		return votes;
-	}
-
-	public void setVotes(long votes) {
-		this.votes = votes;
 	}
 
 	public DateTime getAired() {
@@ -102,6 +94,14 @@ public class Episode {
 		this.ratingParent = ratingParent;
 	}
 	
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

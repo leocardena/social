@@ -33,8 +33,8 @@ public class Season {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "votes")
-	private long votes;
+	@Column(name = "number")
+	private Integer number;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "season")
 	private Set<Episode> epidodes = new HashSet<Episode>();
@@ -75,14 +75,6 @@ public class Season {
 		this.name = name;
 	}
 
-	public long getVotes() {
-		return votes;
-	}
-
-	public void setVotes(long votes) {
-		this.votes = votes;
-	}
-
 	public Set<Episode> getEpidodes() {
 		return epidodes;
 	}
@@ -113,6 +105,14 @@ public class Season {
 
 	public void setRatingParent(RatingParent ratingParent) {
 		this.ratingParent = ratingParent;
+	}
+	
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
 
 	@Override

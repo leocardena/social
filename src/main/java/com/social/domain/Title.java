@@ -36,9 +36,6 @@ public class Title {
 	@Column(name = "homepage")
 	private String homePage;
 	
-	@Column(name = "votes")
-	private long votes;
-	
 	public long getId() {
 		return id;
 	}
@@ -87,14 +84,6 @@ public class Title {
 		this.homePage = homePage;
 	}
 
-	public long getVotes() {
-		return votes;
-	}
-
-	public void setVotes(long votes) {
-		this.votes = votes;
-	}
-	
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

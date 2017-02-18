@@ -26,9 +26,6 @@ public class Actor extends People {
 	@Column(name = "slug")
 	private String slug;
 	
-	@Column(name = "votes")
-	private long votes;
-	
     @OneToOne
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
@@ -59,14 +56,6 @@ public class Actor extends People {
 
 	public void setSlug(String slug) {
 		this.slug = slug;
-	}
-
-	public long getVotes() {
-		return votes;
-	}
-
-	public void setVotes(long votes) {
-		this.votes = votes;
 	}
 
 	public CommentParent getCommentParent() {
