@@ -1,5 +1,6 @@
 package com.social.domain;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,14 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "title")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Title {
+public class Title implements Serializable {
 	
+	private static final long serialVersionUID = -4457558877522952865L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idtitle")
@@ -82,6 +84,58 @@ public class Title {
 
 	public void setHomePage(String homePage) {
 		this.homePage = homePage;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((homePage == null) ? 0 : homePage.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((imdb == null) ? 0 : imdb.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((slug == null) ? 0 : slug.hashCode());
+		result = prime * result + ((trailer == null) ? 0 : trailer.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Title other = (Title) obj;
+		if (homePage == null) {
+			if (other.homePage != null)
+				return false;
+		} else if (!homePage.equals(other.homePage))
+			return false;
+		if (id != other.id)
+			return false;
+		if (imdb == null) {
+			if (other.imdb != null)
+				return false;
+		} else if (!imdb.equals(other.imdb))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (slug == null) {
+			if (other.slug != null)
+				return false;
+		} else if (!slug.equals(other.slug))
+			return false;
+		if (trailer == null) {
+			if (other.trailer != null)
+				return false;
+		} else if (!trailer.equals(other.trailer))
+			return false;
+		return true;
 	}
 
 	@Override

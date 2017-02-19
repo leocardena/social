@@ -1,7 +1,8 @@
 package com.social.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,8 +19,10 @@ import org.joda.time.DateTime;
 
 @Entity
 @Table(name = "season")
-public class Season {
+public class Season implements Serializable {
 	
+	private static final long serialVersionUID = -4839728303715381438L;
+
 	@Column(name = "idtvshow")
 	private Long tvShow;
 	
@@ -36,7 +38,7 @@ public class Season {
 	private Integer number;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "season")
-	private Set<Episode> epidodes = new HashSet<Episode>();
+	private List<Episode> episodes = new ArrayList<Episode>();
 
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@Column(name = "aired")
@@ -85,14 +87,6 @@ public class Season {
 		this.name = name;
 	}
 
-	public Set<Episode> getEpidodes() {
-		return epidodes;
-	}
-
-	public void setEpidodes(Set<Episode> epidodes) {
-		this.epidodes = epidodes;
-	}
-
 	public DateTime getAired() {
 		return aired;
 	}
@@ -123,6 +117,81 @@ public class Season {
 
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+	
+	public List<Episode> getEpisodes() {
+		return episodes;
+	}
+
+	public void setEpisodes(List<Episode> episodes) {
+		this.episodes = episodes;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aired == null) ? 0 : aired.hashCode());
+		result = prime * result + ((commentParent == null) ? 0 : commentParent.hashCode());
+		result = prime * result + ((episodes == null) ? 0 : episodes.hashCode());
+		result = prime * result + ((idSeason == null) ? 0 : idSeason.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result + ((ratingParent == null) ? 0 : ratingParent.hashCode());
+		result = prime * result + ((tvShow == null) ? 0 : tvShow.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Season other = (Season) obj;
+		if (aired == null) {
+			if (other.aired != null)
+				return false;
+		} else if (!aired.equals(other.aired))
+			return false;
+		if (commentParent == null) {
+			if (other.commentParent != null)
+				return false;
+		} else if (!commentParent.equals(other.commentParent))
+			return false;
+		if (episodes == null) {
+			if (other.episodes != null)
+				return false;
+		} else if (!episodes.equals(other.episodes))
+			return false;
+		if (idSeason == null) {
+			if (other.idSeason != null)
+				return false;
+		} else if (!idSeason.equals(other.idSeason))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		if (ratingParent == null) {
+			if (other.ratingParent != null)
+				return false;
+		} else if (!ratingParent.equals(other.ratingParent))
+			return false;
+		if (tvShow == null) {
+			if (other.tvShow != null)
+				return false;
+		} else if (!tvShow.equals(other.tvShow))
+			return false;
+		return true;
 	}
 
 	@Override

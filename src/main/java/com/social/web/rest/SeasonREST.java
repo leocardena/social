@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.social.business.interfaces.RatingTvShowBusiness;
-import com.social.business.interfaces.TvShowBusiness;
+import com.social.business.interfaces.SeasonBusiness;
 import com.social.web.rest.util.APIEndpoint;
 import com.social.web.rest.vm.RatingVM;
 import com.social.web.rest.vm.TitleRatingVM;
@@ -27,7 +28,7 @@ import com.social.web.rest.vm.TitleRatingVM;
 public class SeasonREST {
 	
 	@Autowired
-	private TvShowBusiness showBusiness;
+	private SeasonBusiness seasonBusiness;
 	
 	@Autowired
 	private RatingTvShowBusiness ratingBusiness;
@@ -45,10 +46,10 @@ public class SeasonREST {
 	 *         encontrada ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que aquela season nao foi encontrada
 	 */
-	@GetMapping(value = "/{showId}/{seasonId}")
+	@GetMapping(value = "/{showId}/seasons/{seasonNumber}")
 	public ResponseEntity<?> get(@PathVariable("showId") String showId,
-			@PathVariable("seasonId") String seasonId) {
-		return ResponseEntity.ok(showBusiness.getTvShow(showId));
+			@PathVariable("seasonNumber") Integer seasonNumber) {
+		return ResponseEntity.ok(seasonBusiness.getSeason(seasonNumber, showId));
 	}
 	
 	/**
@@ -64,10 +65,11 @@ public class SeasonREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinada season nao foi encontrado
 	 */
-	@GetMapping(value = "/{showId}/{seasonId}/user-rating/{ratingId}")
+	@GetMapping(value = "/{showId}/seasons/{seasonId}/user-rating/{ratingId}")
 	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId, 
 			@PathVariable("ratingId") Long ratingId, @PathVariable("seasonId") String seasonId) {
-		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId, ratingId));
+//		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId, ratingId));
+		return ResponseEntity.ok().build();
 	}
 	
 	/**
@@ -87,10 +89,11 @@ public class SeasonREST {
 	 * 		   do tipo ErrorDetailDTO com o codigo 404 informando que o show 
 	 *         com o id informado nao foi encontrado
 	 */
-	@PostMapping(value = "/{showId}/{seasonId}/user-rating")
+	@PostMapping(value = "/{showId}/seasons/{seasonId}/user-rating")
 	public ResponseEntity<?> postUserRating(@PathVariable("showId") String showId, 
 			@RequestBody TitleRatingVM rating, @PathVariable("seasonId") String seasonId) {
-		return ResponseEntity.ok(ratingBusiness.postRatingForTvShow(showId, rating));
+//		return ResponseEntity.ok(ratingBusiness.postRatingForTvShow(showId, rating));
+		return ResponseEntity.ok().build();
 	}
 	
 	/**
@@ -115,11 +118,12 @@ public class SeasonREST {
 	 *         codigo 404 informando que o show com o id informado nao
 	 *         foi encontrado
 	 */
-	@PutMapping(value = "/{showId}/{seasonId}/user-rating/{ratingId}")
+	@PutMapping(value = "/{showId}/seasons/{seasonId}/user-rating/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("showId") String showId, 
 			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating,
 			@PathVariable("seasonId") String seasonId) {
-		return ResponseEntity.ok(ratingBusiness.putRatingForTvShow(ratingId, rating, showId));
+//		return ResponseEntity.ok(ratingBusiness.putRatingForTvShow(ratingId, rating, showId));
+		return ResponseEntity.ok().build();
 	}
 	
 	/**
@@ -138,7 +142,7 @@ public class SeasonREST {
 	 * 		   ErrorDetailDTO com o codigo 404 informando que o show com o id informado nao
 	 *         foi encontrado
 	 */
-	@DeleteMapping(value = "/{showId}/{seasonId}/user-rating/{ratingId}")
+	@DeleteMapping(value = "/{showId}/seasons/{seasonId}/user-rating/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("showId") String showId, 
 			@PathVariable("ratingId") Long ratingId, @PathVariable("seasonId") String seasonId) {
 		ratingBusiness.deleteRatingForTvShow(ratingId, showId);
