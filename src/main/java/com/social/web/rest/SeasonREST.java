@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.social.business.interfaces.RatingTvShowBusiness;
+import com.social.business.interfaces.RatingSeasonBusiness;
 import com.social.business.interfaces.SeasonBusiness;
 import com.social.web.rest.util.APIEndpoint;
 import com.social.web.rest.vm.RatingVM;
-import com.social.web.rest.vm.TitleRatingVM;
 
 /**
  * Camada REST responsável por expor os serviços do recurso Season
@@ -31,7 +29,7 @@ public class SeasonREST {
 	private SeasonBusiness seasonBusiness;
 	
 	@Autowired
-	private RatingTvShowBusiness ratingBusiness;
+	private RatingSeasonBusiness ratingSeasonBusiness;
 
 	/**
 	 * Retorna as informacoes de uma season em especifico
@@ -39,8 +37,8 @@ public class SeasonREST {
 	 * @param showId
 	 *        O id do show que sera pesquisado
 	 *        
-	 * @param seasonId
-	 *        O id da season que sera pesquisada
+	 * @param seasonNumber
+	 *        O numero da season que sera pesquisada
 	 * 
 	 * @return O objeto ResponseEntity contendo a season pesquisada caso seja
 	 *         encontrada ou um objeto do tipo ErrorDetailDTO com o codigo 404
@@ -58,18 +56,20 @@ public class SeasonREST {
 	 * @param showId
 	 *        O id do show que sera pesquisado
 	 * 
-	 * @param season
-	 * 		  O id da season que sera pesquisada
+	 * @param seasonNumber
+	 * 		  O numero da season que sera pesquisada
+	 * 
+	 * @param userRatingId
+	 *        O id do rating do usuario 
 	 * 
 	 * @return O objeto ResponseEntity contendo o rating pesquisado caso seja
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinada season nao foi encontrado
 	 */
-	@GetMapping(value = "/{showId}/seasons/{seasonId}/user-rating/{ratingId}")
+	@GetMapping(value = "/{showId}/seasons/{seasonNumber}/user-rating/{userRatingId}")
 	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId, 
-			@PathVariable("ratingId") Long ratingId, @PathVariable("seasonId") String seasonId) {
-//		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId, ratingId));
-		return ResponseEntity.ok().build();
+			@PathVariable("userRatingId") Long userRatingId, @PathVariable("seasonNumber") Long seasonNumber) {
+		return ResponseEntity.ok(ratingSeasonBusiness.getUserRatingForSeasonBySlug(showId, seasonNumber, userRatingId));
 	}
 	
 	/**
@@ -78,8 +78,8 @@ public class SeasonREST {
 	 * @param showId
 	 * 		  O id do show no qual o rating sera inserido
 	 * 
-	 * @param seasonId
-	 * 		  O id da season no qual o rating sera inserido
+	 * @param seasonNumber
+	 * 		  O numero da season no qual o rating sera inserida
 	 * 
 	 * @param rating
 	 *        O objeto do tipo rating contendo as informacoes necessarias
@@ -89,11 +89,10 @@ public class SeasonREST {
 	 * 		   do tipo ErrorDetailDTO com o codigo 404 informando que o show 
 	 *         com o id informado nao foi encontrado
 	 */
-	@PostMapping(value = "/{showId}/seasons/{seasonId}/user-rating")
+	@PostMapping(value = "/{showId}/seasons/{seasonNumber}/user-rating")
 	public ResponseEntity<?> postUserRating(@PathVariable("showId") String showId, 
-			@RequestBody TitleRatingVM rating, @PathVariable("seasonId") String seasonId) {
-//		return ResponseEntity.ok(ratingBusiness.postRatingForTvShow(showId, rating));
-		return ResponseEntity.ok().build();
+			@RequestBody RatingVM rating, @PathVariable("seasonNumber") Long seasonNumber) {
+		return ResponseEntity.ok(ratingSeasonBusiness.postUserRatingForSeason(showId, seasonNumber, rating));
 	}
 	
 	/**
@@ -102,28 +101,26 @@ public class SeasonREST {
 	 * @param showId
 	 * 		  O id do show no qual o rating sera inserido
 	 * 
-	  @param seasonId
-	 * 	      O id da season no qual o rating sera inserido
+	 * @param seasonNumber
+	 * 	      O numero da season no qual o rating sera inserido
 	 * 
-	 * @param ratingId
-	 * 		  O id do rating que sera editado
+	 * @param userRatingId
+	 *        O id do rating do usuario 
 	 * 
 	 * @param rating
 	 *        O objeto do tipo rating contendo as informacoes necessarias
 	 *        para a edicao do rating
 	 * 
-	 * @return O objeto ResponseEntity contendo o rating inserido, um objeto do 
-	 *         tipo ErrorDetailDTO com o codigo 500 informando que ocorreu um 
-	 *         erro na insercao ou um objeto do tipo ErrorDetailDTO com o 
+	 * @return O objeto ResponseEntity contendo o rating inserido, 
+	 *         ou um objeto do tipo ErrorDetailDTO com o 
 	 *         codigo 404 informando que o show com o id informado nao
 	 *         foi encontrado
 	 */
-	@PutMapping(value = "/{showId}/seasons/{seasonId}/user-rating/{ratingId}")
+	@PutMapping(value = "/{showId}/seasons/{seasonNumber}/user-rating/{userRatingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("showId") String showId, 
-			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating,
-			@PathVariable("seasonId") String seasonId) {
-//		return ResponseEntity.ok(ratingBusiness.putRatingForTvShow(ratingId, rating, showId));
-		return ResponseEntity.ok().build();
+			@PathVariable("userRatingId") Long userRatingId, @RequestBody RatingVM rating,
+			@PathVariable("seasonNumber") Long seasonNumber) {
+		return ResponseEntity.ok(ratingSeasonBusiness.putUserRatingForSeason(showId, seasonNumber, userRatingId, rating));
 	}
 	
 	/**
@@ -132,20 +129,20 @@ public class SeasonREST {
 	 * @param showId
 	 * 		  O id do show no qual o rating sera inserido
 	 * 
-	 * @param seasonId
-	 * 		  O id da season no qual o rating sera inserido
+	 * @param seasonNumber
+	 * 		  O numero da season no qual o rating sera inserido
 	 * 
-	 * @param ratingId
-	 * 		  O id do rating que sera editado
+	 * @param userRatingId
+	 *        O id do rating do usuario 
 	 *
 	 * @return O objeto ResponseEntity contendo o rating inserido, ou um objeto do tipo 
 	 * 		   ErrorDetailDTO com o codigo 404 informando que o show com o id informado nao
 	 *         foi encontrado
 	 */
-	@DeleteMapping(value = "/{showId}/seasons/{seasonId}/user-rating/{ratingId}")
+	@DeleteMapping(value = "/{showId}/seasons/{seasonNumber}/user-rating/{userRatingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("showId") String showId, 
-			@PathVariable("ratingId") Long ratingId, @PathVariable("seasonId") String seasonId) {
-		ratingBusiness.deleteRatingForTvShow(ratingId, showId);
+			@PathVariable("userRatingId") Long userRatingId, @PathVariable("seasonNumber") Long seasonNumber) {
+		ratingSeasonBusiness.deleteUserRatingForSeason(showId, seasonNumber, userRatingId);
 		return ResponseEntity.ok().build();
 	}
 	
