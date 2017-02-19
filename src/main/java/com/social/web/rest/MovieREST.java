@@ -61,7 +61,7 @@ public class MovieREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado filme nao foi encontrado
 	 */
-	@GetMapping(value = "/{movieId}/user-rating")
+	@GetMapping(value = "/{movieId}/user-rating/{ratingId}")
 	public ResponseEntity<?> getUserRating(@PathVariable("movieId") String movieId,
 			@PathVariable("ratingId") Long ratingId) {
 		return ResponseEntity.ok(ratingMovieBusiness.getUserRatingForMovieBySlug(movieId, ratingId));

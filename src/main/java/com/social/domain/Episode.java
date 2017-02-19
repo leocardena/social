@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -22,9 +21,8 @@ public class Episode {
 	@Column(name = "idepisode")
 	private Long idEpisode;
 	
-	@ManyToOne
-	@JoinColumn(name = "idseason")
-	private Season season;
+	@Column(name = "idseason")
+	private Long season;
 	
 	@Column(name = "name")
 	private String name;
@@ -44,6 +42,16 @@ public class Episode {
     @JoinColumn(name = "idratingparent")
     private RatingParent ratingParent;
     
+	public Episode createFrom(com.social.trakt.model.Episode traktEpisode, Long idSeason) {
+		Episode episode = new Episode();
+		episode.setAired(traktEpisode.getFirstAired() != null ? new DateTime(traktEpisode.getFirstAired()) : null);
+		episode.setName(traktEpisode.getTitle() != null ? traktEpisode.getTitle() : null);
+		episode.setNumber(traktEpisode.getNumber());
+		episode.setSeason(idSeason);
+		
+		return episode;
+	}
+    
     public Episode() {}
     
     public Long getIdEpisode() {
@@ -54,11 +62,11 @@ public class Episode {
 		this.idEpisode = idEpisode;
 	}
 
-	public Season getSeason() {
+	public Long getSeason() {
 		return season;
 	}
 
-	public void setSeason(Season season) {
+	public void setSeason(Long season) {
 		this.season = season;
 	}
 

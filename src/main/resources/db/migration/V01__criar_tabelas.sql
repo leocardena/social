@@ -108,7 +108,7 @@ homePage VARCHAR(200)
 CREATE TABLE TvShow( 
 idTitle INT NOT NULL,
 idCommentParent INT,
-idRatingParent INT NOT NULL
+idRatingParent INT
 )ENGINE=InnoDB;
 -- -----------------------------------------------------
 -- Table SocialNetwork.Season
@@ -116,8 +116,8 @@ idRatingParent INT NOT NULL
 CREATE TABLE Season(
 idSeason INT UNIQUE NOT NULL, 
 idTvShow INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL,
+idCommentParent INT,
+idRatingParent INT,
 name VARCHAR(100) NOT NULL,
 aired DATE,
 number INT
@@ -128,8 +128,8 @@ number INT
 CREATE TABLE Episode(
 idEpisode INT UNIQUE NOT NULL, 
 idSeason INT NOT NULL,
-idCommentParent INT NOT NULL,
-idRatingParent INT NOT NULL,
+idCommentParent INT,
+idRatingParent INT,
 name VARCHAR(100) NOT NULL,
 aired DATE,
 number INT
@@ -197,7 +197,7 @@ idTitle INT NOT NULL
 -- -----------------------------------------------------
 CREATE TABLE Comment(
 idComment INT NOT NULL, 
-idCommentParent INT,
+idCommentParent INT NOT NULL,
 text TEXT NOT NULL,
 date TIMESTAMP DEFAULT NOW() NOT NULL,
 likes INT(10) DEFAULT 0 ,

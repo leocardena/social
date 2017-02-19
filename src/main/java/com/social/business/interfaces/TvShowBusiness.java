@@ -8,7 +8,10 @@ import com.social.web.rest.vm.TitleRatingVM;
 
 public interface TvShowBusiness {
 	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	TvShow createTvShow(TitleRatingVM titleRating, String showId);
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
 	Optional<TvShow> findBySlug(String slug);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")

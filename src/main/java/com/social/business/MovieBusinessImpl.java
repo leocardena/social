@@ -47,12 +47,14 @@ public class MovieBusinessImpl implements MovieBusiness {
 		movieDTO.setTrailer(movie.getTrailer());
 		movieDTO.setHomePage(movie.getHomePage());
 		
-		Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
+		Optional<RatingDTO> ratingDTOOptional = ratingRepository
 				.averageAndVotesByIdRatingParent(movie.getRatingParent().getId());
 		
-		if (ratingQueryDTOOptional.isPresent()) {
-			RatingDTO ratingQueryDTO = ratingQueryDTOOptional.get();
+		if (ratingDTOOptional.isPresent()) {
+			RatingDTO ratingQueryDTO = ratingDTOOptional.get();
 			movieDTO.setRating(ratingQueryDTO);
+		} else {
+			movieDTO.setRating(new RatingDTO());
 		}
 		
 		return movieDTO;

@@ -1,16 +1,25 @@
 package com.social.business;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.social.business.interfaces.TvShowBusiness;
 import com.social.domain.CommentParent;
+import com.social.domain.Episode;
 import com.social.domain.RatingParent;
+import com.social.domain.Season;
 import com.social.domain.TvShow;
 import com.social.repository.CommentParentRepository;
+import com.social.repository.EpisodeRepository;
 import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
+import com.social.repository.SeasonRepository;
 import com.social.repository.TvShowRepository;
+import com.social.trakt.business.interfaces.SeasonTraktAPIBusiness;
 import com.social.web.rest.dto.RatingDTO;
 import com.social.web.rest.dto.TvShowDTO;
 import com.social.web.rest.exception.ResourceNotFoundException;
@@ -31,6 +40,15 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 	@Autowired
 	private RatingRepository ratingRepository;
 
+	@Autowired
+	private SeasonTraktAPIBusiness seasonTraktAPIBusiness;
+
+	@Autowired
+	private SeasonRepository seasonRepository;
+	
+	@Autowired
+	private EpisodeRepository episodeRepository;
+
 	@Override
 	public TvShow createTvShow(TitleRatingVM titleRating, String showId) {
 		// criando um novo comentParent e ratingParent para o show que sera
@@ -48,8 +66,24 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		tvShow.setCommentParent(commentParent);
 		tvShow.setRatingParent(ratingParent);
 
-		// criando o novo tvShow
-		return tvShowRepository.saveAndFlush(tvShow);
+		tvShow = tvShowRepository.saveAndFlush(tvShow);
+		
+		List<com.social.trakt.model.Season> traktSeasons = seasonTraktAPIBusiness.getSummarySeason(showId, "full,episodes");
+		
+		final Long idTvShow = tvShow.getId();
+		List<Episode> episodesToSave = new ArrayList<>();
+		traktSeasons.forEach(s -> {
+			Season seasonSalva = seasonRepository.saveAndFlush(new Season().createFrom(s, idTvShow));
+			
+			s.getEpisodes().forEach(e -> {
+				episodesToSave.add(new Episode().createFrom(e, seasonSalva.getIdSeason()));
+			});
+			
+		});
+		
+		episodeRepository.bulkSave(episodesToSave);
+		
+		return tvShow;
 	}
 
 	@Override
@@ -80,6 +114,8 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		if (ratingQueryDTOOptional.isPresent()) {
 			RatingDTO ratingDTO = ratingQueryDTOOptional.get();
 			tvShowDTO.setRating(ratingDTO);
+		} else {
+			tvShowDTO.setRating(new RatingDTO());
 		}
 
 		return tvShowDTO;

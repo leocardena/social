@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+//import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,9 +21,8 @@ import org.joda.time.DateTime;
 @Table(name = "season")
 public class Season {
 	
-	@ManyToOne
-	@JoinColumn(name = "idtvshow")
-	private TvShow tvShow;
+	@Column(name = "idtvshow")
+	private Long tvShow;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,12 +49,23 @@ public class Season {
 	@OneToOne
 	@JoinColumn(name = "idratingparent")
 	private RatingParent ratingParent;
+	
+	public Season createFrom(com.social.trakt.model.Season traktSeason, Long idTvShow) {
+		
+		Season season = new Season();
+		season.setNumber(traktSeason.getNumber());
+		season.setName(traktSeason.getTitle() != null ? traktSeason.getTitle() : null);
+		season.setAired(traktSeason.getFirstAired() != null ? new DateTime(traktSeason.getFirstAired()) : null);
+		season.setTvShow(idTvShow);
+	
+		return season;
+	}
 
-	public TvShow getTvShow() {
+	public Long getTvShow() {
 		return tvShow;
 	}
 
-	public void setTvShow(TvShow tvShow) {
+	public void setTvShow(Long tvShow) {
 		this.tvShow = tvShow;
 	}
 	

@@ -1,10 +1,9 @@
 package com.social.business;
 
 import java.util.Optional;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 import com.amazonaws.services.applicationdiscovery.model.ResourceNotFoundException;
 import com.social.business.interfaces.AccountBusiness;
 import com.social.business.interfaces.MovieBusiness;
@@ -18,6 +17,7 @@ import com.social.web.rest.response.PostResponseAPI;
 import com.social.web.rest.vm.RatingVM;
 import com.social.web.rest.vm.TitleRatingVM;
 
+@Service
 public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 	
 	@Autowired
