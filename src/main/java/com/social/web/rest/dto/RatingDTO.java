@@ -1,5 +1,9 @@
 package com.social.web.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class RatingDTO {
 	
 	private Double average = 0.0;

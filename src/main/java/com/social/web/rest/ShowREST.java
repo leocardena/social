@@ -59,10 +59,10 @@ public class ShowREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado show nao foi encontrado
 	 */
-	@GetMapping(value = "/{showId}/user-rating/{ratingId}")
-	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId, 
-			@PathVariable("ratingId") Long ratingId) {
-		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId, ratingId));
+	@GetMapping(value = "/{showId}/user-ratings")
+	public ResponseEntity<?> getUserRating(@PathVariable("showId") String showId,
+			@RequestParam("idRatingParent") Long idRatingParent) {
+		return ResponseEntity.ok(ratingBusiness.getUserRatingForTvShowBySlug(showId, idRatingParent));
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class ShowREST {
 	 *         codigo 404 informando que o show com o id informado nao
 	 *         foi encontrado
 	 */
-	@PostMapping(value = "/{showId}/user-rating")
+	@PostMapping(value = "/{showId}/user-ratings")
 	public ResponseEntity<?> postUserRating(@PathVariable("showId") String showId, 
 			@RequestBody TitleRatingVM rating) {
 		return ResponseEntity.ok(ratingBusiness.postRatingForTvShow(showId, rating));
@@ -106,7 +106,7 @@ public class ShowREST {
 	 *         codigo 404 informando que o show com o id informado nao
 	 *         foi encontrado
 	 */
-	@PutMapping(value = "/{showId}/user-rating/{ratingId}")
+	@PutMapping(value = "/{showId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("showId") String showId, 
 			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating) {
 		return ResponseEntity.ok(ratingBusiness.putRatingForTvShow(ratingId, rating, showId));
@@ -127,7 +127,7 @@ public class ShowREST {
 	 *         codigo 404 informando que o show com o id informado nao
 	 *         foi encontrado
 	 */
-	@DeleteMapping(value = "/{showId}/user-rating/{ratingId}")
+	@DeleteMapping(value = "/{showId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("showId") String showId, 
 			@PathVariable("ratingId") Long ratingId) {
 		ratingBusiness.deleteRatingForTvShow(ratingId, showId);

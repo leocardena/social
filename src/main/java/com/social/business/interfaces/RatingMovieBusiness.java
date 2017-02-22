@@ -20,6 +20,6 @@ public interface RatingMovieBusiness {
 	void deleteRatingForMovie(Long idRating, String movieId);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	UserRatingDTO getUserRatingForMovieBySlug(String slug, Long idRating);
+	UserRatingDTO getUserRatingForMovieBySlug(String slug, Long idRatingParent);
 	
 }

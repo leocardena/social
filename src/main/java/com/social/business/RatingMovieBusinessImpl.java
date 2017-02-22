@@ -11,6 +11,8 @@ import com.social.business.interfaces.RatingMovieBusiness;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
 import com.social.domain.Rating;
+import com.social.domain.RatingParent;
+import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
 import com.social.web.rest.dto.UserRatingDTO;
 import com.social.web.rest.response.PostResponseAPI;
@@ -29,6 +31,9 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 	@Autowired
 	private AccountBusiness accountBusiness;
 	
+	@Autowired
+	private RatingParentRepository ratingParentRepository;
+	
 	@Override
 	public PostResponseAPI<UserRatingDTO> postRatingForMovie(String movieId, TitleRatingVM titleRating) {
 
@@ -39,6 +44,11 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 			movie = movieBusiness.createMovie(titleRating, movieId);
 		} else {
 			movie = movieOptional.get();
+		}
+		
+		if (movie.getRatingParent() == null) {
+			RatingParent ratingParent = ratingParentRepository.saveAndFlush(new RatingParent());
+			movie.setRatingParent(ratingParent);
 		}
 
 		Profile profile = accountBusiness.findProfileByLoggedUser();
@@ -97,19 +107,14 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 	}
 
 	@Override
-	public UserRatingDTO getUserRatingForMovieBySlug(String slug, Long idRating) {
+	public UserRatingDTO getUserRatingForMovieBySlug(String slug, Long idRatingParent) {
+		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
 
-		Optional<Movie> movieOptional = movieBusiness.findBySlug(slug);
-		
-		if(!movieOptional.isPresent())
-			throw new ResourceNotFoundException("Movie não encontrado!");
-		
-		Optional<Rating> ratingOptional = ratingRepository.findRatingByIdRating(idRating);
-		
-		if(!ratingOptional.isPresent())
-			throw new ResourceNotFoundException("Rating não encontrado!");
-		
-		Rating rating = ratingOptional.get();
+		if (!ratingOptinal.isPresent())
+			throw new ResourceNotFoundException("Rating nao encontrado");
+
+		Rating rating = ratingOptinal.get();
 
 		return new UserRatingDTO(rating.getNote(), rating.getIdRating());
 	}

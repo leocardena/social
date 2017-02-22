@@ -77,10 +77,6 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		traktSeasons.forEach(s -> {
 			Season seasonSalva = seasonRepository.saveAndFlush(new Season().createFrom(s, idTvShow));
 
-//			s.getEpisodes().forEach(e -> {
-//				episodesToSave.add(new Episode().createFrom(e, seasonSalva.getIdSeason()));
-//			});
-
 			List<Episode> episodesList = s.getEpisodes().stream()
 					.map(e -> new Episode().createFrom(e, seasonSalva.getIdSeason())).collect(Collectors.toList());
 
@@ -114,16 +110,20 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		tvShowDTO.setName(tvShow.getName());
 		tvShowDTO.setSlug(tvShow.getSlug());
 		tvShowDTO.setTrailer(tvShow.getTrailer());
-
+		
+		RatingDTO ratingDTO = new RatingDTO();
+		ratingDTO.setIdRatingParent(tvShow.getRatingParent() != null ? tvShow.getRatingParent().getId() : null);
+		
 		Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
 				.averageAndVotesByIdRatingParent(tvShow.getRatingParent().getId());
 
 		if (ratingQueryDTOOptional.isPresent()) {
-			RatingDTO ratingDTO = ratingQueryDTOOptional.get();
-			tvShowDTO.setRating(ratingDTO);
-		} else {
-			tvShowDTO.setRating(new RatingDTO());
+			RatingDTO ratingDTODatabase = ratingQueryDTOOptional.get();
+			ratingDTO.setVotes(ratingDTODatabase.getVotes());
+			ratingDTO.setAverage(ratingDTODatabase.getAverage());
 		}
+		
+		tvShowDTO.setRating(ratingDTO);
 
 		return tvShowDTO;
 	}
