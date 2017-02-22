@@ -12,7 +12,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @PrimaryKeyJoinColumn(name="idtitle")
 public class Movie extends Title {
 	
-    @OneToOne
+	private static final long serialVersionUID = 1L;
+
+	@OneToOne
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
     
