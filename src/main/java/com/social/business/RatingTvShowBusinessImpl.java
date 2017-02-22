@@ -55,19 +55,14 @@ public class RatingTvShowBusinessImpl implements RatingTvShowBusiness {
 	}
 
 	@Override
-	public UserRatingDTO getUserRatingForTvShowBySlug(String slug, Long idRating) {
-		
-		Optional<TvShow> tvShowOptional = tvShowBusiness.findBySlug(slug);
+	public UserRatingDTO getUserRatingForTvShowBySlug(String slug, Long idRatingParent) {
+		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
 
-		if (!tvShowOptional.isPresent())
-			throw new ResourceNotFoundException("Show nao encontrado");
-
-		Optional<Rating> ratingOptional = ratingRepository.findRatingByIdRating(idRating);
-		
-		if (!ratingOptional.isPresent())
+		if (!ratingOptinal.isPresent())
 			throw new ResourceNotFoundException("Rating nao encontrado");
 
-		Rating rating = ratingOptional.get();
+		Rating rating = ratingOptinal.get();
 
 		return new UserRatingDTO(rating.getNote(), rating.getIdRating());
 	}

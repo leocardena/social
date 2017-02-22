@@ -19,5 +19,5 @@ public interface RatingTvShowBusiness {
 	void deleteRatingForTvShow(Long idRating, String showId);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	UserRatingDTO getUserRatingForTvShowBySlug(String slug, Long idRating);
+	UserRatingDTO getUserRatingForTvShowBySlug(String slug, Long idRatingParent);
 }
