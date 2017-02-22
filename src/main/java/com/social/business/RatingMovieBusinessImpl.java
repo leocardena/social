@@ -75,7 +75,7 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 
 		Rating ratingUpdated = ratingRepository.save(rating);
 
-		return new UserRatingDTO(ratingUpdated.getNote());
+		return new UserRatingDTO(ratingUpdated.getNote(), ratingUpdated.getIdRating());
 		
 	}
 
@@ -111,7 +111,7 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 		
 		Rating rating = ratingOptional.get();
 
-		return new UserRatingDTO(rating.getNote());
+		return new UserRatingDTO(rating.getNote(), rating.getIdRating());
 	}
 
 }

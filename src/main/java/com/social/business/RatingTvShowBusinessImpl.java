@@ -69,7 +69,7 @@ public class RatingTvShowBusinessImpl implements RatingTvShowBusiness {
 
 		Rating rating = ratingOptional.get();
 
-		return new UserRatingDTO(rating.getNote());
+		return new UserRatingDTO(rating.getNote(), rating.getIdRating());
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class RatingTvShowBusinessImpl implements RatingTvShowBusiness {
 
 		Rating ratingUpdated = ratingRepository.save(rating);
 
-		return new UserRatingDTO(ratingUpdated.getNote());
+		return new UserRatingDTO(ratingUpdated.getNote(), ratingUpdated.getIdRating());
 	}
 
 }

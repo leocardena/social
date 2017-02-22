@@ -36,21 +36,20 @@ public class SeasonBusinessImpl implements SeasonBusiness {
 		seasonDTO.setIdTvShow(season.getTvShow());
 		seasonDTO.setName(season.getName());
 		seasonDTO.setNumber(season.getNumber());
-
-		if (season.getRatingParent() == null) {
-			seasonDTO.setRating(new RatingDTO());
-			return seasonDTO;
-		}
+		
+		RatingDTO ratingDTO = new RatingDTO();
+		ratingDTO.setIdRatingParent(season.getRatingParent() != null ? season.getRatingParent().getId() : null);
 
 		Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
 				.averageAndVotesByIdRatingParent(season.getRatingParent().getId());
-
+		
 		if (ratingQueryDTOOptional.isPresent()) {
-			RatingDTO ratingDTO = ratingQueryDTOOptional.get();
-			seasonDTO.setRating(ratingDTO);
-		} else {
-			seasonDTO.setRating(new RatingDTO());
+			RatingDTO ratingDTODb = ratingQueryDTOOptional.get();
+			ratingDTO.setAverage(ratingDTODb.getAverage());
+			ratingDTO.setVotes(ratingDTODb.getVotes());
 		}
+		
+		seasonDTO.setRating(ratingDTO);
 		
 		return seasonDTO;
 	}

@@ -3,6 +3,7 @@ package com.social.business;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 
 	@Autowired
 	private SeasonRepository seasonRepository;
-	
+
 	@Autowired
 	private EpisodeRepository episodeRepository;
 
@@ -67,22 +68,28 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		tvShow.setRatingParent(ratingParent);
 
 		tvShow = tvShowRepository.saveAndFlush(tvShow);
-		
-		List<com.social.trakt.model.Season> traktSeasons = seasonTraktAPIBusiness.getSummarySeason(showId, "full,episodes");
-		
+
+		List<com.social.trakt.model.Season> traktSeasons = seasonTraktAPIBusiness.getSummarySeason(showId,
+				"full,episodes");
+
 		final Long idTvShow = tvShow.getId();
 		List<Episode> episodesToSave = new ArrayList<>();
 		traktSeasons.forEach(s -> {
 			Season seasonSalva = seasonRepository.saveAndFlush(new Season().createFrom(s, idTvShow));
-			
-			s.getEpisodes().forEach(e -> {
-				episodesToSave.add(new Episode().createFrom(e, seasonSalva.getIdSeason()));
-			});
-			
+
+//			s.getEpisodes().forEach(e -> {
+//				episodesToSave.add(new Episode().createFrom(e, seasonSalva.getIdSeason()));
+//			});
+
+			List<Episode> episodesList = s.getEpisodes().stream()
+					.map(e -> new Episode().createFrom(e, seasonSalva.getIdSeason())).collect(Collectors.toList());
+
+			episodesToSave.addAll(episodesList);
+
 		});
-		
+
 		episodeRepository.bulkSave(episodesToSave);
-		
+
 		return tvShow;
 	}
 
@@ -110,7 +117,7 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 
 		Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
 				.averageAndVotesByIdRatingParent(tvShow.getRatingParent().getId());
-		
+
 		if (ratingQueryDTOOptional.isPresent()) {
 			RatingDTO ratingDTO = ratingQueryDTOOptional.get();
 			tvShowDTO.setRating(ratingDTO);

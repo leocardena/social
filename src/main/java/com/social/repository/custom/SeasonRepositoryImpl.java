@@ -50,13 +50,15 @@ public class SeasonRepositoryImpl implements SeasonBulkOperations, SeasonReposit
 	@Override
 	public Optional<Season> findSeasonByNumberAndTvShowSlug(Integer seasonNumber, String slug) {
 
-		QSeason season = QSeason.season;
-		QTvShow tvShow = QTvShow.tvShow;
+		QSeason season = new QSeason("s");
+		QTvShow tvShow = new QTvShow("tv");
 
 		Season seasonResult = new JPAQuery<Season>(em)
-				.from(season, tvShow)
-				.where(tvShow.slug.eq(slug)
-						.and(season.number.eq(seasonNumber)))
+				.select(season)
+				.from(tvShow)
+				.join(tvShow.season, season)
+				.where(tvShow.slug.eq(slug))
+				.where(season.number.eq(seasonNumber))
 				.fetchOne();
 
 		return Optional.ofNullable(seasonResult);
