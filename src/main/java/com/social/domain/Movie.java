@@ -1,5 +1,7 @@
 package com.social.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -10,9 +12,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Entity
 @Table(name = "movie")
 @PrimaryKeyJoinColumn(name="idtitle")
-public class Movie extends Title {
-	
-    @OneToOne
+public class Movie extends Title implements Serializable {
+
+	private static final long serialVersionUID = 3172468940281591855L;
+
+	@OneToOne
     @JoinColumn(name = "idcommentparent")
 	private CommentParent commentParent;
     
