@@ -61,9 +61,9 @@ public class MovieREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado filme nao foi encontrado
 	 */
-	@GetMapping(value = "/{movieId}/user-ratings/{ratingId}")
+	@GetMapping(value = "/{movieId}/user-ratings")
 	public ResponseEntity<?> getUserRating(@PathVariable("movieId") String movieId,
-			@RequestParam("ratingId") Long idRatingParent) {
+			@RequestParam("idRatingParent") Long idRatingParent) {
 		return ResponseEntity.ok(ratingMovieBusiness.getUserRatingForMovieBySlug(movieId, idRatingParent));
 	}
 	
@@ -108,7 +108,7 @@ public class MovieREST {
 	 *         codigo 404 informando que o filme com o id informado nao
 	 *         foi encontrado
 	 */
-	@PutMapping(value = "/{movieId}/user-rating/{ratingId}")
+	@PutMapping(value = "/{movieId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("movieId") String movieId, 
 			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating) {
 		return ResponseEntity.ok(ratingMovieBusiness.putRatingForMovie(ratingId, rating, movieId));
@@ -129,7 +129,7 @@ public class MovieREST {
 	 *         codigo 404 informando que o filme com o id informado nao
 	 *         foi encontrado
 	 */
-	@DeleteMapping(value = "/{movieId}/user-rating/{ratingId}")
+	@DeleteMapping(value = "/{movieId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("movieId") String movieId, 
 			@PathVariable("ratingId") Long ratingId) {
 		ratingMovieBusiness.deleteRatingForMovie(ratingId, movieId);
