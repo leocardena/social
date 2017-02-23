@@ -11,8 +11,6 @@ import com.social.business.interfaces.RatingMovieBusiness;
 import com.social.domain.Movie;
 import com.social.domain.Profile;
 import com.social.domain.Rating;
-import com.social.domain.RatingParent;
-import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
 import com.social.web.rest.dto.UserRatingDTO;
 import com.social.web.rest.response.PostResponseAPI;
@@ -31,9 +29,6 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 	@Autowired
 	private AccountBusiness accountBusiness;
 	
-	@Autowired
-	private RatingParentRepository ratingParentRepository;
-	
 	@Override
 	public PostResponseAPI<UserRatingDTO> postRatingForMovie(String movieId, TitleRatingVM titleRating) {
 
@@ -46,11 +41,6 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 			movie = movieOptional.get();
 		}
 		
-		if (movie.getRatingParent() == null) {
-			RatingParent ratingParent = ratingParentRepository.saveAndFlush(new RatingParent());
-			movie.setRatingParent(ratingParent);
-		}
-
 		Profile profile = accountBusiness.findProfileByLoggedUser();
 
 		Rating rating = new Rating();
@@ -80,6 +70,7 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 			throw new ResourceNotFoundException("Rating não encontrado!");
 		
 		Rating rating = ratingOptional.get();
+		
 		rating.setDate(new DateTime());
 		rating.setNote(ratingVM.getNote());
 
@@ -108,7 +99,9 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 
 	@Override
 	public UserRatingDTO getUserRatingForMovieBySlug(String slug, Long idRatingParent) {
+		
 		Profile profile = accountBusiness.findProfileByLoggedUser();
+		
 		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
 
 		if (!ratingOptinal.isPresent())

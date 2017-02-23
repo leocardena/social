@@ -46,13 +46,13 @@ public class ActorREST {
 		return ResponseEntity.ok().build();
 	}
 	
-	@PostMapping(value = "/{actorId}/user-rating")
+	@PostMapping(value = "/{actorId}/user-ratings")
 	public ResponseEntity<?> postUserRating(@PathVariable("movieId") String actorId, 
 			@RequestBody ActorRatingVM rating) {
 		return ResponseEntity.ok().build();
 	}
 	
-	@PutMapping(value = "/{actorId}/user-rating/{ratingId}")
+	@PutMapping(value = "/{actorId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("actorId") String actorId, 
 			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating) {
 		return ResponseEntity.ok().build();

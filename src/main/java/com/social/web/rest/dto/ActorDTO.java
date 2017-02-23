@@ -1,7 +1,5 @@
 package com.social.web.rest.dto;
 
-import org.joda.time.DateTime;
-
 public class ActorDTO {
 
 	private Long id;
@@ -9,8 +7,8 @@ public class ActorDTO {
 	private String name;
 	private String imdb;
 	private String country;
-	private DateTime birthday;
-	private RatingDTO ratingDTO;
+	private String birthday;
+	private RatingDTO rating;
 	
 	public Long getId() {
 		return id;
@@ -52,19 +50,19 @@ public class ActorDTO {
 		this.country = country;
 	}
 	
-	public DateTime getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 	
-	public void setBirthday(DateTime birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	
 	public RatingDTO getRatingDTO() {
-		return ratingDTO;
+		return rating;
 	}
 	
-	public void setRatingDTO(RatingDTO ratingDTO) {
-		this.ratingDTO = ratingDTO;
+	public void setRating(RatingDTO rating) {
+		this.rating = rating;
 	}
 }

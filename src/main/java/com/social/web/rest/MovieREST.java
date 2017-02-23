@@ -61,10 +61,10 @@ public class MovieREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado filme nao foi encontrado
 	 */
-	@GetMapping(value = "/{movieId}/user-rating/{ratingId}")
+	@GetMapping(value = "/{movieId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> getUserRating(@PathVariable("movieId") String movieId,
-			@PathVariable("ratingId") Long ratingId) {
-		return ResponseEntity.ok(ratingMovieBusiness.getUserRatingForMovieBySlug(movieId, ratingId));
+			@RequestParam("ratingId") Long idRatingParent) {
+		return ResponseEntity.ok(ratingMovieBusiness.getUserRatingForMovieBySlug(movieId, idRatingParent));
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class MovieREST {
 	 *         codigo 404 informando que o filme com o id informado nao
 	 *         foi encontrado
 	 */
-	@PostMapping(value = "/{movieId}/user-rating")
+	@PostMapping(value = "/{movieId}/user-ratings")
 	public ResponseEntity<?> postUserRating(@PathVariable("movieId") String movieId, 
 			@RequestBody TitleRatingVM rating) {
 		return ResponseEntity.ok(ratingMovieBusiness.postRatingForMovie(movieId, rating));
