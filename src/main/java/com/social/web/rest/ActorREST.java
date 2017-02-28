@@ -40,24 +40,84 @@ public class ActorREST {
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
+	/**
+	 * Retorna o rating dado pelo usuario logado ao ator em questão
+	 * 
+	 * @param actorId
+	 * 		  O id do ator que sera pesquisado
+	 * 
+	 * @return O objeto ResponseEntity contendo o rating pesquisado caso seja
+	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
+	 *         informando que o rating para determinado ator nao foi encontrado
+	 */
 	@GetMapping(value = "/{actorId}/user-rating/{ratingId}")
 	public ResponseEntity<?> getUserRating(@PathVariable("actorId") String actorId,
 			@PathVariable("ratingId") Long ratingId) {
 		return ResponseEntity.ok().build();
 	}
 	
+	/**
+	 * Insere o rating dado pelo usuario logado ao ator em questão
+	 * 
+	 * @param actorId
+	 * 		  O id do ator no qual o rating sera inserido
+	 * 
+	 * @param rating
+	 *        O objeto do tipo rating contendo as informacoes necessarias
+	 *        para a insercao do rating
+	 *        
+	 * @return O objeto ResponseEntity contendo o rating inserido, um objeto do 
+	 *         tipo ErrorDetailDTO com o codigo 500 informando que ocorreu um 
+	 *         erro na insercao ou um objeto do tipo ErrorDetailDTO com o 
+	 *         codigo 404 informando que o ator com o id informado nao
+	 *         foi encontrado
+	 */
 	@PostMapping(value = "/{actorId}/user-ratings")
 	public ResponseEntity<?> postUserRating(@PathVariable("movieId") String actorId, 
 			@RequestBody ActorRatingVM rating) {
 		return ResponseEntity.ok().build();
 	}
 	
+	/**
+	 * Edita o rating dado pelo usuario logado ao ator em questão
+	 * 
+	 * @param actorId
+	 * 		  O id do ator no qual o rating sera inserido
+	  
+	 * @param ratingId
+	 * 		  O id do rating que sera editado
+	 * 
+	 * @param rating
+	 *        O objeto do tipo rating contendo as informacoes necessarias
+	 *        para a edicao do rating
+	 * 
+	 * @return O objeto ResponseEntity contendo o rating inserido, um objeto do 
+	 *         tipo ErrorDetailDTO com o codigo 500 informando que ocorreu um 
+	 *         erro na insercao ou um objeto do tipo ErrorDetailDTO com o 
+	 *         codigo 404 informando que o ator com o id informado nao
+	 *         foi encontrado
+	 */
 	@PutMapping(value = "/{actorId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("actorId") String actorId, 
 			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating) {
 		return ResponseEntity.ok().build();
 	}
 	
+	/**
+	 * Deleta o rating dado pelo usuario logado ao ator em questão
+	 * 
+	 * @param actorId
+	 * 		  O id do ator no qual o rating sera inserido
+	 * 
+	 * @param ratingId
+	 * 		  O id do rating que sera editado
+	 * 
+	 * @return O objeto ResponseEntity contendo o rating inserido, um objeto do 
+	 *         tipo ErrorDetailDTO com o codigo 500 informando que ocorreu um 
+	 *         erro na insercao ou um objeto do tipo ErrorDetailDTO com o 
+	 *         codigo 404 informando que o ator com o id informado nao
+	 *         foi encontrado
+	 */
 	@DeleteMapping(value = "/{actorId}/user-rating/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("actorId") String actorId, 
 			@PathVariable("ratingId") Long ratingId) {

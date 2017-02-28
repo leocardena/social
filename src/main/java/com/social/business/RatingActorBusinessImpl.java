@@ -5,8 +5,7 @@ import java.util.Optional;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.amazonaws.services.appstream.model.ResourceNotAvailableException;
-import com.amazonaws.services.shield.model.ResourceNotFoundException;
+import com.amazonaws.services.applicationdiscovery.model.ResourceNotFoundException;
 import com.social.business.interfaces.AccountBusiness;
 import com.social.business.interfaces.ActorBusiness;
 import com.social.business.interfaces.RatingActorBusiness;
@@ -57,20 +56,59 @@ public class RatingActorBusinessImpl implements RatingActorBusiness {
 
 	@Override
 	public UserRatingDTO putRatingForActor(Long idRating, RatingVM ratingVM, String slug) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Optional<Actor> actorOptional = actorBusiness.findBySlug(slug);
+		
+		if(!actorOptional.isPresent())
+			throw new ResourceNotFoundException("Actor não encontrado!");
+		
+		Optional<Rating> ratingOptional = ratingRepository.findRatingByIdRating(idRating);
+		
+		if(!ratingOptional.isPresent())
+			throw new ResourceNotFoundException("Rating não encontrado!");
+		
+		Rating rating = ratingOptional.get();
+		
+		rating.setDate(new DateTime());
+		rating.setNote(ratingVM.getNote());
+
+		Rating ratingUpdated = ratingRepository.save(rating);
+
+		return new UserRatingDTO(ratingUpdated.getNote(), ratingUpdated.getIdRating());
+		
 	}
 
 	@Override
 	public void deleteRatingForActor(Long idRating, String slug) {
-		// TODO Auto-generated method stub
 
+		Optional<Actor> actorOptional = actorBusiness.findBySlug(slug);
+		
+		if(!actorOptional.isPresent())
+			throw new ResourceNotFoundException("Ator não encontrado!");
+		
+		Optional<Rating> ratingOptional = ratingRepository.findRatingByIdRating(idRating);
+		
+		if(!ratingOptional.isPresent())
+			throw new ResourceNotFoundException("Rating não encontrado!");
+		
+		ratingRepository.delete(ratingOptional.get());
+		
 	}
 
 	@Override
 	public UserRatingDTO getUserRatingForActor(String slug, Long idRatingParent) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Profile profile = accountBusiness.findProfileByLoggedUser();
+		
+		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
+
+		if (!ratingOptinal.isPresent())
+			throw new ResourceNotFoundException("Rating nao encontrado");
+
+		Rating rating = ratingOptinal.get();
+
+		return new UserRatingDTO(rating.getNote(), rating.getIdRating());
+		
 	}
 
 }

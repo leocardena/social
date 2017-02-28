@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.social.business.interfaces.EpisodeBusiness;
 import com.social.domain.Episode;
-import com.social.domain.Season;
 import com.social.repository.EpisodeRepository;
 import com.social.repository.RatingRepository;
 import com.social.web.rest.dto.EpisodeDTO;
 import com.social.web.rest.dto.RatingDTO;
-import com.social.web.rest.dto.SeasonDTO;
 import com.social.web.rest.exception.ResourceNotFoundException;
 
 @Service
