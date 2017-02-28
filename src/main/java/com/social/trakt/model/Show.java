@@ -56,7 +56,7 @@ public class Show {
     @JsonProperty("country")
     private String country;
     @JsonProperty("trailer")
-    private Object trailer;
+    private String trailer;
     @JsonProperty("homepage")
     private String homepage;
     @JsonProperty("status")
@@ -184,12 +184,12 @@ public class Show {
     }
 
     @JsonProperty("trailer")
-    public Object getTrailer() {
+    public String getTrailer() {
         return trailer;
     }
 
     @JsonProperty("trailer")
-    public void setTrailer(Object trailer) {
+    public void setTrailer(String trailer) {
         this.trailer = trailer;
     }
 

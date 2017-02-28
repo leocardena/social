@@ -1,14 +1,12 @@
 package com.social.web.rest.dto;
 
-import org.joda.time.DateTime;
-
 public class EpisodeDTO {
 
 	private Long idEpisode;
 	private Long season;
 	private String name;
 	private Long number;
-	private DateTime aired;
+	private String aired;
 	private RatingDTO rating;
 
 	public Long getIdEpisode() {
@@ -43,11 +41,11 @@ public class EpisodeDTO {
 		this.number = number;
 	}
 
-	public DateTime getAired() {
+	public String getAired() {
 		return aired;
 	}
 
-	public void setAired(DateTime aired) {
+	public void setAired(String aired) {
 		this.aired = aired;
 	}
 

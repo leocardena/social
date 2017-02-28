@@ -95,7 +95,7 @@ public class RatingSeasonBusinessImpl implements RatingSeasonBusiness {
 		UserRatingDTO u = new UserRatingDTO(ratingStored.getNote());
 
 		return new PostResponseAPI<UserRatingDTO>(
-				"/api/rest/shows/" + showId + "/seasons/" + seasonNumber + "/user-rating/" + ratingStored.getIdRating(),
+				"/api/rest/shows/" + showId + "/seasons/" + seasonNumber + "/user-ratings/" + ratingStored.getIdRating(),
 				u);
 	}
 
