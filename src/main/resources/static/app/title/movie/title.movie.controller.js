@@ -8,19 +8,22 @@
 	
 	TitleMovieController.$inject = ['$stateParams', 'TmdbMovieService', 'movieSummaryPrepService', 'moviePeoplePrepService',
 	                                'movieTranslationsPrepService', 'relatedMoviesPrepService', '$window', '$state',
-	                                'TrailerModalService', 'TmdbPersonService'];
+	                                'TrailerModalService', 'TmdbPersonService', 'DomainMovieService'];
 	
 	/*@ngInject*/
 	function TitleMovieController($stateParams, TmdbMovieService, movieSummaryPrepService, moviePeoplePrepService, 
-			movieTranslationsPrepService, relatedMoviesPrepService, $window, $state, TrailerModalService, TmdbPersonService) {
+			movieTranslationsPrepService, relatedMoviesPrepService, $window, $state, TrailerModalService, TmdbPersonService,
+			DomainMovieService) {
+		
 		var vm = this;
 		vm.movie = movieSummaryPrepService;
 		vm.movie.cast = moviePeoplePrepService.cast;
 		vm.movie.crew = moviePeoplePrepService.crew;
 		vm.movie.relatedMovies = relatedMoviesPrepService;
-		vm.movie.rating = 3;
 		vm.openTrailer = _openTrailer;
 		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
+		vm.movieDoesntExist = false;
+		vm.movie.userRating = { note : 0, id: 0 };
 		var startCast = 0;
 		var endCast = vm.movie.cast.length >= 5 ? 5 : vm.movie.cast.length; 
 		var maxVisualisedCast = endCast;
@@ -28,6 +31,7 @@
 		vm.loadMore = _loadMore;
 		vm.exibirTitulo = _exibirTitulo;
 		vm.evaluate = _evaluate;
+		vm.deleteRating = _deleteRating;
 		vm.last = false;
 		vm.first = true;
 		vm.comments = [{
@@ -55,8 +59,33 @@
         }
         
         function _evaluate() {
-        	//request to backend
-        	//console.log(vm.movie.userRating);
+        	if (vm.movie.userRating) return;
+        	
+        	vm.isEvaluating = true;
+	   		DomainMovieService.postMovie({
+	     		movieId : $stateParams.traktSlug
+	     	}, {
+     			imdb: vm.movie.ids.imdb,
+     			name: vm.movie.title,
+     		    trailer: vm.movie.trailer ? vm.movie.trailer : null,
+     		    homepage: vm.movie.homepage ? vm.movie.homepage : null,
+     		    rating: {
+     		    	note: vm.movie.userRating.note
+     		    }
+     		}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadMovieDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+        function _editRating() {
+        	//put rating
+        }
+        
+        function _deleteRating() {
+        	//delete rating
         }
 		
 		function _loadMore(action) {
@@ -140,6 +169,29 @@
  
     	}
     	
+    	function _loadMovieDetails() {
+	   		DomainMovieService.getMovie({
+	     		movieId : $stateParams.traktSlug
+	     	}).$promise.then(function (data) {
+	     		vm.movie.domain = data;
+	     		vm.movieDoesntExist = false;
+	     		 _loadUserRating(vm.movie.domain.rating.idRatingParent);
+	     	}).catch(function (err) {
+	     		vm.movieDoesntExist = true;
+	     	});
+    	}
+    	
+    	function _loadUserRating(idRatingParent) {
+     		DomainMovieService.getUserRating({
+	     		movieId : $stateParams.traktSlug,
+	     		idRatingParent: idRatingParent
+	     	}).$promise.then(function (data) {
+	     		vm.movie.userRating = data;
+	     	}).catch(function (err) {
+
+	     	});
+    	}
+    	
     	function _insertBackground (backgroundUrl) {
 			if (backgroundUrl) {
     			$state.current.data.background = backgroundUrl;
@@ -152,6 +204,7 @@
     		
     		_loadPersonImage();
     		_loadRelatedMovies();
+    		_loadMovieDetails();
     		
     		if (movieTranslationsPrepService.length > 0) {
     			vm.movie.overview = movieTranslationsPrepService[0].overview;

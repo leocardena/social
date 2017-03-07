@@ -39,23 +39,25 @@
 		<div class="col-md-3 rating">
 				<div class="mediaGeral">
 					<div class="mediaGeralTitle col-md-5 col-md-offset-1"> 
-						<p> MÉDIA
+						<p> Média
 						<br>
 						GERAL</p>
 					</div>
 					
 					<div class="mediaGeralText col-md-5">
-						<span> {{vm.movie.rating}}  </span>
+						<span ng-show="!vm.movieDoesntExist"> {{vm.movie.domain.rating.average}}  </span>
+						<span ng-show="vm.movieDoesntExist"> 0 </span>
 					</div>
 				</div>
 
 			<div class="col-md-12">
-				<h4 class="text-center ratingText"> 500 avaliações totais</h4>
+				<h4 class="text-center ratingText" ng-show="!vm.movieDoesntExist"> {{vm.movie.domain.rating.votes}} avaliações totais</h4>
+				<h4 class="text-center ratingText" ng-show="vm.movieDoesntExist"> 0 avaliações totais</h4>
 			</div>
 			<div class="col-md-12 text-center">
 				<p class="">Deixe sua avaliação: 
-				<ng-rate-it ng-model="vm.movie.userRating" resetable="false"
-					step="1" rated="vm.evaluate"> </ng-rate-it>
+				<ng-rate-it ng-disabled="vm.isEvaluating" ng-model="vm.movie.userRating.note" resetable="vm.movie.userRating ? true: false"
+					step="1" rated="vm.evaluate" reset="vm.deleteRating"> </ng-rate-it>
 				</p>
 			</div>
 

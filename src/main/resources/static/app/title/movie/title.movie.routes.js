@@ -57,6 +57,9 @@
         		movieId : $stateParams.traktSlug
         	}).$promise.then(function (data) {
         		return data;
+        	}).catch(function (err) {
+        		console.log(err);
+        		return err;
         	});
         }
         
