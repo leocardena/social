@@ -38,7 +38,6 @@ public class ActorBusinessImpl implements ActorBusiness {
 		CommentParent commentParent = commentParentRepository.saveAndFlush(new CommentParent());
 		
 		Actor actor = new Actor();
-		actor.setBirthday(actorRatingVM.getBirthday());
 		actor.setCountry(actorRatingVM.getCountry());
 		actor.setImdb(actorRatingVM.getImdb());
 		actor.setName(actorRatingVM.getName());
@@ -60,10 +59,11 @@ public class ActorBusinessImpl implements ActorBusiness {
 		Optional<Actor> actorOptional = findBySlug(slug);
 		
 		if(!actorOptional.isPresent())
-			throw new ResourceNotFoundException("Movie não encontrado!");
+			throw new ResourceNotFoundException("Actor não encontrado!");
 		
 		Actor actor = actorOptional.get();
 		ActorDTO actorDTO = new ActorDTO();
+		actorDTO.setId(actor.getId());
 		actorDTO.setBirthday(actor.getBirthday().toString(DateTimeFormat.forPattern("dd/MM/yyyy")));
 		actorDTO.setCountry(actor.getCountry());
 		actorDTO.setImdb(actor.getImdb());

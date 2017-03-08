@@ -18,7 +18,7 @@ public class Actor extends People {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idactor")
-	private String id;
+	private Long id;
 	
 	@Column(name = "imdb")
 	private String imdb;
@@ -42,11 +42,11 @@ public class Actor extends People {
 		this.imdb = imdb;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

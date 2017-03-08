@@ -1,14 +1,11 @@
 package com.social.web.rest.vm;
 
-import org.joda.time.DateTime;
-
 public class ActorRatingVM {
 
 	private String name;
 	private String imdb;
 	private String country;
-	private DateTime birthday;
-	private RatingVM ratingVM;
+	private RatingVM rating;
 	
 	public String getName() {
 		return name;
@@ -26,20 +23,12 @@ public class ActorRatingVM {
 		this.imdb = imdb;
 	}
 	
-	public DateTime getBirthday() {
-		return birthday;
+	public RatingVM getRating() {
+		return rating;
 	}
 	
-	public void setBirthday(DateTime birthday) {
-		this.birthday = birthday;
-	}
-	
-	public RatingVM getRatingVM() {
-		return ratingVM;
-	}
-	
-	public void setRatingVM(RatingVM ratingVM) {
-		this.ratingVM = ratingVM;
+	public void setRating(RatingVM rating) {
+		this.rating = rating;
 	}
 
 	public String getCountry() {
@@ -49,5 +38,5 @@ public class ActorRatingVM {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-		
+	
 }
