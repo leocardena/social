@@ -56,7 +56,7 @@
 			</div>
 			<div class="col-md-12 text-center">
 				<p class="">Deixe sua avaliação: 
-				<ng-rate-it ng-disabled="vm.isEvaluating" ng-model="vm.movie.userRating.note" resetable="vm.movie.userRating ? true: false"
+				<ng-rate-it ng-disabled="vm.isEvaluating" ng-model="vm.movie.userRating.note" resetable="vm.movie.userRating.note > 0 ? true : false"
 					step="1" rated="vm.evaluate" reset="vm.deleteRating"> </ng-rate-it>
 				</p>
 			</div>

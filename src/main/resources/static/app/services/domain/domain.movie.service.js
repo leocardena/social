@@ -23,9 +23,14 @@
 				url: DomainBase.movie + '/:movieId/user-ratings',
 				params: {
 					movieId : '@movieId'
-				},
-				data: {
-					
+				}
+			},
+			'putUserRating' : {
+				method: 'PUT',
+				url: DomainBase.movie + '/:movieId/user-ratings/:userRatingId',
+				params: {
+					movieId : '@movieId',
+					userRatingId: '@userRatingId'
 				}
 			},
 			'getUserRating': {
@@ -34,6 +39,15 @@
 				params: {
 					movieId : '@movieId',
 					idRatingParent: '@idRatingParent'
+				},
+				isArray : false
+			},
+			'deleteUserRating': {
+				method: 'DELETE',
+				url: DomainBase.movie + '/:movieId/user-ratings/:userRatingId',
+				params: {
+					movieId : '@movieId',
+					userRatingId: '@userRatingId'
 				},
 				isArray : false
 			}

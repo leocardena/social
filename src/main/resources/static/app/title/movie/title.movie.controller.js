@@ -34,16 +34,6 @@
 		vm.deleteRating = _deleteRating;
 		vm.last = false;
 		vm.first = true;
-		vm.comments = [{
-			user : 'Gustavo',
-			comment : 'Filme muito bom'
-		}, {
-			user : 'Leonardo',
-			comment : 'Ótima produção!'
-		}, {
-			user: 'Pedro',
-			comment : 'Merece óscar!!'
-		}];
 		
 		_init();
 		
@@ -59,8 +49,11 @@
         }
         
         function _evaluate() {
-        	if (vm.movie.userRating) return;
-        	
+        	if (vm.movie.userRating.id !== 0) {
+        		_editRating();
+        		return;
+        	};
+        	       	
         	vm.isEvaluating = true;
 	   		DomainMovieService.postMovie({
 	     		movieId : $stateParams.traktSlug
@@ -81,11 +74,32 @@
         }
         
         function _editRating() {
-        	//put rating
+        	vm.isEvaluating = true;
+	   		DomainMovieService.putUserRating({
+	     		movieId : $stateParams.traktSlug,
+	     		userRatingId: vm.movie.userRating.id
+	     	}, {note: vm.movie.userRating.note}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadMovieDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
         }
         
         function _deleteRating() {
-        	//delete rating
+        	if (vm.movie.userRating.note == 0) return;
+        	
+        	vm.isEvaluating = true;
+        	DomainMovieService.deleteUserRating({
+	     		movieId : $stateParams.traktSlug,
+	     		userRatingId : vm.movie.userRating.id
+	     	}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	    		vm.movie.userRating = { note : 0, id: 0 };
+	        	_loadMovieDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
         }
 		
 		function _loadMore(action) {
@@ -188,7 +202,7 @@
 	     	}).$promise.then(function (data) {
 	     		vm.movie.userRating = data;
 	     	}).catch(function (err) {
-
+	    		vm.movie.userRating = { note : 0, id: 0 };
 	     	});
     	}
     	
