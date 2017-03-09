@@ -38,9 +38,9 @@ public class RatingActorBusinessImpl implements RatingActorBusiness {
 		Actor actor;
 		
 		if(actorOptional.isPresent()){
-			actor = actorBusiness.createActor(actorRatingVM, slug);
-		}else{ 
 			actor = actorOptional.get();
+		}else{ 
+			actor = actorBusiness.createActor(actorRatingVM, slug);
 		}
 		
 		Profile profile = accountBusiness.findProfileByLoggedUser();
