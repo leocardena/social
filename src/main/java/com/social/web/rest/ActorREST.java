@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.business.interfaces.ActorBusiness;
@@ -60,9 +61,9 @@ public class ActorREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado ator nao foi encontrado
 	 */
-	@GetMapping(value = "/{actorId}/user-rating/{ratingId}")
+	@GetMapping(value = "/{actorId}/user-ratings")
 	public ResponseEntity<?> getUserRating(@PathVariable("actorId") String actorId,
-			@PathVariable("idRatingParent") Long idRatingParent) {
+			@RequestParam("idRatingParent") Long idRatingParent) {
 		return ResponseEntity.ok(ratingActorBusiness.getUserRatingForActor(actorId, idRatingParent));
 	}
 	
@@ -128,7 +129,7 @@ public class ActorREST {
 	 *         codigo 404 informando que o ator com o id informado nao
 	 *         foi encontrado
 	 */
-	@DeleteMapping(value = "/{actorId}/user-rating/{ratingId}")
+	@DeleteMapping(value = "/{actorId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("actorId") String actorId, 
 			@PathVariable("ratingId") Long ratingId) {
 		ratingActorBusiness.deleteRatingForActor(ratingId, actorId);
