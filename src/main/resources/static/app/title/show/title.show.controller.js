@@ -8,12 +8,13 @@
 	
 	TitleShowController.$inject = ['$stateParams', '$window', '$state', 'showTranslationsPrepService',
 	                               'showSummaryPrepService', 'showPeoplePrepService', 'relatedShowsPrepService',
-	                               'seasonsShowPrepService', 'TrailerModalService', 'TmdbShowService', 'TmdbPersonService'];
+	                               'seasonsShowPrepService', 'TrailerModalService', 'TmdbShowService', 'TmdbPersonService',
+	                               'DomainShowService'];
 	
 	/*@ngInject*/
 	function TitleShowController($stateParams, $window, $state, showTranslationsPrepService,
 			showSummaryPrepService, showPeoplePrepService, relatedShowsPrepService, seasonsShowPrepService,
-			TrailerModalService, TmdbShowService, TmdbPersonService) {
+			TrailerModalService, TmdbShowService, TmdbPersonService, DomainShowService) {
 		
 		var vm = this;
 		
@@ -27,9 +28,12 @@
 		vm.show.crew = showPeoplePrepService.crew;
 		vm.show.relatedShows = relatedShowsPrepService;
 		vm.show.seasons  = seasonsShowPrepService;
+		vm.show.userRating = { note : 0, id: 0 };
+
 		
 		/* Methods */
 		vm.evaluate = _evaluate;
+		vm.deleteRating = _deleteRating;
 		vm.exibirTitulo = _exibirTitulo;
 		vm.loadMorePerson = _loadMorePerson;
 		vm.openTrailer = _openTrailer;
@@ -41,12 +45,64 @@
 		var endCast = vm.show.cast.length >= 5 ? 5 : vm.show.cast.length; 
 		var maxVisualisedCast = endCast;
 		vm.castArray = vm.show.cast.slice(startCast, endCast);
+		vm.showDoesntExist = false;
+    	vm.isEvaluating = false;
 		
 		/* Init Controller*/
 		_init();
 		
         function _evaluate() {
-        	//request to backend
+        	if (vm.show.userRating.id !== 0) {
+        		_editRating();
+        		return;
+        	};
+        	       	
+        	vm.isEvaluating = true;
+        	DomainShowService.postUserRating({
+        		showId : $stateParams.traktSlug
+	     	}, {
+     			imdb: vm.show.ids.imdb,
+     			name: vm.show.title,
+     		    trailer: vm.show.trailer ? vm.show.trailer : null,
+     		    homepage: vm.show.homepage ? vm.show.homepage : null,
+     		    rating: {
+     		    	note: vm.show.userRating.note
+     		    }
+     		}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadShowDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+        function _editRating() {
+        	vm.isEvaluating = true;
+        	DomainShowService.putUserRating({
+	     		showId : $stateParams.traktSlug,
+	     		userRatingId: vm.show.userRating.id
+	     	}, {note: vm.show.userRating.note}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadShowDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+        function _deleteRating() {
+        	if (vm.show.userRating.note == 0) return;
+        	
+        	vm.isEvaluating = true;
+        	DomainShowService.deleteUserRating({
+	     		showId : $stateParams.traktSlug,
+	     		userRatingId : vm.show.userRating.id
+	     	}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	    		vm.show.userRating = { note : 0, id: 0 };
+	    		_loadShowDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
         }
         
         function  _exibirSeason(season, show) {
@@ -70,6 +126,7 @@
     		_loadPersonImages();
     		_loadRelatedShowsImages();
     		_loadSeasonsImages();
+    		_loadShowDetails();
     		
     		if (showTranslationsPrepService.length > 0) {
     			vm.show.overview = showTranslationsPrepService[0].overview;
@@ -90,6 +147,29 @@
     		$window.document.title = vm.show.title;
     		
     	} 
+    	
+    	function _loadShowDetails() {
+    		DomainShowService.getShow({
+	     		showId : $stateParams.traktSlug
+	     	}).$promise.then(function (data) {
+	     		vm.show.domain = data;
+	     		vm.showDoesntExist = false;
+	     		 _loadUserRating(vm.show.domain.rating.idRatingParent);
+	     	}).catch(function (err) {
+	     		vm.showDoesntExist = true;
+	     	});
+    	}
+    	
+    	function _loadUserRating(idRatingParent) {
+    		DomainShowService.getUserRating({
+	     		showId : $stateParams.traktSlug,
+	     		idRatingParent: idRatingParent
+	     	}).$promise.then(function (data) {
+	     		vm.show.userRating = data;
+	     	}).catch(function (err) {
+	    		vm.show.userRating = { note : 0, id: 0 };
+	     	});
+    	}
         
     	function _insertBackground (backgroundUrl) {
 			if (backgroundUrl) {

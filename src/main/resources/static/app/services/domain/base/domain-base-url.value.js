@@ -9,7 +9,9 @@
 				movie : "/api/rest/movies",
 				account : "/api/rest/accounts",
 				avatar : "/api/rest/avatars",
-				lists : "/api/rest/lists"
+				lists : "/api/rest/lists",
+				show: "/api/rest/shows",
+				actor: "/api/rest/actors"
 		   });
 	
 })();

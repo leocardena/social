@@ -39,15 +39,19 @@ public class EpisodeBusinessImpl implements EpisodeBusiness {
 		episodeDTO.setSeason(episode.getSeason());
 
 		RatingDTO ratingDTO = new RatingDTO();
-		ratingDTO.setIdRatingParent(episode.getRatingParent() != null ? episode.getRatingParent().getId() : null);
+		
+		if (episode.getRatingParent() != null) {
+			ratingDTO.setIdRatingParent(episode.getRatingParent().getId());
+			
+			Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
+					.averageAndVotesByIdRatingParent(episode.getRatingParent().getId());
 
-		Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
-				.averageAndVotesByIdRatingParent(episode.getRatingParent().getId());
-
-		if (ratingQueryDTOOptional.isPresent()) {
-			RatingDTO ratingDTODb = ratingQueryDTOOptional.get();
-			ratingDTO.setAverage(ratingDTODb.getAverage());
-			ratingDTO.setVotes(ratingDTODb.getVotes());
+			if (ratingQueryDTOOptional.isPresent()) {
+				RatingDTO ratingDTODb = ratingQueryDTOOptional.get();
+				ratingDTO.setAverage(ratingDTODb.getAverage());
+				ratingDTO.setVotes(ratingDTODb.getVotes());
+			}
+			
 		}
 
 		episodeDTO.setRating(ratingDTO);

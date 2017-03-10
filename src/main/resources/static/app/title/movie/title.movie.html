@@ -51,8 +51,8 @@
 				</div>
 
 			<div class="col-md-12">
-				<h4 class="text-center ratingText" ng-show="!vm.movieDoesntExist"> {{vm.movie.domain.rating.votes}} avaliações totais</h4>
-				<h4 class="text-center ratingText" ng-show="vm.movieDoesntExist"> 0 avaliações totais</h4>
+				<h4 class="text-center ratingText" ng-show="!vm.movieDoesntExist && vm.movie.domain.rating.average > 0"> {{vm.movie.domain.rating.votes}} avaliações totais</h4>
+				<h4 class="text-center ratingText" ng-show="vm.movieDoesntExist || vm.movie.domain.rating.average == 0">Não há avaliações no momento</h4>
 			</div>
 			<div class="col-md-12 text-center">
 				<p class="">Deixe sua avaliação: 

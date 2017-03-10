@@ -112,15 +112,18 @@ public class TvShowBusinessImpl implements TvShowBusiness {
 		tvShowDTO.setTrailer(tvShow.getTrailer());
 		
 		RatingDTO ratingDTO = new RatingDTO();
-		ratingDTO.setIdRatingParent(tvShow.getRatingParent() != null ? tvShow.getRatingParent().getId() : null);
 		
-		Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
-				.averageAndVotesByIdRatingParent(tvShow.getRatingParent().getId());
-
-		if (ratingQueryDTOOptional.isPresent()) {
-			RatingDTO ratingDTODatabase = ratingQueryDTOOptional.get();
-			ratingDTO.setVotes(ratingDTODatabase.getVotes());
-			ratingDTO.setAverage(ratingDTODatabase.getAverage());
+		if (tvShow.getRatingParent() != null) {
+			ratingDTO.setIdRatingParent(tvShow.getRatingParent().getId());
+			Optional<RatingDTO> ratingQueryDTOOptional = ratingRepository
+					.averageAndVotesByIdRatingParent(tvShow.getRatingParent().getId());
+			
+			if (ratingQueryDTOOptional.isPresent()) {
+				RatingDTO ratingDTODatabase = ratingQueryDTOOptional.get();
+				ratingDTO.setVotes(ratingDTODatabase.getVotes());
+				ratingDTO.setAverage(ratingDTODatabase.getAverage());
+			}
+			
 		}
 		
 		tvShowDTO.setRating(ratingDTO);

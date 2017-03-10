@@ -7,20 +7,24 @@
 			.controller('TitleShowSeasonController', TitleShowSeasonController);
 	
 	TitleShowSeasonController.$inject = ['seasonPrepService', 'showSummaryPrepService', 'showTranslationsPrepService',
-	                                     'TmdbShowService', '$state', '$stateParams', '$window'];
+	                                     'TmdbShowService', '$state', '$stateParams', '$window', 'DomainSeasonService'];
 	
 	/*@ngInject*/
 	function TitleShowSeasonController(seasonPrepService, showSummaryPrepService, showTranslationsPrepService,
-			TmdbShowService, $state, $stateParams, $window) {
+			TmdbShowService, $state, $stateParams, $window, DomainSeasonService) {
 		
 		var vm = this;
 		vm.evaluate = _evaluate;
+		vm.deleteRating = _deleteRating;
 		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
 		vm.show = showSummaryPrepService
 		vm.season = { episodes : seasonPrepService };
 		vm.season.number = $stateParams.seasonNumber;
 		vm.returnToShow = _returnToShow;
 		vm.openEpisode = _openEpisode;
+		vm.season.userRating = { note : 0, id: 0 };
+		vm.seasonDoesntExist = false;
+    	vm.isEvaluating = false;
 		
 		_init();
 		
@@ -32,6 +36,7 @@
 			 _setShowTranslations();
 			 _setEpidodesTranslations();
 	    	 $window.document.title = vm.show.title + ' (Temporada ' + $stateParams.seasonNumber + ')';
+	    	 _loadSeasonDetails();
 			 
 			function _getSeasonImage() {
 				if ($stateParams.season) {
@@ -77,9 +82,87 @@
 			
 		}
 		
-		function _evaluate () {
-			
-		}
+        function _evaluate() {
+        	if (vm.season.userRating.id !== 0) {
+        		_editRating();
+        		return;
+        	};
+        	       	
+        	vm.isEvaluating = true;
+        	DomainSeasonService.postUserRating({
+        		showId : $stateParams.traktSlug,
+        		seasonNumber: $stateParams.seasonNumber
+	     	}, {
+     			imdb: vm.show.ids.imdb,
+     			name: vm.show.title,
+     		    trailer: vm.show.trailer ? vm.show.trailer : null,
+     		    homepage: vm.show.homepage ? vm.show.homepage : null,
+     		    rating: {
+     		    	note: vm.season.userRating.note
+     		    }
+     		}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadSeasonDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+        function _editRating() {
+        	vm.isEvaluating = true;
+        	DomainSeasonService.putUserRating({
+	     		showId : $stateParams.traktSlug,
+        		seasonNumber: $stateParams.seasonNumber,
+	     		userRatingId: vm.season.userRating.id
+	     	}, {note: vm.season.userRating.note}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadSeasonDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+		
+        function _deleteRating() {
+        	if (vm.season.userRating.note == 0) return;
+        	
+        	vm.isEvaluating = true;
+        	DomainSeasonService.deleteUserRating({
+	     		showId : $stateParams.traktSlug,
+	     		seasonNumber: $stateParams.seasonNumber,
+	     		userRatingId : vm.season.userRating.id
+	     	}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	    		vm.season.userRating = { note : 0, id: 0 };
+	    		_loadSeasonDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+    	function _loadSeasonDetails() {
+    		DomainSeasonService.getSeason({
+	     		showId : $stateParams.traktSlug,
+	     		seasonNumber: $stateParams.seasonNumber,
+	     	}).$promise.then(function (data) {
+	     		vm.season.domain = data;
+	     		vm.seasonDoesntExist = false;
+	     		 _loadUserRating(vm.season.domain.rating.idRatingParent);
+	     	}).catch(function (err) {
+	     		vm.seasonDoesntExist = true;
+	     	});
+    	}
+    	
+    	function _loadUserRating(idRatingParent) {
+    		DomainSeasonService.getUserRating({
+	     		showId : $stateParams.traktSlug,
+	     		seasonNumber: $stateParams.seasonNumber,
+	     		idRatingParent: idRatingParent
+	     	}).$promise.then(function (data) {
+	     		vm.season.userRating = data;
+	     	}).catch(function (err) {
+	    		vm.season.userRating = { note : 0, id: 0 };
+	     	});
+    	}
 		
     	function _insertBackground (backgroundUrl) {
 			if (backgroundUrl) {

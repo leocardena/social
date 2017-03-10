@@ -50,7 +50,7 @@ public class ActorREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado ator nao foi encontrado
 	 */
-	@GetMapping(value = "/{actorId}/user-rating/{ratingId}")
+	@GetMapping(value = "/{actorId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> getUserRating(@PathVariable("actorId") String actorId,
 			@PathVariable("ratingId") Long ratingId) {
 		return ResponseEntity.ok().build();
@@ -118,7 +118,7 @@ public class ActorREST {
 	 *         codigo 404 informando que o ator com o id informado nao
 	 *         foi encontrado
 	 */
-	@DeleteMapping(value = "/{actorId}/user-rating/{ratingId}")
+	@DeleteMapping(value = "/{actorId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("actorId") String actorId, 
 			@PathVariable("ratingId") Long ratingId) {
 		return ResponseEntity.ok().build();
