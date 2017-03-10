@@ -97,7 +97,7 @@ CREATE TABLE Title(
 idTitle INT NOT NULL,
 slug VARCHAR(100) NOT NULL,
 imdb VARCHAR(100) UNIQUE NOT NULL,
-name VARCHAR(100) UNIQUE NOT NULL,
+name VARCHAR(100),
 trailer VARCHAR(200),
 homePage VARCHAR(200)
 )ENGINE=InnoDB;
@@ -118,7 +118,7 @@ idSeason INT UNIQUE NOT NULL,
 idTvShow INT NOT NULL,
 idCommentParent INT,
 idRatingParent INT,
-name VARCHAR(100) NOT NULL,
+name VARCHAR(100),
 aired DATE,
 number INT
 )ENGINE=InnoDB;
@@ -130,7 +130,7 @@ idEpisode INT UNIQUE NOT NULL,
 idSeason INT NOT NULL,
 idCommentParent INT,
 idRatingParent INT,
-name VARCHAR(100) NOT NULL,
+name VARCHAR(100),
 aired DATE,
 number INT
 )ENGINE=InnoDB;
