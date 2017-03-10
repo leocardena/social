@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.applicationdiscovery.model.ResourceNotFoundException;
 import com.social.business.interfaces.AccountBusiness;
@@ -18,6 +19,7 @@ import com.social.web.rest.response.PostResponseAPI;
 import com.social.web.rest.vm.ActorRatingVM;
 import com.social.web.rest.vm.RatingVM;
 
+@Service
 public class RatingActorBusinessImpl implements RatingActorBusiness {
 
 	@Autowired
@@ -35,16 +37,17 @@ public class RatingActorBusinessImpl implements RatingActorBusiness {
 		Optional<Actor> actorOptional = actorBusiness.findBySlug(slug);
 		Actor actor;
 		
-		if(actorOptional.isPresent())
-			actor = actorBusiness.createActor(actorRatingVM, slug);
-		else 
+		if(actorOptional.isPresent()){
 			actor = actorOptional.get();
-			
+		}else{ 
+			actor = actorBusiness.createActor(actorRatingVM, slug);
+		}
+		
 		Profile profile = accountBusiness.findProfileByLoggedUser();
 		
 		Rating rating = new Rating();
 		rating.setDate(new DateTime());
-		rating.setNote(actorRatingVM.getRatingVM().getNote());
+		rating.setNote(actorRatingVM.getRating().getNote());
 		rating.setProfile(profile.getId());
 		rating.setIdRatingParent(actor.getRatingParent());
 		

@@ -87,7 +87,7 @@ idRatingParent INT,
 slug VARCHAR(100) NOT NULL,
 imdb VARCHAR(100) UNIQUE NOT NULL,
 name VARCHAR (100) NOT NULL,
-birthay DATE NOT NULL,
+birthay DATE,
 country VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 -- -----------------------------------------------------

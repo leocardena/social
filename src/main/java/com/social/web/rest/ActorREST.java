@@ -1,5 +1,6 @@
 package com.social.web.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.social.business.interfaces.ActorBusiness;
+import com.social.business.interfaces.RatingActorBusiness;
 import com.social.web.rest.util.APIEndpoint;
 import com.social.web.rest.vm.ActorRatingVM;
 import com.social.web.rest.vm.RatingVM;
@@ -25,7 +29,13 @@ import com.social.web.rest.vm.RatingVM;
 @RestController
 @RequestMapping(APIEndpoint.ACTOR)
 public class ActorREST {
-
+	
+	@Autowired
+	private ActorBusiness actorBusiness;
+	
+	@Autowired
+	private RatingActorBusiness ratingActorBusiness;
+	
 	/**
 	 * Retorna as informacoes de um ator especifico
 	 * 
@@ -36,8 +46,9 @@ public class ActorREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que aquele ator nao foi encontrado.
 	 */
+	@GetMapping(value = "/{actorId}")
 	public ResponseEntity<?> get(@PathVariable("actorId") String actorId){
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return ResponseEntity.status(HttpStatus.OK).body(actorBusiness.getActor(actorId));
 	}
 	
 	/**
@@ -50,10 +61,11 @@ public class ActorREST {
 	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
 	 *         informando que o rating para determinado ator nao foi encontrado
 	 */
-	@GetMapping(value = "/{actorId}/user-ratings/{ratingId}")
+
+	@GetMapping(value = "/{actorId}/user-ratings")
 	public ResponseEntity<?> getUserRating(@PathVariable("actorId") String actorId,
-			@PathVariable("ratingId") Long ratingId) {
-		return ResponseEntity.ok().build();
+			@RequestParam("idRatingParent") Long idRatingParent) {
+		return ResponseEntity.ok(ratingActorBusiness.getUserRatingForActor(actorId, idRatingParent));
 	}
 	
 	/**
@@ -73,9 +85,9 @@ public class ActorREST {
 	 *         foi encontrado
 	 */
 	@PostMapping(value = "/{actorId}/user-ratings")
-	public ResponseEntity<?> postUserRating(@PathVariable("movieId") String actorId, 
+	public ResponseEntity<?> postUserRating(@PathVariable("actorId") String actorId, 
 			@RequestBody ActorRatingVM rating) {
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(ratingActorBusiness.postRatingForActor(actorId, rating));
 	}
 	
 	/**
@@ -100,7 +112,7 @@ public class ActorREST {
 	@PutMapping(value = "/{actorId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> putUserRating(@PathVariable("actorId") String actorId, 
 			@PathVariable("ratingId") Long ratingId, @RequestBody RatingVM rating) {
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(ratingActorBusiness.putRatingForActor(ratingId, rating, actorId));
 	}
 	
 	/**
@@ -121,6 +133,7 @@ public class ActorREST {
 	@DeleteMapping(value = "/{actorId}/user-ratings/{ratingId}")
 	public ResponseEntity<?> deleteUserRating(@PathVariable("actorId") String actorId, 
 			@PathVariable("ratingId") Long ratingId) {
+		ratingActorBusiness.deleteRatingForActor(ratingId, actorId);
 		return ResponseEntity.ok().build();
 	}
 }
