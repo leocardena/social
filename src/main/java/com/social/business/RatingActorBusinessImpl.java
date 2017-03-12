@@ -1,12 +1,9 @@
 package com.social.business;
 
 import java.util.Optional;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.amazonaws.services.applicationdiscovery.model.ResourceNotFoundException;
 import com.social.business.interfaces.AccountBusiness;
 import com.social.business.interfaces.ActorBusiness;
 import com.social.business.interfaces.RatingActorBusiness;
@@ -15,6 +12,7 @@ import com.social.domain.Profile;
 import com.social.domain.Rating;
 import com.social.repository.RatingRepository;
 import com.social.web.rest.dto.UserRatingDTO;
+import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.response.PostResponseAPI;
 import com.social.web.rest.vm.ActorRatingVM;
 import com.social.web.rest.vm.RatingVM;

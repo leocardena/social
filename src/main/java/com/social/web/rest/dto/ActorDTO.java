@@ -58,7 +58,7 @@ public class ActorDTO {
 		this.birthday = birthday;
 	}
 	
-	public RatingDTO getRatingDTO() {
+	public RatingDTO getRating() {
 		return rating;
 	}
 	

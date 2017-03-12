@@ -1,12 +1,8 @@
 package com.social.business;
 
 import java.util.Optional;
-
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.amazonaws.services.cloudtrail.model.ResourceNotFoundException;
 import com.social.business.interfaces.ActorBusiness;
 import com.social.domain.Actor;
 import com.social.domain.CommentParent;
@@ -17,6 +13,7 @@ import com.social.repository.RatingParentRepository;
 import com.social.repository.RatingRepository;
 import com.social.web.rest.dto.ActorDTO;
 import com.social.web.rest.dto.RatingDTO;
+import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.vm.ActorRatingVM;
 
 @Service
@@ -64,22 +61,23 @@ public class ActorBusinessImpl implements ActorBusiness {
 		Actor actor = actorOptional.get();
 		ActorDTO actorDTO = new ActorDTO();
 		actorDTO.setId(actor.getId());
-		actorDTO.setBirthday(actor.getBirthday().toString(DateTimeFormat.forPattern("dd/MM/yyyy")));
 		actorDTO.setCountry(actor.getCountry());
 		actorDTO.setImdb(actor.getImdb());
 		actorDTO.setName(actor.getName());
 		actorDTO.setSlug(slug);
 		
 		RatingDTO ratingDTO = new RatingDTO();
-		ratingDTO.setIdRatingParent(actor.getRatingParent().getId() != null ? actor.getRatingParent().getId() : null);
 		
-		Optional<RatingDTO> ratingDTOOptional = ratingRepository
-				.averageAndVotesByIdRatingParent(ratingDTO.getIdRatingParent());
-		
-		if(ratingDTOOptional.isPresent()){
-			RatingDTO ratingDTOAux = ratingDTOOptional.get();
-			ratingDTO.setAverage(ratingDTOAux.getAverage());
-			ratingDTO.setVotes(ratingDTOAux.getVotes());
+		if (actor.getRatingParent() != null) {
+			ratingDTO.setIdRatingParent(actor.getRatingParent().getId());
+			Optional<RatingDTO> ratingDTOOptional = ratingRepository
+					.averageAndVotesByIdRatingParent(ratingDTO.getIdRatingParent());
+			
+			if(ratingDTOOptional.isPresent()){
+				RatingDTO ratingDTOAux = ratingDTOOptional.get();
+				ratingDTO.setAverage(ratingDTOAux.getAverage());
+				ratingDTO.setVotes(ratingDTOAux.getVotes());
+			}				
 		}
 		
 		actorDTO.setRating(ratingDTO);

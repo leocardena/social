@@ -29,15 +29,15 @@ public class MovieBusinessImpl implements MovieBusiness {
 	private RatingParentRepository ratingParentRepository;
 	@Autowired
 	private CommentParentRepository commentParentRepository;
-		
+
 	@Override
 	public MovieDTO getMovie(String id) {
-		
+
 		Optional<Movie> movieOptinal = findBySlug(id);
-		
-		if(!movieOptinal.isPresent()) 
+
+		if (!movieOptinal.isPresent())
 			throw new ResourceNotFoundException("Show nao encontrado");
-		
+
 		Movie movie = movieOptinal.get();
 		MovieDTO movieDTO = new MovieDTO();
 		movieDTO.setId(movie.getId());
@@ -46,21 +46,24 @@ public class MovieBusinessImpl implements MovieBusiness {
 		movieDTO.setSlug(movie.getSlug());
 		movieDTO.setTrailer(movie.getTrailer());
 		movieDTO.setHomePage(movie.getHomePage());
-		
+
 		RatingDTO ratingDTO = new RatingDTO();
-		ratingDTO.setIdRatingParent(movie.getRatingParent() != null ? movie.getRatingParent().getId() : null);
-		
-		Optional<RatingDTO> ratingDTOOptional = ratingRepository
-				.averageAndVotesByIdRatingParent(movie.getRatingParent().getId());
-		
-		if (ratingDTOOptional.isPresent()) {
-			RatingDTO ratingQueryDTOAux = ratingDTOOptional.get();
-			ratingDTO.setAverage(ratingQueryDTOAux.getAverage());
-			ratingDTO.setVotes(ratingQueryDTOAux.getVotes());
+
+		if (movie.getRatingParent() != null) {
+			ratingDTO.setIdRatingParent(movie.getRatingParent().getId());
+			Optional<RatingDTO> ratingDTOOptional = ratingRepository
+					.averageAndVotesByIdRatingParent(movie.getRatingParent().getId());
+
+			if (ratingDTOOptional.isPresent()) {
+				RatingDTO ratingQueryDTOAux = ratingDTOOptional.get();
+				ratingDTO.setAverage(ratingQueryDTOAux.getAverage());
+				ratingDTO.setVotes(ratingQueryDTOAux.getVotes());
+			}
+
 		}
-		
+
 		movieDTO.setRating(ratingDTO);
-		
+
 		return movieDTO;
 	}
 
@@ -78,7 +81,7 @@ public class MovieBusinessImpl implements MovieBusiness {
 		movie.setTrailer(titleRating.getTrailer());
 		movie.setCommentParent(commentParent);
 		movie.setRatingParent(ratingParent);
-		
+
 		return movieRepository.saveAndFlush(movie);
 	}
 
@@ -86,6 +89,5 @@ public class MovieBusinessImpl implements MovieBusiness {
 	public Optional<Movie> findBySlug(String slug) {
 		return movieRepository.findBySlug(slug);
 	}
-	
 
 }

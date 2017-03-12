@@ -8,18 +8,21 @@
 	
 	TitlePeopleController.$inject = ['personSummaryPrepService', 'personMoviesPrepService',
 	                                 'personShowsPrepService', '$stateParams', 'TmdbPersonService', 'TmdbMovieService',
-	                                 'TmdbShowService', '$state', '$window'];
+	                                 'TmdbShowService', '$state', '$window', 'DomainActorService'];
 	
 	/*@ngInject*/
 	function TitlePeopleController(personSummaryPrepService, personMoviesPrepService,
 			personShowsPrepService, $stateParams, TmdbPersonService, TmdbMovieService, TmdbShowService, $state,
-			$window) {
+			$window, DomainActorService) {
 		
 		var vm = this;
 		vm.people = personSummaryPrepService;
 		vm.people.actor = personShowsPrepService.cast.concat(personMoviesPrepService.cast);
 		vm.people.production =  personMoviesPrepService.crew.production.concat(personShowsPrepService.crew.production);
 		vm.imageNotAvailable = 'content/images/search/phosto-not-available.jpg';
+		vm.people.userRating = { note : 0, id: 0 };
+		vm.peopleDoesntExist = false;
+    	vm.isEvaluating = false;
 		var startActor = 0;
 		var startProduction = 0;
 		var endActor = vm.people.actor.length >= 8 ? 8 : vm.people.actor.length;
@@ -34,8 +37,86 @@
 		vm.loadMoreProduction = _loadMoreProduction;
 		vm.goToMovie = _goToMovie;
 		vm.goToShow = _goToShow;
+		vm.evaluate = _evaluate;
+		vm.deleteRating = _deleteRating;
 		
 		_init();
+		
+        function _evaluate() {
+        	if (vm.people.userRating.id !== 0) {
+        		_editRating();
+        		return;
+        	};
+        	       	
+        	vm.isEvaluating = true;
+        	DomainActorService.postUserRating({
+        		actorId : $stateParams.traktSlug
+	     	}, {
+     			imdb: vm.people.ids.imdb,
+     			name: vm.people.name,
+     		    country: vm.people.country ? vm.people.country : 'UNKNOWN',
+     		    rating: {
+     		    	note: vm.people.userRating.note
+     		    }
+     		}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadActorDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+        function _editRating() {
+        	vm.isEvaluating = true;
+        	DomainActorService.putUserRating({
+        		actorId : $stateParams.traktSlug,
+        		userRatingId: vm.people.userRating.id
+	     	}, {note: vm.people.userRating.note}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	        	_loadActorDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+        function _deleteRating() {
+        	if (vm.people.userRating.note == 0) return;
+        	
+        	vm.isEvaluating = true;
+        	DomainActorService.deleteUserRating({
+        		actorId : $stateParams.traktSlug,
+	     		userRatingId : vm.people.userRating.id
+	     	}).$promise.then(function (data) {
+	        	vm.isEvaluating = false;
+	    		vm.people.userRating = { note : 0, id: 0 };
+	    		_loadActorDetails();
+	     	}).catch(function (err) {
+	        	vm.isEvaluating = false;
+	     	});
+        }
+        
+    	function _loadActorDetails() {
+    		DomainActorService.getActor({
+    			actorId : $stateParams.traktSlug
+	     	}).$promise.then(function (data) {
+	     		vm.people.domain = data;
+	     		vm.peopleDoesntExist = false;
+	     		 _loadUserRating(vm.people.domain.rating.idRatingParent);
+	     	}).catch(function (err) {
+	     		vm.peopleDoesntExist = true;
+	     	});
+    	}
+    	
+    	function _loadUserRating(idRatingParent) {
+    		DomainActorService.getUserRating({
+    			actorId : $stateParams.traktSlug,
+	     		idRatingParent: idRatingParent
+	     	}).$promise.then(function (data) {
+	     		vm.people.userRating = data;
+	     	}).catch(function (err) {
+	    		vm.people.userRating = { note : 0, id: 0 };
+	     	});
+    	}
 		
 		function _init() {
 
@@ -43,6 +124,7 @@
 			_calculateAge(new Date(vm.people.birthday));
 			_loadMoviesAndShowsActorImages();
 			_loadMoviesAndShowProductionImages();
+			_loadActorDetails();
 			$window.document.title = vm.people.name;
 			
 			function _checkPeopleImages() {
