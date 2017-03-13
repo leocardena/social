@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class EpisodeRatingVM {
 	
 	private String name;
-	private Long number;
 	private RatingVM rating;
 	
 	public String getName() {
@@ -22,14 +21,6 @@ public class EpisodeRatingVM {
 
 	public void setRating(RatingVM rating) {
 		this.rating = rating;
-	}
-	
-	public Long getNumber() {
-		return number;
-	}
-
-	public void setNumber(Long number) {
-		this.number = number;
 	}
 	
 	@Override
