@@ -15,5 +15,6 @@ public interface APIEndpoint {
 	public final String AVATAR = "/api/rest/avatars";
 	public final String LISTS = "/api/rest/lists";
 	public final String ACTOR = "/api/rest/actors";	
+	public final String PROFILE = "/api/rest/profiles";
 	
 }
