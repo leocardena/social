@@ -15,7 +15,6 @@ import com.social.repository.RatingRepository;
 import com.social.repository.UserRepository;
 import com.social.util.Compatibility;
 import com.social.web.rest.dto.ProfileDTO;
-import com.social.web.rest.dto.RatingDTO;
 
 @Service
 public class ProfileBusinessImpl implements ProfileBusiness {
