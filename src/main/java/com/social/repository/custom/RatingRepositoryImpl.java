@@ -60,4 +60,18 @@ public class RatingRepositoryImpl implements RatingRepositoryCustom {
 			.findFirst();
 	}
 
+	@Override
+	public Long compatibilityBetweenFriends(Long profileId, Long friendId) {
+		QRating rating = QRating.rating;
+		
+		return new JPAQueryFactory(em)
+			.select(rating.idRatingParent.count())
+			.from(rating)
+			.where(rating.profile.eq(profileId).or(rating.profile.eq(friendId)))
+			.where(rating.note.gt(4))
+			.groupBy(rating.idRatingParent)
+			.having(rating.idRatingParent.count().gt(1))
+			.fetchCount();
+	}
+	
 }

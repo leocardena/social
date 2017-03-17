@@ -1,5 +1,7 @@
 package com.social.web.rest.dto;
 
+import com.social.util.Compatibility;
+
 public class ProfileDTO {
 
 	private Long id;
@@ -7,6 +9,7 @@ public class ProfileDTO {
 	private String name;
 	private String genre;
 	private String avatar;
+	private String compatibility;
 
 	public Long getId() {
 		return id;
@@ -37,6 +40,12 @@ public class ProfileDTO {
 	}
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+	public String getCompatibility() {
+		return compatibility;
+	}
+	public void setCompatibility(String compatibility) {
+		this.compatibility = compatibility;
 	}
 	
 }
