@@ -1,7 +1,5 @@
 package com.social.web.rest.dto;
 
-import com.social.util.Compatibility;
-
 public class ProfileDTO {
 
 	private Long id;

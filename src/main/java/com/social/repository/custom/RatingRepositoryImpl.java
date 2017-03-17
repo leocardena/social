@@ -5,8 +5,6 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.querydsl.core.Tuple;
-import com.querydsl.core.alias.Alias;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.social.domain.QRating;
