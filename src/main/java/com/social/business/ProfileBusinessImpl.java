@@ -46,9 +46,13 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 		profileDTO.setAvatar(profileFriend.getAvatar());
 		profileDTO.setCountry(profileFriend.getCountry());
 		
+		// TODO Verificar se o cara esta logado antes para trazer estas informações.
 		Profile profile = accountBusiness.findProfileByLoggedUser();
-		Long value = ratingRepository.compatibilityBetweenFriends(profile.getId(), profileFriend.getId());
-		profileDTO.setCompatibility(Compatibility.getCompatibility(Long.valueOf(value).intValue()));
+		if(profile != null){
+			Long value = ratingRepository.compatibilityBetweenFriends(profile.getId(), profileFriend.getId());
+			profileDTO.setCompatibility(
+						Compatibility.getCompatibility(Long.valueOf(value).intValue()));
+		}			
 		
 		return profileDTO;
 	}

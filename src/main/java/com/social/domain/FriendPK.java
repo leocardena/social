@@ -12,11 +12,11 @@ public class FriendPK implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 //	@JoinColumn(name="idprofile")
-	private Profile profile;
+	private Profile profile; //logado
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 //	@JoinColumn(name="idFriend")
-	private Profile friend;
+	private Profile friend; //getProfile
 	
 	public Profile getProfile() {
 		return profile;

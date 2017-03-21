@@ -1,34 +1,25 @@
 package com.social.util;
 
-public class Compatibility {
+import org.apache.commons.lang3.StringUtils;
 
-	public static String getCompatibility(int value){	
+public enum Compatibility {
 		
-		String compatibility;
+	NENHUMA(0),BAIXA(3),BOA(6),OTIMA(9),SUPER(12),HEROICA(13);
 		
-		switch (value) {
-		case 0:
-			compatibility = "Nenhuma";
-			break;
-		case 1: case 2: case 3:
-			compatibility = "Baixa";
-			break;
-		case 4: case 5: case 6:
-			compatibility = "Boa";
-			break;
-		case 7: case 8: case 9:
-			compatibility = "Ótima";
-			break;
-		case 10: case 11: case 12:
-			compatibility = "Super";
-			break;
-		default:
-			compatibility = "Heróica";
-			break;
+	private int value;
+	
+	private Compatibility(int value) {
+		this.value = value;
+	}
+
+	public static String getCompatibility(int note){
+		Compatibility encontrada = NENHUMA;
+		for(Compatibility c : values()){
+			if(c.value <= note){
+				encontrada = c;
+			}
 		}
-		
-		return compatibility;
-		
+		return StringUtils.capitalize(encontrada.name().toLowerCase());
 	}
 	
 }

@@ -6,11 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.web.rest.util.APIEndpoint;
+import com.social.web.rest.vm.FriendVM;
 
 /**
  * 
@@ -47,9 +48,8 @@ public class FriendREST {
 	 *         codigo 404 informando que o perfil com o id informado nao
 	 *         foi encontrado
 	 */
-	@PostMapping(value="/{idProfile}")
-	public ResponseEntity<?> postFriend(@PathVariable("idProfile") Long idProfile, 
-			@RequestParam("idRatingParent") Long idRatingParent){
+	@PostMapping
+	public ResponseEntity<?> postFriend(@RequestBody FriendVM friendVM){
 		return ResponseEntity.ok(null);
 	}
 	
@@ -82,5 +82,7 @@ public class FriendREST {
 	public ResponseEntity<?> deleteUserRating(@PathVariable("idFriend") String idFriend) {
 		return ResponseEntity.ok().build();
 	}
+	
+	
 	
 }
