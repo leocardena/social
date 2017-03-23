@@ -13,6 +13,7 @@ import com.social.domain.User;
 import com.social.repository.ProfileRepository;
 import com.social.repository.RatingRepository;
 import com.social.repository.UserRepository;
+import com.social.storage.AvatarStorage;
 import com.social.util.Compatibility;
 import com.social.web.rest.dto.ProfileDTO;
 
@@ -31,6 +32,9 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 	@Autowired
 	private AccountBusiness accountBusiness;
 	
+	@Autowired
+	private AvatarStorage avatarStorage;
+	
 	@Override
 	public ProfileDTO getProfile(String username) {
 
@@ -43,16 +47,13 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 		profileDTO.setId(profileFriend.getId());
 		profileDTO.setName(profileFriend.getName());
 		profileDTO.setGenre(profileFriend.getGenre());
-		profileDTO.setAvatar(profileFriend.getAvatar());
+		profileDTO.setAvatar(avatarStorage.getUrl(profileFriend.getAvatar()));
 		profileDTO.setCountry(profileFriend.getCountry());
 		
-		// TODO Verificar se o cara esta logado antes para trazer estas informações.
 		Profile profile = accountBusiness.findProfileByLoggedUser();
-		if(profile != null){
-			Long value = ratingRepository.compatibilityBetweenFriends(profile.getId(), profileFriend.getId());
-			profileDTO.setCompatibility(
-						Compatibility.getCompatibility(Long.valueOf(value).intValue()));
-		}			
+		Long value = ratingRepository.compatibilityBetweenFriends(profile.getId(), profileFriend.getId());
+		profileDTO.setCompatibility(
+					Compatibility.getCompatibility(Long.valueOf(value).intValue()));
 		
 		return profileDTO;
 	}
