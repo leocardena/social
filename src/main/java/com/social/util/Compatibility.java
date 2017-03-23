@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum Compatibility {
 		
-	NENHUMA(0),BAIXA(3),BOA(6),OTIMA(9),SUPER(12),HEROICA(13);
+	NENHUMA(0),BAIXA(1),BOA(4),OTIMA(7),SUPER(10),HEROICA(13);
 		
 	private int value;
 	
