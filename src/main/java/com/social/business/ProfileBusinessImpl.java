@@ -47,7 +47,7 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 		profileDTO.setId(profileFriend.getId());
 		profileDTO.setName(profileFriend.getName());
 		profileDTO.setGenre(profileFriend.getGenre());
-		profileDTO.setAvatar(avatarStorage.getUrl(profileFriend.getAvatar()));
+//		profileDTO.setAvatar(avatarStorage.getUrl(profileFriend.getAvatar()));
 		profileDTO.setCountry(profileFriend.getCountry());
 		
 		Profile profile = accountBusiness.findProfileByLoggedUser();

@@ -8,7 +8,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.social.util.FriendStatus;
 
@@ -43,23 +42,23 @@ public class Friend {
 		this.id = id;
 	}
 	
-	@Transient
-	public Profile getProfile() {
-		return getId().getProfile();
-	}
-	
-	public void setProfile(Profile profile) {
-		getId().setProfile(profile);
-	}
-	
-	@Transient
-	public Profile getFriend() {
-		return getId().getFriend();
-	}
-	
-	public void setFriend(Profile friend) {
-		getId().setFriend(friend);
-	}
+//	@Transient
+//	public Profile getProfile() {
+//		return getId().getProfile();
+//	}
+//	
+//	public void setProfile(Profile profile) {
+//		getId().setProfile(profile);
+//	}
+//	
+//	@Transient
+//	public Profile getFriend() {
+//		return getId().getFriend();
+//	}
+//	
+//	public void setFriend(Profile friend) {
+//		getId().setFriend(friend);
+//	}
 
 	@Override
 	public String toString() {
