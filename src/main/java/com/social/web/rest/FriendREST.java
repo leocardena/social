@@ -1,5 +1,6 @@
 package com.social.web.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.social.business.interfaces.FriendBusiness;
 import com.social.web.rest.util.APIEndpoint;
 import com.social.web.rest.vm.FriendVM;
 
@@ -24,6 +26,9 @@ import com.social.web.rest.vm.FriendVM;
 @RequestMapping(APIEndpoint.FRIEND)
 public class FriendREST {
 
+	@Autowired
+	private FriendBusiness friendBusiness;
+	
 	/**
 	 * Retorna as informacoes de um profile em especifico do
 	 * 
@@ -50,7 +55,7 @@ public class FriendREST {
 	 */
 	@PostMapping
 	public ResponseEntity<?> postFriend(@RequestBody FriendVM friendVM){
-		return ResponseEntity.ok(null);
+		return ResponseEntity.ok(friendBusiness.postFriend(friendVM));
 	}
 	
 	/**
