@@ -42,8 +42,6 @@ public class FriendBusinessImpl implements FriendBusiness {
 		FriendPK friendPK = new FriendPK(profileLogado, profileFriend);
 		Friend friend = new Friend();
 		friend.setId(friendPK);
-		friend.setFriend(profileFriend);
-		friend.setProfile(profileLogado);
 		friend.setStatus(FriendStatus.WAITING);
 		
 		return friendRepository.saveAndFlush(friend);
