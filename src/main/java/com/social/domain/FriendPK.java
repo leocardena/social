@@ -18,6 +18,14 @@ public class FriendPK implements Serializable {
 //	@JoinColumn(name="idFriend")
 	private Profile friend;
 	
+	public FriendPK() {
+	}
+	
+	public FriendPK(Profile profile, Profile friend) {
+		this.profile = profile;
+		this.friend = friend;
+	}
+	
 	public Profile getProfile() {
 		return profile;
 	}

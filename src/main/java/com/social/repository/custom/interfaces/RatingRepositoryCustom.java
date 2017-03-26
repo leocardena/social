@@ -9,5 +9,6 @@ public interface RatingRepositoryCustom {
 	Optional<Rating> findRatingByRatingParentAndProfile(Long idProfile, Long idRatingParent);
 	Optional<RatingDTO> averageAndVotesByIdRatingParent(Long idRatingParent);
 	Optional<Rating> findUserRating(Long profileId, Long idRatingParent, String slug);
+	Long compatibilityBetweenFriends(Long profileId, Long friendId);
 	
 }

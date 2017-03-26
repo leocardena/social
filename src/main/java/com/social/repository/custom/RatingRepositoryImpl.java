@@ -1,8 +1,10 @@
 package com.social.repository.custom;
 
+import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.social.domain.QRating;
@@ -60,4 +62,19 @@ public class RatingRepositoryImpl implements RatingRepositoryCustom {
 			.findFirst();
 	}
 
+	@Override
+	public Long compatibilityBetweenFriends(Long profileId, Long friendId) {
+		QRating rating = QRating.rating;
+		
+		List<Long> listResult = new JPAQueryFactory(em)
+					.select(rating.idRatingParent.count())
+					.from(rating)
+					.where(rating.profile.eq(profileId).or(rating.profile.eq(friendId)).and(rating.note.gt(4)))
+					.groupBy(rating.idRatingParent)
+					.having(rating.idRatingParent.count().between(2, 2))
+					.fetch();
+		
+		return listResult.stream().count();
+	}
+	
 }
