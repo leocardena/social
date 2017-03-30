@@ -69,7 +69,7 @@ public class FriendREST {
 	 *         o id informado nao foi encontrado
 	 */
 	@PutMapping(value = "/{idFriend}")
-	public ResponseEntity<?> putFriend(@PathVariable("idFriend") Long idFriend) {
+	public ResponseEntity<?> putFriend(@RequestBody String status) {
 		return ResponseEntity.ok(null);
 	}
 	
@@ -77,14 +77,15 @@ public class FriendREST {
 	 * Deleta o rating dado pelo usuario logado a season em questão
 	 * 
 	 * @param idFriend
-	 *            O id do friend no qual será deletado
+	 *            O id do Friend no qual será deletado
 	 *
 	 * @return O objeto ResponseEntity contendo o friend inserido, ou um objeto
 	 *         do tipo ErrorDetailDTO com o codigo 404 informando que o friend com
 	 *         o id informado nao foi encontrado
 	 */
 	@DeleteMapping(value = "/{idFriend}")
-	public ResponseEntity<?> deleteUserRating(@PathVariable("idFriend") String idFriend) {
+	public ResponseEntity<?> delete(@PathVariable("idFriend") Long idFriend) {
+		friendBusiness.deleteFriend(idFriend);
 		return ResponseEntity.ok().build();
 	}
 	
