@@ -10,7 +10,7 @@ import com.social.domain.Profile;
 import com.social.domain.QProfile;
 import com.social.repository.custom.interfaces.ProfileRepositoryCustom;
 
-public class ProfileRepository implements ProfileRepositoryCustom {
+public class ProfileRepositoryImpl implements ProfileRepositoryCustom {
 
 	@PersistenceContext
     private EntityManager em;

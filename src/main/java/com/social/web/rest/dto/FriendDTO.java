@@ -1,23 +1,23 @@
 package com.social.web.rest.dto;
 
-import com.social.domain.FriendPK;
+import com.social.domain.Friend;
 
 public class FriendDTO {
 
-	private FriendPK id;
 	private String status;
-	
-	public FriendPK getId() {
-		return id;
+
+	public static FriendDTO build(Friend friend) {
+		FriendDTO friendDTO = new FriendDTO();
+		friendDTO.setStatus(friend.getStatus().toString());
+		return friendDTO;
 	}
-	public void setId(FriendPK id) {
-		this.id = id;
-	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 }

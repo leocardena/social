@@ -1,23 +1,22 @@
 package com.social.business.interfaces;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-
-import com.social.domain.Friend;
 import com.social.web.rest.dto.FriendDTO;
+import com.social.web.rest.vm.FriendStatusVM;
 import com.social.web.rest.vm.FriendVM;
 
 public interface FriendBusiness {
 
 	@PreAuthorize("hasRole('ROLE_USER')")
-	Friend postFriend(FriendVM friendVM);
+	FriendDTO postFriend(FriendVM friendVM);
 
 	@PreAuthorize("hasRole('ROLE_USER')")
-	FriendDTO getFriend(Long idProfile);
+	FriendDTO getFriend(Long idFriend);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	void deleteFriend(Long idProfile);
+	void deleteFriend(Long idFriend);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	FriendDTO putFriend(String status);
+	FriendDTO patchFriend(FriendStatusVM status, Long idFriend);
 	
 }

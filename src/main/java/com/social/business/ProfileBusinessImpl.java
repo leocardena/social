@@ -3,10 +3,8 @@ package com.social.business;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.amazonaws.services.rds.model.ResourceNotFoundException;
 import com.social.business.interfaces.AccountBusiness;
 import com.social.business.interfaces.ProfileBusiness;
@@ -15,7 +13,8 @@ import com.social.domain.User;
 import com.social.repository.ProfileRepository;
 import com.social.repository.RatingRepository;
 import com.social.repository.UserRepository;
-import com.social.repository.custom.interfaces.ProfileRepositoryCustom;
+import com.social.security.util.SecurityUtils;
+import com.social.storage.AvatarStorage;
 import com.social.util.Compatibility;
 import com.social.web.rest.dto.ProfileDTO;
 
@@ -34,7 +33,8 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 	@Autowired
 	private AccountBusiness accountBusiness;
 	
-	private ProfileRepositoryCustom profileRepositoryCustom;
+	@Autowired
+	private AvatarStorage avatarStorage;
 	
 	@Override
 	public ProfileDTO getProfile(String username) {
@@ -48,11 +48,14 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 		profileDTO.setId(profileFriend.getId());
 		profileDTO.setName(profileFriend.getName());
 		profileDTO.setGenre(profileFriend.getGenre());
-//		profileDTO.setAvatar(avatarStorage.getUrl(profileFriend.getAvatar()));
 		profileDTO.setCountry(profileFriend.getCountry());
+
+		if (profileFriend.getAvatar() != null) {
+			profileDTO.setAvatar(avatarStorage.getUrl(profileFriend.getAvatar()));
+		}
 		
-		Profile profile = accountBusiness.findProfileByLoggedUser();
-		if(profile != null){
+		if(SecurityUtils.getCurrentUserLogin() != null){
+			Profile profile = accountBusiness.findProfileByLoggedUser();
 			Long value = ratingRepository.compatibilityBetweenFriends(profile.getId(), profileFriend.getId());
 			profileDTO.setCompatibility(
 						Compatibility.getCompatibility(Long.valueOf(value).intValue()));
@@ -74,7 +77,7 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 	@Override
 	public List<ProfileDTO> getLikeProfile(String username) {
 
-		List<Profile> listProfile = profileRepositoryCustom.getProfileLikeUsername(username);
+		List<Profile> listProfile = profileRepository.getProfileLikeUsername(username);
 		if(listProfile == null)
 			throw new ResourceNotFoundException("Nenhum Perfil encontrado");
 		
