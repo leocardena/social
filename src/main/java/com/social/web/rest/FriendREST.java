@@ -55,7 +55,7 @@ public class FriendREST {
 	 */
 	@GetMapping
 	public ResponseEntity<?> getAll(Pageable pageable) {
-		return ResponseEntity.ok(null);
+		return ResponseEntity.ok(friendBusiness.getFriends(pageable));
 	}
 
 	/**

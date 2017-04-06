@@ -8,7 +8,7 @@ import com.social.web.rest.response.PageableResponse;
 
 public interface ProfileBusiness {
 
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("permitAll")
 	ProfileDTO getProfile(String username);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")

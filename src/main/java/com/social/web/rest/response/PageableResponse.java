@@ -1,7 +1,6 @@
 package com.social.web.rest.response;
 
 import java.util.List;
-import org.springframework.data.domain.Page;
 
 public class PageableResponse<T> {
 
