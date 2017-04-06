@@ -1,11 +1,10 @@
 package com.social.business.interfaces;
 
-import java.util.List;
-
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
-
 import com.social.domain.Profile;
 import com.social.web.rest.dto.ProfileDTO;
+import com.social.web.rest.response.PageableResponse;
 
 public interface ProfileBusiness {
 
@@ -16,5 +15,5 @@ public interface ProfileBusiness {
 	Profile getProfile(Long idProfile);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	List<ProfileDTO> getLikeProfile(String username);
+	PageableResponse<ProfileDTO> getLikeProfile(String username, Pageable pageable);
 }

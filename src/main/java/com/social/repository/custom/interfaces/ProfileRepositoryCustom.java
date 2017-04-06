@@ -1,11 +1,11 @@
 package com.social.repository.custom.interfaces;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.social.domain.Profile;
 
 public interface ProfileRepositoryCustom {
 
-	List<Profile> getProfileLikeUsername(String username);
+	 Page<Profile> getProfileLikeUsername(String username, Pageable pageable);
 	
 }

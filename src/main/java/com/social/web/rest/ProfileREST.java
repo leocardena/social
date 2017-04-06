@@ -1,6 +1,8 @@
 package com.social.web.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,8 +54,8 @@ public class ProfileREST {
 	 *         informando que aquele perfil nao foi encontrado
 	 */
 	@GetMapping
-	public ResponseEntity<?> getProfile(@RequestParam("username") String username){
-		return ResponseEntity.status(HttpStatus.OK).body(profileBusiness.getLikeProfile(username));
+	public ResponseEntity<?> getProfile(@RequestParam("username") String username, Pageable pageable){
+		return ResponseEntity.status(HttpStatus.OK).body(profileBusiness.getLikeProfile(username, pageable));
 	}
 	
 }
