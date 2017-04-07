@@ -110,10 +110,17 @@ public class FriendBusinessImpl implements FriendBusiness {
 	}
 
 	@Override
-	public PageableResponse<ProfileDTO> getFriends(Pageable pageable) {
+	public PageableResponse<ProfileDTO> getFriends(Pageable pageable, String status) {
 		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		
+		FriendStatus friendStatus;
+		if (status.equalsIgnoreCase(FriendStatus.ACCEPT.toString())) {
+			friendStatus = FriendStatus.ACCEPT;
+		} else {
+			friendStatus = FriendStatus.WAITING;
+		}
 
-		Page<Friend> friendsPageable = friendRepository.findAllFriends(FriendStatus.ACCEPT, profileLogado.getId(),
+		Page<Friend> friendsPageable = friendRepository.findAllFriends(friendStatus, profileLogado.getId(),
 				pageable);
 		List<ProfileDTO> listFriendsDTO = new ArrayList<>();
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.social.business.interfaces.FriendBusiness;
 import com.social.web.rest.util.APIEndpoint;
@@ -54,8 +55,8 @@ public class FriendREST {
 	 *         informando que aquele perfil nao foi encontrado
 	 */
 	@GetMapping
-	public ResponseEntity<?> getAll(Pageable pageable) {
-		return ResponseEntity.ok(friendBusiness.getFriends(pageable));
+	public ResponseEntity<?> getAll(Pageable pageable, @RequestParam("status") String status) {
+		return ResponseEntity.ok(friendBusiness.getFriends(pageable, status));
 	}
 
 	/**

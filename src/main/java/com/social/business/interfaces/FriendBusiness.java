@@ -23,6 +23,6 @@ public interface FriendBusiness {
 	FriendDTO patchFriend(FriendStatusVM status, Long idFriend);
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
-	PageableResponse<ProfileDTO> getFriends(Pageable pageable);
+	PageableResponse<ProfileDTO> getFriends(Pageable pageable, String status);
 	
 }
