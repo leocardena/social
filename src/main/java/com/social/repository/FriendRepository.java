@@ -14,13 +14,17 @@ import com.social.util.FriendStatus;
 
 public interface FriendRepository extends JpaRepository<Friend, FriendPK> {
 
-	@Query(value = "select f from Friend f where (f.id.profile.id = :friendId and f.id.friend.id = :profileId)"
-			+ " or (f.id.profile.id = :profileId and f.id.friend.id = :friendId)")
+	@Query(value = "select f from Friend f where (f.id.profile = :friendId and f.id.friend = :profileId)"
+			+ " or (f.id.profile = :profileId and f.id.friend = :friendId)")
 	Optional<Friend> findFriendsById(@Param("profileId")Long profileId,@Param("friendId") Long friendId);
 	
 	@Query(value = "select f from Friend f where f.status"
-			+ " = :status and (f.id.profile.id = :profileId or f.id.friend.id = :profileId)")
+			+ " = :status and (f.id.profile = :profileId or f.id.friend = :profileId)")
 	Page<Friend> findAllFriends(@Param(value = "status") FriendStatus status, @Param(value = "profileId") Long profileId,
 			Pageable pageable);
+	
+	@Query("select count(f.status) from Friend f where f.status = :status and "
+			+ "(f.id.profile = :profileId or f.id.friend = :profileId)")
+	Long countFriends(@Param(value = "status") FriendStatus status, @Param(value = "profileId") Long profileId);
 	
 }

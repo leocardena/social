@@ -1,44 +1,43 @@
 package com.social.domain;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
 
 @Embeddable
 public class FriendPK implements Serializable {
-	
-	private static final long serialVersionUID = 1086083733282299984L;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="idprofile")
-	private Profile profile;
+	private static final long serialVersionUID = 1634956311600917256L;
+
+//	@ManyToOne(cascade = CascadeType.ALL)
+	@Column(name="idprofile")
+	private Long profile;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="idFriend")
-	private Profile friend;
+//	@ManyToOne(cascade = CascadeType.ALL)
+	@Column(name="idfriend")
+	private Long friend;
 	
 	public FriendPK() {
 	}
 	
-	public FriendPK(Profile profile, Profile friend) {
+	public FriendPK(Long profile, Long friend) {
 		this.profile = profile;
 		this.friend = friend;
 	}
 	
-	public Profile getProfile() {
+	public Long getProfile() {
 		return profile;
 	}
 
-	public void setProfile(Profile profile) {
+	public void setProfile(Long profile) {
 		this.profile = profile;
 	}
 
-	public Profile getFriend() {
+	public Long getFriend() {
 		return friend;
 	}
 
-	public void setFriend(Profile friend) {
+	public void setFriend(Long friend) {
 		this.friend = friend;
 	}
 
@@ -72,5 +71,9 @@ public class FriendPK implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
+
+
 	
 }

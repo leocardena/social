@@ -25,7 +25,7 @@ public class FriendRepositoryImpl implements FriendRepositoryCustom {
 		
 		JPAQuery<Friend> jpaQuery = new JPAQuery<Profile>(em).select(friend)
 				.from(friend)
-				.where(friend.id.profile.id.eq(profileId).or(friend.id.friend.id.eq(profileId)))
+				.where(friend.id.profile.eq(profileId).or(friend.id.friend.eq(profileId)))
 				.where(friend.status.eq(status));
 		
 		jpaQuery.offset(pageable.getOffset());

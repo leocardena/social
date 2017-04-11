@@ -1,23 +1,15 @@
 package com.social.domain;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import com.social.util.FriendStatus;
 
 @Entity
 @Table(name = "friend")
-@AssociationOverrides({
-    @AssociationOverride(name = "id.profile",
-        joinColumns = @JoinColumn(name = "idprofile")),
-    @AssociationOverride(name = "id.friend",
-        joinColumns = @JoinColumn(name = "idfriend")) })
 public class Friend {
 	
 	@EmbeddedId

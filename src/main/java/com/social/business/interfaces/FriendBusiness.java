@@ -25,4 +25,7 @@ public interface FriendBusiness {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	PageableResponse<ProfileDTO> getFriends(Pageable pageable, String status);
 	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	Long getFriendsCount(String status);
+	
 }

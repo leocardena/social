@@ -15,7 +15,6 @@ import com.social.domain.Friend;
 import com.social.domain.FriendPK;
 import com.social.domain.Profile;
 import com.social.repository.FriendRepository;
-import com.social.repository.ProfileRepository;
 import com.social.repository.RatingRepository;
 import com.social.storage.AvatarStorage;
 import com.social.util.Compatibility;
@@ -39,9 +38,6 @@ public class FriendBusinessImpl implements FriendBusiness {
 	private ProfileBusiness profileBusiness;
 
 	@Autowired
-	private ProfileRepository profileRepository;
-
-	@Autowired
 	private AvatarStorage avatarStorage;
 	
 	@Autowired
@@ -49,15 +45,12 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 	@Override
 	public FriendDTO postFriend(FriendVM friendVM) {
-
-		Optional<Profile> friendProfile = profileRepository.findOneById(friendVM.getIdFriend());
-
-		if (!friendProfile.isPresent())
-			throw new ResourceNotFoundException("Amigo não encontrado");
+		
+		Profile friendProfile = profileBusiness.getProfile(friendVM.getIdFriend());
 
 		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
 
-		FriendPK friendPK = new FriendPK(profileLogado, friendProfile.get());
+		FriendPK friendPK = new FriendPK(profileLogado.getId(), friendProfile.getId());
 		Friend friend = new Friend();
 		friend.setId(friendPK);
 		friend.setStatus(FriendStatus.WAITING);
@@ -84,7 +77,7 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 		Profile friendSearch = profileBusiness.getProfile(idFriend);
 		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
-		FriendPK friendPK = new FriendPK(profileLogado, friendSearch);
+		FriendPK friendPK = new FriendPK(profileLogado.getId(), friendSearch.getId());
 
 		friendRepository.delete(friendPK);
 
@@ -127,10 +120,10 @@ public class FriendBusinessImpl implements FriendBusiness {
 		friendsPageable.getContent().forEach(f -> {
 			Profile friendProfile;
 
-			if (f.getId().getFriend().getId() != profileLogado.getId()) {
-				friendProfile = f.getId().getFriend();
+			if (f.getId().getFriend() != profileLogado.getId()) {
+				friendProfile = profileBusiness.getProfile(f.getId().getFriend());
 			} else {
-				friendProfile = f.getId().getProfile();
+				friendProfile = profileBusiness.getProfile(f.getId().getProfile());
 			}
 
 			ProfileDTO profileDTO = new ProfileDTO();
@@ -159,6 +152,18 @@ public class FriendBusinessImpl implements FriendBusiness {
 		pageableResponse.setSize(friendsPageable.getSize());
 
 		return pageableResponse;
+	}
+
+	@Override
+	public Long getFriendsCount(String status) {
+		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		FriendStatus friendStatus;
+		if (status.equalsIgnoreCase(FriendStatus.ACCEPT.toString())) {
+			friendStatus = FriendStatus.ACCEPT;
+		} else {
+			friendStatus = FriendStatus.WAITING;
+		}
+		return friendRepository.countFriends(friendStatus, profileLogado.getId());
 	}
 
 }

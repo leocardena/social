@@ -1,0 +1,21 @@
+<uib-tabset active="activeJustified" justified="true"> <uib-tab
+	index="0" heading="{{vm.myFriendsQtd}}">
+<div ng-repeat="myFriend in vm.myFriends">
+	nome: {{myFriend.name}} <br> usuario: {{myFriend.username}}
+</div>
+<ul uib-pagination total-items="vm.myFriendsTotalItens"
+	ng-model="vm.myFriendsCurrentPage" items-per-page="vm.myFriendsItensPerPage"
+	class="pagination-sm" boundary-links="true"
+	num-pages="vm.myFriendsTotalPages"
+	ng-change="vm.pageMyFriendsChanged()"></ul>
+</uib-tab> <uib-tab index="1" heading="{{vm.waitingFriendsQtd}}">
+<div ng-repeat="watingFriend in vm.waitingFriends">
+	nome: {{watingFriend.name}} <br> usuario: {{
+	watingFriend.username}}
+</div>
+<ul uib-pagination total-items="vm.waitingFriendsTotalItens"
+	ng-model="vm.waitingFriendsCurrentPage"
+	items-per-page="vm.waitingFriendsItensPerPage" class="pagination-sm"
+	boundary-links="true" num-pages="vm.waitingFriendsTotalPages"
+	ng-change="vm.pageWatingFriendsChanged()"></ul>
+</uib-tab> </uib-tabset>

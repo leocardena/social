@@ -1,5 +1,8 @@
 package com.social.web.rest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +60,21 @@ public class FriendREST {
 	@GetMapping
 	public ResponseEntity<?> getAll(Pageable pageable, @RequestParam("status") String status) {
 		return ResponseEntity.ok(friendBusiness.getFriends(pageable, status));
+	}
+	
+	/**
+	 * Retorna as informacoes de um profile em especifico do
+	 * 
+	 * 
+	 * @return O objeto ResponseEntity contendo o perfil pesquisado caso seja
+	 *         encontrado ou um objeto do tipo ErrorDetailDTO com o codigo 404
+	 *         informando que aquele perfil nao foi encontrado
+	 */
+	@GetMapping(value = "/total")
+	public ResponseEntity<?> getAll(@RequestParam("status") String status) {
+		Map<String, Long> resp = new HashMap<>();
+		resp.put("total", friendBusiness.getFriendsCount(status));
+		return ResponseEntity.ok(resp);
 	}
 
 	/**

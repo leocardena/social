@@ -11,7 +11,8 @@
 				avatar : "/api/rest/avatars",
 				lists : "/api/rest/lists",
 				show: "/api/rest/shows",
-				actor: "/api/rest/actors"
+				actor: "/api/rest/actors",
+				friend: "/api/rest/friends"
 		   });
 	
 })();
