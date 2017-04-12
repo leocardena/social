@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.amazonaws.services.rds.model.ResourceNotFoundException;
 import com.social.business.interfaces.AccountBusiness;
 import com.social.business.interfaces.FriendBusiness;
 import com.social.business.interfaces.ProfileBusiness;
@@ -21,6 +20,8 @@ import com.social.util.Compatibility;
 import com.social.util.FriendStatus;
 import com.social.web.rest.dto.FriendDTO;
 import com.social.web.rest.dto.ProfileDTO;
+import com.social.web.rest.exception.FriendStatusBadGatewayException;
+import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.response.PageableResponse;
 import com.social.web.rest.vm.FriendStatusVM;
 import com.social.web.rest.vm.FriendVM;
@@ -39,13 +40,13 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 	@Autowired
 	private AvatarStorage avatarStorage;
-	
+
 	@Autowired
 	private RatingRepository ratingRepository;
 
 	@Override
 	public FriendDTO postFriend(FriendVM friendVM) {
-		
+
 		Profile friendProfile = profileBusiness.getProfile(friendVM.getIdFriend());
 
 		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
@@ -105,15 +106,19 @@ public class FriendBusinessImpl implements FriendBusiness {
 	@Override
 	public PageableResponse<ProfileDTO> getFriends(Pageable pageable, String status) {
 		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
-		
-		FriendStatus friendStatus;
+
 		if (status.equalsIgnoreCase(FriendStatus.ACCEPT.toString())) {
-			friendStatus = FriendStatus.ACCEPT;
+			return this.getMyFriends(pageable, profileLogado);
+		} else if (status.equalsIgnoreCase(FriendStatus.WAITING.toString())) {
+			return this.getWaitingFriends(pageable, profileLogado);
 		} else {
-			friendStatus = FriendStatus.WAITING;
+			throw new FriendStatusBadGatewayException("StatusFriend incorreto");
 		}
 
-		Page<Friend> friendsPageable = friendRepository.findAllFriends(friendStatus, profileLogado.getId(),
+	}
+
+	private PageableResponse<ProfileDTO> getMyFriends(Pageable pageable, Profile profileLogado) {
+		Page<Friend> friendsPageable = friendRepository.findAllFriends(FriendStatus.ACCEPT, profileLogado.getId(),
 				pageable);
 		List<ProfileDTO> listFriendsDTO = new ArrayList<>();
 
@@ -152,18 +157,53 @@ public class FriendBusinessImpl implements FriendBusiness {
 		pageableResponse.setSize(friendsPageable.getSize());
 
 		return pageableResponse;
+
+	}
+
+	private PageableResponse<ProfileDTO> getWaitingFriends(Pageable pageable, Profile profileLogado) {
+		Page<Friend> friendsPageable = friendRepository.findAllWaitingFriends(FriendStatus.WAITING,
+				profileLogado.getId(), pageable);
+		List<ProfileDTO> listFriendsDTO = new ArrayList<>();
+
+		friendsPageable.getContent().forEach(f -> {
+			Profile friendProfile = profileBusiness.getProfile(f.getId().getProfile());
+
+			ProfileDTO profileDTO = new ProfileDTO();
+			profileDTO.setId(friendProfile.getId());
+			profileDTO.setGenre(friendProfile.getGenre());
+			profileDTO.setName(friendProfile.getName());
+			profileDTO.setUsername(friendProfile.getUser().getUsername());
+			profileDTO.setCountry(friendProfile.getCountry());
+
+			if (profileDTO.getAvatar() != null) {
+				profileDTO.setAvatar(avatarStorage.getUrl(profileDTO.getAvatar()));
+			}
+
+			Long value = ratingRepository.compatibilityBetweenFriends(profileLogado.getId(), friendProfile.getId());
+			profileDTO.setCompatibility(Compatibility.getCompatibility(Long.valueOf(value).intValue()));
+
+			listFriendsDTO.add(profileDTO);
+
+		});
+
+		PageableResponse<ProfileDTO> pageableResponse = new PageableResponse<>();
+		pageableResponse.setContent(listFriendsDTO);
+		pageableResponse.setTotalPages(friendsPageable.getTotalPages());
+		pageableResponse.setNumber(friendsPageable.getNumber());
+		pageableResponse.setTotalElements(friendsPageable.getTotalElements());
+		pageableResponse.setSize(friendsPageable.getSize());
+
+		return pageableResponse;
 	}
 
 	@Override
 	public Long getFriendsCount(String status) {
 		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
-		FriendStatus friendStatus;
 		if (status.equalsIgnoreCase(FriendStatus.ACCEPT.toString())) {
-			friendStatus = FriendStatus.ACCEPT;
+			return friendRepository.countFriends(FriendStatus.ACCEPT, profileLogado.getId());
 		} else {
-			friendStatus = FriendStatus.WAITING;
+			return friendRepository.countWatingFriends(FriendStatus.WAITING, profileLogado.getId());
 		}
-		return friendRepository.countFriends(friendStatus, profileLogado.getId());
 	}
 
 }

@@ -27,6 +27,13 @@
 					status : '@status'
 				},
 				isArray : false
+			},
+			'patchFriends' : {
+				method: 'PATCH',
+				url: DomainBase.friend + '/:friendId',
+				params: {
+					friendId : '@friendId'
+				}
 			}
 		} );
 		

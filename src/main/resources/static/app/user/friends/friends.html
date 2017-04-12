@@ -1,21 +1,109 @@
 <uib-tabset active="activeJustified" justified="true"> <uib-tab
-	index="0" heading="{{vm.myFriendsQtd}}">
-<div ng-repeat="myFriend in vm.myFriends">
-	nome: {{myFriend.name}} <br> usuario: {{myFriend.username}}
+	index="0" heading="{{'Amigos ' + '(' + vm.myFriendsQtd + ')'}}">
+
+<div ng-if="vm.myFriendsQtd > 0">
+	<div class="container">
+		<div ng-repeat="myFriend in vm.myFriends">
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-sm-3">
+							<img
+								ng-src="{{myFriend.avatar ? myFriend.avatar : vm.defaultAvatar}}"
+								alt="people" class="media-object img-circle"
+								style="height: 50px; width: 50px">
+						</div>
+						<div class="col-sm-5">
+							<h4 class="media-heading ">
+								<a href="#">{{myFriend.name}}</a>
+							</h4>
+						</div>
+						<div class="pull-right">
+							<button type="button" class="btn btn-default btn-sm">
+								Amigos <span class="glyphicon glyphicon-ok" aria-hidden="true">
+								</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-center">
+		<ul uib-pagination total-items="vm.myFriendsTotalItens"
+			ng-model="vm.myFriendsCurrentPage"
+			items-per-page="vm.myFriendsItensPerPage" class="pagination-sm"
+			boundary-links="true" num-pages="vm.myFriendsTotalPages"
+			ng-change="vm.pageMyFriendsChanged()" last-text="Última"
+			first-text="Primeira" next-text="Próxima" previous-text="Anterior">
+		</ul>
+	</div>
 </div>
-<ul uib-pagination total-items="vm.myFriendsTotalItens"
-	ng-model="vm.myFriendsCurrentPage" items-per-page="vm.myFriendsItensPerPage"
-	class="pagination-sm" boundary-links="true"
-	num-pages="vm.myFriendsTotalPages"
-	ng-change="vm.pageMyFriendsChanged()"></ul>
-</uib-tab> <uib-tab index="1" heading="{{vm.waitingFriendsQtd}}">
-<div ng-repeat="watingFriend in vm.waitingFriends">
-	nome: {{watingFriend.name}} <br> usuario: {{
-	watingFriend.username}}
+
+<div ng-if="!vm.myFriendsQtd > 0">
+	<div class="text-center">
+		<h4>Você não possue amigos pendentes</h4>
+	</div>
 </div>
-<ul uib-pagination total-items="vm.waitingFriendsTotalItens"
-	ng-model="vm.waitingFriendsCurrentPage"
-	items-per-page="vm.waitingFriendsItensPerPage" class="pagination-sm"
-	boundary-links="true" num-pages="vm.waitingFriendsTotalPages"
-	ng-change="vm.pageWatingFriendsChanged()"></ul>
+
+
+</uib-tab> <uib-tab index="1" heading="{{'Pendentes ' + '(' + vm.waitingFriendsQtd + ')'}}">
+
+<div ng-if="vm.waitingFriendsQtd > 0">
+	<div class="container">
+		<div ng-repeat="watingFriend in vm.waitingFriends">
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-sm-3">
+							<img
+								ng-src="{{watingFriend.avatar ? watingFriend.avatar : vm.defaultAvatar}}"
+								alt="people" class="media-object img-circle"
+								style="height: 50px; width: 50px">
+						</div>
+						<div class="col-sm-5">
+							<h4 class="media-heading ">
+								<a href="#">{{watingFriend.name}}</a>
+							</h4>
+						</div>
+						<div class="pull-right">
+							<div class="btn-group" uib-dropdown is-open="status.isopen">
+								<button id="single-button" type="button"
+									class="btn btn-default btn-sm" uib-dropdown-toggle
+									ng-disabled="vm.isLoadingReply">
+									Analisar <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+									aria-labelledby="single-button">
+									<li role="menuitem"
+										ng-click="vm.replyRequest('Accept', watingFriend)"><a>Confirmar</a></li>
+									<li role="menuitem"
+										ng-click="vm.replyRequest('Refused', watingFriend)"><a>Recusar</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-if="!vm.waitingFriendsQtd > 0">
+	<div class="text-center">
+		<h4>Não há solicitações de amizades pendentes</h4>
+	</div>
+</div>
+
+<div class="text-center">
+	<ul uib-pagination total-items="vm.waitingFriendsTotalItens"
+		ng-model="vm.waitingFriendsCurrentPage"
+		items-per-page="vm.waitingFriendsItensPerPage" class="pagination-sm"
+		boundary-links="true" num-pages="vm.waitingFriendsTotalPages"
+		ng-change="vm.pageWatingFriendsChanged()" last-text="Última"
+		first-text="Primeira" next-text="Próxima" previous-text="Anterior">
+	</ul>
+</div>
+
 </uib-tab> </uib-tabset>

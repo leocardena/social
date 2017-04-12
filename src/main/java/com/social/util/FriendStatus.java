@@ -23,7 +23,7 @@ public enum FriendStatus {
 	@JsonCreator
 	public static FriendStatus create(String value) {
 		for (FriendStatus r : FriendStatus.values()) {
-			if (r.getText().equals(value)) {
+			if (r.getText().equalsIgnoreCase(value)) {
 				return r;
 			}
 		}

@@ -23,8 +23,17 @@ public interface FriendRepository extends JpaRepository<Friend, FriendPK> {
 	Page<Friend> findAllFriends(@Param(value = "status") FriendStatus status, @Param(value = "profileId") Long profileId,
 			Pageable pageable);
 	
+	@Query(value = "select f from Friend f where f.status"
+			+ " = :status and f.id.friend = :profileId")
+	Page<Friend> findAllWaitingFriends(@Param(value = "status") FriendStatus status, @Param(value = "profileId") Long profileId,
+			Pageable pageable);
+	
 	@Query("select count(f.status) from Friend f where f.status = :status and "
 			+ "(f.id.profile = :profileId or f.id.friend = :profileId)")
 	Long countFriends(@Param(value = "status") FriendStatus status, @Param(value = "profileId") Long profileId);
+	
+	@Query("select count(f.status) from Friend f where f.status = :status and "
+			+ "f.id.friend = :profileId")
+	Long countWatingFriends(@Param(value = "status") FriendStatus status, @Param(value = "profileId") Long profileId);
 	
 }

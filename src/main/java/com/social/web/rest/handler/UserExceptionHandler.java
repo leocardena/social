@@ -1,16 +1,19 @@
 package com.social.web.rest.handler;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.social.web.rest.exception.ResourceNotFoundException;
+
 import com.social.web.rest.dto.ErrorDetailDTO;
 import com.social.web.rest.exception.EmailAlreadyInUseException;
+import com.social.web.rest.exception.FriendStatusBadGatewayException;
 import com.social.web.rest.exception.KeyNotFoundException;
 import com.social.web.rest.exception.LoginAlreadyInUseException;
 import com.social.web.rest.exception.LoginNotFoundException;
+import com.social.web.rest.exception.ResourceNotFoundException;
 
 /**
  * Classe responsável por manipular as excetions da camada REST
@@ -118,6 +121,19 @@ public class UserExceptionHandler {
 		error.setTimestamp(System.currentTimeMillis());
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+	@ExceptionHandler(FriendStatusBadGatewayException.class)
+	public ResponseEntity<?> handleFriendStatusBadGatewayException(FriendStatusBadGatewayException exception,
+			HttpServletRequest request) {
+		ErrorDetailDTO error = new ErrorDetailDTO();
+		
+		error.setStatus(400L);
+		error.setTitulo("FriendStatus incorreto");
+		error.setMensagem(exception.getMessage());
+		error.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(error);
 	}
 
 }
