@@ -1,5 +1,7 @@
 package com.social.business.interfaces;
 
+import java.util.Optional;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +26,6 @@ public interface AccountBusiness {
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public void deleteAvatar();
 	
-	Profile findProfileByLoggedUser();
+	Optional<Profile> findProfileByLoggedUser();
 
 }

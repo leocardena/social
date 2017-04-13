@@ -31,7 +31,8 @@
 		// utilities variables
         vm.defaultAvatar = 'content/images/avatar/avatar-300x300.png';
         vm.isLoadingReply = false;
-
+        vm.selection = 'amigos';
+        
 		// methods
 		vm.pageMyFriendsChanged = _pageMyFriendsChanged;
 		vm.pageWatingFriendsChanged = _pageWatingFriendsChanged;

@@ -49,7 +49,7 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 		Profile friendProfile = profileBusiness.getProfile(friendVM.getIdFriend());
 
-		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
 
 		FriendPK friendPK = new FriendPK(profileLogado.getId(), friendProfile.getId());
 		Friend friend = new Friend();
@@ -63,7 +63,7 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 	@Override
 	public FriendDTO getFriend(Long idFriend) {
-		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
 
 		Optional<Friend> friendOptinal = friendRepository.findFriendsById(profileLogado.getId(), idFriend);
 
@@ -77,7 +77,7 @@ public class FriendBusinessImpl implements FriendBusiness {
 	public void deleteFriend(Long idFriend) {
 
 		Profile friendSearch = profileBusiness.getProfile(idFriend);
-		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
 		FriendPK friendPK = new FriendPK(profileLogado.getId(), friendSearch.getId());
 
 		friendRepository.delete(friendPK);
@@ -86,7 +86,7 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 	@Override
 	public FriendDTO patchFriend(FriendStatusVM status, Long idFriend) {
-		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
 
 		Optional<Friend> friendOptinal = friendRepository.findFriendsById(profileLogado.getId(), idFriend);
 
@@ -105,7 +105,7 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 	@Override
 	public PageableResponse<ProfileDTO> getFriends(Pageable pageable, String status) {
-		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
 
 		if (status.equalsIgnoreCase(FriendStatus.ACCEPT.toString())) {
 			return this.getMyFriends(pageable, profileLogado);
@@ -198,7 +198,7 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 	@Override
 	public Long getFriendsCount(String status) {
-		Profile profileLogado = accountBussiness.findProfileByLoggedUser();
+		Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
 		if (status.equalsIgnoreCase(FriendStatus.ACCEPT.toString())) {
 			return friendRepository.countFriends(FriendStatus.ACCEPT, profileLogado.getId());
 		} else {

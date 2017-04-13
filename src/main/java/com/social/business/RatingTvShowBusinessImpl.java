@@ -40,7 +40,7 @@ public class RatingTvShowBusinessImpl implements RatingTvShowBusiness {
 			tvShow = tvShowOptional.get();
 		}
 
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 
 		Rating rating = new Rating();
 		rating.setDate(new DateTime());
@@ -56,7 +56,7 @@ public class RatingTvShowBusinessImpl implements RatingTvShowBusiness {
 
 	@Override
 	public UserRatingDTO getUserRatingForTvShowBySlug(String slug, Long idRatingParent) {
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
 
 		if (!ratingOptinal.isPresent())

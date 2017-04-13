@@ -7,7 +7,7 @@
 	
 	DomainFriendsService.$inject = ['DomainBase', '$resource'];
 	
-	/*@ngInject*/
+	/* @ngInject */
 	function DomainFriendsService(DomainBase, $resource) {
 		var service =  $resource( DomainBase.friend, {}, {
 			'getMyFriends' : {

@@ -12,7 +12,8 @@
 				lists : "/api/rest/lists",
 				show: "/api/rest/shows",
 				actor: "/api/rest/actors",
-				friend: "/api/rest/friends"
+				friend: "/api/rest/friends",
+				profiles: "/api/rest/profiles"
 		   });
 	
 })();

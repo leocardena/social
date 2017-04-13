@@ -176,13 +176,10 @@ public class AccountBusinessImpl implements AccountBusiness {
 	}
 	
 	@Override
-	public Profile findProfileByLoggedUser() {
+	public Optional<Profile> findProfileByLoggedUser() {
 		Optional<User> userOptional = userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin());
 		
-		if (!userOptional.isPresent())
-			throw new LoginNotFoundException("Login não encontrado");
-		
-		return profileRepository.findOneByUser(userOptional.get()).get();
+		return profileRepository.findOneByUser(userOptional.get());
 	}
 
 }

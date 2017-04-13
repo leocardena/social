@@ -94,7 +94,7 @@ public class RatingEpisodeBusiness implements com.social.business.interfaces.Rat
 			ratingParent = episode.getRatingParent();
 		}
 
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 
 		Rating userRating = new Rating();
 		userRating.setDate(new DateTime());
@@ -144,7 +144,7 @@ public class RatingEpisodeBusiness implements com.social.business.interfaces.Rat
 	@Override
 	public UserRatingDTO getUserRatingForEpisode(String slug, Integer seasonNumber, Integer episodeNumber,
 			Long idRatingParent) {
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
 
 		if (!ratingOptinal.isPresent())

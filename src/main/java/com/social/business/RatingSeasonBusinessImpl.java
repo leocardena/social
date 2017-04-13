@@ -83,7 +83,7 @@ public class RatingSeasonBusinessImpl implements RatingSeasonBusiness {
 			ratingParent = season.getRatingParent();
 		}
 
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 
 		Rating userRating = new Rating();
 		userRating.setDate(new DateTime());
@@ -130,7 +130,7 @@ public class RatingSeasonBusinessImpl implements RatingSeasonBusiness {
 
 	@Override
 	public UserRatingDTO getUserRatingForSeasonBySlug(String slug, Integer seasonNumber, Long idRatingParent) {
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
 
 		if (!ratingOptinal.isPresent())

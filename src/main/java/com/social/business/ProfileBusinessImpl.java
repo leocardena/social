@@ -56,9 +56,10 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 		if (profileFriend.getAvatar() != null) {
 			profileDTO.setAvatar(avatarStorage.getUrl(profileFriend.getAvatar()));
 		}
-
-		if (SecurityUtils.getCurrentUserLogin() != null) {
-			Profile profile = accountBusiness.findProfileByLoggedUser();
+		
+		String loggedUsername = SecurityUtils.getCurrentUserLogin();
+		if (loggedUsername != null) {
+			Profile profile = accountBusiness.findProfileByLoggedUser().get();
 			Long value = ratingRepository.compatibilityBetweenFriends(profile.getId(), profileFriend.getId());
 			profileDTO.setCompatibility(Compatibility.getCompatibility(Long.valueOf(value).intValue()));
 		}
@@ -94,10 +95,10 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 			if (profileDTO.getAvatar() != null) {
 				profileDTO.setAvatar(avatarStorage.getUrl(profileDTO.getAvatar()));
 			}
-
+			
 			if (accountBusiness.findProfileByLoggedUser() != null) {
 				Long value = ratingRepository
-						.compatibilityBetweenFriends(accountBusiness.findProfileByLoggedUser().getId(), p.getId());
+						.compatibilityBetweenFriends(accountBusiness.findProfileByLoggedUser().get().getId(), p.getId());
 				profileDTO.setCompatibility(Compatibility.getCompatibility(Long.valueOf(value).intValue()));
 			}
 

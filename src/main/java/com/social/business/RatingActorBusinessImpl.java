@@ -41,7 +41,7 @@ public class RatingActorBusinessImpl implements RatingActorBusiness {
 			actor = actorBusiness.createActor(actorRatingVM, slug);
 		}
 		
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 		
 		Rating rating = new Rating();
 		rating.setDate(new DateTime());
@@ -99,7 +99,7 @@ public class RatingActorBusinessImpl implements RatingActorBusiness {
 	@Override
 	public UserRatingDTO getUserRatingForActor(String slug, Long idRatingParent) {
 
-		Profile profile = accountBusiness.findProfileByLoggedUser();
+		Profile profile = accountBusiness.findProfileByLoggedUser().get();
 		
 		Optional<Rating> ratingOptinal = ratingRepository.findUserRating(profile.getId(), idRatingParent, slug);
 
