@@ -9,32 +9,75 @@
 	function config($stateProvider) {
 
 		$stateProvider
-
+		
 		.state('friends', {
-			url : "/friends",
 			parent : 'social',
 			data : {
 				authorities : [ 'ROLE_USER' ],
 				pageTitle : 'Amigos'
 			},
-			views : {
-				'content@' : {
-					templateUrl : 'app/user/friends/friends.html',
-					controller : 'FriendsController',
-					controllerAs : 'vm'
-				}
+			 views : {
+					'content@' : {
+						templateUrl : 'app/user/friends/friends.html',
+						controller : 'FriendsController',
+						controllerAs : 'vm'
+					}
 			}, 
-			resolve : {
-				myFriendsPrepService: myFriendsPrepService,
+			resolve: {
 				myFriendsTotalPrepService: myFriendsTotalPrepService,
-				waitingFriendsPrepService: waitingFriendsPrepService,
 				waitingFriendsTotalPrepService: waitingFriendsTotalPrepService
 			}
-		});
+		})
+
+		.state('myFriends', {
+			url : "/friends",
+			parent : 'friends',
+			data : {
+				authorities : [ 'ROLE_USER' ],
+				pageTitle : 'Meus Amigos'
+			},
+					templateUrl : 'app/user/friends/my-friends.html',
+					controller : 'MyFriendsController',
+					controllerAs : 'vm'
+				,
+			resolve : {
+				myFriendsPrepService: myFriendsPrepService
+			}
+		})
 		
+		.state('pending', {
+			url : "/friends/pending",
+			parent : 'friends',
+			data : {
+				authorities : [ 'ROLE_USER' ],
+				pageTitle : 'Amigos Pendentes'
+			},
+					templateUrl : 'app/user/friends/pending-friends.html',
+					controller : 'PendingFriendsController',
+					controllerAs : 'vm',
+			resolve : {
+				pendingFriendsPrepService: pendingFriendsPrepService
+			}
+		})
+		
+		.state('search-friends', {
+			url : "/friends/search?username?page",
+			parent : 'friends',
+			data : {
+				authorities : [ 'ROLE_USER' ],
+				pageTitle : 'Pesquisa de Usuários'
+			},
+			templateUrl : 'app/user/friends/search-friends.html',
+			controller : 'SearchFriendsController',
+			controllerAs : 'vm',
+			resolve : {
+				searchPrepService : searchPrepService
+			}
+		});
+
 		myFriendsPrepService.$inject = ['DomainFriendsService'];
-        
-        /*@ngInject*/
+
+        /* @ngInject */
         function myFriendsPrepService (DomainFriendsService) {
         	return DomainFriendsService.getMyFriends({
         		status : 'Accept',
@@ -44,10 +87,10 @@
         		return data;
         	});
         }
-        
+
         myFriendsTotalPrepService.$inject = ['DomainFriendsService'];
-        
-        /*@ngInject*/
+
+        /* @ngInject */
         function myFriendsTotalPrepService (DomainFriendsService) {
         	return DomainFriendsService.getTotalFriends({
         		status : 'Accept'
@@ -55,11 +98,11 @@
         		return data;
         	});
         }
-        
-        waitingFriendsPrepService.$inject = ['DomainFriendsService'];
-        
-        /*@ngInject*/
-        function waitingFriendsPrepService (DomainFriendsService) {
+
+        pendingFriendsPrepService.$inject = ['DomainFriendsService'];
+
+        /* @ngInject */
+        function pendingFriendsPrepService (DomainFriendsService) {
         	return DomainFriendsService.getMyFriends({
         		status : 'Waiting',
         		page: 0,
@@ -68,16 +111,34 @@
         		return data;
         	});
         }
-        
+
         waitingFriendsTotalPrepService.$inject = ['DomainFriendsService'];
-        
-        /*@ngInject*/
+
+        /* @ngInject */
         function waitingFriendsTotalPrepService (DomainFriendsService) {
         	return DomainFriendsService.getTotalFriends({
         		status : 'Waiting'
         	}).$promise.then(function (data) {
         		return data;
         	});
+        }
+
+        searchPrepService.$inject = ['DomainProfilesService', '$stateParams'];
+
+        /* @ngInject */
+        function searchPrepService (DomainProfilesService, $stateParams) {
+        	if ($stateParams.username) {
+                	return DomainProfilesService.getByUsername({
+                		page : $stateParams.page ? $stateParams.page - 1 : '0',
+                		size : '10',
+                		username : $stateParams.username
+                	}).$promise.then(function(data){
+                		return data;
+                	}).catch(function () {
+                	});
+        	} else {
+                return 'NO_SEARCH';
+            }
         }
 
 	}

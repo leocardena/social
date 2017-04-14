@@ -1,0 +1,42 @@
+<h3 class="text-center">Amigos</h3>
+<div ng-repeat="myFriend in vm.myFriends">
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="col-sm-3">
+					<img
+						ng-src="{{myFriend.avatar ? myFriend.avatar : vm.defaultAvatar}}"
+						alt="people" class="media-object img-circle"
+						style="height: 50px; width: 50px">
+				</div>
+				<div class="col-sm-5">
+					<h4 class="media-heading ">
+						<a href="#">{{myFriend.name}}</a>
+					</h4>
+				</div>
+				<div class="pull-right">
+					<button type="button" class="btn btn-default btn-sm">
+						Amigos <span class="glyphicon glyphicon-ok" aria-hidden="true">
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" ng-if="vm.myFriends.length > 0">
+	<div class="text-center">
+		<ul uib-pagination total-items="vm.myFriendsTotalItens"
+			ng-model="vm.myFriendsCurrentPage"
+			items-per-page="vm.myFriendsItensPerPage" class="pagination-sm"
+			boundary-links="true" num-pages="vm.myFriendsTotalPages"
+			ng-change="vm.pageMyFriendsChanged()" last-text="Última"
+			first-text="Primeira" next-text="Próxima" previous-text="Anterior">
+		</ul>
+	</div>
+</div>
+<div ng-if="!vm.myFriends.length > 0">
+	<div class="text-center">
+		<h4>Você não possui amigos adicionados</h4>
+	</div>
+</div>
