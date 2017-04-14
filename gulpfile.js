@@ -18,7 +18,7 @@ gulp.task('watch', function(){
 });
 
 gulp.task('watch-js', function(){
-	gulp.watch('./src/main/resources/static/app/**/.js', ['scripts']);
+	gulp.watch('./src/main/resources/static/app/**/*.js', ['scripts']);
 });
 
 gulp.task('scripts', function() {  

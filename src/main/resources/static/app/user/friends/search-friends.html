@@ -1,12 +1,47 @@
 <h3 class="text-center">Pesquisa de Usuários</h3>
-<div>
-	<div class="input-group col-md-12">
-		<input type="text" class="form-control"/> 
-			<span class="input-group-btn">
-				<button class="btn btn-danger" type="button">
-				<span class=" glyphicon glyphicon-search">
-				</span>
-			</button>
-			</span>
+<div class="input-group col-md-12">
+	<input type="text" class="form-control" ng-model="vm.search" /> <span
+		class="input-group-btn">
+		<button class="btn btn-danger" type="button"
+			ng-click="vm.searchFriend(vm.search)">
+			<span class=" glyphicon glyphicon-search"> </span>
+		</button>
+	</span>
+</div>
+<div class="col-md-12" ng-if="vm.friends.length > 0 && vm.check()">
+	<div ng-repeat="friend in vm.friends">
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="col-sm-3">
+						<img
+							ng-src="{{friend.avatar ? friend.avatar : vm.defaultAvatar}}"
+							alt="people" class="media-object img-circle"
+							style="height: 50px; width: 50px">
+					</div>
+					<div class="col-sm-6">
+						<h4 class="media-heading ">
+							<a href="#">{{friend.name}}</a>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" ng-if="vm.friends.length > 0 && vm.check()">
+	<div class="text-center">
+		<ul uib-pagination total-items="vm.friendsTotalItens"
+			ng-model="vm.friendsCurrentPage"
+			items-per-page="vm.friendsItensPerPage" class="pagination-sm"
+			boundary-links="true" num-pages="vm.friendsTotalPages"
+			ng-change="vm.pageChanged()" last-text="Última"
+			first-text="Primeira" next-text="Próxima" previous-text="Anterior">
+		</ul>
+	</div>
+</div>
+<div ng-if="!vm.friends.length > 0 && vm.noResults && vm.check()">
+	<div class="text-center">
+		<h4>Não há resultados para a sua pesquisa.</h4>
 	</div>
 </div>
