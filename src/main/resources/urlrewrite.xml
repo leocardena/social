@@ -10,6 +10,7 @@
         <condition type="request-uri" operator="notequal">^/app/.*</condition>
         <condition type="request-uri" operator="notequal">^/bower_components/.*</condition>
         <condition type="request-uri" operator="notequal">^/content/.*</condition>
+        <condition type="request-uri" operator="notequal">^/dist/.*</condition>
         <condition type="request-uri" operator="notequal">^/api.*$</condition>
         <condition type="request-uri" operator="notequal">^/index.html*$</condition>
 
