@@ -7,16 +7,12 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.social.domain.Authority;
 import com.social.domain.Profile;
 import com.social.util.CustomDateTimeSerializer;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "firstName", "lastName", "country",
-	"phone", "birthday", "genre", "login", "email", "password",
-		"avatar" })
 public class UserDTO {
 
 	@JsonIgnore
@@ -52,12 +48,14 @@ public class UserDTO {
 
 	@JsonProperty("name")
 	private String name;
-
+	
 	@JsonProperty("avatar")
 	private String avatar;
 
 	@JsonProperty("authorities")
 	private Set<String> authorities;
+	
+	private Long id;
 
 	public UserDTO() {
 	}
@@ -65,12 +63,14 @@ public class UserDTO {
 	public UserDTO(Profile profile) {
 		this(profile.getName(), profile.getCountry(), profile.getUser().getPhone(), profile.getBirthday(),
 				profile.getGenre(), profile.getUser().getUsername(), profile.getUser().getEmail(), profile.getAvatar(),
-				profile.getUser().getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()));
+				profile.getUser().getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()), profile.getId());
 	}
 
 	public UserDTO(String name, String country, String phone, DateTime birthday, String genre, String username,
-			String email, String avatar, Set<String> authorities) {
-		this.name = name;
+			String email, String avatar, Set<String> authorities, Long id) {
+		String[] nameParts = name.split(" ");
+		this.name = nameParts[0];
+		this.lastName = nameParts[1];
 		this.country = country;
 		this.phone = phone;
 		this.birthday = birthday;
@@ -79,6 +79,16 @@ public class UserDTO {
 		this.email = email;
 		this.avatar = avatar;
 		this.authorities = authorities;
+		this.id = id;
+	}
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**

@@ -1,0 +1,79 @@
+<div class="col-md-4">
+	<ul id="sidebar" class="nav nav-stacked">
+		<li><a ng-click="vm.sidebarOption = 'geral'" href="">Geral</a></li>
+		<li><a ng-click="vm.sidebarOption = 'senha'" href="">Senha</a></li>
+	</ul>
+</div>
+<div ng-switch on="vm.sidebarOption">
+	<div ng-switch-when="geral" class="col-md-4">
+		<div class="alert alert-success" ng-show="vm.updated">
+			<strong>Successo!</strong> As informações da sua conta foram
+			atualizadas.
+		</div>
+		<h2 class="text-center">Editar Conta ({{vm.sidebarOption}})</h2>
+		<form novalidate ng-submit="vm.updateAccount(vm.user)"
+			ng-click="vm.updated = false">
+			<div class="form-group">
+				<label for="name">Nome:</label> <input type="text"
+					class="form-control" id="name" ng-model="vm.user.name">
+			</div>
+			<div class="form-group">
+				<label for="lastName">Sobrenome:</label> <input type="text"
+					class="form-control" id="lastName" ng-model="vm.user.lastName">
+			</div>
+			<div class="form-group">
+				<label for="country">País:</label> <select class="form-control"
+					name="country" id="country" ng-model="vm.user.country"
+					ng-options="country.name as country.nativeName for country 
+									in vm.countries">
+					<option value="">Selecione...</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="genre">Gênero:</label> <label class="radio-inline">
+					<input type="radio" name="genre" ng-model="vm.user.genre" value="F">Feminino
+				</label> <label class="radio-inline"> <input type="radio"
+					name="genre" ng-model="vm.user.genre" value="M">Masculino
+				</label>
+				
+			</div>
+			<div class="form-group">
+				<label for="phone">Celular:</label> <input type="text"
+					class="form-control" id="phone" ng-model="vm.user.phone"
+					ui-br-phone-number>
+			</div>
+			<button type="submit" class="btn btn-default pull-right">Alterar</button>
+		</form>
+	</div>
+	<div ng-switch-when="senha" class="col-md-4">
+		<h2 class="text-center">Editar Conta ({{vm.sidebarOption}})</h2>
+		<div class="alert alert-success" ng-show="vm.passSucess">
+			<strong>Successo!</strong> Senha alterada.
+		</div>
+		<div class="alert alert-danger" ng-show="vm.notMatch">
+			<strong>Erro!</strong> A Nova Senha e a confirmação não conferem.
+		</div>
+		<div class="alert alert-danger" ng-show="vm.requestError">
+			<strong>Erro!</strong> Senha atual incorreta.
+		</div>
+		<form novalidate
+			ng-submit="vm.updatePassword(vm.password, vm.passwordConfirm)"
+			ng-click="vm.passSucess = false; vm.notMatch = false; vm.requestError = false;">
+			<div class="form-group">
+				<label for="passord">Senha Atual:</label> <input type="password"
+					class="form-control" id="passord" ng-model="vm.password.current">
+			</div>
+			<div class="form-group">
+				<label for="newPassord">Nova Senha:</label> <input type="password"
+					class="form-control" id="newPassord"
+					ng-model="vm.password.newPassword">
+			</div>
+			<div class="form-group">
+				<label for="confirm">Confirme a Nova Senha:</label> <input
+					type="password" class="form-control" id="confirm"
+					ng-model="vm.passwordConfirm">
+			</div>
+			<button type="submit" class="btn btn-default pull-right">Alterar</button>
+		</form>
+	</div>
+</div>

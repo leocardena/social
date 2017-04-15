@@ -13,6 +13,7 @@ import com.social.web.rest.exception.FriendStatusBadGatewayException;
 import com.social.web.rest.exception.KeyNotFoundException;
 import com.social.web.rest.exception.LoginAlreadyInUseException;
 import com.social.web.rest.exception.LoginNotFoundException;
+import com.social.web.rest.exception.PasswordDoenstMatchException;
 import com.social.web.rest.exception.ResourceNotFoundException;
 
 /**
@@ -133,7 +134,20 @@ public class UserExceptionHandler {
 		error.setMensagem(exception.getMessage());
 		error.setTimestamp(System.currentTimeMillis());
 		
-		return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(error);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+	
+	@ExceptionHandler(PasswordDoenstMatchException.class)
+	public ResponseEntity<?> handlePasswordDoenstMatchException(PasswordDoenstMatchException exception,
+			HttpServletRequest request) {
+		ErrorDetailDTO error = new ErrorDetailDTO();
+		
+		error.setStatus(400L);
+		error.setTitulo("Password nao confere com o atual.");
+		error.setMensagem(exception.getMessage());
+		error.setTimestamp(System.currentTimeMillis());
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 
 }

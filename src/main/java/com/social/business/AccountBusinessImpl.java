@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,10 @@ import com.social.web.rest.exception.EmailAlreadyInUseException;
 import com.social.web.rest.exception.KeyNotFoundException;
 import com.social.web.rest.exception.LoginAlreadyInUseException;
 import com.social.web.rest.exception.LoginNotFoundException;
+import com.social.web.rest.exception.PasswordDoenstMatchException;
 import com.social.web.rest.util.RandomUtil;
+import com.social.web.rest.vm.AccountVM;
+import com.social.web.rest.vm.PasswordVM;
 
 @Service
 public class AccountBusinessImpl implements AccountBusiness {
@@ -180,6 +184,34 @@ public class AccountBusinessImpl implements AccountBusiness {
 		Optional<User> userOptional = userRepository.findOneByUsername(SecurityUtils.getCurrentUserLogin());
 		
 		return profileRepository.findOneByUser(userOptional.get());
+	}
+
+	@Override
+	public UserDTO putAccount(AccountVM accountVM, Long userId) {
+		Profile profile = profileRepository.getOne(userId);
+		
+		profile.getUser().setPhone(accountVM.getPhone());
+		profile.setGenre(accountVM.getGenre());
+		profile.setCountry(accountVM.getCountry());
+		profile.setName(accountVM.getName() + " " + accountVM.getLastName());
+		
+		Profile profileUpdated = profileRepository.save(profile);
+		
+		return new UserDTO(profileUpdated);
+	}
+
+	@Override
+	public void putPassoword(PasswordVM passwordVM, Long userId) {
+		Profile profile = profileRepository.getOne(userId);
+
+		if (passwordEncoder.matches(passwordVM.getCurrent(), profile.getUser().getPassword())) {
+	        String encryptedPassword = passwordEncoder.encode(passwordVM.getNewPassword());
+	        profile.getUser().setPassword(encryptedPassword);
+	        profileRepository.save(profile);
+		} else {
+		   throw new PasswordDoenstMatchException("Password incorreto");
+		}
+		
 	}
 
 }

@@ -21,6 +21,7 @@
         vm.rememberMe = true;
         vm.state = $state;
         vm.toggleNavbar = _toggleNavbar;
+        vm.collapseDropDown = _collapseDropDown;
         vm.searchTypes = [
 	        {path: 'movie', name: 'Filmes'},
 	        {path: 'show', name: 'Séries'},

@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.social.domain.Profile;
 import com.social.domain.User;
 import com.social.web.rest.dto.UserDTO;
+import com.social.web.rest.vm.AccountVM;
+import com.social.web.rest.vm.PasswordVM;
 
 public interface AccountBusiness {
 	
@@ -25,6 +27,12 @@ public interface AccountBusiness {
 	
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public void deleteAvatar();
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public UserDTO putAccount(AccountVM accountVM, Long userId);
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public void putPassoword(PasswordVM passwordVM, Long userId);
 	
 	Optional<Profile> findProfileByLoggedUser();
 
