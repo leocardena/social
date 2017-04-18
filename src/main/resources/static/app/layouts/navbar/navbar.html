@@ -17,22 +17,29 @@
 
 		<div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed"
 			ng-switch="vm.isAuthenticated()">
-
 			<div class="col-sm-5 col-md-5">
 				<form class="navbar-form" role="search" name="vm.formSearch"
 					ng-submit="vm.submitSearchForm(vm.search.type, vm.search.text, 1)">
-					<div class="input-group">
-						<select name="vm.formSearch.type" class="form-control" id="type"
-							ng-options="type.path as type.name for type in vm.searchTypes"
-							ng-model="vm.search.type">
-						</select> <span class="input-group-btn"> <input type="text"
-							class="form-control"
-							placeholder="Pesquise por filmes, séries, atores..."
-							name="vm.formSearch.text" ng-model="vm.search.text">
-							<button class="btn btn-default" type="submit" tabindex="-1">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</span>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<div class="btn-group">
+									<select name="vm.formSearch.type" class="form-control"
+										id="type"
+										ng-options="type.path as type.name for type in vm.searchTypes"
+										ng-model="vm.search.type">
+									</select>
+								</div>
+							</div>
+							<input type="search" class="no-fill-color form-control" 
+								placeholder="Pesquise por filmes, séries, atores..."
+								name="vm.formSearch.text" ng-model="vm.search.text"> <span
+								class="input-group-btn" id="form-navbar-search">
+								<button class="btn btn-default" type="submit" tabindex="-1">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
 					</div>
 				</form>
 			</div>

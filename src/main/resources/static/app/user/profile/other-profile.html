@@ -1,12 +1,15 @@
 <div class="col-md-12 friend-profile-container">
-  <div class="row friend-profile-top-banner">
-    <img src="http://lorempixel.com/850/280/nightlife/2" alt="Profile image" class="img-responsive"/>
-  </div>
-    <div class="col-sm-12">
-
-      
-   </div>
+	<div class="row friend-profile-top-banner" style="background-image: url(https://lastfm-img2.akamaized.net/i/u/ar0/43fe7ffe59154a81ab7b2b5c0283b2ae.jpg)">
+		<div class="img-circle text-center">
+			<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}" alt="" class="friend-profile-header-image">
+		</div>
+		<div class="friend-profile-header-info">
+			<h3>{{vm.user.name + ' ' + vm.user.lastName}}</h3>
+			<p>{{vm.user.username + ' • desde ' + vm.user.createdDate}}</p>
+		</div>
+	</div>
 </div>
+
 
 
 <!-- <div class="container">

@@ -4,11 +4,23 @@
 	margin-top: 10px;
 }
 
-.profile-image {
-	height: 180px; 
-	width: 180px; 
+.friend-profile-header-image {
+	height: 160px; 
+	width: 160px; 
 	border: 2px solid black; 
 	border-radius: 50%;
+	top: 54px;
+    left: 80px;
+    position: absolute;
+}
+
+.friend-profile-header-info {
+    position: relative;
+    min-height: 1px;
+    padding-top: 82px;
+    padding-left: 261px;
+    float: left;
+    width: 800px;
 }
 
 .friend-profile-container {
@@ -16,41 +28,17 @@
 }
 
 .friend-profile-top-banner {
-	height: 20%;
-    overflow: hidden;
+	height: 24%;
+}
+
+.friend-profile-top-banner-img {
+	min-width: 100%;
+    height: auto;
+    background-color: rgba(214, 224, 226, 0.2);
 }
 
 .btn-alterar-image-profile {
 	position:absolute;
 	right:14%;
 	top:40%;
-}
-
-.fb-profile img.fb-image-lg{
-    z-index: 0;
-    width: 100%;  
-    margin-bottom: 10px;
-    margin-top: -20px;
-}
-
-.fb-image-profile
-{
-    margin: -90px 10px 20px 80px;
-    z-index: 9;
-    width: 20%; 
-}
-
-@media (max-width:768px){
-    
-.fb-profile-text>h1{
-    font-weight: 700;
-    font-size:16px;
-}
-
-.fb-image-profile
-{
-    margin: -45px 10px 0px 25px;
-    z-index: 9;
-    width: 20%; 
-}
 }
