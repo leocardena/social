@@ -1,90 +1,165 @@
-.firstBackground {
-	width: 100%;
-	max-width: 100%;
-	margin-top: 0;
-	height: 92.5vh;
-	background-image: url("/content/images/HomeImage.png");
-	.firstBackgroundText {
-		margin-top: 10%;
-		.btnLoginHome {
-			background-color: $red-primary;
-			border-color: $red-primary;
-		}
-	}
-}
-
-.firstBackground h1 {
-	margin-bottom: 0px;
-	margin-top: 0px;
-	font-size: 50px;
-	color: $white;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	text-shadow: -2px 2px 1px $black;
-	letter-spacing: -1px;
-	border-radius: 1px;
-}
-
-.firstSeparatorBg{
-	background-color: $red-secondary;
-	.separatorGraphic{
-		height: 120px;
-		background-color: $red-secondary;
-	}
-	.separatorTitle{
-		height: 120px;
+.first-section{
+	background-image: url('/content/images/background/Logan-4.jpg');
+    background-repeat: no-repeat;
+    background-size:100%; 
+  	height: 92.5vh;
+  	.fist-section-title{
+  		color: $white;
+  		font-size: 7.5vh;
+  		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    	line-height: 1;
+    	color: #767777;
+    	font-weight: 500;
+  	 	margin-top: 10rem;
+  	}
+  	.fist-section-subtitle{
+  		color: $white;
+  		font-size: 3vh;
+  		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  		color: #767777;
+  		line-height: 1;
+  		margin-top: 10px;
+  	}
+  	.btn-register-home {
+		margin-top: 40px;
 		background-color: $red-primary;
-		color: $white;
-		.separatorText{
-			font-size: 10px;
-		}
+		border-color: $red-primary;
+		display: block; 
 	}
-}
-
-
-.secondBackground {
-	width: 100%;
-	max-width: 100%;
-	margin-top: 0;
-	height: 115vh;
-	background-image:
-		url("https://3.bp.blogspot.com/-OxsdruWJI3Y/VsBkXzSd65I/AAAAAAABoPI/G52d1LUYq28/s1600/papel-de-parede-deadpool-filme.jpg");
-	.secondBackgroundText {
-		margin-top: 10%;
+	.link-login-text{
+		font-size: 2vh;
+		color: #767777;
 	}
-}
-
-.secondBackground h1 {
-	margin-bottom: 0px;
-	margin-top: 0px;
-	font-size: 30px;
-	color: $white;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	text-shadow: -2px 2px 1px $black;
-	letter-spacing: -1px;
-	border-radius: 1px;
-	background-color: $red-primary;
-	margin-bottom: 8px;
-}
-
-.thumbnailBody {
-	padding: 0;
-	margin-top: 0;
-	.thumbnail {
-		background-color: $black;
-		border: 0;
-		border-radius: 0;
-		.thumbnailText {
+	.link-login-home{
+		color: $red-primary;
+		cursor:pointer;
+	}
+	.first-section-movie{
+		.first-section-movie-button{
+			float:right;
 			color: $white;
+			font-size: 2vh;
+			background-color: rgba(0, 0, 0, 0.4);
+			border: none;
+			display: block;
 		}
 	}
-}
-
-.thumbnailBody:hover {
-	background-color: $red-primary;
-	border-radius: 5rem;
+	
+ }
+ 
+ .first-section-footer{
+	background-color: #fcfcfc;
+	.interrogation{
+		padding: 10px;
+		font-size: 30vh;
+		.glyphicon-question-sign{
+			float: left;
+			color: $red-primary;
+		}
+	}
+	.first-section-footer-title{
+		padding-top: 15px;
+		border-bottom: thick dotted $red-primary;
+		.first-section-footer-title-text{
+			font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+			line-height: 1;
+			font-size: 7vh;
+			color: #767777;
+			font-weight: 500;
+			
+		}
+	}
+	.first-section-footer-subtitle{
+		font-size: 3vh;
+		color: #767777;
+		padding-bottom: 15px;
+		text-align: justify;
+		.first-section-footer-subtitle-text{
+		}
+	}
+	
 	
 }
-.imgtb:hover{
-		background-color: rgba(0,0,0,0.5);
+ 
+ .second-section{
+ 	background-image: url('/content/images/background/Power-2.jpg');
+    background-repeat: no-repeat;
+    background-size:100%; 
+  	height: 100vh;
+  	.second-section-title{
+  		color: $red-primary;
+  		font-size: 11vh;
+  		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    	line-height: 1.1;
+    	color: $black;
+    	font-weight: 500;
+  	 	margin-top: 10rem;
+  	 	.title-size-big{
+  	 		font-size: 12vh; 
+  	 	}
+  	 }
+  
+  	.second-section-movie{
+  		margin-top: 10px;
+		.second-section-movie-button{
+			 margin:0px auto;
+			color: $white;
+			font-size: 2vh;
+			background-color: rgba(0, 0, 0, 0.4);
+			border: none;
+			display: block;
+		
+		}
+	}
+}
+
+.third-section{
+	.third-section-title{
+			border-bottom: thick dotted $red-primary;
+			padding-top: 20px;
+			font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+			line-height: 1;
+			font-size: 7vh;
+			color: #767777;
+			font-weight: 500;
+		}
+	.third-section-principal{
+		padding: 30px;
+		.third-section-title{
+			font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+			line-height: 1;
+			font-size: 7vh;
+			color: #767777;
+			font-weight: 500;
+		}
+		.third-section-birl{
+			background-color: #fcfcfc;
+			box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.2), 0 1px 8px 0 rgba(0,0,0,.12);
+			.third-section-text{
+				.third-section-birl-title{
+					padding-top: 15px;
+					font-size: 3.5vh;
+					text-align: center;
+					color: #767777;
+					font-weight: 700;
+					
+				}
+				.third-section-birl-text{
+					padding: 15px 0 50px 0px;
+					text-align: justify;
+					line-height: 2;
+					color: #767777;
+				}
+				.third-section-birl-more-info{
+					padding-bottom:20px;
+					.third-section-birl-more-info-text{
+						color: $red-primary;
+						float:right;
+						cursor:pointer; 
+					}
+				}
+			}
+		}
+	}
 }
 
