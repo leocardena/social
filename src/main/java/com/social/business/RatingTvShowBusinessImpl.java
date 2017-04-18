@@ -47,6 +47,7 @@ public class RatingTvShowBusinessImpl implements RatingTvShowBusiness {
 		rating.setNote(titleRating.getRating().getNote());
 		rating.setProfile(profile.getId());
 		rating.setIdRatingParent(tvShow.getRatingParent());
+		rating.setTargetType("TVSHOW");
 
 		Rating ratingStoraged = ratingRepository.save(rating);
 

@@ -34,6 +34,20 @@
                         templateUrl: 'app/layouts/error/accessdenied.html'
                     }
                 }
+            })
+            
+            .state('notfound', {
+            	parent: 'social',
+            	url: '/notfound',
+            	data: {
+            		authorities: [],
+            		pageTitle: 'Não Encontrado'
+            	},
+            	views: {
+            		'content@': {
+            			templateUrl: 'app/layouts/error/notfound.html'
+            		}
+            	}
             });
     }
 })();

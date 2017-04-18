@@ -48,6 +48,7 @@ public class RatingActorBusinessImpl implements RatingActorBusiness {
 		rating.setNote(actorRatingVM.getRating().getNote());
 		rating.setProfile(profile.getId());
 		rating.setIdRatingParent(actor.getRatingParent());
+		rating.setTargetType("ACTOR");
 		
 		Rating ratingStoraged = ratingRepository.save(rating);
 		

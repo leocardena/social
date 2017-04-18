@@ -3,22 +3,28 @@ package com.social.business;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.amazonaws.services.rds.model.ResourceNotFoundException;
 import com.social.business.interfaces.AccountBusiness;
 import com.social.business.interfaces.ProfileBusiness;
+import com.social.domain.Friend;
 import com.social.domain.Profile;
 import com.social.domain.User;
+import com.social.repository.FriendRepository;
 import com.social.repository.ProfileRepository;
 import com.social.repository.RatingRepository;
 import com.social.repository.UserRepository;
 import com.social.security.util.SecurityUtils;
 import com.social.storage.AvatarStorage;
 import com.social.util.Compatibility;
+import com.social.util.FriendStatus;
 import com.social.web.rest.dto.ProfileDTO;
+import com.social.web.rest.dto.RatingTargetDTO;
+import com.social.web.rest.exception.ResourceNotFoundException;
 import com.social.web.rest.response.PageableResponse;
 
 @Service
@@ -38,6 +44,9 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 
 	@Autowired
 	private AvatarStorage avatarStorage;
+	
+	@Autowired
+	private FriendRepository friendRepository;
 
 	@Override
 	public ProfileDTO getProfile(String username) {
@@ -47,11 +56,16 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 			throw new ResourceNotFoundException("Usuário não encontrado!");
 
 		Profile profileFriend = profileRepository.findOneByUser(userOptional.get()).get();
+		DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+		
 		ProfileDTO profileDTO = new ProfileDTO();
 		profileDTO.setId(profileFriend.getId());
 		profileDTO.setName(profileFriend.getName());
 		profileDTO.setGenre(profileFriend.getGenre());
 		profileDTO.setCountry(profileFriend.getCountry());
+		profileDTO.setUsername(profileFriend.getUser().getUsername());
+		profileDTO.setBirthday(dtf.print(profileFriend.getBirthday()));
+		profileDTO.setCreatedDate(dtf.print(profileFriend.getUser().getCreatedDate()));
 
 		if (profileFriend.getAvatar() != null) {
 			profileDTO.setAvatar(avatarStorage.getUrl(profileFriend.getAvatar()));
@@ -62,7 +76,19 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 			Profile profile = accountBusiness.findProfileByLoggedUser().get();
 			Long value = ratingRepository.compatibilityBetweenFriends(profile.getId(), profileFriend.getId());
 			profileDTO.setCompatibility(Compatibility.getCompatibility(Long.valueOf(value).intValue()));
+			
+			Optional<Friend> friendOptional = friendRepository.findFriendsById(profile.getId(), profileFriend.getId());
+			
+			if (friendOptional.isPresent()) {
+				profileDTO.setFriendStatus(friendOptional.get().getStatus().toString());
+			} else {
+				profileDTO.setFriendStatus(FriendStatus.NONE.toString());
+			}
+			
 		}
+		
+		List<RatingTargetDTO<?>> ratings = ratingRepository.findRatingsByIdProfile(profileFriend.getId());
+		profileDTO.setRatings(ratings);
 
 		return profileDTO;
 	}

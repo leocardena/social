@@ -8,6 +8,7 @@ public class UserRatingDTO {
 	
 	private Long id;
 	private Integer note;
+	private String date;
 	
 	public UserRatingDTO() {}
 
@@ -36,4 +37,12 @@ public class UserRatingDTO {
 		this.id = id;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 }

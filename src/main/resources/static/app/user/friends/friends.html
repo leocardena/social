@@ -2,9 +2,9 @@
 	<div class="row">
 		<div class="col-md-3 col-xs-12">
 			<ul id="sidebar" class="nav nav-stacked">
-				<li><a ui-sref="myFriends">{{'Amigos ' + '('
+				<li><a ui-sref="myFriends({username : vm.user.username})">{{'Amigos ' + '('
 						+ vm.myFriendsQtd + ')'}}</a></li>
-				<li><a ui-sref="pending">{{'Solicitações
+				<li><a ui-sref="pending({username : vm.user.username})">{{'Solicitações
 						' + '(' + vm.waitingFriendsQtd + ')'}}</a></li>
 				<li><a ui-sref="search-friends">Pesquisar
 						Usuários</a></li>

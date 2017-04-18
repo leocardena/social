@@ -48,6 +48,7 @@ public class RatingMovieBusinessImpl implements RatingMovieBusiness {
 		rating.setNote(titleRating.getRating().getNote());
 		rating.setProfile(profile.getId());
 		rating.setIdRatingParent(movie.getRatingParent());
+		rating.setTargetType("MOVIE");
 
 		Rating ratingStoraged = ratingRepository.save(rating);
 

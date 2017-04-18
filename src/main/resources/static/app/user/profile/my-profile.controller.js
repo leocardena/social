@@ -3,15 +3,15 @@
 
     angular
         .module('social.user.profile')
-        .controller('UserProfileController', UserProfileController);
+        .controller('MyProfileController', MyProfileController);
 
-    UserProfileController.$inject = ['UploadService', 'PrincipalService', '$rootScope'];
+    MyProfileController.$inject = ['UploadService', 'PrincipalService', '$rootScope', '$stateParams'];
 
-    function UserProfileController (UploadService, PrincipalService, $rootScope) {
+    function MyProfileController(UploadService, PrincipalService, $rootScope, $stateParams) {
         var vm = this;
         vm.defaultAvatar = 'content/images/avatar/avatar-300x300.png';
         vm.openUploadModal = _openUploadModal;
-        vm.user = PrincipalService.getUserInformation();
+        vm.user = $stateParams.user;
         
         function _openUploadModal(avatar) {
         	UploadService.openModal(avatar);

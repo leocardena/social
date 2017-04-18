@@ -4,19 +4,20 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="col-sm-3">
-					<img
-						ng-src="{{myFriend.avatar ? myFriend.avatar : vm.defaultAvatar}}"
-						alt="people" class="media-object img-circle"
-						style="height: 50px; width: 50px">
+					<a ui-sref="profile({username : myFriend.username})">
+						<img ng-src="{{myFriend.avatar ? myFriend.avatar : vm.defaultAvatar}}"
+							alt="people" class="media-object img-circle"
+							style="height: 50px; width: 50px">
+					</a>
 				</div>
 				<div class="col-sm-5">
 					<h4 class="media-heading ">
-						<a href="#">{{myFriend.name}}</a>
+						<a ui-sref="profile({username : myFriend.username})">{{myFriend.name}}</a>
 					</h4>
 				</div>
 				<div class="pull-right">
 					<button type="button" class="btn btn-default btn-sm">
-						Amigos <span class="glyphicon glyphicon-ok" aria-hidden="true">
+						Amigos <span class="glyphicon glyphicon-ok" asria-hidden="true">
 						</span>
 					</button>
 				</div>

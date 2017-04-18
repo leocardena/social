@@ -9,6 +9,7 @@ public class RatingDTO {
 	private Double average = 0.0;
 	private Long votes = 0L;
 	private Long idRatingParent;
+	private String type;
 	
 	public RatingDTO() {
 	}
@@ -40,6 +41,14 @@ public class RatingDTO {
 
 	public void setIdRatingParent(Long idRatingParent) {
 		this.idRatingParent = idRatingParent;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

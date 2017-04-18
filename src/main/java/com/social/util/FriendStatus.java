@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using = FriendStatusDeserializer.class)
 public enum FriendStatus {
 
-	ACCEPT("Accept"), REFUSED("Refused"), WAITING("Waiting");
+	ACCEPT("Accept"), REFUSED("Refused"), WAITING("Waiting"), NONE("None");
 
 	private String valor;
 

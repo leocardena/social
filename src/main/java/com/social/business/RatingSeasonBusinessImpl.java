@@ -90,6 +90,8 @@ public class RatingSeasonBusinessImpl implements RatingSeasonBusiness {
 		userRating.setIdRatingParent(ratingParent);
 		userRating.setNote(rating.getRating().getNote());
 		userRating.setProfile(profile.getId());
+		userRating.setTargetType("SEASON");
+
 
 		Rating ratingStored = ratingRepository.saveAndFlush(userRating);
 		UserRatingDTO u = new UserRatingDTO(ratingStored.getNote());

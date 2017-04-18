@@ -228,6 +228,7 @@ idRating INT NOT NULL,
 idRatingParent INT NOT NULL,
 idProfile INT NOT NULL,
 date TIMESTAMP NOT NULL DEFAULT NOW(),
+targetType VARCHAR(30), 
 note FLOAT NOT NULL DEFAULT 0.0
 )ENGINE=InnoDB;
 -- -----------------------------------------------------

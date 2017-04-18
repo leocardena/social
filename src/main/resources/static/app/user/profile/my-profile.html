@@ -1,0 +1,20 @@
+<div class="container">
+
+	<div class="text-center">
+		<div class="profile-image-container" ng-mouseenter="vm.options=true"
+			ng-mouseleave="vm.options=false">
+			<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}"
+				alt="" class="profile-image">
+			<button type="button"
+				class="btn btn-default btn-alterar-image-profile"
+				ng-show="vm.options" ng-click="vm.openUploadModal(vm.user.avatar)">
+				<span class="glyphicon glyphicon-camera"></span> Trocar Avatar
+			</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<h3 class="text-center">{{vm.user.name + ' ' + vm.user.lastName}}</h3>
+	</div>
+
+</div>

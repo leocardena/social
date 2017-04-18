@@ -4,14 +4,15 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="col-sm-3">
-					<img
-						ng-src="{{watingFriend.avatar ? watingFriend.avatar : vm.defaultAvatar}}"
+					<a ui-sref="profile({username : watingFriend.username})"> 
+					<img ng-src="{{watingFriend.avatar ? watingFriend.avatar : vm.defaultAvatar}}"
 						alt="people" class="media-object img-circle"
 						style="height: 50px; width: 50px">
+					</a>
 				</div>
 				<div class="col-sm-5">
 					<h4 class="media-heading ">
-						<a href="#">{{watingFriend.name}}</a>
+						<a ui-sref="profile({username : watingFriend.username})">{{watingFriend.name}}</a>
 					</h4>
 				</div>
 				<div class="pull-right">

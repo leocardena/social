@@ -11,8 +11,46 @@
 	border-radius: 50%;
 }
 
+.friend-profile-container {
+	height: 100%;
+}
+
+.friend-profile-top-banner {
+	height: 20%;
+    overflow: hidden;
+}
+
 .btn-alterar-image-profile {
 	position:absolute;
 	right:14%;
 	top:40%;
+}
+
+.fb-profile img.fb-image-lg{
+    z-index: 0;
+    width: 100%;  
+    margin-bottom: 10px;
+    margin-top: -20px;
+}
+
+.fb-image-profile
+{
+    margin: -90px 10px 20px 80px;
+    z-index: 9;
+    width: 20%; 
+}
+
+@media (max-width:768px){
+    
+.fb-profile-text>h1{
+    font-weight: 700;
+    font-size:16px;
+}
+
+.fb-image-profile
+{
+    margin: -45px 10px 0px 25px;
+    z-index: 9;
+    width: 20%; 
+}
 }

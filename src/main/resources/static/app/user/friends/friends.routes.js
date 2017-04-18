@@ -30,7 +30,7 @@
 		})
 
 		.state('myFriends', {
-			url : "/friends",
+			url : "/{username}/friends",
 			parent : 'friends',
 			data : {
 				authorities : [ 'ROLE_USER' ],
@@ -46,7 +46,7 @@
 		})
 		
 		.state('pending', {
-			url : "/friends/pending",
+			url : "/{username}/friends/pending",
 			parent : 'friends',
 			data : {
 				authorities : [ 'ROLE_USER' ],

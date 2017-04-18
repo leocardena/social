@@ -101,6 +101,7 @@ public class RatingEpisodeBusiness implements com.social.business.interfaces.Rat
 		userRating.setIdRatingParent(ratingParent);
 		userRating.setNote(rating.getRating().getNote());
 		userRating.setProfile(profile.getId());
+		userRating.setTargetType("EPISODE");
 
 		Rating ratingStored = ratingRepository.saveAndFlush(userRating);
 		UserRatingDTO u = new UserRatingDTO(ratingStored.getNote());

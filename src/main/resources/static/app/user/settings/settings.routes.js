@@ -11,7 +11,7 @@
 		$stateProvider
 		
 		.state('settings', {
-			url: '/settings',
+			url: '/{username}/settings',
 			parent : 'social',
 			data : {
 				authorities : [ 'ROLE_USER' ],

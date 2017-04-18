@@ -6,13 +6,14 @@
 
 	FriendsController.$inject = [ 'DomainFriendsService',
 			'waitingFriendsTotalPrepService', 'myFriendsTotalPrepService',
-			'$scope' ];
+			'$scope', 'PrincipalService'];
 
 	function FriendsController(DomainFriendsService,
-			waitingFriendsTotalPrepService, myFriendsTotalPrepService, $scope) {
+			waitingFriendsTotalPrepService, myFriendsTotalPrepService, $scope, PrincipalService) {
 		var vm = this;
 		vm.myFriendsQtd = myFriendsTotalPrepService.total;
 		vm.waitingFriendsQtd = waitingFriendsTotalPrepService.total;
+		vm.user = PrincipalService.getUserInformation();
 
 		$scope.$on('updateFriendsSidebar', function(event, data) {
 			getMyFriendsTotal();

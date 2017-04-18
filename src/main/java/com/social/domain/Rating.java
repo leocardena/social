@@ -37,6 +37,9 @@ public class Rating implements Serializable {
 	
 	@Column(name = "note")
 	private Integer note;
+	
+	@Column(name = "targettype")
+	private String targetType;
 
     public Rating () { }
 
@@ -84,7 +87,14 @@ public class Rating implements Serializable {
 	public void setIdRatingParent(RatingParent idRatingParent) {
 		this.idRatingParent = idRatingParent;
 	}
-	
+
+	public String getTargetType() {
+		return targetType;
+	}
+
+	public void setTargetType(String targetType) {
+		this.targetType = targetType;
+	}
 
 	@Override
 	public String toString() {
