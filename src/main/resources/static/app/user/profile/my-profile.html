@@ -4,7 +4,7 @@
 		<div class="profile-image-container" ng-mouseenter="vm.options=true"
 			ng-mouseleave="vm.options=false">
 			<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}"
-				alt="" class="profile-image">
+				alt="" class="profile-image img-circle">
 			<button type="button"
 				class="btn btn-default btn-alterar-image-profile"
 				ng-show="vm.options" ng-click="vm.openUploadModal(vm.user.avatar)">

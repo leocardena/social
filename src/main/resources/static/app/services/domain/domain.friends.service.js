@@ -34,6 +34,17 @@
 				params: {
 					friendId : '@friendId'
 				}
+			},
+			'postFriends' : {
+				method: 'POST',
+				url: DomainBase.friend
+			},
+			'deleteFriends' : {
+				method: 'DELETE',
+				url: DomainBase.friend + '/:friendId',
+				params: {
+					friendId : '@friendId'
+				}
 			}
 		} );
 		
