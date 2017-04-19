@@ -138,8 +138,8 @@ public class FriendBusinessImpl implements FriendBusiness {
 			profileDTO.setUsername(friendProfile.getUser().getUsername());
 			profileDTO.setCountry(friendProfile.getCountry());
 
-			if (profileDTO.getAvatar() != null) {
-				profileDTO.setAvatar(avatarStorage.getUrl(profileDTO.getAvatar()));
+			if (friendProfile.getAvatar() != null) {
+				profileDTO.setAvatar(avatarStorage.getUrl(friendProfile.getAvatar()));
 			}
 
 			Long value = ratingRepository.compatibilityBetweenFriends(profileLogado.getId(), friendProfile.getId());
@@ -175,8 +175,8 @@ public class FriendBusinessImpl implements FriendBusiness {
 			profileDTO.setUsername(friendProfile.getUser().getUsername());
 			profileDTO.setCountry(friendProfile.getCountry());
 
-			if (profileDTO.getAvatar() != null) {
-				profileDTO.setAvatar(avatarStorage.getUrl(profileDTO.getAvatar()));
+			if (friendProfile.getAvatar() != null) {
+				profileDTO.setAvatar(avatarStorage.getUrl(friendProfile.getAvatar()));
 			}
 
 			Long value = ratingRepository.compatibilityBetweenFriends(profileLogado.getId(), friendProfile.getId());

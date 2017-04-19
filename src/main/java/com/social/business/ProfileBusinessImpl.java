@@ -118,8 +118,8 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 			profileDTO.setUsername(p.getUser().getUsername());
 			profileDTO.setCountry(p.getCountry());
 
-			if (profileDTO.getAvatar() != null) {
-				profileDTO.setAvatar(avatarStorage.getUrl(profileDTO.getAvatar()));
+			if (p.getAvatar() != null) {
+				profileDTO.setAvatar(avatarStorage.getUrl(p.getAvatar()));
 			}
 			
 			if (accountBusiness.findProfileByLoggedUser() != null) {
