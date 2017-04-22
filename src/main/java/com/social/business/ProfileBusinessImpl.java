@@ -80,7 +80,16 @@ public class ProfileBusinessImpl implements ProfileBusiness {
 			Optional<Friend> friendOptional = friendRepository.findFriendsById(profile.getId(), profileFriend.getId());
 			
 			if (friendOptional.isPresent()) {
-				profileDTO.setFriendStatus(friendOptional.get().getStatus().toString());
+				Friend friendShip = friendOptional.get();
+				if (friendShip.getStatus() == FriendStatus.WAITING) {
+					if (friendShip.getId().getFriend() == profile.getId()) {
+						profileDTO.setFriendStatus("Pending");
+					} else {
+						profileDTO.setFriendStatus(friendShip.getStatus().toString());
+					}
+				} else {
+					profileDTO.setFriendStatus(friendShip.getStatus().toString());
+				}
 			} else {
 				profileDTO.setFriendStatus(FriendStatus.NONE.toString());
 			}

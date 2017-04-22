@@ -2,7 +2,6 @@ package com.social.web.rest;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -60,6 +59,11 @@ public class FriendREST {
 	@GetMapping
 	public ResponseEntity<?> getAll(Pageable pageable, @RequestParam("status") String status) {
 		return ResponseEntity.ok(friendBusiness.getFriends(pageable, status));
+	}
+	
+	@GetMapping(value = "/{username}/friends")
+	public ResponseEntity<?> getAllFriends(Pageable pageable, @PathVariable("username") String username) {
+		return ResponseEntity.ok(friendBusiness.getFriendsByUsername(pageable, username));
 	}
 	
 	/**

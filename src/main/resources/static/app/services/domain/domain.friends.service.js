@@ -45,6 +45,16 @@
 				params: {
 					friendId : '@friendId'
 				}
+			},
+			'getFriendsByUsername' : {
+				method: 'GET',
+				url: DomainBase.friend + '/:username/friends',
+				params: {
+					username : '@username',
+					page: '@page',
+					size: '@size'
+				},
+				isArray : false
 			}
 		} );
 		

@@ -22,6 +22,7 @@
 		// methods
 		vm.pageWatingFriendsChanged = _pageWatingFriendsChanged;
 		vm.replyRequest = _replyRequest;
+        vm.removeFriend = _removeFriend;
 		
 		function _replyRequest(action, friend) {
         	vm.isLoadingReply = true;
@@ -48,6 +49,16 @@
 				vm.waitingFriendsCurrentPage = data.number + 1;
 			});
 		}
+		
+        function _removeFriend(idFriend) {
+        	DomainFriendsService.deleteFriends({
+        		friendId : idFriend
+        	}).$promise.then(function (data) {
+	     		refreshFriendsData();
+        	}).catch(function (err) {
+        		console.log('error');
+        	});
+        }
 		
 		function refreshFriendsData() {
 			getWatingFriends();

@@ -14,6 +14,7 @@ import com.social.domain.Friend;
 import com.social.domain.FriendPK;
 import com.social.domain.Profile;
 import com.social.repository.FriendRepository;
+import com.social.repository.ProfileRepository;
 import com.social.repository.RatingRepository;
 import com.social.storage.AvatarStorage;
 import com.social.util.Compatibility;
@@ -31,6 +32,9 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 	@Autowired
 	private FriendRepository friendRepository;
+
+	@Autowired
+	private ProfileRepository profileRepository;
 
 	@Autowired
 	private AccountBusiness accountBussiness;
@@ -78,7 +82,13 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 		Profile friendSearch = profileBusiness.getProfile(idFriend);
 		Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
-		FriendPK friendPK = new FriendPK(profileLogado.getId(), friendSearch.getId());
+		Optional<Friend> friendOptinal = friendRepository.findFriendsById(profileLogado.getId(), friendSearch.getId());
+		
+		if (!friendOptinal.isPresent())
+			throw new ResourceNotFoundException("Amigo não encontrado");
+		
+		Friend friend = friendOptinal.get();
+		FriendPK friendPK = new FriendPK(friend.getId().getProfile(), friend.getId().getFriend());
 
 		friendRepository.delete(friendPK);
 
@@ -204,6 +214,50 @@ public class FriendBusinessImpl implements FriendBusiness {
 		} else {
 			return friendRepository.countWatingFriends(FriendStatus.WAITING, profileLogado.getId());
 		}
+	}
+
+	@Override
+	public PageableResponse<ProfileDTO> getFriendsByUsername(Pageable pageable, String username) {
+		Optional<Profile> profileOptinal = profileRepository.findOneByUsername(username);
+		if (!profileOptinal.isPresent())
+			throw new ResourceNotFoundException("Profile não encontrado");
+
+		Profile profile = profileOptinal.get();
+		Page<Friend> friendsPageable = friendRepository.findAllFriends(FriendStatus.ACCEPT, profile.getId(), pageable);
+		List<ProfileDTO> listFriendsDTO = new ArrayList<>();
+
+		friendsPageable.getContent().forEach(f -> {
+			Profile friendProfile;
+
+			if (f.getId().getFriend() != profile.getId()) {
+				friendProfile = profileBusiness.getProfile(f.getId().getFriend());
+			} else {
+				friendProfile = profileBusiness.getProfile(f.getId().getProfile());
+			}
+
+			ProfileDTO profileDTO = new ProfileDTO();
+			profileDTO.setId(friendProfile.getId());
+			profileDTO.setGenre(friendProfile.getGenre());
+			profileDTO.setName(friendProfile.getName());
+			profileDTO.setUsername(friendProfile.getUser().getUsername());
+			profileDTO.setCountry(friendProfile.getCountry());
+
+			if (friendProfile.getAvatar() != null) {
+				profileDTO.setAvatar(avatarStorage.getUrl(friendProfile.getAvatar()));
+			}
+
+			listFriendsDTO.add(profileDTO);
+
+		});
+
+		PageableResponse<ProfileDTO> pageableResponse = new PageableResponse<>();
+		pageableResponse.setContent(listFriendsDTO);
+		pageableResponse.setTotalPages(friendsPageable.getTotalPages());
+		pageableResponse.setNumber(friendsPageable.getNumber());
+		pageableResponse.setTotalElements(friendsPageable.getTotalElements());
+		pageableResponse.setSize(friendsPageable.getSize());
+
+		return pageableResponse;
 	}
 
 }

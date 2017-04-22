@@ -69,6 +69,9 @@
 	    			controller: 'OtherProfileController',
 	    			controllerAs : 'vm',
 	    		}
+	    	},
+	    	resolve: {
+	    		friendsByUsernamePrepService : friendsByUsernamePrepService
 	    	}
 	    });
 		
@@ -83,6 +86,21 @@
         	}).catch(function (err) {
         		return 'NOT-FOUND';
         	});
+		}
+		
+		friendsByUsernamePrepService.$inject = ['DomainFriendsService', '$stateParams'];
+		
+		/*@ngInject*/
+		function friendsByUsernamePrepService(DomainFriendsService, $stateParams) {
+			return DomainFriendsService.getFriendsByUsername({
+				username : $stateParams.user.username,
+				page: 0,
+				size: 10
+			}).$promise.then(function (data) {
+				return data;
+			}).catch(function (err) {
+				return 'ERROR';
+			});
 		}
 		
 	}
