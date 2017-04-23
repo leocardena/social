@@ -88,7 +88,10 @@
 			</div>
 		</uib-tab>
 		<uib-tab index="1" heading="Atividades Recentes" class="tab-pane">
-			<div class="table-responsive">
+			<div class="text-center" ng-if="!vm.user.ratings.length > 0">
+					<label>Não há atividades recentes no momento</label>
+			</div>
+			<div class="table-responsive" ng-if="vm.user.ratings.length > 0">
 				<table class="table">
 					<tbody>
 						<tr ng-repeat="rating in vm.user.ratings">
@@ -121,7 +124,10 @@
 			</div>		
 		</uib-tab> 
 		<uib-tab index="2" heading="{{'Amigos (' + vm.friendsTotalItens + ')'}}" class="tab-pane"> 
-				<div ng-repeat="friend in vm.friends">
+				<div class="text-center" ng-if="!vm.friends.length > 0">
+					<label>Não há amigos adicionados no momento</label>
+				</div>
+				<div ng-repeat="friend in vm.friends" ng-if="vm.friends.length > 0">
 					<div class="col-sm-6">
 						<div class="panel panel-default">
 							<div class="panel-body">
