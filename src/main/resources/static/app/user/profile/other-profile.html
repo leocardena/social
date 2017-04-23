@@ -1,15 +1,20 @@
 <div class="container-fluid">
 	<div class="row">
+		
 		<div class="fb-profile">
 			<img align="left" class="fb-image-lg "
-				src="http://lorempixel.com/850/280/abstract/"
+				src="/content/images/background/Batman-2.jpg"
 				alt="Profile image example" /> 
 			<img align="left"
 				ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}"
 				alt="" class="fb-image-profile img-circle">
 			<div class="fb-profile-text">
-				<h3>{{vm.user.name + ' ' + vm.user.lastName}}</h3>
-				<p>{{vm.user.username + ' • desde ' + vm.user.createdDate}}</p>
+				<div class="fb-profile-title">
+					<h3 class="fb-profile-title-text">{{vm.user.name + ' ' + vm.user.lastName}}</h3>
+				</div>
+				<div class="fb-profile-subtitle">
+					<p>{{vm.user.username + ' - usuário desde ' + vm.user.createdDate}}</p>
+				</div>
 				
 				<div class="btn-group" uib-dropdown ng-if="vm.user.friendStatus === 'Pending'">
 						<button id="single-button" type="button"
@@ -25,6 +30,8 @@
 								ng-click="vm.removeFriend(vm.user.id)"><a>Recusar</a></li>
 						</ul>
 				</div>
+				
+				
 				<div class="btn-group" uib-dropdown ng-if="vm.user.friendStatus === 'Accept'">
 						<button id="single-button" type="button"
 							class="btn btn-default btn-sm" uib-dropdown-toggle
@@ -38,8 +45,8 @@
 						</ul>
 				</div>
 				
-				<button ng-click="vm.addFriend(vm.user.id)" ng-if="vm.user.friendStatus === 'None'">Adiconar</button>
-				<button ng-click="vm.replyRequest('Waiting', vm.user)" ng-if="vm.user.friendStatus === 'Refused'">Adiconar</button>
+				<button ng-click="vm.addFriend(vm.user.id)" ng-if="vm.user.friendStatus === 'None'">Adicionar</button>
+				<button ng-click="vm.replyRequest('Waiting', vm.user)" ng-if="vm.user.friendStatus === 'Refused'">Adicionar</button>
 				<button ng-click="vm.removeFriend(vm.user.id)" ng-if="vm.user.friendStatus === 'Waiting'">Remover Solicitação</button>
 			</div>
 			
