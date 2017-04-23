@@ -228,14 +228,32 @@ public class FriendBusinessImpl implements FriendBusiness {
 
 		friendsPageable.getContent().forEach(f -> {
 			Profile friendProfile;
+			ProfileDTO profileDTO = new ProfileDTO();
 
 			if (f.getId().getFriend() != profile.getId()) {
 				friendProfile = profileBusiness.getProfile(f.getId().getFriend());
 			} else {
 				friendProfile = profileBusiness.getProfile(f.getId().getProfile());
 			}
+			
+			Profile profileLogado = accountBussiness.findProfileByLoggedUser().get();
+			Optional<Friend> friendOptional = friendRepository.findFriendsById(profileLogado.getId(), friendProfile.getId());
+			
+			if (friendOptional.isPresent()) {
+				Friend friendShip = friendOptional.get();
+				if (friendShip.getStatus() == FriendStatus.WAITING) {
+					if (friendShip.getId().getFriend() == profileLogado.getId()) {
+						profileDTO.setFriendStatus("Pending");
+					} else {
+						profileDTO.setFriendStatus(friendShip.getStatus().toString());
+					}
+				} else {
+					profileDTO.setFriendStatus(friendShip.getStatus().toString());
+				}
+			} else {
+				profileDTO.setFriendStatus(FriendStatus.NONE.toString());
+			}
 
-			ProfileDTO profileDTO = new ProfileDTO();
 			profileDTO.setId(friendProfile.getId());
 			profileDTO.setGenre(friendProfile.getGenre());
 			profileDTO.setName(friendProfile.getName());

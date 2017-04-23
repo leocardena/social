@@ -8,6 +8,7 @@ public class EpisodeDTO {
 	private Long number;
 	private String aired;
 	private RatingDTO rating;
+	private String tvShowName;
 
 	public Long getIdEpisode() {
 		return idEpisode;
@@ -57,4 +58,12 @@ public class EpisodeDTO {
 		this.rating = rating;
 	}
 
+	public String getTvShowName() {
+		return tvShowName;
+	}
+
+	public void setTvShowName(String tvShowName) {
+		this.tvShowName = tvShowName;
+	}
+	
 }

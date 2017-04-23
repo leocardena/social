@@ -37,7 +37,7 @@ public class Season implements Serializable {
 	@Column(name = "number")
 	private Integer number;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "season")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "season")
 	private List<Episode> episodes = new ArrayList<Episode>();
 
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")

@@ -8,6 +8,7 @@ public class SeasonDTO {
 	private Integer number;
 	private String aired;
 	private RatingDTO rating;
+	private String tvShowName;
 
 	public long getId() {
 		return id;
@@ -55,6 +56,14 @@ public class SeasonDTO {
 
 	public void setRating(RatingDTO rating) {
 		this.rating = rating;
+	}
+
+	public String getTvShowName() {
+		return tvShowName;
+	}
+
+	public void setTvShowName(String tvShowName) {
+		this.tvShowName = tvShowName;
 	}
 
 }

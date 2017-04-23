@@ -186,6 +186,12 @@ public class RatingRepositoryImpl implements RatingRepositoryCustom {
 						.from(season)
 						.where(season.ratingParent.eq(r.getIdRatingParent()))
 						.fetchOne();
+					
+					TvShow tvShowSeasonResult = new JPAQueryFactory(em)
+							.select(tvShow)
+							.from(tvShow)
+							.where(tvShow.id.eq(seasonResult.getTvShow()))
+							.fetchOne();
 			
 					UserRatingDTO userSeasonRating = new UserRatingDTO();
 					userSeasonRating.setId(r.getIdRating());
@@ -197,6 +203,7 @@ public class RatingRepositoryImpl implements RatingRepositoryCustom {
 					seasonDTO.setName(seasonResult.getName());
 					seasonDTO.setId(seasonResult.getIdSeason());
 					seasonDTO.setIdTvShow(seasonResult.getTvShow());
+					seasonDTO.setTvShowName(tvShowSeasonResult.getName());
 					
 					result.add(new RatingTargetDTO<SeasonDTO>(userSeasonRating, seasonDTO, r.getTargetType()));
 					break;
@@ -206,6 +213,14 @@ public class RatingRepositoryImpl implements RatingRepositoryCustom {
 						.from(episode)
 						.where(episode.ratingParent.eq(r.getIdRatingParent()))
 						.fetchOne();
+					
+					TvShow tvShowEpisodeResult = new JPAQueryFactory(em)
+							.select(tvShow)
+							.from(tvShow)
+							.join(tvShow.season, season)
+							.join(season.episodes, episode)
+							.where(episode.idEpisode.eq(episodeResult.getIdEpisode()))
+							.fetchOne();
 		
 					UserRatingDTO userEpisodeRating = new UserRatingDTO();
 					userEpisodeRating.setId(r.getIdRating());
@@ -217,6 +232,7 @@ public class RatingRepositoryImpl implements RatingRepositoryCustom {
 					episodeDTO.setName(episodeResult.getName());
 					episodeDTO.setNumber(Long.valueOf(episodeResult.getNumber()));
 					episodeDTO.setSeason(episodeResult.getSeason());
+					episodeDTO.setTvShowName(tvShowEpisodeResult.getName());
 					
 					result.add(new RatingTargetDTO<EpisodeDTO>(userEpisodeRating, episodeDTO, r.getTargetType()));
 					break;

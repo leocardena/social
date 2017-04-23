@@ -1,22 +1,20 @@
 <div class="container-fluid">
 	<div class="row">
-		
+
 		<div class="fb-profile">
 			<img align="left" class="fb-image-lg "
 				src="/content/images/background/Batman-2.jpg"
-				alt="Profile image example" /> 
-			<img align="left"
+				alt="Profile image example" /> <img align="left"
 				ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}"
 				alt="" class="fb-image-profile img-circle">
 			<div class="fb-profile-text">
 				<div class="fb-profile-title">
-					<h3 class="fb-profile-title-text">{{vm.user.name + ' ' + vm.user.lastName}}</h3>
+					<h3 class="fb-profile-title-text">{{vm.user.name + ' ' +
+						vm.user.lastName}}</h3>
 				</div>
-				<div class="fb-profile-subtitle">
-					<p>{{vm.user.username + ' - usuário desde ' + vm.user.createdDate}}</p>
-				</div>
-				
-				<div class="btn-group" uib-dropdown ng-if="vm.user.friendStatus === 'Pending'">
+				<div class="btn-friend-group">
+					<div class="btn-group" uib-dropdown
+						ng-if="vm.user.friendStatus === 'Pending'">
 						<button id="single-button" type="button"
 							class="btn btn-default btn-sm" uib-dropdown-toggle
 							ng-disabled="vm.isLoadingReply">
@@ -24,15 +22,13 @@
 						</button>
 						<ul class="dropdown-menu" uib-dropdown-menu role="menu"
 							aria-labelledby="single-button">
-							<li role="menuitem"
-								ng-click="vm.replyRequest('Accept', vm.user)"><a>Confirmar</a></li>
-							<li role="menuitem"
-								ng-click="vm.removeFriend(vm.user.id)"><a>Recusar</a></li>
+							<li role="menuitem" ng-click="vm.replyRequest('Accept', vm.user)"><a>Confirmar</a></li>
+							<li role="menuitem" ng-click="vm.removeFriend(vm.user.id)"><a>Recusar</a></li>
 						</ul>
-				</div>
-				
-				
-				<div class="btn-group" uib-dropdown ng-if="vm.user.friendStatus === 'Accept'">
+					</div>
+
+					<div class="btn-group" uib-dropdown
+						ng-if="vm.user.friendStatus === 'Accept'">
 						<button id="single-button" type="button"
 							class="btn btn-default btn-sm" uib-dropdown-toggle
 							ng-disabled="vm.isLoadingReply">
@@ -40,50 +36,180 @@
 						</button>
 						<ul class="dropdown-menu" uib-dropdown-menu role="menu"
 							aria-labelledby="single-button">
-							<li role="menuitem"
-								ng-click="vm.removeFriend(vm.user.id)"><a>Remover Amizade</a></li>
+							<li role="menuitem" ng-click="vm.removeFriend(vm.user.id)"><a>Remover
+									Amizade</a></li>
 						</ul>
+					</div>
+
+					<button class="btn btn-default" ng-click="vm.addFriend(vm.user.id)"
+						ng-if="vm.user.friendStatus === 'None'">Adicionar</button>
+					<button class="btn btn-default"
+						ng-click="vm.replyRequest('Waiting', vm.user)"
+						ng-if="vm.user.friendStatus === 'Refused'">Adicionar</button>
+					<button class="btn btn-default"
+						ng-click="vm.removeFriend(vm.user.id)"
+						ng-if="vm.user.friendStatus === 'Waiting'">Remover
+						Solicitação</button>
 				</div>
-				
-				<button ng-click="vm.addFriend(vm.user.id)" ng-if="vm.user.friendStatus === 'None'">Adicionar</button>
-				<button ng-click="vm.replyRequest('Waiting', vm.user)" ng-if="vm.user.friendStatus === 'Refused'">Adicionar</button>
-				<button ng-click="vm.removeFriend(vm.user.id)" ng-if="vm.user.friendStatus === 'Waiting'">Remover Solicitação</button>
+
 			</div>
-			
+
 		</div>
 	</div>
 </div>
 <!-- /container fluid-->
 <div class="container">
-	<div class="col-sm-12">
-
+	<div class="col-sm-8 tabbable-panel">
+		<uib-tabset active="activeJustified" justified="true"
+			class="tabbable-line"> 
+		<uib-tab index="0" heading="Sobre" class="tab-pane active">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Usuário:</label>
+					<p>{{vm.user.username}}</p>
+				</div>
+				<div class="form-group">
+					<label>Usuário Desde:</label>
+					<p>{{vm.user.createdDate}}</p>
+				</div>
+				<div class="form-group">
+					<label>Aniversário:</label>
+					<p>{{vm.user.birthday}}</p>
+				</div>
+				<div class="form-group">
+					<label>Gênero:</label>
+					<p ng-show="vm.user.genre === 'M'">Masculino</p>
+					<p ng-show="vm.user.genre === 'F'">Feminino</p>
+				</div>
+				<div class="form-group">
+					<label>País:</label>
+					<p>{{vm.user.country}}</p>
+				</div>
+			</div>
+		</uib-tab>
+		<uib-tab index="1" heading="Atividades Recentes" class="tab-pane">
+			<div class="table-responsive">
+				<table class="table">
+					<tbody>
+						<tr ng-repeat="rating in vm.user.ratings">
+							<td>
+						    	<span class="glyphicon" ng-class="{'glyphicon-film': rating.type == 'MOVIE',
+						    	'glyphicon-user': rating.type == 'ACTOR', 'glyphicon-person': rating.type == 'ACTOR',
+						    	'glyphicon-question-sign': rating.type == 'TVSHOW' || rating.type == 'SEASON' || rating.type == 'EPISODE'}"></span>
+								<span ng-show="rating.type === 'ACTOR' || rating.type === 'MOVIE' || rating.type === 'TVSHOW'">
+									{{rating.title.name}}
+								</span>
+								<span ng-show="rating.type === 'SEASON'">
+									{{'Temporada ' + rating.title.number + ' (' + rating.title.tvShowName + ')'}}
+								</span>
+								<span ng-show="rating.type === 'EPISODE'">
+									{{rating.title.name + ' (' + 'Temporada ' + rating.title.season + ' - ' + rating.title.tvShowName + ')'}}
+								</span>
+						    </td>
+						    <td>
+						    	<span class="" style="background-color: #fff">
+									<ng-rate-it ng-model="rating.rating.note" step="1" max="5" read-only="true"></ng-rate-it>
+								</span>
+						    </td>
+						    <td>
+						    	<span class="glyphicon glyphicon-calendar"></span>
+					 			<span>{{rating.rating.date}}</span>
+						    </td>
+						 </tr>
+					</tbody>
+				</table>		
+			</div>		
+		</uib-tab> 
+		<uib-tab index="2" heading="{{'Amigos (' + vm.friendsTotalItens + ')'}}" class="tab-pane"> 
+				<div ng-repeat="friend in vm.friends">
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="col-sm-3">
+									<a ui-sref="profile({username : friend.username})">
+										<img ng-src="{{friend.avatar ? friend.avatar : vm.defaultAvatar}}"
+											alt="people" class="media-object img-circle"
+											style="height: 50px; width: 50px">
+									</a>
+								</div>
+								<div class="col-sm-5">
+									<h4 class="media-heading ">
+										<a ui-sref="profile({username : friend.username})">{{friend.name}}</a>
+									</h4>
+								</div>
+								<div class="pull-right" ng-if="vm.loggedId != friend.id">
+									<div class="btn-group" uib-dropdown
+										ng-if="friend.friendStatus === 'Pending'">
+										<button id="single-button" type="button"
+											class="btn btn-default btn-sm" uib-dropdown-toggle
+											ng-disabled="vm.isLoadingReply">
+											Responder Solicitação <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+											aria-labelledby="single-button">
+											<li role="menuitem" ng-click="vm.replyRequestFromList('Accept', friend)"><a>Confirmar</a></li>
+											<li role="menuitem" ng-click="vm.removeFriendFromList(friend.id)"><a>Recusar</a></li>
+										</ul>
+									</div>
+				
+									<div class="btn-group" uib-dropdown
+										ng-if="friend.friendStatus === 'Accept'">
+										<button id="single-button" type="button"
+											class="btn btn-default btn-sm" uib-dropdown-toggle
+											ng-disabled="vm.isLoadingReply">
+											Amigos <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+											aria-labelledby="single-button">
+											<li role="menuitem" ng-click="vm.removeFriendFromList(friend.id)"><a>Remover
+													Amizade</a></li>
+										</ul>
+									</div>
+				
+									<button class="btn btn-default"
+										ng-click="vm.replyRequestFromList('Waiting', friend)"
+										ng-if="friend.friendStatus === 'Refused'">Adicionar</button>
+									<button class="btn btn-default"
+										ng-click="vm.removeFriendFromList(friend.id)"
+										ng-if="friend.friendStatus === 'Waiting'">Remover
+										Solicitação</button>
+									<button class="btn btn-default" ng-click="vm.addFriendFromList(friend.id)"
+										ng-if="friend.friendStatus === 'None'">Adicionar
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12" ng-if="vm.friends.length > 0">
+					<div class="text-center">
+						<ul uib-pagination total-items="vm.friendsTotalItens"
+							ng-model="vm.friendsCurrentPage"
+							items-per-page="vm.friendsItensPerPage" class="pagination-sm"
+							boundary-links="true" num-pages="vm.friendsTotalPages"
+							ng-change="vm.pageMyFriendsChanged()" last-text="Última"
+							first-text="Primeira" next-text="Próxima" previous-text="Anterior">
+						</ul>
+					</div>
+				</div>
+		</uib-tab> 
+		</uib-tabset>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-default">
+			<div class="menu-title text-center">Compatibilidade</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<span ng-if="vm.user.compatibility === 'Nenhuma'">{{vm.user.compatibility}}</span>
+						<span ng-if="vm.user.compatibility === 'Baixa'">{{vm.user.compatibility}}</span>
+						<span ng-if="vm.user.compatibility === 'Boa'">{{vm.user.compatibility}}</span>
+						<span ng-if="vm.user.compatibility === 'Otima'">{{vm.user.compatibility}}</span>
+						<span ng-if="vm.user.compatibility === 'Super'">{{vm.user.compatibility}}</span>
+						<span ng-if="vm.user.compatibility === 'Heroica'">{{vm.user.compatibility}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-
-
-<!--  <div class="col-md-12 friend-profile-container">
-	<div class="row friend-profile-top-banner" style="background-image: url(https://lastfm-img2.akamaized.net/i/u/ar0/43fe7ffe59154a81ab7b2b5c0283b2ae.jpg)">
-		<div class="img-circle text-center">
-			<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}" alt="" class="friend-profile-header-image">
-		</div>
-		<div class="friend-profile-header-info">
-			<h3>{{vm.user.name + ' ' + vm.user.lastName}}</h3>
-			<p>{{vm.user.username + ' • desde ' + vm.user.createdDate}}</p>
-		</div>
-	</div>
-</div>-->
-
-
-
-<!-- <div class="container">
-	
-	<div class="media-object img-circle text-center">
-		<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}" alt="" class="profile-image">
-	</div>
-	
-	<div class="row">
-		<h3 class="text-center">{{vm.user.name + ' ' + vm.user.lastName}}</h3>
-	</div>
-	{{vm.user | json}}
-	
-</div>-->
