@@ -97,10 +97,14 @@
 						<tr ng-repeat="rating in vm.user.ratings">
 							<td>
 						    	<span class="glyphicon" ng-class="{'glyphicon-film': rating.type == 'MOVIE',
-						    	'glyphicon-user': rating.type == 'ACTOR', 'glyphicon-person': rating.type == 'ACTOR',
-						    	'glyphicon-question-sign': rating.type == 'TVSHOW' || rating.type == 'SEASON' || rating.type == 'EPISODE'}"></span>
+						    	'glyphicon-user': rating.type == 'ACTOR', 'glyphicon-person': rating.type == 'ACTOR'}" style="display:inline"></span>
+								
+								<span  ng-show="rating.type == 'TVSHOW' || rating.type =='SEASON' || rating.type =='EPISODE'">
+								 <img src="content/images/tv/television-icon.png" style="padding-right:0px;">
+								 </span>
+								 
 								<span ng-show="rating.type === 'ACTOR' || rating.type === 'MOVIE' || rating.type === 'TVSHOW'">
-									{{rating.title.name}}
+									{{rating.title.name}} 
 								</span>
 								<span ng-show="rating.type === 'SEASON'">
 									{{'Temporada ' + rating.title.number + ' (' + rating.title.tvShowName + ')'}}
