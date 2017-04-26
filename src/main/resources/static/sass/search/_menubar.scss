@@ -1,23 +1,29 @@
 .menuBar{
-	background-color: $red-secondary;
-	height: 100vh;
+	background-color: $white;
 	.searchTitle{
-		color: $white;
+		color: $red-primary;
 		text-align: center;
 		font-weight: 700;
 		font-size: 4rem;
 		letter-spacing: -3px;
-		padding-top: 40px;
+		padding: 10px 0;
+	}
+	.searchTabs{
+		border-bottom:1px solid rgba(0,0,255,0.25);
 	}
 	.newSearch{
 		margin: 20px;
+	}
+	.searchPage{
+		font-size: 2vh;
+		margin-bottom: 15px;
 	}
 	.result{
 		margin-top: 20px;
 		text-align: center;
 		line-height: 70%;
 		.searchResultado{
-			color: $white;
+			color: $red-primary;
 		}
 	}
 }
@@ -56,6 +62,10 @@
 			}	
 		}
 	}
+}
+
+.pagination-sm ul {
+	background-color: $red-primary;
 }
 
 @media ( max-width : 991px) {

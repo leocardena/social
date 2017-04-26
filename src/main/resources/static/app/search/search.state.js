@@ -33,7 +33,7 @@
         /*@ngInject*/
         function searchPrepService (TraktSearchService, $stateParams) {
         	return TraktSearchService.getSearch({
-        		limit : 15,
+        		limit : 18,
         		page : $stateParams.page,
         		query : $stateParams.query,
         		type : $stateParams.type === 'all' ? 'movie,show,person' : $stateParams.type,

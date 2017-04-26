@@ -1,15 +1,33 @@
-<div class="col-sm-3 col-md-2 menuBar">
-	
-			<h2 class="control-label searchTitle">Pesquisa</h2>
+<div class="col-sm-12 col-md-12 menuBar">
+			<!--- pesquisa <h2 class="control-label searchTitle col-md-6 col-md-offset-3">Sua Busca</h2> -->
+			
+			<img src="/content/images/search/search.jpg" class="img-responsive center-block" style="padding: 20px 0;">
+			
+		<div class="searchTabs text-center col-md-6 col-md-offset-3">
+			<label class="control-label" style="cursor:pointer;" ng-style="{'color':(vm.type === 'movie' ? 'red' : 'none')}"
+				ng-click="vm.type != 'movie' ? vm.search(1, vm.searchInput.text, 'movie') : null">Filmes</label>
+			
+			<label class="control-label" style="margin-left: 3vw; cursor:pointer;" ng-style="{'color':(vm.type === 'show' ? 'red' :'none')}"
+				ng-click="vm.type != 'show' ? vm.search(1, vm.searchInput.text, 'show') : null">Series</label>
+			
+			<label class="control-label" style="margin-left: 3vw; cursor:pointer;" ng-style="{'color':(vm.type === 'person' ? 'red' : 'none')}"
+				ng-click="vm.type != 'person' ? vm.search(1, vm.searchInput.text, 'person') : null">Pessoas</label>
+		
+			<label class="control-label" style="margin-left: 3vw; cursor:pointer;" ng-style="{'color':(vm.type === 'all' ? 'red' : 'none')}"
+				ng-click="vm.type != 'all' ? vm.search(1, vm.searchInput.text, 'all') : null">Todos</label>
+		
+		</div >
+		
+		<div class="col-md-6 col-md-offset-3 searchResult">
 			<p class="result">
 			<label>Encontramos </label>
 			<label class="control-label searchResultado"> {{vm.totalResults}} </label>
 			<label> resultados para </label> 
 			<label class="control-label searchResultado">"{{vm.query}}"</label>
 			</p>
-		
+		</div>
 		<div class="newSearch">
-			<form class="form-horizontal" role="form" novalidate ng-submit="vm.searchInput.text ? 
+			<form class="form-horizontal col-md-6 col-md-offset-3" role="form" novalidate ng-submit="vm.searchInput.text ? 
 				vm.search(1, vm.searchInput.text, vm.type) : null">
 				<div class="form-group ">
 					<label class="control-label">Nova Pesquisa</label>
@@ -18,26 +36,13 @@
 			</form>
 		</div>
 			
-		<div class="text-center">
-			<label class="control-label" ng-style="{'color':(vm.type === 'movie' ? 'white' : 'none')}"
-				ng-click="vm.type != 'movie' ? vm.search(1, vm.searchInput.text, 'movie') : null">Filmes</label>
-			<br>
-			<label class="control-label" ng-style="{'color':(vm.type === 'show' ? 'white' :'none')}"
-				ng-click="vm.type != 'show' ? vm.search(1, vm.searchInput.text, 'show') : null">Series</label>
-			<br>
-			<label class="control-label" ng-style="{'color':(vm.type === 'person' ? 'white' : 'none')}"
-				ng-click="vm.type != 'person' ? vm.search(1, vm.searchInput.text, 'person') : null">Pessoas</label>
-			<br>
-			<label class="control-label" ng-style="{'color':(vm.type === 'all' ? 'white' : 'none')}"
-				ng-click="vm.type != 'all' ? vm.search(1, vm.searchInput.text, 'all') : null">Todos</label>
-		</div>	
-		
-		<div class=" text-center" ng-hide="vm.results.length == 0">
+
+		<div class="searchPage col-sm-12 col-md-3 col-md-offset-9 " ng-hide="vm.results.length == 0">
 			<label class="control-label">Você está visualizando a página: {{vm.page}} de {{vm.totalPages}}</label>
 		</div>
 	</div>
 	
-	<div class="col-sm-9 col-md-10 searchBody">
+	<div class="col-sm-12 col-md-10 col-md-offset-1 searchBody">
 		
 		<div id="hasSearchResults" ng-hide="vm.results.length == 0">
 			
@@ -68,9 +73,9 @@
 				</div>
 			
 
-					<div class="row col-md-offset-3">
+					<div class="col-md-offset-4 col-md-8">
 						<ul uib-pagination total-items="vm.totalResults" ng-model="vm.page" max-size="vm.maxSize"
-							class="pagination-sm" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"
+							class="pagination-sm searchPagination" boundary-links="true" force-ellipses="true" items-per-page="vm.itemsPerPage"
 							first-text="Primeira" last-text="Última" next-text="Próxima" previous-text="Anterior"
 							ng-change="vm.changePage(vm.page, vm.query, vm.type, vm.searchInput.text)">
 						</ul>
@@ -80,7 +85,7 @@
 				
 			</div>
 			
-<div class="row" ng-show="vm.results.length == 0">
+<div class="row col-md-8 col-md-offset-2" ng-show="vm.results.length == 0">
 	<h3 class="text-center control-label"> 
 		Não foram encontrados resultados para a sua pesquisa
 	</h3>

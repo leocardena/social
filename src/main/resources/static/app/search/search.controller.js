@@ -12,10 +12,10 @@
     function SearchController (TraktSearchService, searchPrepService, TmdbMovieService, 
     		TmdbPersonService, TmdbShowService, $stateParams, $state, SearchTextService) {
         var vm = this;
-        vm.itemsPerPage = 15;
+        vm.itemsPerPage = 18;
         vm.results = searchPrepService.data;
         vm.changePage = _changePage;
-        vm.maxSize = 5;
+        vm.maxSize = 6;
         vm.query = $stateParams.query;
         vm.searchInput = { text : $stateParams.query };
         vm.type = $stateParams.type;

@@ -4,11 +4,13 @@
 	        	<img ng-src="{{vm.season.images.file_path ? 
 	        		vm.season.images.file_path : vm.imageNotAvailable}}" alt=""
 				    class="imgPosterSidebar img-responsive"/>
+				<!--
         	    <ul class="nav nav-pills nav-stacked navSidebar text-center">
 	                <li class="listNav" role="presentation"><a class="listNav" href="#">Assistido</a></li>
 	                <li class="listNav" role="presentation"><a class="listNav" href="#">Quero Assistir</a></li>
 	                <li  role="presentation"><a class="listNav" href="#">Outras Listas</a></li>
             	</ul>
+            	 -->
         </div>
         
         <!-- Page content -->
@@ -89,15 +91,18 @@
 		       <p style="font-weight: 900; margin: 30px 0 ;" class="text-center">Episódios</p>
              	
              	<div ng-repeat="episode in vm.season.episodes track by episode.number" 
-             		ng-click="vm.openEpisode(episode.number, vm.season.number, vm.show.ids.slug,
-             		 	vm.show.images.backdrop, vm.season.images)" class=" row col-md-12 episodeSeason">
+             		 class=" row col-md-12 episodeSeason">
            
              		<div class="col-md-7 col-md-offset-1">
-             			<h4>{{vm.season.number + 'x' + episode.number + ' - ' + episode.title}}</h4>
+             			<h4 ng-click="vm.openEpisode(episode.number, vm.season.number, vm.show.ids.slug,
+             		 	vm.show.images.backdrop, vm.season.images)" style="cursor:pointer">
+             		 	{{vm.season.number + 'x' + episode.number + ' - ' + episode.title}}</h4>
              			<p class="overviewSeason">{{episode.overview}}</p>
              		</div>
              		<div class="col-md-4 img-responsive">
-             			<img ng-src="{{episode.images.file_path ? episode.images.file_path : 
+             			<img ng-click="vm.openEpisode(episode.number, vm.season.number, vm.show.ids.slug,
+             		 	vm.show.images.backdrop, vm.season.images)"  style="cursor:pointer"
+             		 	ng-src="{{episode.images.file_path ? episode.images.file_path : 
                        			vm.imageNotAvailable}}">
              		</div>
              		

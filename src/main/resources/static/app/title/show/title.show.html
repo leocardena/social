@@ -10,11 +10,13 @@
         			<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
         			TRAILER
         		</button>
+        		<!--
         	    <ul class="nav nav-pills nav-stacked navSidebar text-center">
 	                <li class="listNav" role="presentation"><a class="listNav" href="#">Assistido</a></li>
 	                <li class="listNav" role="presentation"><a class="listNav" href="#">Quero Assistir</a></li>
 	                <li  role="presentation"><a class="listNav" href="#">Outras Listas</a></li>
             	</ul>
+            	 -->
         </div>
       </div>
 
@@ -104,8 +106,7 @@
 		                       			</button>
 		                       		</div>
 		                       		
-		                       		<div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt" class="col-md-2 center-text" >
-		                       					
+		                       		<div ng-repeat="cast in vm.castArray track by cast.person.ids.trakt" class="col-md-2 center-text">
 		                       					<img ng-src="{{cast.person.image ? cast.person.image : vm.imageNotAvailable}}" 
 		                       						class="img-responsive imgActor">
 		                       					<span class="nameActor"> {{cast.person.name}} </span>
@@ -128,14 +129,14 @@
               					<p style="font-weight: 900; margin-top: 15px;">Temporadas:</p>
              
              					<div ng-repeat="season in vm.show.seasons track by season.number">
-				             		<div class="col-md-2" ng-click="vm.exibirSeason(season, vm.show)">
+				             		<div class="col-md-2" ng-click="vm.exibirSeason(season, vm.show)" style="cursor:pointer">
 				             			<div class="row">
 				                       		<img ng-src="{{season.images.file_path ? season.images.file_path : 
 				                       			vm.imageNotAvailable}}" 
 				                       			style="height: 120px; width: 80px">
 				                       	</div>
 				                       	<div class="row">
-				                       		<p>{{season.number == 0 ? 'Temporada Especial' : season.number + 'ª temporada'}} </p>
+				                       		<p >{{season.number == 0 ? 'T. Especial' : season.number + 'ª temporada'}} </p>
 				                       	</div>
 				             		</div>
              					</div>
@@ -148,10 +149,10 @@
 	                       			
 	                       			<div class="col-md-11  col-md-offset-1 related">
 		                       			<div ng-repeat="show in vm.show.relatedShows track by show.ids.trakt">
-		                       				<div class="col-md-2" ng-click="vm.exibirTitulo(show)">
+		                       				<div class="col-md-2" ng-click="vm.exibirTitulo(show)" style="cursor:pointer">
 		                       					<img ng-src="{{show.images.poster.file_path ? show.images.poster.file_path : 
                        									vm.imageNotAvailable}}" 
-		                       						class="imgRelated">
+		                       						class="imgRelated" >
 		                       						<p class="nameRelated">{{show.title}}</p>
 		                       				</div>
 		                       			</div>
