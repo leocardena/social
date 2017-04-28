@@ -48,6 +48,7 @@
                 }
                 
                 $window.document.title = titleKey;
+                window.scrollTo(0, 0);
             });
 
             $rootScope.$on('$destroy', function () {
