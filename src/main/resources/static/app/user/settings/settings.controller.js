@@ -4,15 +4,15 @@
 	angular.module('social.user.settings').controller('SettingsController',
 			SettingsController);
 
-	SettingsController.$inject = ['countriesPrepareService', 'AccountService', 'PrincipalService'];
+	SettingsController.$inject = ['countriesPrepareService', 'AccountService', 'PrincipalService', '$stateParams'];
 
-	function SettingsController(countriesPrepareService, AccountService, PrincipalService) {
+	function SettingsController(countriesPrepareService, AccountService, PrincipalService, $stateParams) {
 		var vm = this;
 		
 		var userTemp = PrincipalService.getUserInformation();
 		vm.user = userTemp;
 		vm.countries = countriesPrepareService;
-		vm.sidebarOption = 'geral';
+		vm.sidebarOption = $stateParams.option ? $stateParams.option : 'geral';
 		vm.updated = false;
 		vm.notMatch = false;
 		vm.passSucess = false;

@@ -1,20 +1,55 @@
-<div class="container">
+<div class="container-fluid">
+	<div class="row">
+		<header id="header">
 
-	<div class="text-center">
-		<div class="profile-image-container" ng-mouseenter="vm.options=true"
-			ng-mouseleave="vm.options=false">
-			<img ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}"
-				alt="" class="profile-image img-circle">
-			<button type="button"
-				class="btn btn-default btn-alterar-image-profile"
-				ng-show="vm.options" ng-click="vm.openUploadModal(vm.user.avatar)">
-				<span class="glyphicon glyphicon-camera"></span> Trocar Avatar
-			</button>
+			<img src="http://waterrf.org/Knowledge%20Portals%20Banner/orange.png"
+				class="img-responsive" style="width: 100%; height: 250px; background-color: blank">
+
+			<nav class="navbar navbar-default navbar-my-profile">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#mainNav">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<div class="navbar-brand navbar-brand-my-profile img-circle profile-image-container" ng-mouseenter="vm.changeAvatar=true"
+					ng-mouseleave="vm.changeAvatar=false">
+						<img class="img-responsive"
+							ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}">
+						<button type="button"
+							class="btn btn-default btn-alterar-image-profile"
+							ng-show="vm.changeAvatar" ng-click="vm.openUploadModal(vm.user.avatar)">
+							<span class="glyphicon glyphicon-camera"></span> Trocar Avatar
+						</button>
+					</div> 
+					<span class="user-name-my-profile"><b>{{vm.user.name}}</b> {{vm.user.lastName}}</span>
+				</div>
+
+				<div class="collapse navbar-collapse" id="mainNav">
+					<ul class="nav main-menu navbar-nav">
+						<li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+						<li><a href="#">Amigos</a></li>
+						<li uib-dropdown is-open="status.isopen" >
+							<a uib-dropdown-toggle href="">Editar Perfil</a>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+						        <li><a ui-sref="settings({option : 'geral'})">Geral</a></li>
+						        <li><a ui-sref="settings({option : 'senha'})">Senha</a></li>
+     	 					</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+
+		</header>
+		<!--/#HEADER-->
+	</div>
+	<div class="row"> 
+		<div class="container">
+			<div ui-view="my-profile"></div>
 		</div>
 	</div>
-
-	<div class="row">
-		<h3 class="text-center">{{vm.user.name + ' ' + vm.user.lastName}}</h3>
-	</div>
-
 </div>

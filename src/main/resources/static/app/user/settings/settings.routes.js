@@ -11,14 +11,17 @@
 		$stateProvider
 		
 		.state('settings', {
-			url: '/{username}/settings',
-			parent : 'social',
+			url: '/settings',
+			parent : 'my-profile',
+			params: {
+				option: null
+			},
 			data : {
 				authorities : [ 'ROLE_USER' ],
 				pageTitle : 'Configuração'
 			},
 			 views : {
-					'content@' : {
+					'my-profile' : {
 						templateUrl : 'app/user/settings/settings.html',
 						controller : 'SettingsController',
 						controllerAs : 'vm'

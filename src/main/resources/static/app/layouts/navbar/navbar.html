@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation"
+<nav class="navbar navbar-default navbar-default-app" role="navigation"
 	ng-hide="vm.state.$current.data.hideNavbar">
 	<div class="container">
 
@@ -9,7 +9,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/" ng-click="vm.collapseNavbar()">
+			<a class="navbar-brand navbar-brand-app" href="/" ng-click="vm.collapseNavbar()">
 				<img class="navbar-logo" style="max-width: 40px; margin-top: -10px;"
 				src="content/images/logo.png">
 			</a>
@@ -32,7 +32,7 @@
 								</div>
 							</div>
 							<input type="search" class="no-fill-color form-control" 
-								placeholder="Pesquise por filmes, séries, atores..."
+								placeholder="Pesquise por filmes, séries atores..."
 								name="vm.formSearch.text" ng-model="vm.search.text"> <span
 								class="input-group-btn" id="form-navbar-search">
 								<button class="btn btn-default" type="submit" tabindex="-1">
@@ -63,15 +63,15 @@
 				</a>
 					<ul class="dropdown-menu" uib-dropdown-menu role="menu"
 						aria-labelledby="single-button">
-						<li ui-sref-active="active" ng-switch-when="true"><a href=""
+						<!--  <li ui-sref-active="active" ng-switch-when="true"><a href=""
 							ui-sref="settings({username : vm.getUserInfo().username})"
 							ng-click="vm.collapseDropDown()"> <span
-								class="glyphicon glyphicon-wrench"></span>&nbsp; <span>Configurações</span>
-						</a> <!--  
+								class="glyphicon glyphicon-wrench"></span>&nbsp; <span>ConfiguraÃ§Ãµes</span>
+						</a> 
                             <a ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                                <span>Configurações</span>
-                            </a>--></li>
+                                <span>ConfiguraÃ§Ãµes</span>
+                            </a></li>-->
 						<li ui-sref-active="active" ng-switch-when="true"><a href=""
 							ng-click="vm.logout()" id="logout"> <span
 								class="glyphicon glyphicon-log-out"></span>&nbsp; <span>Logout</span>
@@ -90,9 +90,9 @@
 									name="vm.formLogin">
 
 									<div class="form-group">
-										<label for="username" class="navbar-default-formLogin">Usuário</label>
+										<label for="username" class="navbar-default-formLogin">UsuÃ¡rio</label>
 										<input type="text" class="form-control" id="username"
-											placeholder="Usuário" ng-model="vm.username" name="username"
+											placeholder="UsuÃ¡rio" ng-model="vm.username" name="username"
 											ng-required="true" ng-maxlength="30">
 									</div>
 

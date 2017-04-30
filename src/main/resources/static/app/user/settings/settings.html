@@ -1,11 +1,5 @@
-<div class="col-md-4">
-	<ul id="sidebar" class="nav nav-stacked">
-		<li><a ng-click="vm.sidebarOption = 'geral'" href="">Geral</a></li>
-		<li><a ng-click="vm.sidebarOption = 'senha'" href="">Senha</a></li>
-	</ul>
-</div>
 <div ng-switch on="vm.sidebarOption">
-	<div ng-switch-when="geral" class="col-md-4">
+	<div ng-switch-when="geral" class="col-md-12">
 		<div class="alert alert-success" ng-show="vm.updated">
 			<strong>Successo!</strong> As informações da sua conta foram
 			atualizadas.
@@ -45,7 +39,7 @@
 			<button type="submit" class="btn btn-default pull-right">Alterar</button>
 		</form>
 	</div>
-	<div ng-switch-when="senha" class="col-md-4">
+	<div ng-switch-when="senha" class="col-md-12">
 		<h2 class="text-center">Editar Conta ({{vm.sidebarOption}})</h2>
 		<div class="alert alert-success" ng-show="vm.passSucess">
 			<strong>Successo!</strong> Senha alterada.
