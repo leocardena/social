@@ -10,14 +10,14 @@
 				<div class="navbar-header">
 
 					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#mainNav">
+						data-toggle="collapse" ng-show="false">
 						<span class="sr-only">Toggle navigation</span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
 					<div class="navbar-brand navbar-brand-my-profile img-circle profile-image-container" ng-mouseenter="vm.changeAvatar=true"
 					ng-mouseleave="vm.changeAvatar=false">
-						<img class="img-responsive"
+						<img class="img-responsive" style="min-height: 100%;"
 							ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}">
 						<button type="button"
 							class="btn btn-default btn-alterar-image-profile"
@@ -28,13 +28,13 @@
 					<span class="user-name-my-profile"><b>{{vm.user.name}}</b> {{vm.user.lastName}}</span>
 				</div>
 
-				<div class="collapse navbar-collapse" id="mainNav">
+				<div class="collapse navbar-collapse" id="mainNav" uib-collapse style="border-top: 0px;">
 					<ul class="nav main-menu navbar-nav">
 						<li><a href="#"><i class="fa fa-home"></i>Home</a></li>
 						<li><a href="#">Amigos</a></li>
 						<li uib-dropdown is-open="status.isopen" >
 							<a uib-dropdown-toggle href="">Editar Perfil</a>
-							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" style="min-width: 104px;">
 						        <li><a ui-sref="settings({option : 'geral'})">Geral</a></li>
 						        <li><a ui-sref="settings({option : 'senha'})">Senha</a></li>
      	 					</ul>

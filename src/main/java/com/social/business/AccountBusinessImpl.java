@@ -197,6 +197,9 @@ public class AccountBusinessImpl implements AccountBusiness {
 		
 		Profile profileUpdated = profileRepository.save(profile);
 		
+		if (profile.getAvatar() != null)
+			profileUpdated.setAvatar(avatarStorage.getUrl(profile.getAvatar()));
+		
 		return new UserDTO(profileUpdated);
 	}
 

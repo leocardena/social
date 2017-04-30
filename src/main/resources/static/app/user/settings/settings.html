@@ -4,7 +4,7 @@
 			<strong>Successo!</strong> As informações da sua conta foram
 			atualizadas.
 		</div>
-		<h2 class="text-center">Editar Conta ({{vm.sidebarOption}})</h2>
+		<h2 class="text-center">Editar Perfil ({{vm.sidebarOption}})</h2>
 		<form novalidate ng-submit="vm.updateAccount(vm.user)"
 			ng-click="vm.updated = false">
 			<div class="form-group">
@@ -40,7 +40,7 @@
 		</form>
 	</div>
 	<div ng-switch-when="senha" class="col-md-12">
-		<h2 class="text-center">Editar Conta ({{vm.sidebarOption}})</h2>
+		<h2 class="text-center">Editar Perfil ({{vm.sidebarOption}})</h2>
 		<div class="alert alert-success" ng-show="vm.passSucess">
 			<strong>Successo!</strong> Senha alterada.
 		</div>

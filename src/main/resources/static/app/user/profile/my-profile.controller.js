@@ -11,14 +11,23 @@
         var vm = this;
         vm.defaultAvatar = 'content/images/avatar/avatar-300x300.png';
         vm.openUploadModal = _openUploadModal;
-        vm.user = $stateParams.user;
         
+        if ($stateParams.user) {
+        	vm.user = $stateParams.user;
+        } else {
+        	vm.user = JSON.parse(JSON.stringify(PrincipalService.getUserInformation()));
+        }
+                
         function _openUploadModal(avatar) {
         	UploadService.openModal(avatar);
         }
         
         $rootScope.$on('avatarChanged', function(event, url) {
         	vm.user.avatar = url;
+        });
+        
+        $rootScope.$on('profileUpdated', function(event, user) {
+        	vm.user = user;
         });
         
         
