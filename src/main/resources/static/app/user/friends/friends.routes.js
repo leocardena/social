@@ -11,13 +11,13 @@
 		$stateProvider
 		
 		.state('friends', {
-			parent : 'social',
+			parent : 'my-profile',
 			data : {
 				authorities : [ 'ROLE_USER' ],
 				pageTitle : 'Amigos'
 			},
 			 views : {
-					'content@' : {
+					'my-profile' : {
 						templateUrl : 'app/user/friends/friends.html',
 						controller : 'FriendsController',
 						controllerAs : 'vm'
@@ -30,7 +30,7 @@
 		})
 
 		.state('myFriends', {
-			url : "/{username}/friends",
+			url : "/friends",
 			parent : 'friends',
 			data : {
 				authorities : [ 'ROLE_USER' ],
@@ -46,7 +46,7 @@
 		})
 		
 		.state('pending', {
-			url : "/{username}/friends/pending",
+			url : "/friends/pending",
 			parent : 'friends',
 			data : {
 				authorities : [ 'ROLE_USER' ],
@@ -61,7 +61,7 @@
 		})
 		
 		.state('search-friends', {
-			url : "/friends/search?username?page",
+			url : "/friends/search?query?page",
 			parent : 'friends',
 			data : {
 				authorities : [ 'ROLE_USER' ],
@@ -127,11 +127,11 @@
 
         /* @ngInject */
         function searchPrepService (DomainProfilesService, $stateParams) {
-        	if ($stateParams.username) {
+        	if ($stateParams.query) {
                 	return DomainProfilesService.getByUsername({
                 		page : $stateParams.page ? $stateParams.page - 1 : '0',
                 		size : '10',
-                		username : $stateParams.username
+                		username : $stateParams.query
                 	}).$promise.then(function(data){
                 		return data;
                 	}).catch(function () {

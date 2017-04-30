@@ -46,7 +46,7 @@
         		vm.friendsItensPerPage = data.size;
         		vm.friendsCurrentPage = data.number + 1;
         		vm.lastSearchTerm = username;
-        		$state.go('search-friends', {username : username, page : 0}, {notify : false}); 
+        		$state.go('search-friends', {query : username, page : 0}, {notify : false}); 
         	}).catch(function () {
         	});
 		}
@@ -64,7 +64,7 @@
         		vm.friendsItensPerPage = data.size;
         		vm.friendsCurrentPage = data.number + 1;
         		vm.lastSearchTerm = vm.search;
-        		$state.go('search-friends', {username : vm.search, page : 0}, {notify : false}); 
+        		$state.go('search-friends', {query : vm.search, page : 0}, {notify : false}); 
 			});
 		}
 		

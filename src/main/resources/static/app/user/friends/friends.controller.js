@@ -13,7 +13,7 @@
 		var vm = this;
 		vm.myFriendsQtd = myFriendsTotalPrepService.total;
 		vm.waitingFriendsQtd = waitingFriendsTotalPrepService.total;
-		vm.user = PrincipalService.getUserInformation();
+		vm.user = JSON.parse(JSON.stringify(PrincipalService.getUserInformation()));
 
 		$scope.$on('updateFriendsSidebar', function(event, data) {
 			getMyFriendsTotal();

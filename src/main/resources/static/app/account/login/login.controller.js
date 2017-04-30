@@ -61,7 +61,7 @@
                 vm.authenticationError = false;
                 vm.formError = false;
                 
-                $state.go('home');
+                $state.go('profile', {username : vm.username});
                 
             }).catch(function () {
                 vm.authenticationError = true;
