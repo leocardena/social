@@ -10,7 +10,7 @@
     function ProfileController ($state, usernamePrepService, PrincipalService) {
     	var search = usernamePrepService;
         var logged = PrincipalService.getUserInformation();
-    
+
         if (search === 'NOT-FOUND') {
     		$state.go('notfound');
     	}

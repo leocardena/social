@@ -52,6 +52,47 @@
 	    	}
 	    })
 	    
+	    .state('my-profile-activities', {
+	    	parent: 'my-profile',
+	    	url: '/activities',
+	    	params: {
+	    		ratings: null
+	    	},
+	    	data: {
+	    		authorities: ['ROLE_USER'],
+	    		pageTitle: 'Profile'
+	    	},
+	    	views: {
+	    		'my-profile': {
+	    			templateUrl : 'app/user/profile/my-profile-activities.html',
+	    			controller: function(usernamePrepService){
+	    			   var vm = this;
+	    			   vm.ratings = usernamePrepService.ratings;
+	    			},
+	    			controllerAs: 'vm'
+	    		}
+	    	}
+	    })
+	    
+	    .state('my-profile-info', {
+	    	parent: 'my-profile',
+	    	url: '/info',
+	    	data: {
+	    		authorities: ['ROLE_USER'],
+	    		pageTitle: 'Profile'
+	    	},
+	    	views: {
+	    		'my-profile': {
+	    			templateUrl : 'app/user/profile/my-profile-info.html',
+	    			controller: function(usernamePrepService, $rootScope){
+	    				var vm = this;
+	    				vm.user = JSON.parse(JSON.stringify(usernamePrepService));
+	    			},
+	    			controllerAs: 'vm'
+	    		}
+	    	}
+	    })
+	    
 	    .state('other-profile', {
 	    	parent: 'profile',
 	    	url: '',

@@ -29,6 +29,7 @@
 			},
 			resolve: {
 				countriesPrepareService: countriesPrepareService
+//				accountPrepareService: accountPrepareService
 			}
 		});
 
@@ -52,6 +53,17 @@
                 	return 'ERROR';
                 }
             });
+		}
+		
+		accountPrepareService.$inject = ['AccountService'];
+		
+		/*@ngInject*/
+		function accountPrepareService(AccountService) {
+			return AccountService.getAcc().then(function (response) {
+				return response;
+			}).catch(function (response) {
+				return 'ERROR';
+			});
 		}
         
 	}

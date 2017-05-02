@@ -25,13 +25,13 @@
 		</div>
 	</div>
 </div>
-<div class="row" ng-if="vm.myFriends.length > 0">
+<div class="col-md-12" ng-if="vm.myFriends.length > 0">
 	<div class="text-center">
 		<ul uib-pagination total-items="vm.myFriendsTotalItens"
 			ng-model="vm.myFriendsCurrentPage"
 			items-per-page="vm.myFriendsItensPerPage" class="pagination-sm"
 			boundary-links="true" num-pages="vm.myFriendsTotalPages"
-			ng-change="vm.pageMyFriendsChanged()" last-text="Última"
+			ng-change="vm.pageMyFriendsChanged()" last-text="Ãšltima"
 			first-text="Primeira" next-text="Próxima" previous-text="Anterior">
 		</ul>
 	</div>

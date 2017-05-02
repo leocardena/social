@@ -18,6 +18,11 @@
 					}
 				}
 			},
+			'getAcc' : {
+				method : 'GET',
+				url : AccountBase.url,
+				isArray : false
+			},
 			'putAccount' : {
 				method : 'PUT',
 				url : AccountBase.url + '/:userId',

@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="col-md-12">
+		<div class="form-group">
+			<label>Usuário:</label>
+			<p>{{vm.user.username}}</p>
+		</div>
+		<div class="form-group">
+			<label>Usuário Desde:</label>
+			<p>{{vm.user.createdDate}}</p>
+		</div>
+		<div class="form-group">
+			<label>Aniversário:</label>
+			<p>{{vm.user.birthday}}</p>
+		</div>
+		<div class="form-group">
+			<label>Gênero:</label>
+			<p ng-show="vm.user.genre === 'M'">Masculino</p>
+			<p ng-show="vm.user.genre === 'F'">Feminino</p>
+		</div>
+		<div class="form-group">
+			<label>País:</label>
+			<p>{{vm.user.country}}</p>
+		</div>
+	</div>
+</div>

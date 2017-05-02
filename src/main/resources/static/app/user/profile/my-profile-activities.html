@@ -1,0 +1,42 @@
+<div class="container">
+	<div class="col-md-12">
+	<div class="text-center" ng-if="!vm.ratings.length > 0"> 
+		<p>Não há atividades registradas no momento.</p>
+	</div>
+			<div class="table-responsive" ng-if="vm.ratings.length > 0">
+				<table class="table">
+					<tbody>
+						<tr ng-repeat="rating in vm.ratings">
+							<td>
+						    	<span class="glyphicon" ng-class="{'glyphicon-film': rating.type == 'MOVIE',
+						    	'glyphicon-user': rating.type == 'ACTOR', 'glyphicon-person': rating.type == 'ACTOR'}" style="display:inline"></span>
+								
+								<span  ng-show="rating.type == 'TVSHOW' || rating.type =='SEASON' || rating.type =='EPISODE'">
+								 <img src="content/images/tv/television-icon.png" style="padding-right:0px;">
+								 </span>
+								 
+								<span ng-show="rating.type === 'ACTOR' || rating.type === 'MOVIE' || rating.type === 'TVSHOW'">
+									{{rating.title.name}} 
+								</span>
+								<span ng-show="rating.type === 'SEASON'">
+									{{'Temporada ' + rating.title.number + ' (' + rating.title.tvShowName + ')'}}
+								</span>
+								<span ng-show="rating.type === 'EPISODE'">
+									{{rating.title.name + ' (' + 'Temporada ' + rating.title.season + ' - ' + rating.title.tvShowName + ')'}}
+								</span>
+						    </td>
+						    <td>
+						    	<span class="" style="background-color: #fff">
+									<ng-rate-it ng-model="rating.rating.note" step="1" max="5" read-only="true"></ng-rate-it>
+								</span>
+						    </td>
+						    <td>
+						    	<span class="glyphicon glyphicon-calendar"></span>
+					 			<span>{{rating.rating.date}}</span>
+						    </td>
+						 </tr>
+					</tbody>
+				</table>		
+			</div>	
+	</div>
+</div>

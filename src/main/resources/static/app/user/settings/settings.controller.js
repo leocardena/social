@@ -10,7 +10,6 @@
 	function SettingsController(countriesPrepareService, AccountService, PrincipalService, $stateParams,
 			$rootScope) {
 		var vm = this;
-		
 		var userTemp = JSON.parse(JSON.stringify(PrincipalService.getUserInformation()));
 		vm.user = userTemp;
 		vm.countries = countriesPrepareService;
