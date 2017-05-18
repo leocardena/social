@@ -5,22 +5,26 @@
 			SettingsController);
 
 	SettingsController.$inject = ['countriesPrepareService', 'AccountService', 'PrincipalService', '$stateParams',
-		'$rootScope'];
+		'$rootScope', 'usernamePrepService'];
 
 	function SettingsController(countriesPrepareService, AccountService, PrincipalService, $stateParams,
-			$rootScope) {
+			$rootScope, usernamePrepService) {
 		var vm = this;
 		var userTemp = JSON.parse(JSON.stringify(PrincipalService.getUserInformation()));
-		vm.user = userTemp;
+		vm.user = usernamePrepService;
 		vm.countries = countriesPrepareService;
 		vm.sidebarOption = $stateParams.option ? $stateParams.option : 'geral';
 		vm.updated = false;
 		vm.notMatch = false;
 		vm.passSucess = false;
-
+		
 		// methods
 		vm.updateAccount = _updateAccount;
 		vm.updatePassword = _updatePassword;
+		
+		function onInit() {
+			$stateParams.username;
+		}
 
 		function _updateAccount(user) {
 			AccountService.putAccount({

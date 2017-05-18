@@ -84,12 +84,15 @@
 	    	views: {
 	    		'my-profile': {
 	    			templateUrl : 'app/user/profile/my-profile-info.html',
-	    			controller: function(usernamePrepService, $rootScope){
+	    			controller: function(usernamePrepService, $rootScope, accPrepService){
 	    				var vm = this;
-	    				vm.user = JSON.parse(JSON.stringify(usernamePrepService));
+	    				vm.user = accPrepService;
 	    			},
 	    			controllerAs: 'vm'
 	    		}
+	    	},
+	    	resolve: {
+	    		accPrepService : accPrepService
 	    	}
 	    })
 	    
@@ -142,6 +145,19 @@
 			}).catch(function (err) {
 				return 'ERROR';
 			});
+		}
+		
+		accPrepService.$inject = ['DomainProfilesService', '$stateParams'];
+		
+		/*@ngInject*/
+		function accPrepService(DomainProfilesService, $stateParams) {
+        	return DomainProfilesService.getOneByUsername(
+        			{username : $stateParams.username}
+        	).$promise.then(function (data) {
+        		return data;
+        	}).catch(function (err) {
+        		return 'NOT-FOUND';
+        	});
 		}
 		
 	}

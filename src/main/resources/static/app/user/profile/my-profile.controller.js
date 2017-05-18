@@ -13,7 +13,6 @@
         vm.openUploadModal = _openUploadModal;
         vm.updateStateName = _updateStateName;
         vm.stateName = $rootScope.toState.name;
-
         if ($stateParams.user) {
         	vm.user = $stateParams.user;
         } else {
@@ -25,7 +24,7 @@
         }
         
         function _updateStateName() {
-            vm.stateName = $rootScope.toState.name;
+            vm.stateName = '';
         }
         
         $rootScope.$on('avatarChanged', function(event, url) {

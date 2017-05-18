@@ -28,18 +28,11 @@
 					}
 			},
 			resolve: {
-				countriesPrepareService: countriesPrepareService
-//				accountPrepareService: accountPrepareService
+				countriesPrepareService: countriesPrepareService,
+				usernamePrepService: usernamePrepService
 			}
 		});
 
-		configPrepService.$inject = ['PrincipalService'];
-
-        /* @ngInject */
-        function configPrepService (PrincipalService) {
-        	return '';
-        }
-        
 		countriesPrepareService.$inject = ['RegionService'];
 		
 		/*@ngInject*/
@@ -55,16 +48,17 @@
             });
 		}
 		
-		accountPrepareService.$inject = ['AccountService'];
+		usernamePrepService.$inject = ['AccountService', '$stateParams'];
 		
 		/*@ngInject*/
-		function accountPrepareService(AccountService) {
-			return AccountService.getAcc().then(function (response) {
-				return response;
-			}).catch(function (response) {
-				return 'ERROR';
-			});
+		function usernamePrepService(AccountService, $stateParams) {
+        	return AccountService.getAcc().$promise.then(function (data) {
+        		return data;
+        	}).catch(function (err) {
+        		return 'NOT-FOUND';
+        	});
 		}
+		
         
 	}
 
