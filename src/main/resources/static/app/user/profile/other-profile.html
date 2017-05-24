@@ -1,19 +1,33 @@
 <div class="container-fluid">
 	<div class="row">
+	
+	<header id="header">
+			<img src="/content/images/background/Batman-2.jpg"
+				class="img-responsive" style="width: 100%; height: 250px; background-color: blank">
 
-		<div class="fb-profile">
-			<img align="left" class="fb-image-lg "
-				src="/content/images/background/Batman-2.jpg"
-				alt="Profile image example" /> <img align="left"
-				ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}"
-				alt="" class="fb-image-profile img-circle">
-			<div class="fb-profile-text">
-				<div class="fb-profile-title">
-					<h3 class="fb-profile-title-text">{{vm.user.name + ' ' +
-						vm.user.lastName}}</h3>
+			<nav class="navbar navbar-default navbar-my-profile">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" ng-show="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<div class="navbar-brand navbar-brand-my-profile img-circle profile-image-container" ng-mouseenter="vm.changeAvatar=true"
+					ng-mouseleave="vm.changeAvatar=false">
+						<img class="img-responsive" style="min-height: 100%;"
+							ng-src="{{vm.user.avatar ? vm.user.avatar : vm.defaultAvatar}}">
+					</div> 
+					<span class="user-name-my-profile"><b>{{vm.user.name}}</b> {{vm.user.lastName}}</span>
 				</div>
-				<div class="btn-friend-group">
-					<div class="btn-group" uib-dropdown
+
+				<div class="collapse navbar-collapse" id="mainNav"
+				 uib-collapse style="border-top: 0px;" ng-click="vm.updateStateName();">
+					
+					<ul class="nav main-menu navbar-nav" >
+						<div class="btn-group" uib-dropdown
 						ng-if="vm.user.friendStatus === 'Pending'">
 						<button id="single-button" type="button"
 							class="btn btn-default btn-sm" uib-dropdown-toggle
@@ -39,6 +53,7 @@
 							<li role="menuitem" ng-click="vm.removeFriend(vm.user.id)"><a>Remover
 									Amizade</a></li>
 						</ul>
+						
 					</div>
 
 					<button class="btn btn-default" ng-click="vm.addFriend(vm.user.id)"
@@ -50,13 +65,18 @@
 						ng-click="vm.removeFriend(vm.user.id)"
 						ng-if="vm.user.friendStatus === 'Waiting'">Remover
 						Solicitação</button>
+				</ul>
+				
 				</div>
+			</nav>
+			
 
-			</div>
+		</header>
+
+		
 
 		</div>
 	</div>
-</div>
 <!-- /container fluid-->
 <div class="container">
 	<div class="col-sm-8 tabbable-panel">
