@@ -8,8 +8,8 @@
     HomePrincipalController.$inject = ['$state', 'PrincipalService'];
 
     function HomePrincipalController ($state, PrincipalService) {
-    	
-        if(PrincipalService.isAuthenticated()) {
+       
+    	if(PrincipalService.isAuthenticated()) {
         	$state.go('logged');
         } else {
         	$state.go('public');
