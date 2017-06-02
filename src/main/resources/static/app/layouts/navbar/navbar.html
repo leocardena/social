@@ -9,7 +9,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand navbar-brand-app" ui-sref="profile({username : vm.getUserInfo().username})" ng-click="vm.collapseNavbar()">
+			<a class="navbar-brand navbar-brand-app"  ng-click="vm.collapseNavbar(); vm.goHome();">
 				<img class="navbar-logo" style="max-width: 40px; margin-top: -10px;"
 				src="content/images/logo.png">
 			</a>

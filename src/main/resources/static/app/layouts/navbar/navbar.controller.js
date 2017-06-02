@@ -12,6 +12,7 @@
     		$localStorage, $scope, SearchTextService) {
         var vm = this;
         vm.collapseNavbar = _collapseNavbar;
+        vm.goHome =  _goHome;
         vm.isAuthenticated = PrincipalService.isAuthenticated;
         vm.getUserInfo = _getUserInfo;
         vm.isNavbarCollapsed = true;
@@ -94,6 +95,14 @@
         function _submitSearchForm(type, query, page) {
         	if (!query) return;
         	$state.go('search', {type : type, page : page, query : query});
+        }
+        
+        function _goHome() {
+        	if (vm.username) {
+                $state.go('profile', {username : vm.username});
+        	} else {
+                $state.go('home');
+        	}
         }
         
         $scope.$watch(function () { 
