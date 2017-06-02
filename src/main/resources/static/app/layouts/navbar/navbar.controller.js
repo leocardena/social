@@ -67,7 +67,8 @@
                     rememberMe: vm.rememberMe
                 }).then(function () {
                 	_collapseDropDown();
-                    $state.go('home');
+                    $state.go('profile', {username : vm.username});
+//                    $state.go('home');
                 }).catch(function () {
                 	_toggleNavbar();
                 	_collapseDropDown();
