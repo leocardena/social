@@ -1,13 +1,17 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
-			<ul class="list-inline text-center">
-				<li><a ui-sref="myFriends({username : vm.user.username})">{{'Amigos ' + '('
+		<div class="col-sm-6 col-sm-offset-3">
+			<ul class="list-inline text-center menu-friend">
+				<li><a class="a-menu-friend" 
+				style="border-right: solid #fff; padding-right: 15px"
+				ui-sref="myFriends({username : vm.user.username})">{{'Amigos ' + '('
 						+ vm.myFriendsQtd + ')'}}</a></li>
-				<li><a ui-sref="pending({username : vm.user.username})">{{'Solicitações
+				<li><a class="a-menu-friend"
+				 ui-sref="pending({username : vm.user.username})">{{'Solicitações
 						' + '(' + vm.waitingFriendsQtd + ')'}}</a></li>
-				<li><a ui-sref="search-friends">Pesquisar
-						Usuários</a></li>
+				<li><a class="a-menu-friend" ui-sref="search-friends"
+				style="border-left: solid #fff; padding-left: 15px">
+				Pesquisar Usuários</a></li>
 			</ul>
 		</div>
 		<div class="col-md-12">

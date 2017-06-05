@@ -1,0 +1,47 @@
+.menu-friend{
+	background-color: $red-primary;
+	border-radius: 0px 30px;
+	padding: 15px;
+	.a-menu-friend{
+		padding: 5px;
+		color: $white;
+		.qnt-friend{
+			background-color: $white;
+			color: $red-primary;
+		}
+	}
+}
+.title-friend{
+	color: $black;
+	margin-bottom: 50px;
+	.glyphicon-user{
+		margin-right: 10px;
+		color: $red-primary;
+	}
+}
+.compontente-amizades{
+	box-shadow: 0 2px 3px 0 rgba(0,0,0,.14), 0 2px 2px -2px rgba(0,0,0,.2), 0 1px 8px 0 rgba(0,0,0,.12);
+}
+.panel-body{
+	padding:0px;
+}
+.avatar-friend{
+	height: 70px;
+	width: 70px;
+	padding: 5px;
+	
+}
+.name-friend{
+	padding: 25px 0;
+	font-size: 15px;
+	.a-friend{
+	color: $black;
+	}
+}
+.btn-friend{
+		color: $white;
+		background-color: $red-primary;
+		border-color: $red-primary;
+		margin:15px;
+		margin-top:20px;
+}

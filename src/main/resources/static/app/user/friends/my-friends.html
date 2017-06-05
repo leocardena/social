@@ -1,22 +1,23 @@
-<h3 class="text-center">Amigos</h3>
-<div ng-repeat="myFriend in vm.myFriends">
-	<div class="col-sm-6">
-		<div class="panel panel-default">
+<div class="col-sm-10 col-sm-offset-1">
+<h3 class="text-center title-friend"> 
+<span class="glyphicon glyphicon-user" aria-hidden="true"></span>Amigos</h3>
+<div ng-repeat="myFriend in vm.myFriends" class="">
+	<div class="col-sm-6">	
+		<div class="panel panel-default compontente-amizades">
 			<div class="panel-body">
 				<div class="col-sm-3">
 					<a ui-sref="profile({username : myFriend.username})">
 						<img ng-src="{{myFriend.avatar ? myFriend.avatar : vm.defaultAvatar}}"
-							alt="people" class="media-object img-circle"
-							style="height: 50px; width: 50px">
+							alt="people" class="media-object avatar-friend">
 					</a>
 				</div>
 				<div class="col-sm-5">
-					<h4 class="media-heading ">
-						<a ui-sref="profile({username : myFriend.username})">{{myFriend.name}}</a>
+					<h4 class="media-heading name-friend">
+						<a class="a-friend" ui-sref="profile({username : myFriend.username})">{{myFriend.name}}</a>
 					</h4>
 				</div>
 				<div class="pull-right">
-					<button type="button" class="btn btn-default btn-sm">
+					<button type="button" class="btn btn-default btn-sm btn-friend">
 						Amigos <span class="glyphicon glyphicon-ok" asria-hidden="true">
 						</span>
 					</button>
@@ -25,6 +26,8 @@
 		</div>
 	</div>
 </div>
+</div>
+
 <div class="col-md-12" ng-if="vm.myFriends.length > 0">
 	<div class="text-center">
 		<ul uib-pagination total-items="vm.myFriendsTotalItens"
