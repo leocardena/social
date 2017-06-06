@@ -1,28 +1,28 @@
-<h3 class="text-center">Pesquisa de Usuários</h3>
-<div class="input-group col-md-12">
+<h3 class="text-center title-friend"> 
+<span class="glyphicon glyphicon-search" aria-hidden="true"></span>Pesquisa de amigos</h3>
+<div class="input-group col-sm-8 col-sm-offset-2" style="margin-bottom: 30px;">
 	<input type="text" class="form-control" ng-model="vm.search" /> <span
 		class="input-group-btn">
-		<button class="btn btn-danger" type="button"
+		<button class="btn btn-danger btn-friend-search" type="button"
 			ng-click="vm.searchFriend(vm.search)">
 			<span class=" glyphicon glyphicon-search"> </span>
 		</button>
 	</span>
 </div>
-<div class="col-md-12" ng-if="vm.friends.length > 0 && vm.check()">
+<div class="col-sm-10 col-sm-offset-1" ng-if="vm.friends.length > 0 && vm.check()">
 	<div ng-repeat="friend in vm.friends">
 		<div class="col-sm-6">
-			<div class="panel panel-default">
+			<div class="panel panel-default compontente-amizades">
 				<div class="panel-body">
 					<div class="col-sm-3">
 						<a ui-sref="profile({username :friend.username})"> 
 						<img ng-src="{{friend.avatar ? friend.avatar : vm.defaultAvatar}}"
-							alt="people" class="media-object img-circle"
-							style="height: 50px; width: 50px">
+							alt="people" class="media-object avatar-friend">
 						</a>
 					</div>
-					<div class="col-sm-6">
-						<h4 class="media-heading ">
-							<a ui-sref="profile({username :friend.username})">{{friend.name}}</a>
+					<div class="col-sm-6 ">
+						<h4 class="media-heading name-friend">
+							<a class="a-friend" ui-sref="profile({username :friend.username})">{{friend.name}}</a>
 						</h4>
 					</div>
 				</div>

@@ -1,34 +1,36 @@
-<h3 class="text-center">Solicitações de Amizade</h3>
-<div ng-repeat="watingFriend in vm.waitingFriends">
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="col-sm-3">
-					<a ui-sref="profile({username : watingFriend.username})"> 
-					<img ng-src="{{watingFriend.avatar ? watingFriend.avatar : vm.defaultAvatar}}"
-						alt="people" class="media-object img-circle"
-						style="height: 50px; width: 50px">
-					</a>
-				</div>
-				<div class="col-sm-5">
-					<h4 class="media-heading ">
-						<a ui-sref="profile({username : watingFriend.username})">{{watingFriend.name}}</a>
-					</h4>
-				</div>
-				<div class="pull-right">
-					<div class="btn-group" uib-dropdown is-open="status.isopen">
-						<button id="single-button" type="button"
-							class="btn btn-default btn-sm" uib-dropdown-toggle
-							ng-disabled="vm.isLoadingReply">
-							Analisar <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" uib-dropdown-menu role="menu"
-							aria-labelledby="single-button">
-							<li role="menuitem"
-								ng-click="vm.replyRequest('Accept', watingFriend)"><a>Confirmar</a></li>
-							<li role="menuitem"
-								ng-click="vm.removeFriend(watingFriend.id)"><a>Recusar</a></li>
-						</ul>
+<h3 class="text-center title-friend col-sm-12"> 
+<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Solicitações de amizade</h3>
+<div class="col-sm-10 col-sm-offset-1">
+	<div ng-repeat="watingFriend in vm.waitingFriends">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="panel panel-default compontente-amizades">
+				<div class="panel-body">
+					<div class="col-sm-3">
+						<a ui-sref="profile({username : watingFriend.username})"> 
+						<img ng-src="{{watingFriend.avatar ? watingFriend.avatar : vm.defaultAvatar}}"
+							alt="people" class="media-object avatar-friend">
+						</a>
+					</div>
+					<div class="col-sm-4">
+						<h4 class="media-heading name-friend">
+							<a class="a-friend" ui-sref="profile({username : watingFriend.username})">{{watingFriend.name}}</a>
+						</h4>
+					</div>
+					<div class="pull-right">
+						<div class="btn-group btn-friend" style="color:white;" uib-dropdown is-open="status.isopen">
+							<button id="single-button" type="button"
+								class="btn btn-default btn-sm" style="color:white;" uib-dropdown-toggle
+								ng-disabled="vm.isLoadingReply">
+								Analisar <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+								aria-labelledby="single-button">
+								<li role="menuitem"
+									ng-click="vm.replyRequest('Accept', watingFriend)"><a>Confirmar</a></li>
+								<li role="menuitem"
+									ng-click="vm.removeFriend(watingFriend.id)"><a>Recusar</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
