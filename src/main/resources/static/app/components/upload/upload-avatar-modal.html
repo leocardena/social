@@ -9,13 +9,14 @@
 		    <fieldset>
 		     
 		      <h5>Envie uma imagem (PNG, JPEG, JPG) para utilizá-la como seu avatar.</h5>
+		      
 		      <img ng-hide="vm.avatarFile" ng-src="{{vm.actualAvatar ? vm.actualAvatar : vm.defaultAvatar}}" 
 		      	style="width: 100px; height: 100px;">
 		      <img ng-show="vm.formUpload.avatar.$valid" ngf-thumbnail="vm.avatarFile" style="width: 100px; height: 100px;"> 
 		     
 		     <div class="row">
-		     	 <input type="text" ng-model="vm.avatarFile.name" ng-disabled="true" class="form-control">
-			     <div class="btn btn-default" ngf-select ngf-pattern="'image/*'" ng-model="vm.avatarFile" name="avatar"    
+		     	 <input type="text" ng-model="vm.avatarFile.name" ng-disabled="true" class="form-control modal-form">
+			     <div class="btn btn-default modal-btn" ngf-select ngf-pattern="'image/*'" ng-model="vm.avatarFile" name="avatar"    
 			              ngf-accept="'image/*'" ngf-min-height="100"  ngf-max-size="20MB" required 
 			              ngf-model-invalid="errorFile">
 			       Selecione
@@ -24,7 +25,7 @@
 		     
 		     <div class="row" ng-show="vm.actualAvatar">
 			     <div class="checkbox">
-	  			 	<label><input type="checkbox" ng-model="vm.deleteAvatar">Deleta Avatar</label>
+	  			 	<label class="modal-delete"><input type="checkbox" ng-model="vm.deleteAvatar">Deleta Avatar</label>
 				 </div>
 		     </div>
 		    
@@ -33,8 +34,8 @@
 	 </div>
 	 
 	 <div class="modal-footer">
-            <button ng-click="vm.uploadAvatar(vm.avatarFile)" class="btn btn-default">Salvar</button>
-            <button ng-click="vm.cancel()" class="btn btn-default" type="button" ng-click="">Cancelar</button>
+            <button ng-click="vm.uploadAvatar(vm.avatarFile)" class="btn btn-default modal-btn">Salvar</button>
+            <button ng-click="vm.cancel()" class="btn btn-default modal-btn" type="button" ng-click="">Cancelar</button>
       </div>
 
 </div>

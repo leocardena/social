@@ -29,8 +29,8 @@
 					<ul class="nav main-menu navbar-nav" >
 						<div class="btn-group" uib-dropdown
 						ng-if="vm.user.friendStatus === 'Pending'">
-						<button id="single-button" type="button"
-							class="btn btn-default btn-sm" uib-dropdown-toggle
+						<button id="single-button" type="button" 
+							class="btn btn-default btn-sm btn-solicitacoes" uib-dropdown-toggle
 							ng-disabled="vm.isLoadingReply">
 							Responder Solicitação <span class="caret"></span>
 						</button>
@@ -43,8 +43,8 @@
 
 					<div class="btn-group" uib-dropdown
 						ng-if="vm.user.friendStatus === 'Accept'">
-						<button id="single-button" type="button"
-							class="btn btn-default btn-sm" uib-dropdown-toggle
+						<button id="single-button" type="button" style="margin-top:10px; color: white"
+							class="btn btn-default btn-sm btn-solicitacoes" uib-dropdown-toggle
 							ng-disabled="vm.isLoadingReply">
 							Amigos <span class="caret"></span>
 						</button>
@@ -56,12 +56,13 @@
 						
 					</div>
 
-					<button class="btn btn-default" ng-click="vm.addFriend(vm.user.id)"
+					<button class="btn btn-default btn-solicitacoes"
+					ng-click="vm.addFriend(vm.user.id)"
 						ng-if="vm.user.friendStatus === 'None'">Adicionar</button>
-					<button class="btn btn-default"
+					<button class="btn btn-default btn-solicitacoes"
 						ng-click="vm.replyRequest('Waiting', vm.user)"
 						ng-if="vm.user.friendStatus === 'Refused'">Adicionar</button>
-					<button class="btn btn-default"
+					<button class="btn btn-default btn-solicitacoes"
 						ng-click="vm.removeFriend(vm.user.id)"
 						ng-if="vm.user.friendStatus === 'Waiting'">Remover
 						Solicitação</button>
