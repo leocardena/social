@@ -84,10 +84,7 @@
 	    	views: {
 	    		'my-profile': {
 	    			templateUrl : 'app/user/profile/my-profile-info.html',
-	    			controller: function(usernamePrepService, $rootScope, accPrepService){
-	    				var vm = this;
-	    				vm.user = accPrepService;
-	    			},
+	    			controller: 'MyProfileInfoController',
 	    			controllerAs: 'vm'
 	    		}
 	    	},

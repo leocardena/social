@@ -40,7 +40,7 @@
 			DomainFriendsService.getMyFriends({
 				status : 'Waiting',
 				page : vm.waitingFriendsCurrentPage - 1,
-				size : 1
+				size : 10
 			}).$promise.then(function(data) {
 				vm.waitingFriends = data.content;
 				vm.waitingFriendsTotalItens = data.totalElements;
@@ -69,7 +69,7 @@
         	DomainFriendsService.getMyFriends({
         		status : 'Waiting',
         		page: 0,
-        		size: 1
+        		size: 10
         	}).$promise.then(function (data) {
         		vm.waitingFriends = data.content;
         		vm.waitingFriendsTotalItens = data.totalElements;
