@@ -195,14 +195,25 @@
 													Amizade</a></li>
 										</ul>
 									</div>
+									
+									<div class="btn-group" uib-dropdown
+										ng-if="friend.friendStatus === 'Waiting'">
+										<button id="single-button" type="button"
+											class="btn btn-default btn-sm btn-friend" uib-dropdown-toggle
+											ng-disabled="vm.isLoadingReply">
+											Solicitado <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+											aria-labelledby="single-button">
+											<li role="menuitem" ng-click="vm.removeFriendFromList(friend.id)"><a>Remover
+													Solicidação</a></li>
+										</ul>
+									</div>
 				
-									<button class="btn btn-default btn-solicitacoes"
+									<button class="btn btn-default btn-sm btn-solicitacoes"
 										ng-click="vm.replyRequestFromList('Waiting', friend)"
 										ng-if="friend.friendStatus === 'Refused'">Adicionar</button>
-									<button class="btn btn-default btn-solicitacoes col-sm-12"
-										ng-click="vm.removeFriendFromList(friend.id)" style="white-space:normal;"
-										ng-if="friend.friendStatus === 'Waiting'">Remover solicitação</button>
-									<button class="btn btn-default btn-solicitacoes" ng-click="vm.addFriendFromList(friend.id)"
+									<button class="btn btn-default btn-sm btn-solicitacoes" ng-click="vm.addFriendFromList(friend.id)"
 										ng-if="friend.friendStatus === 'None'">Adicionar
 									</button>
 								</div>
