@@ -98,8 +98,8 @@
         }
         
         function _goHome() {
-        	if (vm.username) {
-                $state.go('profile', {username : vm.username});
+        	if (vm.isAuthenticated()) {
+                $state.go('profile', {username : _getUserInfo().username});
         	} else {
                 $state.go('home');
         	}
