@@ -196,14 +196,13 @@
 										</ul>
 									</div>
 				
-									<button class="btn btn-default"
+									<button class="btn btn-default btn-solicitacoes"
 										ng-click="vm.replyRequestFromList('Waiting', friend)"
 										ng-if="friend.friendStatus === 'Refused'">Adicionar</button>
-									<button class="btn btn-default"
-										ng-click="vm.removeFriendFromList(friend.id)"
-										ng-if="friend.friendStatus === 'Waiting'">Remover
-										Solicitação</button>
-									<button class="btn btn-default" ng-click="vm.addFriendFromList(friend.id)"
+									<button class="btn btn-default btn-solicitacoes col-sm-12"
+										ng-click="vm.removeFriendFromList(friend.id)" style="white-space:normal;"
+										ng-if="friend.friendStatus === 'Waiting'">Remover solicitação</button>
+									<button class="btn btn-default btn-solicitacoes" ng-click="vm.addFriendFromList(friend.id)"
 										ng-if="friend.friendStatus === 'None'">Adicionar
 									</button>
 								</div>
