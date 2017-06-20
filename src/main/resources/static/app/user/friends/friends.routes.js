@@ -105,8 +105,8 @@
         function pendingFriendsPrepService (DomainFriendsService) {
         	return DomainFriendsService.getMyFriends({
         		status : 'Waiting',
-        		page: 0,
-        		size: 1
+        		page: '0',
+        		size: '10'
         	}).$promise.then(function (data) {
         		return data;
         	});

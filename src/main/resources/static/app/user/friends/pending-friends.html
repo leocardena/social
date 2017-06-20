@@ -2,7 +2,7 @@
 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Solicitações de amizade</h3>
 <div class="col-sm-10 col-sm-offset-1">
 	<div ng-repeat="watingFriend in vm.waitingFriends">
-		<div class="col-sm-8 col-sm-offset-2">
+		<div class="col-sm-6">
 			<div class="panel panel-default compontente-amizades">
 				<div class="panel-body">
 					<div class="col-sm-3">
@@ -17,7 +17,7 @@
 						</h4>
 					</div>
 					<div class="pull-right">
-						<div class="btn-group btn-friend" style="color:white;" uib-dropdown is-open="status.isopen">
+						<div class="btn-group btn-friend" style="color:white;" uib-dropdown >
 							<button id="single-button" type="button"
 								class="btn btn-default btn-sm " style="color:white;" uib-dropdown-toggle
 								ng-disabled="vm.isLoadingReply">
