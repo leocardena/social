@@ -155,7 +155,7 @@
 					<div class="col-sm-6">
 						<div class="panel panel-default compontente-amizades">
 							<div class="panel-body">
-								<div class="col-sm-4">
+								<div class="col-sm-3">
 									<a ui-sref="profile({username : friend.username})">
 										<img ng-src="{{friend.avatar ? friend.avatar : vm.defaultAvatar}}"
 											alt="people" class="media-object  avatar-friend">
@@ -166,7 +166,7 @@
 										<a class="a-friend" ui-sref="profile({username : friend.username})">{{friend.name}}</a>
 									</h4>
 								</div>
-								<div class="pull-right col-sm-3" ng-if="vm.loggedId != friend.id">
+								<div class="pull-right col-sm-4" ng-if="vm.loggedId != friend.id">
 									<div class="btn-group" uib-dropdown
 										ng-if="friend.friendStatus === 'Pending'">
 										<button id="single-button" type="button"
@@ -262,7 +262,7 @@
 						<img src="/content/images/compatibilidade/Otima.png"
 						class="img-responsive" style="width: 100%; height: 100%; background-color: blank">
 						{{vm.user.compatibility}}
-						</span>
+						</span> 
 
 						<span ng-if="vm.user.compatibility === 'Super'">
 						<img src="/content/images/compatibilidade/Super.png"
